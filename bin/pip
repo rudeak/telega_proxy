@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/home/rudeak/telega2/bin/python3
+=======
+#!/home/rudeak/telega_proxy/bin/python3
+>>>>>>> clean virtualenv instalation
 
 # -*- coding: utf-8 -*-
 import re
@@ -7,5 +11,9 @@ import sys
 from pip import main
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+=======
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+>>>>>>> clean virtualenv instalation
     sys.exit(main())
