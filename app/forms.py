@@ -3,6 +3,7 @@ from wtforms import TextField, BooleanField
 from wtforms.validators import Required
 
 class LoginForm(Form):
-    openid = TextField('login', validators = [Required()])
-    remember_me = BooleanField('remember_me', default = False)
+    login = TextField('login', validators = [Required()])
+    password = TextField('password', validators = [Required()])
+
 

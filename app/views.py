@@ -14,6 +14,9 @@ def index():
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        print(form.login.data)
+        print(form.password.data)
     return render_template('login.html', 
         title = 'Sign In',
         form = form)
