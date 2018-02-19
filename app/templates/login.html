@@ -19,7 +19,7 @@
               <div>
                 <input type="password" name ="password" class="form-control" placeholder="Пароль" required="" />
               </div>
-              <div>
+              <div allign ="center">
                 <input type= "submit" class="btn btn-default submit" value ="Увійти">
                 <a class="reset_pass" href="#">Забули пароль?</a>
               </div>
@@ -45,19 +45,23 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
+            <form name=" regiser"action="" method="post">
               <h1>Зареєструватись</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Логін" required="" />
+                <input name="newlogin" type="text" class="form-control" placeholder="Логін" required="" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Електронна пошта" required="" />
+                <input name = "new_email" type="email" class="form-control" placeholder="Електронна пошта" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Пароль" required="" />
+                <input name = "new_password1" type="password" class="form-control" placeholder="Пароль" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Зараєструватись</a>
+                <input name = "new_password2" type="password" class="form-control" placeholder="Повторити пароль" required="" />
+              </div>
+		
+              <div allign = "center">
+                <input type="submit" class="btn btn-default submit" value="Зарeєструватись">
               </div>
 
               <div class="clearfix"></div>
