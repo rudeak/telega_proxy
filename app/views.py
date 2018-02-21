@@ -12,7 +12,6 @@ def load_user(id):
 
 @app.before_request
 def before_request():
-    user = current_user
     g.user = current_user
 
 @app.route('/logout')
@@ -48,8 +47,6 @@ def login():
                 return render_template ('login.html', error = 'Невірний пароль', form = form)
     else:
             if form.new_password1.data !=form.new_password2.data:
-                passwordsdontmatch = None
-                print('password error')
                 return render_template ('login.html', error = 'Паролі не співпадають', form = form)
             if form.new_password1 == '':
                 return render_template ('login.html', error = 'Пароль порожній', form = form)
