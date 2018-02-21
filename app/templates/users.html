@@ -36,22 +36,17 @@
                           <td>@{{user.login}}</td>
                           <td>{{user.role}}</td>
                           <td>  
-                        <div class = "btn-group open">
-                          <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="submit" aria-expanded="true" id = "{{user.id}}">Змінит роль<span class="caret"></span>
-                          </button>
-                          <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">0 - Користувач</a>
-                            </li>
-                            <li><a href="#">1 - Адміністратор</a>
-                            </li>
-                            <li><a href="#">2 - Суперкористувач</a>
-                            </li>
-                          </ul> 
-                        </div>
-                        </td>
-                          
+                            <div class = "btn-group">
+                              <select class="form-control input-sm">
+                                <option value="0">Користувач</option>
+                                <option value="1">Адміністратор</option>
+                                <option value="2">Суперкористувач</option>
+                              </select>
+                              <button class="btn btn-round btn-success" type="submit" id = "{{user.id}}">Змінит роль<span class="caret"></span>
+                              </button>
+                            </div>
+                          </td>
                         </tr>
-                       
                       </tbody>
                     </table>
                   </div>
