@@ -73,6 +73,12 @@ def user(nickname):
     return render_template('profile.html',
                             user = user)
 
+@app.route('/users', methods = ['GET', 'POST'])
+@login_required
+def user_list():
+    return render_template('users.html')
+
+
 #@app.before_request
 #def before_request():
 #    g.user = current_user
