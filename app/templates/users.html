@@ -35,7 +35,8 @@
                           <td>{{user.email}}</td>
                           <td>@{{user.login}}</td>
                           <td>{{user.role}}</td>
-                          <td>                    
+                          <td>  
+                        <div class = "btn-group open">
                           <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="submit" aria-expanded="true" id = "{{user.id}}">Змінит роль<span class="caret"></span>
                           </button>
                           <ul role="menu" class="dropdown-menu">
@@ -45,7 +46,10 @@
                             </li>
                             <li><a href="#">2 - Суперкористувач</a>
                             </li>
-                          </ul></td>
+                          </ul> 
+                        </div>
+                        </td>
+                          
                         </tr>
                        
                       </tbody>
