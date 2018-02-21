@@ -22,11 +22,11 @@
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          <th>Login</th>
-                          <th>Email</th>
-                          <th>Telegram</th>
-                          <th>Role</th>
-                          <th>Change role</th>
+                          <th>Логін</th>
+                          <th>Пошта</th>
+                          <th>Профіль телеграм</th>
+                          <th>Роль</th>
+                          <th>Змінити роль</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -35,7 +35,17 @@
                           <td>{{user.email}}</td>
                           <td>@{{user.login}}</td>
                           <td>{{user.role}}</td>
-                          <td><button id ="{{user.id}}">Change role</button></td>
+                          <td>                    
+                          <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="submit" aria-expanded="true" id = "{{user.id}}">Змінит роль<span class="caret"></span>
+                          </button>
+                          <ul role="menu" class="dropdown-menu">
+                            <li><a href="#">0 - Користувач</a>
+                            </li>
+                            <li><a href="#">1 - Адміністратор</a>
+                            </li>
+                            <li><a href="#">2 - Суперкористувач</a>
+                            </li>
+                          </ul></td>
                         </tr>
                        
                       </tbody>
