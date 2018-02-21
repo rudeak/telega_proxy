@@ -70,10 +70,18 @@ def user(nickname):
     return render_template('profile.html',
                             user = user)
 
-@app.route('/users', methods = ['GET', 'POST'])
+@app.route('/users', methods = ['GET'])
 @login_required
 def user_list():
     return render_template('users.html', users = users_list(), user = current_user)
+
+@app.route('/users', methods = ['POST'])
+@login_required
+def update_user():
+    print (request.form)
+    return render_template('users.html', users = users_list(), user = current_user)
+
+    
 
 
 #@app.before_request
