@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
 from app.forms import LoginForm
 from app.models import User, ROLE_USER, ROLE_ADMIN
-from app.user_managment import register_user, signin_user
+from app.user_managment import register_user, signin_user, users_list
 
 @lm.user_loader
 def load_user(id):
@@ -73,8 +73,7 @@ def user(nickname):
 @app.route('/users', methods = ['GET', 'POST'])
 @login_required
 def user_list():
-    users = User.all()
-    return render_template('users.html', users = users)
+    return render_template('users.html', users = users_list())
 
 
 #@app.before_request

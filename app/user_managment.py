@@ -29,3 +29,7 @@ def signin_user (nickname, password1):
     else:
         return False
 
+def users_list():
+    users = User.query.all()
+    return users
+
