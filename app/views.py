@@ -73,7 +73,8 @@ def user(nickname):
 @app.route('/users', methods = ['GET', 'POST'])
 @login_required
 def user_list():
-    return render_template('users.html', user = current_user)
+    users = User.all()
+    return render_template('users.html', users = users)
 
 
 #@app.before_request
