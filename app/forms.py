@@ -13,3 +13,5 @@ class LoginForm(Form):
     isRegister = BooleanField('isRegister', default = True)
 
 
+
+
