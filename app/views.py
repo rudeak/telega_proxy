@@ -78,7 +78,7 @@ def user_list():
 @app.route('/users', methods = ['POST'])
 @login_required
 def update_user():
-    print (request.form)
+    print (request.form.values())
     return render_template('users.html', users = users_list(), user = current_user)
 
     
