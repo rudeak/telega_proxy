@@ -80,8 +80,7 @@ def user_list():
 @login_required
 def update_user():
     form = RoleEdit()
-    if form.validate_on_submit():
-        print (form.role.data+ ' ' + form.userid.data)
+    print ('role = ' +form.role.data+ ', id=' + form.user_id.data)
     return render_template('users.html', users = users_list(), user = current_user, form = form)
 
     

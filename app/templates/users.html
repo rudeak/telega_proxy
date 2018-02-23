@@ -41,7 +41,7 @@
                             {{form.hidden_tag()}}
                             <button class="btn btn-round btn-success" type="submit" id = "{{user.id}}">Змінит роль</button>
                              {{form.role}}
-                             {{form.userid}}{{user.id}}
+                             <div>{{form.user_id(size=20, value =1)}}</div>
                             </form>
                             </div>
                           </td>
