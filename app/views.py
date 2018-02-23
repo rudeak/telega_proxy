@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
-from app.forms import LoginForm
+from app.forms import LoginForm, RoleEdit
 from app.models import User, ROLE_USER, ROLE_ADMIN
 from app.user_managment import register_user, signin_user, users_list
 
@@ -73,13 +73,16 @@ def user(nickname):
 @app.route('/users', methods = ['GET'])
 @login_required
 def user_list():
-    return render_template('users.html', users = users_list(), user = current_user)
+    form = RoleEdit()
+    return render_template('users.html', users = users_list(), user = current_user, form = form)
 
 @app.route('/users', methods = ['POST'])
 @login_required
 def update_user():
-    print (list(request.form.items()))
-    return render_template('users.html', users = users_list(), user = current_user)
+    form = RoleEdit()
+    if form.validate_on_submit():
+        print (form.role.data+ ' ' + form.userid.data)
+    return render_template('users.html', users = users_list(), user = current_user, form = form)
 
     
 

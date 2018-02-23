@@ -37,16 +37,13 @@
                           <td>@{{user.login}}</td>
                           <td>{{user.role}}</td>
                           <td> 
-                            <form method = 'post'>
-                            <div class = "row">
-                              <select class="form-control input-sm" id = "{{users.id}}">
-                                <option value="0">Користувач</option>
-                                <option value="1">Адміністратор</option>
-                                <option value="2">Суперкористувач</option>
-                              </select>
-                              <button class="btn btn-round btn-success" type="submit" id = "{{user.id}}">Змінит роль</button>
-                            </div>
+                            <form method = "post" name ="form{{user.id}}" action="/users">
+                            {{form.hidden_tag()}}
+                            <button class="btn btn-round btn-success" type="submit" id = "{{user.id}}">Змінит роль</button>
+                             {{form.role}}
+                             {{form.userid}}{{user.id}}
                             </form>
+                            </div>
                           </td>
                         </tr>
                         {% endfor %}
