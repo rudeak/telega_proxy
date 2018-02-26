@@ -1,0 +1,73 @@
+{% extends "top.html" %}
+{% block page_content%}
+<!-- page content -->
+<div class="col-md-12 col-sm-12 col-xs-12">
+        <h2>Створити нову гру</h2>        
+        <div id="wizard_verticle" class="form_wizard wizard_verticle">
+                <ul class="list-unstyled wizard_steps anchor">
+                  <li>
+                    <a href="#step-11" class="selected" isdone="1" rel="1">
+                      <span class="step_no">1</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#step-22" class="done" isdone="1" rel="2">
+                      <span class="step_no">2</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#step-33" class="done" isdone="1" rel="3">
+                      <span class="step_no">3</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#step-44" class="done" isdone="1" rel="4">
+                      <span class="step_no">4</span>
+                    </a>
+                  </li>
+                </ul>
+
+                
+                
+                
+                
+              <div class="stepContainer" style="height: 374px;">
+                  <div id="step-11" class="content" style="display: block;">
+                  <h2 class="StepTitle">Вкажіть домен</h2>
+                    <form class="form-horizontal form-label-left">
+
+
+                    </form>
+                  
+                </div>
+                <div id="step-22" class="content" style="display: none;">
+                  <h2 class="StepTitle">Виберіть гру та телеграмм-чат</h2>
+                
+
+                </div>
+                <div id="step-33" class="content" style="display: none;">
+                  <h2 class="StepTitle">Виберіть гравця та команду</h2>
+                  
+                </div>
+                <div id="step-44" class="content" style="display: none;">
+                  <h2 class="StepTitle">Створення гри</h2>
+                  
+                </div>
+            </div>
+            <div class="actionBar">
+                <div class="msgBox">
+                    <div class="content">
+
+                    </div>
+                    <a href="#" class="close">X</a>
+                </div>
+                <div class="loader">Loading</div>
+                <a href="#" class="buttonFinish btn btn-default">Finish</a>
+                <a href="#" class="buttonNext btn btn-success">Next</a>
+                <a href="#" class="buttonPrevious btn btn-primary buttonDisabled">Previous</a>
+            </div>
+        </div>
+</div>
+        <!-- /page content -->
+
+{% endblock%}

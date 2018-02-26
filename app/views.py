@@ -112,7 +112,10 @@ def list_telegram_users():
     form_add = AddGamerForm()
     return render_template('telegram.html', tg_users = telega_list(g.user.id), user = current_user, form = form, add_gamer_frm = form_add)
 
-
+@app.route ('/new_game', methods = ['GET'])
+@login_required
+def new_game_wizard():
+    return render_template ('new_game.html')
 
 #@app.before_request
 #def before_request():
