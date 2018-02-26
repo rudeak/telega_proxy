@@ -115,7 +115,7 @@ def list_telegram_users():
 @app.route ('/new_game', methods = ['GET'])
 @login_required
 def new_game_wizard():
-    return render_template ('new_game.html')
+    return render_template ('new_game.html', user = current_user)
 
 #@app.before_request
 #def before_request():
