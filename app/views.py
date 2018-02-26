@@ -4,6 +4,7 @@ from app import app, db, lm
 from app.forms import LoginForm, RoleEdit
 from app.models import User, ROLE_USER, ROLE_ADMIN
 from app.user_managment import register_user, signin_user, users_list
+from app.gamers_managment import gamers_list
 
 @lm.user_loader
 def load_user(id):
@@ -88,7 +89,7 @@ def update_user():
 @login_required
 def list_gamers():
     form = RoleEdit()
-    return render_template('gamers.html', users = users_list(), user = current_user, form = form)
+    return render_template('gamers.html', gamers = gamers_list(g.user.id), user = current_user, form = form)
     
 
 

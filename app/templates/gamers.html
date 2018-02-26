@@ -28,12 +28,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                      {% for user in users %}
+                      {% for gamer in gamers %}
                         <tr>
-                          <td>{{user.login}}</td>
-                          <td>{{user.email}}</td>
+                          <td>{{gamer.login}}</td>
+                          <td>{{gamer.comment}}</td>
                           <td> 
-                            <form method = "post" name ="form{{user.id}}" action="">
+                            <form method = "post" name ="form{{gamer.id}}" action="">
                             {{form.hidden_tag()}}
                             <button type = "submit">Видалити</button>
                             </form>
