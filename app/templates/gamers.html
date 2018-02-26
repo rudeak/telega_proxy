@@ -23,10 +23,8 @@
                       <thead>
                         <tr>
                           <th>Логін</th>
-                          <th>Пошта</th>
-                          <th>Профіль телеграм</th>
-                          <th>Роль</th>
-                          <th>Змінити роль</th>
+                          <th>Пароль</th>
+                          <th>Видалити</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -34,14 +32,10 @@
                         <tr>
                           <td>{{user.login}}</td>
                           <td>{{user.email}}</td>
-                          <td>@{{user.login}}</td>
-                          <td>{{user.role}}</td>
                           <td> 
                             <form method = "post" name ="form{{user.id}}" action="">
                             {{form.hidden_tag()}}
-                            <button class="btn btn-round btn-success" type="submit" id = "{{user.id}}">Змінит роль</button>
-                             {{form.role}}
-                            <div>{{form.user_id(size=20, value =1)}}</div>
+                            <button type = "submit">Видалити</button>
                             </form>
                             </div>
                           </td>

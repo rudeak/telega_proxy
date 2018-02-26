@@ -84,6 +84,11 @@ def update_user():
     print (request.form)
     return render_template('users.html', users = users_list(), user = current_user, form = form)
 
+@app.route ('/gamers', methods = ['GET', 'POST'])
+@login_required
+def list_gamers():
+    form = RoleEdit()
+    return render_template('gamers.html', users = users_list(), user = current_user, form = form)
     
 
 

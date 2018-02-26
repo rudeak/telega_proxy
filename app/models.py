@@ -37,4 +37,16 @@ class User(db.Model):
         return 'http://www.gravatar.com/avatar/' + md5(self.email.encode()).hexdigest() + '?d=mm&s=' + str(size)
 
 
+class Gamers (db.Model)
+    id = db.Column(db.Integer, primary_key = True)
+    login = db.Column(db.String(64), index = True, unique = False)
+    password = db.Column(db.String(120), index = True, unique = False)
+    creator_id = db.Column(db.Integer)    
+    
+    def __repr__(self):
+        return '<User %r>' % (self.login)
 
+    def __init__ (self, login, password , creator_id):
+        self.login = login
+        self.password = password
+        self.creator_id = creator_id
