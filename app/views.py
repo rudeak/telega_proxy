@@ -4,7 +4,7 @@ from app import app, db, lm
 from app.forms import LoginForm, RoleEdit, AddGamerForm
 from app.models import User, ROLE_USER, ROLE_ADMIN
 from app.user_managment import register_user, signin_user, users_list
-from app.gamers_managment import gamers_list
+from app.gamers_managment import gamers_list, add_gamer_db
 
 @lm.user_loader
 def load_user(id):
@@ -85,14 +85,21 @@ def update_user():
     print (request.form)
     return render_template('users.html', users = users_list(), user = current_user, form = form)
 
-@app.route ('/gamers', methods = ['GET', 'POST'])
+@app.route ('/gamers', methods = ['GET'])
 @login_required
 def list_gamers():
     form = RoleEdit()
     form_add = AddGamerForm()
     return render_template('gamers.html', gamers = gamers_list(g.user.id), user = current_user, form = form, add_gamer_frm = form_add)
     
-
+@app.route ('/gamers', methods = ['POST'])
+@login_required
+def add_gamer():
+    form = RoleEdit()
+    form_add = AddGamerForm()
+    if form_add.validate_on_submit():
+        add_gamer_db(form_add.login.data, form_add.password.data, form_add.comment.data, g.user.id)
+    return render_template('gamers.html', gamers = gamers_list(g.user.id), user = current_user, form = form, add_gamer_frm = form_add)
 
 #@app.before_request
 #def before_request():

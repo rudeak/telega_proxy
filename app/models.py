@@ -47,7 +47,7 @@ class Gamers (db.Model):
     def __repr__(self):
         return '<User %r>' % (self.login)
 
-    def __init__ (self, login, password , creator_id):
+    def __init__ (self, login, password , comment,  creator_id):
         self.login = login
         self.password = password
         self.comment = comment
