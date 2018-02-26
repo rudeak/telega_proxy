@@ -99,6 +99,9 @@ def add_gamer():
     form_add = AddGamerForm()
     if form_add.validate_on_submit():
         add_gamer_db(form_add.login.data, form_add.password.data, form_add.comment.data, g.user.id)
+        form_add.login.data =''
+        form_add.password.data =''
+        form_add.comment.data =''
     return render_template('gamers.html', gamers = gamers_list(g.user.id), user = current_user, form = form, add_gamer_frm = form_add)
 
 #@app.before_request
