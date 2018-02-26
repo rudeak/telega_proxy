@@ -24,6 +24,7 @@
                         <tr>
                           <th>Логін</th>
                           <th>Пароль</th>
+                          <th>Коментар</th>
                           <th>Видалити</th>
                         </tr>
                       </thead>
@@ -31,6 +32,7 @@
                       {% for gamer in gamers %}
                         <tr>
                           <td>{{gamer.login}}</td>
+                          <td>{{gamer.password}}</td>
                           <td>{{gamer.comment}}</td>
                           <td> 
                             <form method = "post" name ="form{{gamer.id}}" action="">
@@ -45,6 +47,44 @@
                     </table>
                   </div>
           </div>
+          <div class="x_panel">
+            <div class="x_title">
+               <h2>Додати нового гравця</h2>
+               <div class = "clearfix"
+            </div>
+            <div class="x_content">
+                <form class="form-horizontal form-label-left" action="" method="post">
+                    {{add_gamer_frm.hidden_tag()}}
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Логін:</label>
+                        <span class="required">*</span>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{add_gamer_frm.login}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Пароль:</label>
+                            <span class="required">*</span>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                    {{add_gamer_frm.password}}
+                            </div>
+                    </div>
+                    <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Коментар:</label>
+                            <span class="required">*</span>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                    {{add_gamer_frm.comment}}
+                            </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="submit" class="btn btn-success">Додати</button>
+                            </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
         <!-- /page content -->
 

@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
-from app.forms import LoginForm, RoleEdit
+from app.forms import LoginForm, RoleEdit, AddGamerForm
 from app.models import User, ROLE_USER, ROLE_ADMIN
 from app.user_managment import register_user, signin_user, users_list
 from app.gamers_managment import gamers_list
@@ -89,7 +89,8 @@ def update_user():
 @login_required
 def list_gamers():
     form = RoleEdit()
-    return render_template('gamers.html', gamers = gamers_list(g.user.id), user = current_user, form = form)
+    form_add = AddGamerForm()
+    return render_template('gamers.html', gamers = gamers_list(g.user.id), user = current_user, form = form, add_gamer_frm = form_add)
     
 
 
