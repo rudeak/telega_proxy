@@ -62,7 +62,7 @@ class Telegram_Users (db.Model):
     id = db.Column(db.Integer, primary_key = True)
     tg_login = db.Column(db.String(64), index = True, unique = True)
     tg_id = db.Column(db.String(64), index = True, unique = True)
-    telega_id = db.Column(db.Integer), index = True, unique = False)
+    telega_id = db.Column(db.Integer,index = True, unique = False)
     telega_role = db.Column(db.SmallInteger, default = TELEGA_USER)
     creator_id = db.Column(db.Integer)    
     
