@@ -5,6 +5,7 @@ from app.forms import LoginForm, RoleEdit, AddGamerForm
 from app.models import User, ROLE_USER, ROLE_ADMIN
 from app.user_managment import register_user, signin_user, users_list
 from app.gamers_managment import gamers_list, add_gamer_db
+from app.telega_managment import telega_list
 
 @lm.user_loader
 def load_user(id):
@@ -103,6 +104,15 @@ def add_gamer():
         form_add.password.data =''
         form_add.comment.data =''
     return render_template('gamers.html', gamers = gamers_list(g.user.id), user = current_user, form = form, add_gamer_frm = form_add)
+
+@app.route ('/telegram', methods = ['GET'])
+@login_required
+def list_telegram_users
+    form = RoleEdit()
+    form_add = AddGamerForm()
+    return render_template('telegram.html', tg_users = telega_list(g.user.id), user = current_user, form = form, add_gamer_frm = form_add)
+
+
 
 #@app.before_request
 #def before_request():
