@@ -81,6 +81,7 @@ def user_list():
 def update_user():
     form = RoleEdit()
     print ('role = ' +form.role.data+ ', id=' + form.user_id.data)
+    print (request.form)
     return render_template('users.html', users = users_list(), user = current_user, form = form)
 
     
