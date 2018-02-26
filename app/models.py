@@ -37,7 +37,7 @@ class User(db.Model):
         return 'http://www.gravatar.com/avatar/' + md5(self.email.encode()).hexdigest() + '?d=mm&s=' + str(size)
 
 
-class Gamers (db.Model)
+class Gamers (db.Model):
     id = db.Column(db.Integer, primary_key = True)
     login = db.Column(db.String(64), index = True, unique = False)
     password = db.Column(db.String(120), index = True, unique = False)
