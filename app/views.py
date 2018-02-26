@@ -117,6 +117,12 @@ def list_telegram_users():
 def new_game_wizard():
     return render_template ('new_game.html', user = current_user)
 
+@app.route ('/channels_active', methods =['GET'])
+@login_required
+def list_channels():
+    tg_chats = ['tg_chat_id':'123', 'tg_chat_name':'test chat', 'tg_chat.tg_chat_avatar':g.user.avatar(32), 'tg_chat_game':'test game', 'id':'1053']
+    return render_template ('active_chats.html', user = current_user, tg_chats = tg_chats)
+
 #@app.before_request
 #def before_request():
 #    g.user = current_user
