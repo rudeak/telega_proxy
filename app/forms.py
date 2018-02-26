@@ -1,8 +1,8 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import TextField, BooleanField, SelectField
 from wtforms.validators import Required
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     login = TextField('login')
     password = TextField('password')
     newlogin = TextField('newlogin')
@@ -12,11 +12,11 @@ class LoginForm(Form):
     isLogin = BooleanField('isLogin', default = True)
     isRegister = BooleanField('isRegister', default = True)
 
-class RoleEdit(Form):
+class RoleEdit(FlaskForm):
     role = SelectField('role',choices=[('0', 'Користувач'), ('1', 'Адміністратор'), ('2', 'Суперкористувач')])
     user_id = TextField ('user_id', [Required()])
 
-class AddGamerForm(Form):
+class AddGamerForm(FlaskForm):
     login = TextField('login', validators = [Required()])
     password = TextField('password', validators = [Required()])
     comment = TextField('comment', validators = [Required()])

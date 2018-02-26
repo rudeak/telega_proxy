@@ -5,7 +5,7 @@ from app.models import Telegram_Users
 
 def telega_list (owner_id):
     tg_users = Telegram_Users.query.filter_by(creator_id = owner_id)
-    print (tg_users)
+    print (list(tg_users)
     return tg_users
 
 
