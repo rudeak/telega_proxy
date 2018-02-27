@@ -80,7 +80,7 @@ def user_list():
 @app.route('/roleedit/<id>', methods = ['GET','POST'])
 @login_required
 def update_user(id):
-    edited_user = User.query.filter_by(id=id)
+    edited_user = User.query.filter_by(id=id).first()
     return render_template('role_edit.html', edited_user = edited_user, user = current_user)
 
 @app.route ('/gamers', methods = ['GET'])
