@@ -72,19 +72,16 @@ def user(nickname):
     return render_template('profile.html',
                             user = user)
 
-@app.route('/users', methods = ['GET'])
+@app.route('/users', methods = ['GET', 'POST'])
 @login_required
 def user_list():
-    form = RoleEdit()
-    return render_template('users.html', users = users_list(), user = current_user, form = form)
+    return render_template('users.html', users = users_list(), user = current_user)
 
-@app.route('/users', methods = ['POST'])
+@app.route('/roleedit/<id>', methods = ['GET','POST'])
 @login_required
-def update_user():
-    form = RoleEdit()
-    print ('role = ' +form.role.data+ ', id=' + form.user_id.data)
-    print (request.form)
-    return render_template('users.html', users = users_list(), user = current_user, form = form)
+def update_user(id):
+    edited_user = User.query.filter_by(id=id)
+    return render_template('role_edit.html', edited_user = edited_user, user = current_user)
 
 @app.route ('/gamers', methods = ['GET'])
 @login_required

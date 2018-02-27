@@ -37,12 +37,11 @@
                           <td>@{{user.login}}</td>
                           <td>{{user.role}}</td>
                           <td> 
-                            <form method = "post" name ="form{{user.id}}" action="">
-                            {{form.hidden_tag()}}
-                            <button class="btn btn-round btn-success" type="submit" id = "{{user.id}}">Змінит роль</button>
-                             {{form.role}}
-                            <div>{{form.user_id(size=20, value =1)}}</div>
-                            </form>
+                            
+                            
+                            <a class="btn btn-round btn-success" id = "{{user.id}}" href="/roleedit/{{user.id}}">Змінит роль</a>
+                         
+                            
                             </div>
                           </td>
                         </tr>
