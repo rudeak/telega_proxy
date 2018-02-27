@@ -83,6 +83,7 @@ def update_user(id):
     edited_user = User.query.filter_by(id=id).first()
     role = RoleEdit()
     if role.validate_on_submit():
+        edit_role (edited_user.id, role.role.data)
         print (role.role.data)
     return render_template('role_edit.html', edited_user = edited_user, user = current_user, role = role)
 
