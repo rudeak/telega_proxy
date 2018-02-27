@@ -14,7 +14,7 @@ class LoginForm(FlaskForm):
 
 class RoleEdit(FlaskForm):
     role = SelectField('role',choices=[('0', 'Користувач'), ('1', 'Адміністратор'), ('2', 'Суперкористувач')])
-    user_id = TextField ('user_id', [Required()])
+   # user_id = TextField ('user_id', [Required()])
 
 class AddGamerForm(FlaskForm):
     login = TextField('login', validators = [Required()])

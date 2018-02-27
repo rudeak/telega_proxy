@@ -53,7 +53,32 @@
 
                       <div class="profile_title">
                         <div class="col-md-6">
-                          
+                            <form action="/users" method="post" name="login">
+                                {{role.hidden_tag()}}
+                                {%if edited_user.role == 0%}
+                                <h3>Поточна роль: <b>користувач</b></h3>
+                                {% endif %}
+                                {%if edited_user.role == 1%}
+                                <h3>Поточна роль: <b>адміністратор</b></h3>
+                                {% endif %}
+                                {%if edited_user.role == 2%}
+                                <h3>Поточна роль: <b>суперкористувач</b></h3>
+                                {% endif %}
+                                <div class ="form-group">
+                                    <div class ="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                        <label class = "control-label col-md-3 col-sm-3 col-xs-12">Нова роль:</label>
+                                    </div>
+                                    <div class = "col-md-6 col-sm-6 col-xs-12">
+                                        {{role.role}}
+                                    </div>
+                                </div>
+                                <div class ="form-group">
+                                    <div class ="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                        <button class="btn btn-primary" type="reset">Відмінити</button>
+                                        <button class = "btn btn-success" type="submit">Зберегит</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="col-md-6">
                         </div>

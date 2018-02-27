@@ -81,7 +81,8 @@ def user_list():
 @login_required
 def update_user(id):
     edited_user = User.query.filter_by(id=id).first()
-    return render_template('role_edit.html', edited_user = edited_user, user = current_user)
+    role = RoleEdit()
+    return render_template('role_edit.html', edited_user = edited_user, user = current_user, role = role)
 
 @app.route ('/gamers', methods = ['GET'])
 @login_required
