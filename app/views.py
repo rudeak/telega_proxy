@@ -80,6 +80,10 @@ def user_list():
 @app.route('/roleedit/<id>', methods = ['GET','POST'])
 @login_required
 def update_user(id):
+    if current_user.role !=2:
+        return render_template("index.html",
+                                title = 'Telega 2.0',
+                                user = g.user)
     edited_user = User.query.filter_by(id=id).first()
     role = RoleEdit()
     if role.validate_on_submit():
