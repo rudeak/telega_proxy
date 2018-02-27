@@ -13,7 +13,7 @@ class LoginForm(FlaskForm):
     isRegister = BooleanField('isRegister', default = True)
 
 class RoleEdit(FlaskForm):
-    role = SelectField('role',choices=[('0', 'Користувач'), ('1', 'Адміністратор'), ('2', 'Суперкористувач')])
+    role = SelectField('role',choices=[('0', 'Користувач'), ('1', 'Адміністратор'), ('2', 'Суперкористувач')], validators = [Required()])
    # user_id = TextField ('user_id', [Required()])
 
 class AddGamerForm(FlaskForm):

@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
 from app.forms import LoginForm, RoleEdit, AddGamerForm
 from app.models import User, ROLE_USER, ROLE_ADMIN
-from app.user_managment import register_user, signin_user, users_list
+from app.user_managment import register_user, signin_user, users_list, edit_role
 from app.gamers_managment import gamers_list, add_gamer_db
 from app.telega_managment import telega_list
 
@@ -82,6 +82,8 @@ def user_list():
 def update_user(id):
     edited_user = User.query.filter_by(id=id).first()
     role = RoleEdit()
+    if role.validate_on_submit():
+        print (role.role.data)
     return render_template('role_edit.html', edited_user = edited_user, user = current_user, role = role)
 
 @app.route ('/gamers', methods = ['GET'])

@@ -13,7 +13,6 @@ def register_user (nickname, email1, password1):
     if User.query.filter_by (email = email1).count () > 0:
         return ('Користувач з таким е-мейлом існує')
     db.session.add(new_user)
-    db.session.commit()
     try:
         db.session.commit()
         return 1
@@ -32,4 +31,14 @@ def signin_user (nickname, password1):
 def users_list():
     users = User.query.all()
     return users
+
+def edit_role (id, role):
+    user = User.query.filter_by (id=id).first()
+    user.role = role
+    try:
+        db.session.commit()
+        return 1
+    except:
+        db.session.rollback()
+        return 'Помилка звернення до бази даних'
 
