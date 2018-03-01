@@ -130,7 +130,8 @@ def list_channels():
 
 @app.route ('/chat_opt', methods =['GET'])
 @login_required
-     return render_template ('chat_options.html', user = current_user)
+def chat_options():
+    return render_template ('chat_options.html', user = current_user)
 #@app.before_request
 #def before_request():
 #    g.user = current_user
