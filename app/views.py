@@ -128,6 +128,9 @@ def list_channels():
     tg_chats = [{'tg_chat_id':'123', 'tg_chat_name':'test chat', 'tg_chat.tg_chat_avatar':'', 'tg_chat_game':'test game', 'id':'1053'}]
     return render_template ('active_chats.html', user = current_user, tg_chats = tg_chats)
 
+@app.route ('/chat_opt', methods =['GET'])
+@login_required
+     return render_template ('chat_options.html', user = current_user)
 #@app.before_request
 #def before_request():
 #    g.user = current_user
