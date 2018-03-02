@@ -1,13 +1,56 @@
 import hashlib
 from sqlalchemy.orm import sessionmaker
 from app import db
-from app.models import Telegram_Users
+from app.models import Telegram_Users, Chat, Chat_opt
 
 def telega_list (owner_id):
     tg_users = Telegram_Users.query.filter_by(creator_id = owner_id)
     print (list(tg_users)) #list tg users
 
     return tg_users
+
+def create_chat (tg_id, name, avatar):
+    if Chat.query.filter_by (tg_id = tg_id).count > 0:
+        return 'чат з таким id існує'
+    chat = Chat (tg_id, name, avatar, 99999)
+    chat_opt = Chat_opt (tg_id)
+    db.session.add (chat)
+    db.session.add (chat_opt)
+    try:
+        db.session.commit()
+        return 1
+    except:
+        db.session.rollback()
+        return 'помилка при звернення до бази данних при створенні чату'
+
+def edit_chat_options (tg_id, chat, proxy, multi_proxy, bonuses, bonuses_count, codes, codes_deny, vote, vote_percent):
+    chat_opt = Chat_opt.query.filter_by (chat = tg_id).first()
+    chat_opt.proxy = proxy
+    chat_opt.multi_proxy = multi_proxy
+    chat_opt.bonuses = bonuses
+    chat_opt.bonuses_count = bonuses_count
+    chat_opt.codes = codes
+    chat_opt.codes_deny = codes_deny
+    chat_opt.vote = vote
+    chat_opt.vote_percent = vote_percent
+    try:
+        db.session.commit()
+        return 1
+    except:
+        db.session.rollback()
+        return 'помилка при редагуванні налаштуваннь чату '+tg_id
+        
+def delete_chat (tg_id):
+    chat = Chat.query.filter_by (tg_id = tg_id).first()
+    chat_opt = Chat_opt.query.filter_by (chat = tg_id).first()
+    db.session.delete (chat)
+    db.session.delete (chat_opt)
+    try:
+        db.session.commit()
+        return 1
+    except:
+        db.session.rollback()
+        return 'помилка при вилученні чату '+ tg_id
 
 
 """
