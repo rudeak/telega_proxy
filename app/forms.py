@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, BooleanField, SelectField
+from wtforms import TextField, BooleanField, SelectField, DecimalField
 from wtforms.validators import Required
 
 class LoginForm(FlaskForm):
@@ -30,7 +30,7 @@ class ChatOptionsForm (FlaskForm):
     codes_deny = BooleanField('codes deny', validators= [Required()])
     vote = BooleanField('vote', validators= [Required()])
     vote_percent = DecimalField('vote percent', validators= [Required()])
-    
+
     
 
 
