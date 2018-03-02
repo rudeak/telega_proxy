@@ -78,7 +78,7 @@ class Telegram_Users (db.Model):
 
 class Chat (db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    tg_id = db.Column(db.Integer(64), index = True, unique = True)
+    tg_id = db.Column(db.Integer, index = True, unique = True)
     name = db.Column(db.String(120), index = True, unique = False)
     avatar = db.Column(db.String(120), index = True, unique = False)
     game_id = db.Column(db.Integer)
