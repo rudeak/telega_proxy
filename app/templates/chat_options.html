@@ -14,13 +14,15 @@
         <h2>Редагування налаштуваннь чату:{{chat.tg_chat_name}}</h2>
       </div>
        <div class="x_content">
+         <form name = "chat_opt" action "" method ="POST">
+           {{chat_opt.hidden_tag()}}
           <div class = ".col-md-4">
             <ul class ="to_do">
         
                           <li>
                             
                             <p>
-                            <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
+                            {{chat_opt.proxy (class="flat" style="position: absolute; opacity: 0;" type="checkbox")}}
                               Дозволити створювати проксі 
                             </p>
                           </li>
@@ -77,7 +79,8 @@
                             </div>
                           </p>
               </div>
-                        
+
+            </form>                      
                     
     </div>
   </div>

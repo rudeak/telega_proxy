@@ -20,6 +20,17 @@ class AddGamerForm(FlaskForm):
     login = TextField('login', validators = [Required()])
     password = TextField('password', validators = [Required()])
     comment = TextField('comment', validators = [Required()])
+
+class ChatOptionsForm (FlaskForm):
+    proxy = BooleanField('proxy', validators= [Required()])
+    multi_proxy = BooleanField('muli proxy', validators= [Required()])
+    bonuses = BooleanField('bonuses', validators= [Required()])  
+    bonuses_count = DecimalField ('bonuses count', validators=[Required()])
+    codes = BooleanField('codes', validators= [Required()])
+    codes_deny = BooleanField('codes deny', validators= [Required()])
+    vote = BooleanField('vote', validators= [Required()])
+    vote_percent = DecimalField('vote percent', validators= [Required()])
+    
     
 
 

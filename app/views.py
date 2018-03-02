@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
-from app.forms import LoginForm, RoleEdit, AddGamerForm
+from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm
 from app.models import User, ROLE_USER, ROLE_ADMIN
 from app.user_managment import register_user, signin_user, users_list, edit_role
 from app.gamers_managment import gamers_list, add_gamer_db
@@ -132,7 +132,8 @@ def list_channels():
 @login_required
 def chat_options():
     chat =[{'tg_chat_name':'test chat'}]
-    return render_template ('chat_options.html', user = current_user, chat=chat)
+    chat_opt = ChatOptionsForm()
+    return render_template ('chat_options.html', user = current_user, chat=chat, chat_opt=chat_opt)
 #@app.before_request
 #def before_request():
 #    g.user = current_user
