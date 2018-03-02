@@ -75,3 +75,46 @@ class Telegram_Users (db.Model):
         self.telega_id = telega_id
         self.telega_role = telega_role
         self.creator_id = creator_id
+
+class Chat (db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    tg_id = db.Column(db.integer(64), index = True, unique = True)
+    name = db.Column(db.String(120), index = True, unique = False)
+    avatar = db.Column(db.String(120), index = True, unique = False)
+    game_id = db.Column(db.Integer)
+
+    
+    def __repr__(self):
+        return '<Chat %r>' % (self.name)
+
+    def __init__ (self, tg_id, name , avatar,  game_id):
+        self.tg_id = tg_id
+        self.name = name
+        self.avatar = avatar
+        self.game_id = game_id
+
+class Chat_opt (db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    chat = db.Column(db.Integer, unique = True)
+    proxy = db.Column (db.Boolean, default = True)
+    multi_proxy = db.Column (db.Boolean, default = False)
+    bonuses = db.Column (db.Boolean, default = True)
+    bonuses_count = db.Column (db.Integer, default = 5)
+    codes =  db.Column (db.Boolean, default = True)
+    codes_deny = db.Column (db.Boolean, default = True)
+    vote = db.Column (db.Boolean, default = True)
+    vote_percent = db.Column (db.Integer, default = 30)
+
+    def __repr__(self):
+        return '<Chat %r>' % (self.chat)
+
+    def __init__ (self, chat):
+        self.chat = chat
+        self.proxy = True
+        self.multi_proxy = False
+        self.bonuses = True
+        self.bonuses_count = 5
+        self.codes = True 
+        self.codes_deny = True
+        self.vote = True
+        self.vote_percent = 30
