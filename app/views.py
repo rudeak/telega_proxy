@@ -131,7 +131,8 @@ def list_channels():
 @app.route ('/chat_opt', methods =['GET'])
 @login_required
 def chat_options():
-    return render_template ('chat_options.html', user = current_user)
+    chat =[{'tg_chat_name':'test chat'}]
+    return render_template ('chat_options.html', user = current_user, chat=chat)
 #@app.before_request
 #def before_request():
 #    g.user = current_user
