@@ -2,94 +2,78 @@
 {% block page_content %}
 <!-- page content -->
  <div class="">
- <div class="page-title">
- <div class="title_left">
- <h3>Plain Page</h3>
- </div>
- <div class="title_right">
- <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
- <div class="input-group">
- <input type="text" class="form-control" placeholder="Search for...">
- <span class="input-group-btn">
- <button class="btn btn-default" type="button">Go!</button>
-</span>
-</div>
-</div>
-</div>
-</div>
+   <div class="page-title">
+    <div class="title_left">
+      <h3>Налаштування чату</h3>
+    </div>
+  </div>
  <div class="clearfix"></div>
  <div class="row"> 
- <div class="col-md-12 col-sm-12 col-xs-12">
-  <div class="x_panel">
-  <div class="x_title">
-  <h2>Plain Page</h2>
-  <ul class="nav navbar-right panel_toolbox">
-  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
- </li>
- <li><a class="close-link"><i class="fa fa-close"></i></a>
-</li>
-</ul>
- <div class="clearfix"></div>
-</div>
- <div class="x_content">
-   <ul class ="to_do">
-     
-                      <li>
-                        <p>
-                         <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
-                          Дозволити створювати проксі 
-                        </p>
-                      </li>
-                      <li>
-                          <p>
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Редагування налаштуваннь чату:{{chat.name}}</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+      <ul class ="to_do">
+        
+                          <li>
+                            <p>
                             <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
-                            Дозволити мультипроксі
+                              Дозволити створювати проксі 
+                            </p>
+                          </li>
+                          <li>
+                              <p>
+                                <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
+                                Дозволити мультипроксі
+                              </p>
+                          </li>
+                          <div class="clearfix"></div>
+                          <p></p>
+                          <li>
+                            <p>
+                            <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
+                            Відображати бонуси</p>
+                          </li>
+                            
+                          <p><b>Максимальна кількість бонусів для відображення:</b></p>
+                            <div style="display:inline">
+                              <canvas width="110" height="120"></canvas>
+                              <input class="knob" data-width="110" data-height="120" data-displayprevious="true" data-fgcolor="#26B99A" data-skin="tron" data-thickness=".2" value="0" style="width: 59px; height: 36px; position: absolute; vertical-align: middle; margin-top: 36px; margin-left: -84px; border: 0px none; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; font: normal normal bold normal 22px Arial; text-align: center; color: rgb(38, 185, 154); padding: 0px;">
+                            </div>
                           </p>
-                      </li>
-                      <div class="clearfix"></div>
-                      <p></p>
-                      <li>
-                        <p>
-                         <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
-                         Відображати бонуси</p>
-                      </li>
-                        
-                      <p><b>Максимальна кількість бонусів для відображення:</b></p>
-                        <div style="display:inline">
-                          <canvas width="110" height="120"></canvas>
-                          <input class="knob" data-width="110" data-height="120" data-displayprevious="true" data-fgcolor="#26B99A" data-skin="tron" data-thickness=".2" value="0" style="width: 59px; height: 36px; position: absolute; vertical-align: middle; margin-top: 36px; margin-left: -84px; border: 0px none; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; font: normal normal bold normal 22px Arial; text-align: center; color: rgb(38, 185, 154); padding: 0px;">
-                        </div>
-                      </p>
-                      <div class="clearfix"></div>
-                      <p></p>
-                    <li>
-                        <p>
-                          <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
-                          Дозволити вбивати коди
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
-                          Дозволити вбивати коди при обмеженні
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
-                          Проводити голосування при обмеженні
-                        </p>
-                      </li>
-                      <p><b>Відсоток гравців необхідний для підтвердження коду:</b></p>
-                        <div style="display:inline">
-                          <canvas width="110" height="120"></canvas>
-                          <input class="knob" data-width="110" data-height="120" data-displayprevious="true" data-fgcolor="#26B99A" data-skin="tron" data-thickness=".2" value="0" style="width: 59px; height: 36px; position: absolute; vertical-align: middle; margin-top: 36px; margin-left: -84px; border: 0px none; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; font: normal normal bold normal 22px Arial; text-align: center; color: rgb(38, 185, 154); padding: 0px;">
-                        </div>
-                      </p>
-                    </ul>
+                          <div class="clearfix"></div>
+                          <p></p>
+                        <li>
+                            <p>
+                              <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
+                              Дозволити вбивати коди
+                            </p>
+                          </li>
+                          <li>
+                            <p>
+                              <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
+                              Дозволити вбивати коди при обмеженні
+                            </p>
+                          </li>
+                          <li>
+                            <p>
+                              <input class="flat" style="position: absolute; opacity: 0;" type="checkbox">
+                              Проводити голосування при обмеженні
+                            </p>
+                          </li>
+                          <p><b>Відсоток гравців необхідний для підтвердження коду:</b></p>
+                            <div style="display:inline">
+                              <canvas width="110" height="120"></canvas>
+                              <input class="knob" data-width="110" data-height="120" data-displayprevious="true" data-fgcolor="#26B99A" data-skin="tron" data-thickness=".2" value="0" style="width: 59px; height: 36px; position: absolute; vertical-align: middle; margin-top: 36px; margin-left: -84px; border: 0px none; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; font: normal normal bold normal 22px Arial; text-align: center; color: rgb(38, 185, 154); padding: 0px;">
+                            </div>
+                          </p>
+                        </ul>
                     
-</div>
-</div>
+    </div>
+  </div>
 </div>
 </div>
 </div>
