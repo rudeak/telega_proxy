@@ -132,8 +132,9 @@ def list_channels():
 @login_required
 def chat_options():
     chat =[{'tg_chat_name':'test chat'}]
+    chat_opt =[{'proxy':'true'}]
     chat_opt_frm = ChatOptionsForm()
-    return render_template ('chat_options.html', user = current_user, chat=chat, chat_opt_frm=chat_opt_frm)
+    return render_template ('chat_options.html', user = current_user, chat=chat, chat_opt_frm=chat_opt_frm, chat_opt=chat_opt)
 #@app.before_request
 #def before_request():
 #    g.user = current_user
