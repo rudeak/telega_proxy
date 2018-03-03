@@ -133,7 +133,7 @@ def list_channels():
 def chat_options():
     chat =[{'tg_chat_name':'test chat'}]
     chat_opt =[{'proxy':'true', 'multi_proxy':'false', 'bonuses':'true', 'bonuses_count':'13', 'codes':'false', 'codes_deny':'true', 'vote':'false', 'vote_percent':99}]
-    chat_opt_frm = ChatOptionsForm()
+    chat_opt_frm = ChatOptionsForm(obj = chat_opt)
     return render_template ('chat_options.html', user = current_user, chat=chat, chat_opt_frm=chat_opt_frm, chat_opt=chat_opt)
 #@app.before_request
 #def before_request():
