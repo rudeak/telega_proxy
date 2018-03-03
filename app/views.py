@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
 from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm
-from app.models import User, ROLE_USER, ROLE_ADMIN
+from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat
 from app.user_managment import register_user, signin_user, users_list, edit_role
 from app.gamers_managment import gamers_list, add_gamer_db
 from app.telega_managment import telega_list
@@ -131,8 +131,8 @@ def list_channels():
 @app.route ('/chat_opt', methods =['GET'])
 @login_required
 def chat_options():
-    chat =[{'tg_chat_name':'test chat'}]
-    chat_opt =[{'proxy':'true', 'multi_proxy':'false', 'bonuses':'true', 'bonuses_count':'13', 'codes':'false', 'codes_deny':'true', 'vote':'false', 'vote_percent':99}]
+    chat = Chat.query.filter_by(tg_id = 1234).first()
+    chat_opt = Chat_opt.query.filter_by().first(chat = 1234)#[{'proxy':'true', 'multi_proxy':'false', 'bonuses':'true', 'bonuses_count':'13', 'codes':'false', 'codes_deny':'true', 'vote':'false', 'vote_percent':99}]
     chat_opt_frm = ChatOptionsForm()
     if request.method =='GET':
         chat_opt_frm.proxy.data = chat_opt.proxy
