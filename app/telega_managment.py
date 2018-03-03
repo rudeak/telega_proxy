@@ -10,7 +10,7 @@ def telega_list (owner_id):
     return tg_users
 
 def create_chat (tg_id, name, avatar):
-    if Chat.query.filter_by (tg_id = tg_id).count > 0:
+    if Chat.query.filter_by (tg_id = tg_id).count() > 0:
         return 'чат з таким id існує'
     chat = Chat (tg_id, name, avatar, 99999)
     chat_opt = Chat_opt (tg_id)
