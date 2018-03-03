@@ -137,6 +137,12 @@ def chat_options():
     if request.method =='GET':
         chat_opt_frm.proxy.data = chat_opt.proxy
         chat_opt_frm.multi_proxy.data = chat_opt.multi_proxy
+        chat_opt_frm.bonuses.data = chat_opt.bonuses
+        chat_opt_frm.bonuses_count.data = chat_opt.bonuses_count
+        chat_opt_frm.codes.data = chat_opt.codes
+        chat_opt_frm.codes_deny.data = chat_opt.codes_deny
+        chat_opt_frm.vote.data = chat_opt.vote
+        chat_opt_frm.vote_percent.data = chat_opt.vote_percent 
     return render_template ('chat_options.html', user = current_user, chat=chat, chat_opt_frm=chat_opt_frm, chat_opt=chat_opt)
 #@app.before_request
 #def before_request():
