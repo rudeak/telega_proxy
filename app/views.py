@@ -5,7 +5,7 @@ from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm
 from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat
 from app.user_managment import register_user, signin_user, users_list, edit_role
 from app.gamers_managment import gamers_list, add_gamer_db
-from app.telega_managment import telega_list
+from app.telega_managment import telega_list, edit_chat_options
 
 @lm.user_loader
 def load_user(id):
@@ -128,11 +128,11 @@ def list_channels():
     tg_chats = [{'tg_chat_id':'123', 'tg_chat_name':'test chat', 'tg_chat.tg_chat_avatar':'', 'tg_chat_game':'test game', 'id':'1053'}]
     return render_template ('active_chats.html', user = current_user, tg_chats = tg_chats)
 
-@app.route ('/chat_opt', methods =['GET'])
+@app.route ('/chat_opt/<id>', methods =['GET', 'POST'])
 @login_required
-def chat_options():
-    chat = Chat.query.filter_by(tg_id = 1234).first()
-    chat_opt = Chat_opt.query.filter_by(chat = 1234).first()#[{'proxy':'true', 'multi_proxy':'false', 'bonuses':'true', 'bonuses_count':'13', 'codes':'false', 'codes_deny':'true', 'vote':'false', 'vote_percent':99}]
+def chat_options(id):
+    chat = Chat.query.filter_by(tg_id = id).first()
+    chat_opt = Chat_opt.query.filter_by(chat = id).first()#[{'proxy':'true', 'multi_proxy':'false', 'bonuses':'true', 'bonuses_count':'13', 'codes':'false', 'codes_deny':'true', 'vote':'false', 'vote_percent':99}]
     chat_opt_frm = ChatOptionsForm()
     if request.method =='GET':
         chat_opt_frm.proxy.data = chat_opt.proxy
@@ -143,6 +143,15 @@ def chat_options():
         chat_opt_frm.codes_deny.data = chat_opt.codes_deny
         chat_opt_frm.vote.data = chat_opt.vote
         chat_opt_frm.vote_percent.data = chat_opt.vote_percent 
+    if request.method == 'POST':
+        if chat_opt_frm.validate_on_submit():
+            edit_chat_options (id,chat_opt_frm.proxy.data, chat_opt_frm.multi_proxy.data 
+                                chat_opt_frm.bonuses_count.data,
+                                chat_opt_frm.codes.data,
+                                chat_opt_frm.codes_deny.data,
+                                chat_opt_frm.vote.data,
+                                chat_opt_frm.vote_percent.data)
+
     return render_template ('chat_options.html', user = current_user, chat=chat, chat_opt_frm=chat_opt_frm, chat_opt=chat_opt)
 #@app.before_request
 #def before_request():

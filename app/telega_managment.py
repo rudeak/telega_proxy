@@ -23,7 +23,7 @@ def create_chat (tg_id, name, avatar):
         db.session.rollback()
         return 'помилка при звернення до бази данних при створенні чату'
 
-def edit_chat_options (tg_id, chat, proxy, multi_proxy, bonuses, bonuses_count, codes, codes_deny, vote, vote_percent):
+def edit_chat_options (tg_id, proxy, multi_proxy, bonuses, bonuses_count, codes, codes_deny, vote, vote_percent):
     chat_opt = Chat_opt.query.filter_by (chat = tg_id).first()
     chat_opt.proxy = proxy
     chat_opt.multi_proxy = multi_proxy
