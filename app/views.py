@@ -132,7 +132,7 @@ def list_channels():
 @login_required
 def chat_options():
     chat = Chat.query.filter_by(tg_id = 1234).first()
-    chat_opt = Chat_opt.query.filter_by().first(chat = 1234)#[{'proxy':'true', 'multi_proxy':'false', 'bonuses':'true', 'bonuses_count':'13', 'codes':'false', 'codes_deny':'true', 'vote':'false', 'vote_percent':99}]
+    chat_opt = Chat_opt.query.filter_by(chat = 1234).first()#[{'proxy':'true', 'multi_proxy':'false', 'bonuses':'true', 'bonuses_count':'13', 'codes':'false', 'codes_deny':'true', 'vote':'false', 'vote_percent':99}]
     chat_opt_frm = ChatOptionsForm()
     if request.method =='GET':
         chat_opt_frm.proxy.data = chat_opt.proxy
