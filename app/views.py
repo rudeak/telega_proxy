@@ -126,6 +126,7 @@ def new_game_wizard():
 @login_required
 def list_channels():
     tg_chats = Chat.query.all() 
+    print (tg_chats)
     return render_template ('active_chats.html', user = current_user, tg_chats = tg_chats)
 
 @app.route ('/chat_opt/<id>', methods =['GET', 'POST'])
