@@ -152,7 +152,7 @@ def chat_options(id):
                                 chat_opt_frm.codes_deny.data,
                                 chat_opt_frm.vote.data,
                                 chat_opt_frm.vote_percent.data)
-            return url_for (channels_active)
+            return redirect(url_for ('channels_active'))
 
     return render_template ('chat_options.html', user = current_user, chat=chat, chat_opt_frm=chat_opt_frm, chat_opt=chat_opt)
 #@app.before_request
