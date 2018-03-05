@@ -145,7 +145,8 @@ def chat_options(id):
         chat_opt_frm.vote.data = chat_opt.vote
         chat_opt_frm.vote_percent.data = chat_opt.vote_percent 
     if request.method == 'POST':
-            edit_chat_options (id,chat_opt_frm.proxy.data, chat_opt_frm.multi_proxy.data, 
+            edit_chat_options (id,chat_opt_frm.proxy.data, chat_opt_frm.multi_proxy.data,
+                                chat_opt_frm.bonuses.data, 
                                 chat_opt_frm.bonuses_count.data,
                                 chat_opt_frm.codes.data,
                                 chat_opt_frm.codes_deny.data,
