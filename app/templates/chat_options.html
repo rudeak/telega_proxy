@@ -11,7 +11,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Редагування налаштуваннь чату:{{chat.tg_chat_name}}</h2>
+        <h2>Редагування налаштуваннь чату:{{chat.name}}</h2>
       </div>
        <div class="x_content">
          <form name = "chat_opt_frm" action "" method ="POST">
@@ -41,13 +41,13 @@
                                 {{chat_opt_frm.bonuses (class="flat", style="position: absolute; opacity: 0;", type="checkbox")}}
                             Відображати бонуси</p>
                           </li>
-              </ul>            {%if chat_opt_frm.bonuses%}  
+              </ul>            {% if chat_opt_frm.bonuses %}  
                           <p><b>Максимальна кількість бонусів для відображення:</b></p>
                             <div style="display:inline">
                               {{chat_opt_frm.bonuses_count(type="text", class="form-control")}}
                             </div>
                           </p>
-                          {% endif %}
+                              {% endif %}
                               
           </div>
 
