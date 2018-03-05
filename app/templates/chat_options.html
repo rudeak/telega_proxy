@@ -76,7 +76,7 @@
                           </li>
                           {% endif %}
                         </ul>
-                           {% chat_opt_frm.vote %}
+                           {% if chat_opt_frm.vote %}
                           <p><b>Відсоток гравців необхідний для підтвердження коду:</b></p>
                             <div style="display:inline">
                               {{chat_opt_frm.vote_percent(type="text", class="form-control")}}
