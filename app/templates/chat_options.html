@@ -41,7 +41,7 @@
                                 {{chat_opt_frm.bonuses (class="flat", style="position: absolute; opacity: 0;", type="checkbox")}}
                             Відображати бонуси</p>
                           </li>
-              </ul>            {% if chat_opt_frm.bonuses %}  
+              </ul>            {% if chat_opt.bonuses %}  
                           <p><b>Максимальна кількість бонусів для відображення:</b></p>
                             <div style="display:inline">
                               {{chat_opt_frm.bonuses_count(type="text", class="form-control")}}
@@ -59,7 +59,7 @@
                               Дозволити вбивати коди
                             </p>
                           </li>
-                          {% if chat_opt_frm.codes %}
+                          {% if chat_opt.codes %}
                           <li>
                             <p>
                                 {{chat_opt_frm.codes_deny (class="flat", style="position: absolute; opacity: 0;", type="checkbox")}}
@@ -68,7 +68,7 @@
                           </li>
                           {% endif %}
                           <li>
-                            {%if chat_opt_frm.codes_deny %}
+                            {%if chat_opt.codes_deny %}
                             <p>
                                 {{chat_opt_frm.vote (class="flat", style="position: absolute; opacity: 0;", type="checkbox")}}
                               Проводити голосування при обмеженні
@@ -76,7 +76,7 @@
                           </li>
                           {% endif %}
                         </ul>
-                           {% if chat_opt_frm.vote %}
+                           {% if chat_opt.vote %}
                           <p><b>Відсоток гравців необхідний для підтвердження коду:</b></p>
                             <div style="display:inline">
                               {{chat_opt_frm.vote_percent(type="text", class="form-control")}}
