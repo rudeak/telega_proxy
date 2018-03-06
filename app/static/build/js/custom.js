@@ -1789,6 +1789,7 @@ if (typeof NProgress != 'undefined') {
 
 			$('#wizard_verticle').smartWizard({
 				transitionEffect: 'slide',
+				labelNext:'Насутпний',
 				buttonOrder: ['next', 'prev', 'finish'] 
 			});
 
