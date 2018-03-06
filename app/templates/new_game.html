@@ -12,7 +12,7 @@
                   <div class="x_panel">
                      <div class="x_content">
 
-                      <h2>Example: Vertical Style</h2>
+                      <h2>Створити нову гру</h2>
                       <!-- Tabs -->
                       <div id="wizard_verticle" class="form_wizard wizard_verticle">
                         <ul class="list-unstyled wizard_steps">
@@ -143,33 +143,4 @@
           
          
         <!-- /page content -->
-        <script type="text/javascript">
-   
-     $(document).ready(function(){
-        $('#wizard_verticle').smartWizard({
-          // Properties
-            selected: 0,  // Selected Step, 0 = first step   
-            keyNavigation: true, // Enable/Disable key navigation(left and right keys are used if enabled)
-            enableAllSteps: false,  // Enable/Disable all steps on first load
-            transitionEffect: 'fade', // Effect on navigation, none/fade/slide/slideleft
-            contentURL:null, // specifying content url enables ajax content loading
-            contentURLData:null, // override ajax query parameters
-            contentCache:true, // cache step contents, if false content is fetched always from ajax url
-            cycleSteps: false, // cycle step navigation
-            enableFinishButton: true, // makes finish button enabled always
-          hideButtonsOnDisabled: false, // when the previous/next/finish buttons are disabled, hide them instead
-            errorSteps:[],    // array of step numbers to highlighting as error steps
-            labelNext:'Вперед', // label for Next button
-            labelPrevious:'Назад', // label for Previous button
-            labelFinish:'Створити',  // label for Finish button        
-            noForwardJumping:false,
-            ajaxType: 'POST',
-          // Events
-            onLeaveStep: null, // triggers when leaving a step
-            onShowStep: null,  // triggers when showing a step
-            onFinish: null,  // triggers when Finish button is clicked  
-            buttonOrder: ['prev', 'next', 'finish']  // button order, to hide a button remove it from the list
-            });
-          }); 
-      </script>
 {% endblock%}
