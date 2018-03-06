@@ -118,3 +118,19 @@ class Chat_opt (db.Model):
         self.codes_deny = True
         self.vote = True
         self.vote_percent = 30
+
+class Game (db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    game_id = db.Column(db.Integer, unique = True)
+    game_name = db.Column(db.String(120), index = True, unique = False)
+    gamer = Gamers.id
+    chat = Chat.id
+
+    def __repr__(self):
+        return '<Game %r>' % (self.game_name)
+    
+    def __init__(self, game_id, game_name, gamer, chat):
+        self.game_id = game_id
+        self.game_name = game_name
+        self.gamer = gamer
+        self.chat = chat
