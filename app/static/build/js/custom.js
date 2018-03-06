@@ -1788,7 +1788,8 @@ if (typeof NProgress != 'undefined') {
 			$('#wizard').smartWizard();
 
 			$('#wizard_verticle').smartWizard({
-			  transitionEffect: 'slide'
+				transitionEffect: 'slide',
+				buttonOrder: ['next', 'prev', 'finish'] 
 			});
 
 			$('.buttonNext').addClass('btn btn-success');
