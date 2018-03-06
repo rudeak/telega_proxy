@@ -1792,7 +1792,9 @@ if (typeof NProgress != 'undefined') {
 				labelNext:'Насутпний',
 				labelPrevious: 'Попередній',
 				labelFinish : 'Створити',
-				buttonOrder: ['Next', 'Previous', 'Finish'] 
+				buttonOrder: ['Next', 'Previous', 'Finish'],
+				ajaxType: 'POST',
+				hideButtonsOnDisabled: true
 			});
 
 			$('.buttonNext').addClass('btn btn-success');
