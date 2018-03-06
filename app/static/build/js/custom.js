@@ -1790,7 +1790,9 @@ if (typeof NProgress != 'undefined') {
 			$('#wizard_verticle').smartWizard({
 				transitionEffect: 'slide',
 				labelNext:'Насутпний',
-				buttonOrder: ['next', 'prev', 'finish'] 
+				labelPrevious: 'Попередній',
+				labelFinish : 'Створити',
+				buttonOrder: ['Next', 'Previous', 'Finish'] 
 			});
 
 			$('.buttonNext').addClass('btn btn-success');
