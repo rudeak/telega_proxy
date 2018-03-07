@@ -127,6 +127,13 @@ def new_game_wizard():
     new_game_frm.gamer.choices = selectChoises    
     return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
 
+@app.route ('/new_game', methods = ['POST'])
+@login_required
+def game_creator():
+    new_game_frm = NewGameForm ()
+    return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
+
+
 @app.route ('/channels_active', methods =['GET'])
 @login_required
 def list_channels():
