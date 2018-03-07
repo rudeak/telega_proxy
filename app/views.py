@@ -4,7 +4,7 @@ from app import app, db, lm
 from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm, NewGameForm 
 from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat
 from app.user_managment import register_user, signin_user, users_list, edit_role
-from app.gamers_managment import gamers_list, add_gamer_db
+from app.gamers_managment import gamers_list, add_gamer_db, return_gamer_name
 from app.telega_managment import telega_list, edit_chat_options, chat_list
 from app.game_managment import new_game, active_games_list
 
@@ -145,6 +145,8 @@ def game_creator():
 @app.route ('/active_games', methods = ['GET'])
 @login_required
 def active_games_list_tmplt():
+    for games in active_games_list():
+        print (return_gamer_name(games.gamer))
     return render_template ('active_games.html', user = current_user, games = active_games_list())
 
 @app.route ('/channels_active', methods =['GET'])
