@@ -1,0 +1,55 @@
+{% extends "top.html" %}
+{% block page_content%}
+<!-- page content -->
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+          <div class="col-sm-6">
+            <div class="dataTables_length" id="datatable-responsive_length">
+              <label>Show <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm"> 
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option> </select>entries</label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div id="datatable-responsive_filter" class="dataTables_filter">
+            <label>Search:<input class="form-control input-sm" placeholder="" aria-controls="datatable-responsive" type="search">
+            </label>
+          </div>
+        </div>                 
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          <th>Домен</th>
+                          <th>iD гри</th>
+                          <th>Назва гри</th>
+                          <th>Гравець</th>
+                          <th>Чат</th>
+                          <th>Видалити</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for game in games %}
+                        <tr>
+                          <td>{{game.game_domain}}</td>
+                          <td>{{game.game_id}}</td>
+                          <td>{{game.game_name}}</td>
+                          <td>{{game.gamer}}</td>
+                          <td>{{game.chat}}</td>
+                          <td> 
+                            <a clas = "btn btn-default submit" href = "/chat_opt/{{tg_chat.tg_id}}">Налаштувати</a>
+                            </form>
+                            </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+          </div>
+    </div>
+        <!-- /page content -->
+
+{% endblock%}

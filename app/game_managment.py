@@ -12,3 +12,6 @@ def new_game (domain, id, name, gamer, chat):
         db.session.rollback()
         print ('Помилка запису параметрів гри у базу')
         return 'Помилка запису параметрів гри у базу'
+
+def active_games_list ()
+    return Game.query.all()
