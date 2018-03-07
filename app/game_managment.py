@@ -1,4 +1,4 @@
-from models import Game
+from app.models import Game
 from sqlalchemy.orm import sessionmaker
 from app import db
 
