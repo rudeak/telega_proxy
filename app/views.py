@@ -121,8 +121,8 @@ def list_telegram_users():
 @login_required
 def new_game_wizard():
     print ('-------------------------CHAT LIST---------------------')
-    chat_list = chat_list()
-    for chat in chat_list:
+    chatList = chat_list()
+    for chat in chatList:
         print (chat)
     print ('-------------------------GAMERS LIST---------------------')
     print (telega_list(current_user.id))
