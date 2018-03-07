@@ -10,4 +10,5 @@ def new_game (domain, id, name, gamer, chat):
         return 1
     except:
         db.session.rollback()
+        print 'Помилка запису параметрів гри у базу'
         return 'Помилка запису параметрів гри у базу'

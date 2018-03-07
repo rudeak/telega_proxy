@@ -6,6 +6,7 @@ from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat
 from app.user_managment import register_user, signin_user, users_list, edit_role
 from app.gamers_managment import gamers_list, add_gamer_db
 from app.telega_managment import telega_list, edit_chat_options, chat_list
+from app.game_managment import new_game
 
 @lm.user_loader
 def load_user(id):
@@ -137,6 +138,7 @@ def game_creator():
     new_game_frm.gamer.choices = selectChoises
     if new_game_frm.validate_on_submit():
         print ('-------------------FORM VALIDATION--------------')
+        new_game (new_game_frm.game_domain.data, new_game_frm.game_id.data, new_game_frm.game_id.data, new_game_frm.gamer.data, new_game_frm.chat.data)
     return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
 
 
