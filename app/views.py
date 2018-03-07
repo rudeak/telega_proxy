@@ -128,12 +128,12 @@ def new_game_wizard():
     i = 0
     for chat in chatList:
         print (chat)
-        new_game_frm.chat.choices.insert (i, chat)
+        new_game_frm.chat.choices.insert (chat.id, chat.name)
         i +=1
     print ('-------------------------GAMERS LIST---------------------')
     i = 0
     for gamer in gamers:
-        new_game_frm.gamer.choices.insert (i, gamer)
+        new_game_frm.gamer.choices.insert (gamer.id, gamer.login)
         i +=1
         print (gamer)
     return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
