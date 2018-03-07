@@ -11,7 +11,6 @@ def telega_list (owner_id):
 
 def chat_list ():
     chat = Chat.query.all()
-    print (list(tg_users)) #list tg users
     return chat
 
 def create_chat (tg_id, name, avatar):
