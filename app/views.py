@@ -136,9 +136,9 @@ def game_creator():
     new_game_frm.chat.choices = selectChoises
     selectChoises = [(gamer.id, gamer.login + ' - ' + gamer.comment) for gamer in gamers_list(current_user.id)]
     new_game_frm.gamer.choices = selectChoises
-    if new_game_frm.validate_on_submit():
-        print ('-------------------FORM VALIDATION--------------')
-        new_game (new_game_frm.game_domain.data, new_game_frm.game_id.data, new_game_frm.game_id.data, new_game_frm.gamer.data, new_game_frm.chat.data)
+    #if new_game_frm.validate_on_submit():
+    print ('-------------------FORM VALIDATION--------------')
+    new_game (new_game_frm.game_domain.data, new_game_frm.game_id.data, new_game_frm.game_id.data, new_game_frm.gamer.data, new_game_frm.chat.data)
     return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
 
 
