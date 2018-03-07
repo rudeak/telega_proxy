@@ -4,7 +4,7 @@ from app import db
 from app.models import Telegram_Users, Chat, Chat_opt
 
 def telega_list (owner_id):
-    tg_users = Telegram_Users.query.filter_by(creator_id = owner_id)
+    tg_users = Telegram_Users.query.filter_by(creator_id = owner_id).all()
     print (list(tg_users)) #list tg users
     return tg_users
 
