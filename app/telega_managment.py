@@ -22,6 +22,7 @@ def create_chat (tg_id, name, avatar):
     db.session.add (chat_opt)
     try:
         db.session.commit()
+        print ('чат додано')
         return 1
     except:
         db.session.rollback()
