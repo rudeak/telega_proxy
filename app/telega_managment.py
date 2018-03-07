@@ -14,6 +14,7 @@ def chat_list ():
 
 def create_chat (tg_id, name, avatar):
     if Chat.query.filter_by (tg_id = tg_id).count() > 0:
+        print ('чат з таким id існує')
         return 'чат з таким id існує'
     chat = Chat (tg_id, name, avatar, 99999)
     chat_opt = Chat_opt (tg_id)
@@ -24,6 +25,7 @@ def create_chat (tg_id, name, avatar):
         return 1
     except:
         db.session.rollback()
+        print ('помилка при звернення до бази данних при створенні чату')
         return 'помилка при звернення до бази данних при створенні чату'
 
 def edit_chat_options (tg_id, proxy, multi_proxy, bonuses, bonuses_count, codes, codes_deny, vote, vote_percent):
