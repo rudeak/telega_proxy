@@ -125,7 +125,9 @@ def new_game_wizard():
     for chat in chatList:
         print (chat)
     print ('-------------------------GAMERS LIST---------------------')
-    print (telega_list(current_user.id))
+    gamers = telega_list(current_user.id)
+    for gamer in gamers
+        print (gamer)
     return render_template ('new_game.html', user = current_user)
 
 @app.route ('/channels_active', methods =['GET'])
