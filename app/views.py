@@ -123,13 +123,18 @@ def new_game_wizard():
     print ('-------------------------CHAT LIST---------------------')
     chatList = chat_list()
     gamers = gamers_list(current_user.id)
+    
+    new_game_frm = NewGameForm ()
+    i = 0
     for chat in chatList:
         print (chat)
+        new_game_frm.chat.choices.insert (i, chat)
+        i +=1
     print ('-------------------------GAMERS LIST---------------------')
-    new_game_frm = NewGameForm ()
-    new_game_frm.gamer.choices.insert (gamers)
-    new_game_frm.chat.choices.insert (chatList)
+    i = 0
     for gamer in gamers:
+        new_game_frm.gamer.choices.insert (i, gamer)
+        i +=1
         print (gamer)
     return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
 
