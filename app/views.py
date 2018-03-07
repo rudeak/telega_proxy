@@ -131,6 +131,12 @@ def new_game_wizard():
 @login_required
 def game_creator():
     new_game_frm = NewGameForm ()
+    selectChoises = [(chat.id, chat.name) for chat in chat_list()]
+    new_game_frm.chat.choices = selectChoises
+    selectChoises = [(gamer.id, gamer.login + ' - ' + gamer.comment) for gamer in gamers_list(current_user.id)]
+    new_game_frm.gamer.choices = selectChoises
+    if new_game_frm.validate_on_submit():
+        print ('-------------------FORM VALIDATION--------------')
     return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
 
 
