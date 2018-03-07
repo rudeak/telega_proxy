@@ -131,11 +131,9 @@ def new_game_wizard():
         new_game_frm.chat.choices.insert (chat.id, chat.name)
         i +=1
     print ('-------------------------GAMERS LIST---------------------')
-    i = 0
-    for gamer in gamers:
-        new_game_frm.gamer.choices.insert (gamer.id, gamer.login)
-        i +=1
-        print (gamer)
+    
+    selectChoises = [(gamer.id, gamer.login) for gamer in gamers_list(current_user.id)]
+    new_game_frm.gamer.choices = selectChoises    
     return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
 
 @app.route ('/channels_active', methods =['GET'])
