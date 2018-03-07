@@ -126,7 +126,7 @@ def new_game_wizard():
         print (chat)
     print ('-------------------------GAMERS LIST---------------------')
     gamers = telega_list(current_user.id)
-    for gamer in gamers
+    for gamer in gamers:
         print (gamer)
     return render_template ('new_game.html', user = current_user)
 
