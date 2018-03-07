@@ -135,7 +135,6 @@ class Game (db.Model):
         return '<Game %r>' % (self.game_name)
     
     def __init__(self, game_domain, game_id, game_name, gamer, chat):
-        print ('chat'+ game_id + 'created')
         self.game_id = game_id
         self.game_domain = game_domain
         self.game_name = game_name

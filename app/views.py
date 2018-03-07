@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
-from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm
+from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm, NewGameForm 
 from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat
 from app.user_managment import register_user, signin_user, users_list, edit_role
 from app.gamers_managment import gamers_list, add_gamer_db
@@ -122,13 +122,16 @@ def list_telegram_users():
 def new_game_wizard():
     print ('-------------------------CHAT LIST---------------------')
     chatList = chat_list()
+    gamers = gamers_list(current_user.id)
     for chat in chatList:
         print (chat)
     print ('-------------------------GAMERS LIST---------------------')
-    gamers = gamers_list(current_user.id)
+    new_game_frm = NewGameForm ()
+    new_game_frm.gamer.choices.insert (gamers)
+    new_game_frm.chat.choices.insert (chatList)
     for gamer in gamers:
         print (gamer)
-    return render_template ('new_game.html', user = current_user)
+    return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
 
 @app.route ('/channels_active', methods =['GET'])
 @login_required

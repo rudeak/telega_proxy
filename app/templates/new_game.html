@@ -16,6 +16,7 @@
 </div>
  <div class="x_content">
    <form method="POST" action="" name="new_game_frm" class="form-horizontal form-label-left">
+     {{new_game_frm.hidden_tag()}}
       <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domain">Домен <span class="required">*</span>
           </label>
@@ -34,12 +35,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gamer">Гравець <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select name="gamer" id="gamer" required="required" class="form-control col-md-7 col-xs-12">
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="fiat">Fiat</option>
-                      <option value="audi">Audi</option>
-                    </select> 
+                  {{new_game_frm.gamer(name="gamer", id="gamer", required="required", class_="form-control col-md-7 col-xs-12")}}
               </div>
           </div>
           <div class="form-group">
