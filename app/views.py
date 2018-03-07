@@ -5,7 +5,7 @@ from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm
 from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat
 from app.user_managment import register_user, signin_user, users_list, edit_role
 from app.gamers_managment import gamers_list, add_gamer_db
-from app.telega_managment import telega_list, edit_chat_options
+from app.telega_managment import telega_list, edit_chat_options, chat_list
 
 @lm.user_loader
 def load_user(id):
@@ -120,6 +120,10 @@ def list_telegram_users():
 @app.route ('/new_game', methods = ['GET'])
 @login_required
 def new_game_wizard():
+    print ('-------------------------CHAT LIST---------------------')
+    print (chat_list())
+    print ('-------------------------GAMERS LIST---------------------')
+    print (telega_list())
     return render_template ('new_game.html', user = current_user)
 
 @app.route ('/channels_active', methods =['GET'])

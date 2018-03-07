@@ -9,7 +9,6 @@ def gamers_list (owner_id):
 def add_gamer_db(login1, password1, comment1, owner_id):
     new_gamer = Gamers (login1, password1, comment1, owner_id)
     db.session.add(new_gamer)
-    db.session.commit()
     try:
         db.session.commit()
         return 1

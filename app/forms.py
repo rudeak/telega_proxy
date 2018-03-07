@@ -31,6 +31,13 @@ class ChatOptionsForm (FlaskForm):
     vote = BooleanField('vote', validators= [Required()])
     vote_percent = DecimalField('vote percent', validators= [Required()])
 
+
+class NewGameForm (FlaskForm):
+    game_domain = TextField('domain', validators = [Required()])
+    game_id = TextField('game_id', validators = [Required()])
+    gamer = SelectField('role',choices=[], validators = [Required()])
+    chat = SelectField('role',choices=[], validators = [Required()])
+
     
 
 

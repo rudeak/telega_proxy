@@ -1,3 +1,4 @@
+import datetime
 from hashlib import md5
 from app import db
 
@@ -82,6 +83,7 @@ class Chat (db.Model):
     name = db.Column(db.String(120), index = True, unique = False)
     avatar = db.Column(db.String(120), index = True, unique = False)
     game_id = db.Column(db.Integer)
+    chat_date = db.Column (db.DateTime)
 
     
     def __repr__(self):
@@ -92,6 +94,7 @@ class Chat (db.Model):
         self.name = name
         self.avatar = avatar
         self.game_id = game_id
+        self.chat_date = datetime.now()
 
 class Chat_opt (db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -121,6 +124,8 @@ class Chat_opt (db.Model):
 
 class Game (db.Model):
     id = db.Column(db.Integer, primary_key = True)
+    game_date = db.Column (db.DateTime)
+    game_domain = db.Column(db.String(120))
     game_id = db.Column(db.Integer, unique = True)
     game_name = db.Column(db.String(120), index = True, unique = False)
     gamer = Gamers.id
@@ -129,8 +134,11 @@ class Game (db.Model):
     def __repr__(self):
         return '<Game %r>' % (self.game_name)
     
-    def __init__(self, game_id, game_name, gamer, chat):
+    def __init__(self, game_domain, game_id, game_name, gamer, chat):
         self.game_id = game_id
+        self.game_domain = game_domain
         self.game_name = game_name
         self.gamer = gamer
         self.chat = chat
+        self.game_date = datetime.now()
+

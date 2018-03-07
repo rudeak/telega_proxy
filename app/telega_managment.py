@@ -9,6 +9,11 @@ def telega_list (owner_id):
 
     return tg_users
 
+def chat_list ():
+    chat = Chat.query.all()
+    print (list(tg_users)) #list tg users
+    return chat
+
 def create_chat (tg_id, name, avatar):
     if Chat.query.filter_by (tg_id = tg_id).count() > 0:
         return 'чат з таким id існує'
