@@ -120,19 +120,10 @@ def list_telegram_users():
 @app.route ('/new_game', methods = ['GET'])
 @login_required
 def new_game_wizard():
-    print ('-------------------------CHAT LIST---------------------')
-    chatList = chat_list()
-    gamers = gamers_list(current_user.id)
-    
     new_game_frm = NewGameForm ()
-    i = 0
-    for chat in chatList:
-        print (chat)
-        new_game_frm.chat.choices.insert (chat.id, chat.name)
-        i +=1
-    print ('-------------------------GAMERS LIST---------------------')
-    
-    selectChoises = [(gamer.id, gamer.login) for gamer in gamers_list(current_user.id)]
+    selectChoises = [(chat.id, chat.name) for chat in chat_list()]
+    new_game_frm.chat.choices = selectChoises
+    selectChoises = [(gamer.id, gamer.login + ' - ' + gamer.comment) for gamer in gamers_list(current_user.id)]
     new_game_frm.gamer.choices = selectChoises    
     return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
 

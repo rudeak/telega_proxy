@@ -21,14 +21,14 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domain">Домен <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="domain" required="required" class="form-control col-md-7 col-xs-12">
+            {{new_game_frm.game_domain(class_="form-control col-md-7 col-xs-12")}}
           </div>
         </div>
         <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="game">Гра <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="game" required="required" class="form-control col-md-7 col-xs-12">
+              {{new_game_frm.game_id (class_="form-control col-md-7 col-xs-12") }}
             </div>
           </div>
           <div class="form-group">
@@ -42,12 +42,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="chat">Чат <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select name="gamer" id="chat" required="required" class="form-control col-md-7 col-xs-12">
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="fiat">Fiat</option>
-                      <option value="audi">Audi</option>
-                    </select> 
+                  {{new_game_frm.chat(class_="form-control col-md-7 col-xs-12")}}
               </div>
           </div>
           <div class="ln_solid"></div>
