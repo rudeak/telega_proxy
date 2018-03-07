@@ -13,5 +13,5 @@ def new_game (domain, id, name, gamer, chat):
         print ('Помилка запису параметрів гри у базу')
         return 'Помилка запису параметрів гри у базу'
 
-def active_games_list ()
+def active_games_list ():
     return Game.query.all()
