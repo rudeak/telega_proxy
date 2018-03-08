@@ -17,5 +17,5 @@ def add_gamer_db(login1, password1, comment1, owner_id):
         return 'Помилка звернення до бази даних'
 
 def return_gamer_name (id):
-    return Gamers.query.login.filter_by (id = id).first()
-    #test git
+    gamer = Gamers.query.filter_by(id = id).first()
+    return gamer.login
