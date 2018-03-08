@@ -22,4 +22,4 @@ def return_gamer_name (id):
     print(id)
     print('gamer=')
     print(gamer)
-    return Gamers.query.login.filter_by 
+    return gamer.login 
