@@ -18,3 +18,4 @@ def add_gamer_db(login1, password1, comment1, owner_id):
 
 def return_gamer_name (id):
     return Gamers.query(Gamers.login).filter_by (id = id).first()
+    #test git
