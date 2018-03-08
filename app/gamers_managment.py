@@ -18,4 +18,6 @@ def add_gamer_db(login1, password1, comment1, owner_id):
 
 def return_gamer_name (id):
     gamer = Gamers.query.filter_by(id = id).first()
-    return gamer.login
+    print('id='+id)
+    print('gamer='+gamer)
+    return Gamers.query.login.filter_by 
