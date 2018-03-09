@@ -172,7 +172,7 @@ def edit_gamer(id):
         gamer_frm.password.data = gamer.password
         gamer_frm.comment.data = gamer.comment
     else:
-        if gamer.frm.validate_on_submit():
+        if gamer_frm.validate_on_submit():
             edit_gamer (id, gamer_frm.login.data, gamer_frm.password.data, gamer_frm.comment.data)
     return render_template ('gamer_opt.html', user = current_user, gamer = gamer, gamer_frm = gamer_frm)
 
