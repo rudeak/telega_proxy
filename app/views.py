@@ -145,15 +145,15 @@ def game_creator():
 @app.route ('/active_games', methods = ['GET'])
 @login_required
 def active_games_list_tmplt():
-    for games in active_games_list():
-        print (games)
+    if current_user.role == 2:
+        games = active_games_list()
+    else:
+        games = active_games_list(current_user.id)
+    for game in games:
+        print (game)
         print ('gamer='+str(games.gamer))
         print (return_gamer_name(games.gamer))
-    
-    if current_user.role == 2:
-        return render_template ('active_games.html', user = current_user, games = active_games_list())
-    else:
-        return render_template ('active_games.html', user = current_user, games = active_games_list(current_user.id))
+    return render_template ('active_games.html', user = current_user, games = games)
 
 @app.route ('/game_del/<id>', methods =['GET','POST'])
 @login_required
