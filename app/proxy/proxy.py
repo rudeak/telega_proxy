@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, abort
 from jinja2 import TemplateNotFound
 
-proxy = Blueprint('proxy', 'proxy', template_folder='templates', url_prefix='proxy')
+proxy = Blueprint('proxy', 'proxy', template_folder='templates')
 
 
 @proxy.route('/', defaults={'page': 'index'})
