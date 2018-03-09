@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, abort
 from jinja2 import TemplateNotFound
-from ..app import db, lm
+from app import db
 
 proxy = Blueprint('proxy', 'proxy', template_folder='templates')
 
