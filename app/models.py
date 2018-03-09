@@ -130,15 +130,17 @@ class Game (db.Model):
     game_name = db.Column(db.String(120), index = True, unique = False)
     gamer = db.Column(db.Integer)
     chat = db.Column(db.Integer)
+    owner = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Game %r>' % (self.game_name)
     
-    def __init__(self, game_domain, game_id, game_name, gamer, chat):
+    def __init__(self, game_domain, game_id, game_name, gamer, chat, owner):
         self.game_id = game_id
         self.game_domain = game_domain
         self.game_name = game_name
         self.gamer = gamer
         self.chat = chat
         self.game_date = datetime.now()
+        self.owner = owner
 

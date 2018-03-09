@@ -139,7 +139,7 @@ def game_creator():
     #if new_game_frm.validate_on_submit():
     print ('-------------------FORM VALIDATION--------------')
     print (new_game_frm.game_domain.data + ' '+ new_game_frm.game_id.data +' '+ new_game_frm.game_id.data +' '+ new_game_frm.gamer.data +' '+ new_game_frm.chat.data)
-    new_game (new_game_frm.game_domain.data, new_game_frm.game_id.data, new_game_frm.game_id.data, new_game_frm.gamer.data, new_game_frm.chat.data)
+    new_game (new_game_frm.game_domain.data, new_game_frm.game_id.data, new_game_frm.game_id.data, new_game_frm.gamer.data, new_game_frm.chat.data, current_user.id
     return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
 
 @app.route ('/active_games', methods = ['GET'])
@@ -148,7 +148,10 @@ def active_games_list_tmplt():
     for games in active_games_list():
         print ('gamer='+str(games.gamer))
         print (return_gamer_name(games.gamer))
-    return render_template ('active_games.html', user = current_user, games = active_games_list())
+    if current_user.role == 2:
+        return render_template ('active_games.html', user = current_user, games = active_games_list())
+    else:
+        return render_template ('active_games.html', user = current_user, games = active_games_list(current_user.id))
 
 @app.route ('/game_del/<id>', methods =['GET','POST'])
 @login_required
