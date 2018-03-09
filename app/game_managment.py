@@ -15,3 +15,13 @@ def new_game (domain, id, name, gamer, chat):
 
 def active_games_list ():
     return Game.query.all()
+
+def delete_game (id):
+    game = Game.query.filter_by (id=id)
+    db.session.delete(game)
+    try:
+        db.session.commit()
+        return 1
+    except:
+        db.session.rollbac()
+        return 'помилка видалення гри'

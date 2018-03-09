@@ -128,8 +128,8 @@ class Game (db.Model):
     game_domain = db.Column(db.String(120))
     game_id = db.Column(db.Integer, unique = True)
     game_name = db.Column(db.String(120), index = True, unique = False)
-    gamer = Gamers.id
-    chat = Chat.id
+    gamer = db.Column(db.Integer)
+    chat = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Game %r>' % (self.game_name)
