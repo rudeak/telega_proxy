@@ -139,7 +139,7 @@ def game_creator():
     #if new_game_frm.validate_on_submit():
     print ('-------------------FORM VALIDATION--------------')
     print (new_game_frm.game_domain.data + ' '+ new_game_frm.game_id.data +' '+ new_game_frm.game_id.data +' '+ new_game_frm.gamer.data +' '+ new_game_frm.chat.data)
-    new_game (new_game_frm.game_domain.data, new_game_frm.game_id.data, new_game_frm.game_id.data, new_game_frm.gamer.data, new_game_frm.chat.data, current_user.id
+    new_game (new_game_frm.game_domain.data, new_game_frm.game_id.data, new_game_frm.game_id.data, new_game_frm.gamer.data, new_game_frm.chat.data, current_user.id)
     return render_template ('new_game.html', user = current_user, new_game_frm = new_game_frm)
 
 @app.route ('/active_games', methods = ['GET'])
