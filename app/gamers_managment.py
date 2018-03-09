@@ -25,6 +25,7 @@ def return_gamer_name (id):
 
 def edit_gamer (id, login, password, comment):
     gamer = Gamers.query.filter_by(id = id).first()
+    print (gamer)
     gamer.login = login
     gamer.password = password
     gamer.comment = comment
