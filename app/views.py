@@ -152,7 +152,7 @@ def active_games_list_tmplt():
 
 @app.route ('/game_del/<id>', methods =['POST'])
 @login_required
-def delete_game_route (id)
+def delete_game_route (id):
     delete_game (id)
     return redirect(url_for('active_games_list_tmplt'))
 
