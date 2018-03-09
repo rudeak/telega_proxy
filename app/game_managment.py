@@ -17,7 +17,7 @@ def active_games_list ():
     return Game.query.all()
 
 def delete_game (id):
-    game = Game.query.filter_by (id=id)
+    game = Game.query.filter_by (id=id).first()
     db.session.delete(game)
     try:
         db.session.commit()
