@@ -46,7 +46,6 @@ def login():
     if form.login.data != '' and form.login.data is not None:
         if signin_user(form.login.data, form.password.data):
             login_user(signin_user(form.login.data, form.password.data), True)
-            print(form.password.data)
             return redirect(url_for('index'))
         else:
             return render_template('login.html', error='Невірний пароль', form=form)
