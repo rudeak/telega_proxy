@@ -35,7 +35,7 @@ def users_list():
 def edit_role (id, role):
     user = User.query.filter_by (id=id).first()
     user.role = role
-    if id == 0:
+    if id == 1:
        user.role = 2 
     try:
         db.session.commit()
