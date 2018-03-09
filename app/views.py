@@ -4,7 +4,7 @@ from app import app, db, lm
 from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm, NewGameForm 
 from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat, Gamers
 from app.user_managment import register_user, signin_user, users_list, edit_role
-from app.gamers_managment import gamers_list, add_gamer_db, return_gamer_name
+from app.gamers_managment import gamers_list, add_gamer_db, return_gamer_name, edit_gamer
 from app.telega_managment import telega_list, edit_chat_options, chat_list
 from app.game_managment import new_game, active_games_list, delete_game
 
@@ -165,11 +165,14 @@ def delete_game_route (id):
 @app.route ('/gamer/<id>', methods =['GET','POST'])
 @login_required
 def edit_gamer(id):
-    gamer = Gamer.query.filter_by (id=id).first()
     gamer_frm = AddGamerForm()
-    gamer_frm.login.data = gamer.login
-    gamer_frm.password.data = gamer.password
-    gamer_frm.comment.data = gamer.comment
+    if request.method == 'GET':
+        gamer = Gamers.query.filter_by (id=id).first()
+        gamer_frm.login.data = gamer.login
+        gamer_frm.password.data = gamer.password
+        gamer_frm.comment.data = gamer.comment
+    else:
+        edit_gamer (id, gamer_frm.login.data, gamer_frm.password.data, gamer_frm.comment.data)
     return render_template ('gamer_opt.html', user = current_user, gamer = gamer, gamer_frm = gamer_frm)
 
 @app.route ('/channels_active', methods =['GET'])

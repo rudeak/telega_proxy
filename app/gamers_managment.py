@@ -22,4 +22,16 @@ def return_gamer_name (id):
         return gamer.login
     else:
         return 'error'
+
+def edit_gamer (id, login, password, comment):
+    gamer = Gamers.query.filter_by(id = id).first()
+    gamer.login = login
+    gamer.password = password
+    gamer.comment = comment
+    try:
+        db.session.commit()
+        return 1
+    except:
+        db.session.rollback()
+        return 'помилка при редагуванні налаштуваннь гравця:'+id
     
