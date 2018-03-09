@@ -1,6 +1,7 @@
 from flask import Flask 
 from flask_sqlalchemy import SQLAlchemy 
 from flask_login import LoginManager
+from app.proxy import views
 import pymysql
 
 pymysql.install_as_MySQLdb()
@@ -8,7 +9,7 @@ pymysql.install_as_MySQLdb()
 app = Flask(__name__)
 app.config.from_object('config')
 app.config['TESTING'] = False
-app.register_blueprint(proxy, url_prefix='/pages')
+app.register_blueprint(proxy, url_prefix='/proxy')
 db = SQLAlchemy(app)
 lm = LoginManager()
 lm.init_app(app)
