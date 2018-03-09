@@ -4,7 +4,7 @@ from jinja2 import TemplateNotFound
 proxy = Blueprint('proxy', 'proxy', template_folder='templates')
 
 
-@proxy.route('/', defaults={'page': 'index'})
-@proxy.route('/proxy')
+@proxy.route('/')
+@login_required
 def show(page):
     return 'hello world'
