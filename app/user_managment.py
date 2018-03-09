@@ -26,7 +26,7 @@ def register_user (nickname, email1, password1):
 
 def signin_user (nickname, password1):
     password_hash = hashlib.sha256(password1.encode()).hexdigest()
-    if User.query.filter_by (login = nickname) == 0
+    if User.query.filter_by (login = nickname) == 0:
         return 0
     user = User.query.filter_by (login = nickname).first()
     if password_hash == user.password:
