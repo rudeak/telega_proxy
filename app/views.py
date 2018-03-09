@@ -149,6 +149,7 @@ def active_games_list_tmplt():
         games = active_games_list()
     else:
         games = active_games_list(current_user.id)
+    
     for game in games:
         print (game)
         #print ('gamer='+str(games.gamer))
