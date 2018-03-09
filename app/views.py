@@ -220,15 +220,4 @@ def chat_options(id):
             return redirect(url_for ('list_channels'))
 
     return render_template ('chat_options.html', user = current_user, chat=chat, chat_opt_frm=chat_opt_frm, chat_opt=chat_opt)
-#@app.before_request
-#def before_request():
-#    g.user = current_user
 
-#@app.route('/logout')
-#def logout():
-#    logout_user()
-#    return redirect(url_for('index'))
-
-#@lm.user_loader
-#def load_user(id):
-#    return User.query.get(id)
