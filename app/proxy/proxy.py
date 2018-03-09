@@ -10,5 +10,5 @@ proxy = Blueprint('proxy', 'proxy', template_folder='templates')
 @proxy.route('/')
 @login_required
 def show():
-    return g.id
+    return g.user.login
     
