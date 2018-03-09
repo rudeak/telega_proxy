@@ -166,13 +166,14 @@ def delete_game_route (id):
 @login_required
 def edit_gamer(id):
     gamer_frm = AddGamerForm()
+    gamer = Gamers.query.filter_by (id=id).first()
     if request.method == 'GET':
-        gamer = Gamers.query.filter_by (id=id).first()
         gamer_frm.login.data = gamer.login
         gamer_frm.password.data = gamer.password
         gamer_frm.comment.data = gamer.comment
     else:
-        edit_gamer (id, gamer_frm.login.data, gamer_frm.password.data, gamer_frm.comment.data)
+        if gamer.frm.validate_on_submit():
+            edit_gamer (id, gamer_frm.login.data, gamer_frm.password.data, gamer_frm.comment.data)
     return render_template ('gamer_opt.html', user = current_user, gamer = gamer, gamer_frm = gamer_frm)
 
 @app.route ('/channels_active', methods =['GET'])
