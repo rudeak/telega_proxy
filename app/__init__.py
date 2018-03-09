@@ -1,7 +1,7 @@
 from flask import Flask 
 from flask_sqlalchemy import SQLAlchemy 
 from flask_login import LoginManager
-from app.proxy import views
+from app.proxy import proxy
 import pymysql
 
 pymysql.install_as_MySQLdb()
