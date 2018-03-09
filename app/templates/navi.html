@@ -33,6 +33,7 @@
                 <ul class="nav side-menu">
                   <li><a href ="/index"><i class="fa fa-home"></i> Додому </a>
                   </li>
+                  {%if user.role >0 %}
                   <li><a><i class="fa fa-users"></i> Користувачі <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/users">Адміністратори</a></li>
@@ -53,7 +54,7 @@
                       <li><a href="/game_archive">Архів ігр</a></li>
                     </ul>
                   </li>
-
+                {%endif%}
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="chartjs.html">Chart JS</a></li>
