@@ -16,7 +16,7 @@ def register_user (nickname, email1, password1):
     try:
         db.session.commit()
         user = User.query.filter_by(login = nickname).first()
-        if user id == 1:
+        if user.id == 1:
             user.role = 2
             db.session.commit()
         return 1
