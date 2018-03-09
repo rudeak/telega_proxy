@@ -150,7 +150,7 @@ def active_games_list_tmplt():
         print (return_gamer_name(games.gamer))
     return render_template ('active_games.html', user = current_user, games = active_games_list())
 
-@app.route ('/game_del/<id>', methods =['POST'])
+@app.route ('/game_del/<id>', methods =['GET','POST'])
 @login_required
 def delete_game_route (id):
     delete_game (id)
