@@ -60,7 +60,8 @@ def delete_chat (tg_id):
 
 def return_chat_name (id):
     chat = Chat.query.filter_by(id=id).first()
-    return ['chat_name':chat.name,'chat_tg_id':chat.tg_id]
+    chat_dict = ['chat_name':chat.name,'chat_tg_id':chat.tg_id]
+    return chat_dict
 """
 def add_gamer_db(login1, password1, comment1, owner_id):
     new_gamer = Gamers (login1, password1, comment1, owner_id)
