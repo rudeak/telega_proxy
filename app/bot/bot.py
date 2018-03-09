@@ -3,8 +3,8 @@ from jinja2 import TemplateNotFound
 from flask_login import login_user, logout_user, current_user, login_required
 import app
 
-proxy = Blueprint('bot', 'bot', template_folder='templates')
+bot = Blueprint('bot', 'bot', template_folder='templates')
 
-@proxy.route('/')
+@bot.route('/')
 def message_listener():
     return render_template ('index.html', user = current_user)
