@@ -20,6 +20,6 @@ def return_gamer_name (id):
     if Gamers.query.filter_by(id = id).count()>0:
         gamer = Gamers.query.filter_by(id = id).first()
         return gamer.login
-    else
+    else:
         return 'error'
     
