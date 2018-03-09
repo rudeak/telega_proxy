@@ -34,4 +34,14 @@ def edit_gamer (id, login, password, comment):
     except:
         db.session.rollback()
         return 'помилка при редагуванні налаштуваннь гравця:'+id
+
+def delete_gamer(id):
+    gamer = Gamers.query.filter_by(id= id).first()
+    db.session.delete(gamer)
+    try:
+        db.session.commit()
+        return 1
+    except:
+        db.session.rollback()
+        return 'помилка видалення користувача '+id
     

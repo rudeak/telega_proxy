@@ -38,13 +38,9 @@
                           <td>{{gamer.password}}</td>
                           <td>{{gamer.comment}}</td>
                           <td> 
-                            <form method = "post" name ="form{{gamer.id}}" action="">
-                            {{form.hidden_tag()}}
-                            <button type = "submit">Видалити</button>
-                            </form>
-                            </div>
+                            <a href='/gamer_del/{{gamer.id}}'>Видалити</a>
                           </td>
-                          <td><a href='/gamer/{{gamer.id}}'>Редагувати</a></a></td>
+                          <td><a href='/gamer/{{gamer.id}}'>Редагувати</a></td>
                         </tr>
                         {% endfor %}
                       </tbody>

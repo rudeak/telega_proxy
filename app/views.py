@@ -4,7 +4,7 @@ from app import app, db, lm
 from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm, NewGameForm 
 from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat, Gamers
 from app.user_managment import register_user, signin_user, users_list, edit_role
-from app.gamers_managment import gamers_list, add_gamer_db, return_gamer_name, edit_gamer
+from app.gamers_managment import gamers_list, add_gamer_db, return_gamer_name, edit_gamer, delete_gamer
 from app.telega_managment import telega_list, edit_chat_options, chat_list
 from app.game_managment import new_game, active_games_list, delete_game
 
@@ -161,6 +161,13 @@ def active_games_list_tmplt():
 def delete_game_route (id):
     delete_game (id)
     return redirect(url_for('active_games_list_tmplt'))
+
+@app.route ('/gamer_del/<id>', methods =['GET','POST'])
+@login_required
+def delete_gamer_route (id):
+    delete_gamer (id)
+    return redirect(url_for('list_gamers'))
+
 
 @app.route ('/gamer/<id>', methods =['GET','POST'])
 @login_required
