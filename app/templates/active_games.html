@@ -36,8 +36,8 @@
                           <td>{{game.game_domain}}</td>
                           <td>{{game.game_id}}</td>
                           <td>{{game.game_name}}</td>
-                          <td>{{game.gamer}}</td>
-                          <td>{{game.chat}}</td>
+                          <td><a href = '/gamer/{{game.gamer}}'>{{game.login}}</a></td>
+                          <td><a href = '/chat_opt/{{game.tg_id}}'>{{game.chat_name}}</td>
                           <td> 
                             <a clas = "btn btn-default submit" href = "/game_del/{{game.id}}">Видалити</a>
                             </form>
