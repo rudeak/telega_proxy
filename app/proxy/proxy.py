@@ -9,5 +9,5 @@ proxy = Blueprint('proxy', 'proxy', template_folder='templates')
 
 @proxy.route('/')
 def show():
-    return 'hello'
+    return current_user.id
     
