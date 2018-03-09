@@ -149,11 +149,6 @@ def active_games_list_tmplt():
         games = active_games_list()
     else:
         games = active_games_list(current_user.id)
-    
-    for game in games:
-        print (game)
-        #print ('gamer='+str(games.gamer))
-        #print (return_gamer_name(games.gamer))
     return render_template ('active_games.html', user = current_user, games = games)
 
 @app.route ('/game_del/<id>', methods =['GET','POST'])
