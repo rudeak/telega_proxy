@@ -5,6 +5,6 @@ proxy = Blueprint('proxy', __name__,
                         template_folder='templates')
 
 @proxy.route('/', defaults={'page': 'index'})
-@proxy.route('/<page>')
+@proxy.route('/proxy')
 def show(page):
     return 'hello world'
