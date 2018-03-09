@@ -146,9 +146,10 @@ def game_creator():
 @login_required
 def active_games_list_tmplt():
     for games in active_games_list():
+        print (games)
         print ('gamer='+str(games.gamer))
         print (return_gamer_name(games.gamer))
-    print (active_games_list())
+    
     if current_user.role == 2:
         return render_template ('active_games.html', user = current_user, games = active_games_list())
     else:
