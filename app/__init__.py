@@ -8,6 +8,7 @@ pymysql.install_as_MySQLdb()
 app = Flask(__name__)
 app.config.from_object('config')
 app.config['TESTING'] = False
+app.register_blueprint(proxy, url_prefix='/pages')
 db = SQLAlchemy(app)
 lm = LoginManager()
 lm.init_app(app)
