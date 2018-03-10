@@ -144,3 +144,11 @@ class Game (db.Model):
         self.game_date = datetime.now()
         self.owner = owner
 
+clas ArchiveGame (Game)
+    id = db.Column(db.Integer, primary_key = True)
+    achive_date = db.Column (db.DateTime)
+
+        def __repr__(self):
+        return '<Game %r>' % (self.game_name)
+
+
