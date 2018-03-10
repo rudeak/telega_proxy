@@ -145,7 +145,7 @@ class Game (db.Model):
         self.owner = owner
 
 class ArchiveGame (Game):
-    id = db.Column(db.Integer, primary_key = True)
+#    id = db.Column(db.Integer, primary_key = True)
     achive_date = db.Column (db.DateTime)
 
     def __repr__(self):
