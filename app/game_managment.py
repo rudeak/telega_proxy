@@ -1,5 +1,6 @@
-from app.models import Game
+from app.models import Game, ArchiveGame
 from sqlalchemy.orm import sessionmaker
+from datetime import datetime
 from app import db
 from app.gamers_managment import return_gamer_name
 from app.telega_managment import return_chat_name
@@ -39,3 +40,19 @@ def delete_game(id):
     except:
         db.session.rollbac()
         return 'помилка видалення гри'
+def archive_game (id):
+    game = Game.query.filter_by(id=id).first()
+    aGame = ArchiveGame()
+    aGame.game_date = game.game_date
+    aGame.game_domain = game.game_domain
+    aGame.game_id = game.game_id
+    aGame.owner = game.owner
+    aGame.achive_date = datetime.now()
+    db.session.add (aGame)
+    db.session.delete (game)
+    try:
+        db.session.commit()
+        return 1
+    except:
+        db.session.rollback ()
+        return 'помилка архівування гри'
