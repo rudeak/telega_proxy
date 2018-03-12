@@ -16,6 +16,6 @@ game_name_id = 'lnkGameTitle'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
-    content =soup.find('a', id = game_name_id)
+    content =soup.find('a', id = game_name_id).get_text()
     print (content)
     return content
