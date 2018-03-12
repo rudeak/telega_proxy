@@ -26,8 +26,8 @@ def active_games_list(owner=0):
     game_table = []
     for game in games:
         print (Proxy.query.all())
-        if  Proxy.query.filter_by (game = game.game_id).count()>0:
-            proxies = Proxy.query.filter_by (game = game.game_id).all()
+        if  Proxy.query.filter_by (game = game.id).count()>0:
+            proxies = Proxy.query.filter_by (game = game.id).all()
             for proxy in proxies:
                 t = {'id': game.id, 'game_domain': game.game_domain, 'game_id': game.game_id, 'game_name': game.game_name, 'gamer': game.gamer, 'login': return_gamer_name(
                     game.gamer), 'chat': game.chat, 'chat_name': return_chat_name(game.chat)['chat_name'], 'tg_id': return_chat_name(game.chat)['chat_tg_id'],'proxy_id':proxy.key}
