@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, flash, redirect, session, url_for,
 from jinja2 import TemplateNotFound
 from flask_login import login_user, logout_user, current_user, login_required
 import app
-from proxy.parser import get_game_info
+from parser import get_game_info
 
 
 

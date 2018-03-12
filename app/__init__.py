@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from app.proxy.proxy import proxy
+from app.proxy.parser import get_game_info
 from app.bot.bot import bot
 from app.api.api import api
 import pymysql
