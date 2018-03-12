@@ -11,4 +11,8 @@ proxy = Blueprint('proxy', 'proxy', template_folder='templates')
 @login_required
 def show():
     return render_template ('index.html', user = current_user)
-    
+
+@proxy.route('/proxy_creator/<id>', methods =['get'])
+@login_required
+def proxy_creator (id):
+    return redirect 'proxy id='+str(id)
