@@ -34,7 +34,7 @@ def index():
 
     return render_template("index.html",
                            title='Telega 2.0',
-                           user=g.user)
+                           user=g.user, stast = stats ())
 
 
 @app.route('/login', methods=['GET', 'POST'])
