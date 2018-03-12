@@ -1,4 +1,4 @@
-from app.models import Game, ArchiveGame
+from app.models import Game, ArchiveGame, Chat, Chat_opt, Proxy
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from app import db
@@ -56,3 +56,28 @@ def archive_game (id):
     except:
         db.session.rollback ()
         return 'помилка архівування гри'
+
+def proxy_db (id):
+    game = Game.query.filter_by(id = id).first()
+    chat = Chat.query.filter_by(id = game.chat).first()
+    chat_opt = Chat_opt.query.filter_by (chat = chat.tg_id).first()
+    if chat_opt.proxy:
+        if chat_opt.multi_proxy:
+            proxy = Proxy (game.id, chat.id)
+            db.session.add(proxy)
+        else:
+            if Proxy.query.filter_by (id = id) == 0:
+                proxy = Proxy (game.id, chat.id)
+                db.session.add(proxy)
+            else:
+                proxy = Proxy.query.filter_by (id = id).first()
+                proxy.game = game.id
+                proxy.chat = chat.id
+    try:
+        db.session.commit()
+        return 1
+    except:
+        db.session.rollback()
+        return 'помилка запису параметрів проксі в базу данних'
+    
+                

@@ -1,5 +1,6 @@
 from datetime import datetime
 from hashlib import md5
+from random import randint
 from app import db
 
 ROLE_USER = 0
@@ -126,7 +127,7 @@ class Game (db.Model):
     id = db.Column(db.Integer, primary_key = True)
     game_date = db.Column (db.DateTime)
     game_domain = db.Column(db.String(120))
-    game_id = db.Column(db.Integer, unique = True)
+    game_id = db.Column(db.Integer)
     game_name = db.Column(db.String(120), index = True, unique = False)
     gamer = db.Column(db.Integer)
     chat = db.Column(db.Integer)
@@ -150,5 +151,24 @@ class ArchiveGame (Game):
 
     def __repr__(self):
         return '<Game %r>' % (self.game_name)
+    
+    def __init__ (self, achive_date):
+        self.achive_date = datetime.now()
 
+class Proxy (Model):
+    game = db.Column(db.Integer)
+    chat = db.Column(db.Integer)
+    key = db.Column(db.Integer)
+    creation_date = db.Column (db.DateTime)
 
+    def __repr__(self):
+        return '<Game proxy %r>' % (self.game)
+
+    def __init__ (self, game, chat):
+        self.game = game
+        self.chat = chat
+        self.creation_date = datetime.now()
+        key = randint (1000000, 9999999)
+        while Proxy.query.filter_by (key = key).count !=0:
+            key = randint (1000000, 9999999)
+        self.key = key
