@@ -42,6 +42,9 @@ def active_games_list(owner=0):
 def delete_game(id):
     game = Game.query.filter_by(id=id).first()
     db.session.delete(game)
+    proxies = Proxy.query.filter_by (game = id).all()
+    for proxy in proxies:
+        db.session.delete(proxy)
     try:
         db.session.commit()
         return 1
