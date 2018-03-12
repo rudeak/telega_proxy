@@ -4,7 +4,7 @@ from jinja2 import TemplateNotFound
 from flask_login import login_user, logout_user, current_user, login_required
 import app
 from app.proxy.parser import get_game_info
-from app.game_managment import edit_game_name
+from app.proxy.game_controller import edit_game_name
 
 
 
