@@ -25,6 +25,7 @@ def active_games_list(owner=0):
         games = Game.query.filter_by(owner=owner).all()
     game_table = []
     for game in games:
+        print (Proxy.query.all())
         if  Proxy.query.filter_by (game = game.game_id).count()>0:
             proxies = Proxy.query.filter_by (game = game.game_id).all()
             for proxy in proxies:
