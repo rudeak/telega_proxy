@@ -40,7 +40,9 @@ def delete_game(id):
     except:
         db.session.rollbac()
         return 'помилка видалення гри'
-def archive_game (id):
+
+
+def archive_game(id):
     game = Game.query.filter_by(id=id).first()
     aGame = ArchiveGame()
     aGame.game_date = game.game_date
@@ -48,29 +50,30 @@ def archive_game (id):
     aGame.game_id = game.game_id
     aGame.owner = game.owner
     aGame.achive_date = datetime.now()
-    db.session.add (aGame)
-    db.session.delete (game)
+    db.session.add(aGame)
+    db.session.delete(game)
     try:
         db.session.commit()
         return 1
     except:
-        db.session.rollback ()
+        db.session.rollback()
         return 'помилка архівування гри'
 
-def proxy_db (id):
-    game = Game.query.filter_by(id = id).first()
-    chat = Chat.query.filter_by(id = game.chat).first()
-    chat_opt = Chat_opt.query.filter_by (chat = chat.tg_id).first()
+
+def proxy_db(id):
+    game = Game.query.filter_by(id=id).first()
+    chat = Chat.query.filter_by(id=game.chat).first()
+    chat_opt = Chat_opt.query.filter_by(chat=chat.tg_id).first()
     if chat_opt.proxy:
         if chat_opt.multi_proxy:
-            proxy = Proxy (game.id, chat.id)
+            proxy = Proxy(game.id, chat.id)
             db.session.add(proxy)
         else:
-            if Proxy.query.filter_by (id = id) == 0:
-                proxy = Proxy (game.id, chat.id)
+            if Proxy.query.filter_by(id=id) == 0:
+                proxy = Proxy(game.id, chat.id)
                 db.session.add(proxy)
             else:
-                proxy = Proxy.query.filter_by (id = id).first()
+                proxy = Proxy.query.filter_by(id=id).first()
                 proxy.game = game.id
                 proxy.chat = chat.id
     try:
@@ -79,5 +82,3 @@ def proxy_db (id):
     except:
         db.session.rollback()
         return 'помилка запису параметрів проксі в базу данних'
-    
-                
