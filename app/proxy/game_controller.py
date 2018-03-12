@@ -1,7 +1,7 @@
 from app.models import Game, ArchiveGame, Chat, Chat_opt, Proxy
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
-from app import db
+
 
 def edit_game_name (id, name):
     game = Game.query.filter_by (game_id = id).first()
