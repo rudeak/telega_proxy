@@ -15,8 +15,8 @@ def show():
 
 @proxy.route('/proxy_creator/<id>')
 @login_required
-def proxy_creator (id):
+def proxy_creatttext
     r = requests.Session()
     page = r.get('http://quest.ua/GameDetails.aspx?gid='+str(id))
-    print (page)
+    print (page.text)
     return redirect(url_for(request.args.get ("redirect_url")))
