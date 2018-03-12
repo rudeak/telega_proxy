@@ -7,9 +7,11 @@ def stats ():
     users = 0
     for user in User.query.all():
         users +=1
+    print ('users = '+ str(users))
     games_active = 0
     for game in Game.query.all():
         games_active+=1
+    print ('games_active = '+ str(games_active))
     games_played = 0
     #for played in ArchiveGame.query.all():
     #    games_played +=1
