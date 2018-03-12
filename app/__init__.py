@@ -23,4 +23,4 @@ from app import views
 from app import forms
 from app import models
 from app.proxy.parser import get_game_info
-from app.proxy.game_controller import edit_game_name
+#from app.proxy.game_controller import edit_game_name
