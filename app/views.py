@@ -156,7 +156,7 @@ def game_creator():
     print ('views')
     print (game)
     proxy_db (game.game_id)
-    redirect (url_for ('proxy.proxy_creator'))
+    redirect (url_for ('proxy.proxy_creator(game.game_id)'))
     return redirect(url_for('active_games_list_tmplt'))
 
 
