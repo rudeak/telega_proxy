@@ -70,11 +70,11 @@ def proxy_db(id):
             proxy = Proxy(game.id, chat.id)
             db.session.add(proxy)
         else:
-            if Proxy.query.filter_by(id=id) == 0:
+            if Proxy.query.filter_by(game=id) == 0:
                 proxy = Proxy(game.id, chat.id)
                 db.session.add(proxy)
             else:
-                proxy = Proxy.query.filter_by(id=id).first()
+                proxy = Proxy.query.filter_by(game=id).first()
                 proxy.game = game.id
                 proxy.chat = chat.id
     try:
