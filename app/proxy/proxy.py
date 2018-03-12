@@ -12,7 +12,7 @@ proxy = Blueprint('proxy', 'proxy', template_folder='templates')
 def show():
     return render_template ('index.html', user = current_user)
 
-@proxy.route('/proxy_creator/<id>', methods =['get'])
+@proxy.route('/proxy_creator/<id>')
 @login_required
 def proxy_creator (id):
     print ('game id ='+ str(id))
