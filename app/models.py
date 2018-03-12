@@ -160,7 +160,7 @@ class ArchiveGame (Game):
         self.achive_date = datetime.now()
 
 
-class Proxy (Model):
+class Proxy (db.Model):
     game = db.Column(db.Integer)
     chat = db.Column(db.Integer)
     key = db.Column(db.Integer)
