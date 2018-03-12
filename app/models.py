@@ -161,6 +161,7 @@ class ArchiveGame (Game):
 
 
 class Proxy (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     game = db.Column(db.Integer)
     chat = db.Column(db.Integer)
     key = db.Column(db.Integer)
