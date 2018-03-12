@@ -81,7 +81,7 @@ def user(nickname):
 @app.route('/users', methods=['GET', 'POST'])
 @login_required
 def user_list():
-    return render_template('users.html',stats = stats<>, users=users_list(), user=current_user)
+    return render_template('users.html',stats = stats(), users=users_list(), user=current_user)
 
 
 @app.route('/roleedit/<id>', methods=['GET', 'POST'])
@@ -96,7 +96,7 @@ def update_user(id):
     if role.validate_on_submit():
         edit_role(edited_user.id, role.role.data)
         print(role.role.data)
-    return render_template('role_edit.html',stats = stats<>, edited_user=edited_user, user=current_user, role=role)
+    return render_template('role_edit.html',stats = stats(), edited_user=edited_user, user=current_user, role=role)
 
 
 @app.route('/gamers', methods=['GET'])
@@ -104,7 +104,7 @@ def update_user(id):
 def list_gamers():
     form = RoleEdit()
     form_add = AddGamerForm()
-    return render_template('gamers.html',stats = stats<>, gamers=gamers_list(g.user.id), user=current_user, form=form, add_gamer_frm=form_add)
+    return render_template('gamers.html',stats = stats(), gamers=gamers_list(g.user.id), user=current_user, form=form, add_gamer_frm=form_add)
 
 
 @app.route('/gamers', methods=['POST'])
@@ -118,7 +118,7 @@ def add_gamer():
         form_add.login.data = ''
         form_add.password.data = ''
         form_add.comment.data = ''
-    return render_template('gamers.html',stats = stats<>, gamers=gamers_list(g.user.id), user=current_user, form=form, add_gamer_frm=form_add)
+    return render_template('gamers.html',stats = stats(), gamers=gamers_list(g.user.id), user=current_user, form=form, add_gamer_frm=form_add)
 
 
 @app.route('/telegram', methods=['GET'])
@@ -126,7 +126,7 @@ def add_gamer():
 def list_telegram_users():
     form = RoleEdit()
     form_add = AddGamerForm()
-    return render_template('telegram.html',stats = stats<>, tg_users=telega_list(g.user.id), user=current_user, form=form, add_gamer_frm=form_add)
+    return render_template('telegram.html',stats = stats(), tg_users=telega_list(g.user.id), user=current_user, form=form, add_gamer_frm=form_add)
 
 
 @app.route('/new_game', methods=['GET'])
@@ -138,7 +138,7 @@ def new_game_wizard():
     selectChoises = [(gamer.id, gamer.login + ' - ' + gamer.comment)
                      for gamer in gamers_list(current_user.id)]
     new_game_frm.gamer.choices = selectChoises
-    return render_template('new_game.html',stats = stats<>, user=current_user, new_game_frm=new_game_frm)
+    return render_template('new_game.html',stats = stats(), user=current_user, new_game_frm=new_game_frm)
 
 
 @app.route('/new_game', methods=['POST'])
@@ -167,7 +167,7 @@ def active_games_list_tmplt():
     else:
         games = active_games_list(current_user.id)
     print (games)
-    return render_template('active_games.html',stats = stats<>, user=current_user, games=games)
+    return render_template('active_games.html',stats = stats(), user=current_user, games=games)
 
 
 @app.route('/game_del/<id>', methods=['GET', 'POST'])
@@ -205,7 +205,7 @@ def edit_gamer(id):
                 db.session.rollback()
                 print('помилка при редагуванні налаштуваннь гравця:'+id)
             #edit_gamer (id, gamer_frm.login.data, gamer_frm.password.data, gamer_frm.comment.data)
-    return render_template('gamer_opt.html',stats = stats<>, user=current_user, gamer=gamer, gamer_frm=gamer_frm)
+    return render_template('gamer_opt.html',stats = stats(), user=current_user, gamer=gamer, gamer_frm=gamer_frm)
 
 
 @app.route('/channels_active', methods=['GET'])
@@ -213,7 +213,7 @@ def edit_gamer(id):
 def list_channels():
     tg_chats = Chat.query.all()
     print(tg_chats)
-    return render_template('active_chats.html',stats = stats<>, user=current_user, tg_chats=tg_chats)
+    return render_template('active_chats.html',stats = stats(), user=current_user, tg_chats=tg_chats)
 
 
 @app.route('/chat_opt/<id>', methods=['GET', 'POST'])
@@ -242,4 +242,4 @@ def chat_options(id):
                           chat_opt_frm.vote_percent.data)
         return redirect(url_for('list_channels'))
 
-    return render_template('chat_options.html',stats = stats<>, user=current_user, chat=chat, chat_opt_frm=chat_opt_frm, chat_opt=chat_opt)
+    return render_template('chat_options.html',stats = stats(), user=current_user, chat=chat, chat_opt_frm=chat_opt_frm, chat_opt=chat_opt)
