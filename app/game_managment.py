@@ -61,7 +61,7 @@ def archive_game(id):
 
 
 def proxy_db(id):
-    game = Game.query.filter_by(id=id).first()
+    game = Game.query.filter_by(game_id=id).first()
     chat = Chat.query.filter_by(id=game.chat).first()
     chat_opt = Chat_opt.query.filter_by(chat=chat.tg_id).first()
     if chat_opt.proxy:
