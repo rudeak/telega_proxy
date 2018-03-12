@@ -5,6 +5,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 import app
 
 
+
 proxy = Blueprint('proxy', 'proxy', template_folder='templates')
 
 
