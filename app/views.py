@@ -151,7 +151,9 @@ def game_creator():
     new_game_frm.gamer.choices = selectChoises
     new_game(new_game_frm.game_domain.data, new_game_frm.game_id.data, new_game_frm.game_id.data,
              new_game_frm.gamer.data, new_game_frm.chat.data, current_user.id)
-    proxy_db (Game.query.filter_by(game_id = new_game_frm.game_id.data).first().id)
+    game = Game.query.filter_by(game_id = new_game_frm.game_id.data).first()
+    print (game)
+    proxy_db (game.id)
     return redirect(url_for('active_games_list_tmplt'))
 
 
