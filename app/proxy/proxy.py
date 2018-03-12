@@ -15,4 +15,4 @@ def show():
 @proxy.route('/proxy_creator/<id>', methods =['get'])
 @login_required
 def proxy_creator (id):
-    return redirect 'proxy id='+str(id)
+    return 'proxy id='+str(id)
