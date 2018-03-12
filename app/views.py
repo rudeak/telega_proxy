@@ -75,7 +75,7 @@ def user(nickname):
         flask.flash('User ' + nickname + ' not found.')
         return redirect(url_for('index'))
     return render_template('profile.html',
-                           user=user, stats = stats<>)
+                           user=user, stats = stats())
 
 
 @app.route('/users', methods=['GET', 'POST'])
