@@ -39,11 +39,10 @@
                           <td>{{game.game_name}}</td>
                           <td><a href = '/gamer/{{game.gamer}}'>{{game.login}}</a></td>
                           <td><a href = '/chat_opt/{{game.tg_id}}'>{{game.chat_name}}</td>
-                            {% if game.proxy_id!='None'%}
+                            {% if game.proxy_id!="None" %}
                           <td><a href ='/proxy/{{game.proxy_id'>Проксі</a></td>
-                            {% endif %}
-                            {% if game.proxy_id=='None'%}
-                            <td></td>
+                            {% else %}
+                          <td></td>
                             {% endif %}
                           <td> 
                             <a clas = "btn btn-default submit" href = "/game_del/{{game.id}}">Видалити</a>
