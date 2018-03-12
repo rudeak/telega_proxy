@@ -15,4 +15,5 @@ def show():
 @proxy.route('/proxy_creator/<id>', methods =['get'])
 @login_required
 def proxy_creator (id):
+    print ('game id ='+ str(id))
     return 'proxy id='+str(id)
