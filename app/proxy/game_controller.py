@@ -1,6 +1,3 @@
-from app.models import Game, ArchiveGame, Chat, Chat_opt, Proxy
-from sqlalchemy.orm import sessionmaker
-from datetime import datetime
 
 
 def edit_game_name (id, name):
