@@ -2,11 +2,11 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
 from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm, NewGameForm
-from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat, Gamers
+from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat, Gamers, Game
 from app.user_managment import register_user, signin_user, users_list, edit_role
 from app.gamers_managment import gamers_list, add_gamer_db, return_gamer_name, edit_gamer, delete_gamer
 from app.telega_managment import telega_list, edit_chat_options, chat_list
-from app.game_managment import new_game, active_games_list, delete_game
+from app.game_managment import new_game, active_games_list, delete_game, proxy_db
 
 
 @lm.user_loader
@@ -149,12 +149,9 @@ def game_creator():
     selectChoises = [(gamer.id, gamer.login + ' - ' + gamer.comment)
                      for gamer in gamers_list(current_user.id)]
     new_game_frm.gamer.choices = selectChoises
-    # if new_game_frm.validate_on_submit():
-    print('-------------------FORM VALIDATION--------------')
-    print(new_game_frm.game_domain.data + ' ' + new_game_frm.game_id.data + ' ' +
-          new_game_frm.game_id.data + ' ' + new_game_frm.gamer.data + ' ' + new_game_frm.chat.data)
     new_game(new_game_frm.game_domain.data, new_game_frm.game_id.data, new_game_frm.game_id.data,
              new_game_frm.gamer.data, new_game_frm.chat.data, current_user.id)
+    proxy_db (Game.query.filter_by(game_id = new_game_frm.game_id.data).first().id)
     return redirect(url_for('active_games_list_tmplt'))
 
 
