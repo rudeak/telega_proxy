@@ -1,4 +1,4 @@
-
+import app
 
 def edit_game_name (id, name):
     game = Game.query.filter_by (game_id = id).first()
