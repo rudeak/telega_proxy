@@ -4,6 +4,7 @@ from jinja2 import TemplateNotFound
 from flask_login import login_user, logout_user, current_user, login_required
 import app
 from app.proxy.parser import get_game_info
+from app.game_managment import edit_game_name
 
 
 
@@ -20,5 +21,5 @@ def show():
 def proxy_creator(id):
     r = requests.Session()
     page = r.get('http://quest.ua/GameDetails.aspx?gid='+str(id))
-    get_game_info (page)
+    edit_game_name (id,  get_game_info (page))
     return redirect(url_for(request.args.get ("redirect_url")))
