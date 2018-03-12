@@ -176,5 +176,6 @@ class Proxy (db.Model):
         self.creation_date = datetime.now()
         key = randint(1000000, 9999999)
         while Proxy.query.filter_by(key=key).count() != 0:
+            print ('key ='+str(key))
             key = randint(1000000, 9999999)
         self.key = key
