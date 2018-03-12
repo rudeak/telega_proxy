@@ -165,7 +165,7 @@ def active_games_list_tmplt():
         games = active_games_list()
     else:
         games = active_games_list(current_user.id)
-        print (games)
+    print (games)
     return render_template('active_games.html', user=current_user, games=games)
 
 
