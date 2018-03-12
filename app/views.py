@@ -153,7 +153,7 @@ def game_creator():
              new_game_frm.gamer.data, new_game_frm.chat.data, current_user.id)
     game = Game.query.filter_by(game_id = new_game_frm.game_id.data).first()
     print (game)
-    proxy_db (game.id)
+    proxy_db (game.game_id)
     return redirect(url_for('active_games_list_tmplt'))
 
 
