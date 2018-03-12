@@ -11,8 +11,8 @@ def stats ():
     for game in Game.query.all():
         games_active+=1
     games_played = 0
-    for played in ArchiveGame.query.all():
-        games_played +=1
+    #for played in ArchiveGame.query.all():
+    #    games_played +=1
     active_proxy = 0
     for proxy in Proxy.query.all():
         active_proxy +=1
