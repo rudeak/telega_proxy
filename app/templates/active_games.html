@@ -27,6 +27,7 @@
                           <th>Назва гри</th>
                           <th>Гравець</th>
                           <th>Чат</th>
+                          <th>Проксі</th>
                           <th>Видалити</th>
                         </tr>
                       </thead>
@@ -38,6 +39,12 @@
                           <td>{{game.game_name}}</td>
                           <td><a href = '/gamer/{{game.gamer}}'>{{game.login}}</a></td>
                           <td><a href = '/chat_opt/{{game.tg_id}}'>{{game.chat_name}}</td>
+                            {% if game.proxy_id<>'None'%}
+                          <td><a href ='/proxy/{{game.proxy_id'>Проксі</a></td>
+                            {% endif %}
+                            {% if game.proxy_id='None'%}
+                            <td></td>
+                            {% endif %}
                           <td> 
                             <a clas = "btn btn-default submit" href = "/game_del/{{game.id}}">Видалити</a>
                             </form>
