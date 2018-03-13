@@ -153,10 +153,14 @@ def game_creator():
     new_game(new_game_frm.game_domain.data, new_game_frm.game_id.data, new_game_frm.game_id.data,
              new_game_frm.gamer.data, new_game_frm.chat.data, current_user.id)
     game = Game.query.filter_by(game_id = new_game_frm.game_id.data).first()
-    print ('views')
-    print (game)
-    proxy_db (game.game_id)
-    return redirect (url_for ('proxy.proxy_creator', id = game.game_id, redirect_url = 'active_games_list_tmplt'))
+    gamer = Gamers.query.filter_by (id = new_game_frm.gamer.data ).first()
+    return redirect (url_for ('proxy.proxy_creator', 
+                                id = game.game_id, 
+                                redirect_url = 'active_games_list_tmplt', 
+                                domain = new_game_frm.game_domain.data, 
+                                proxy = proxy_db (game.game_id),
+                                login = gamer.login,
+                                password = gamer.password))
     return redirect(url_for('active_games_list_tmplt'))
 
 
@@ -167,7 +171,6 @@ def active_games_list_tmplt():
         games = active_games_list()
     else:
         games = active_games_list(current_user.id)
-    print (games)
     return render_template('active_games.html',stats = stats(), user=current_user, games=games)
 
 

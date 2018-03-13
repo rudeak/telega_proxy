@@ -5,9 +5,13 @@ from flask_login import login_user, logout_user, current_user, login_required
 import app
 from app.proxy.parser import get_game_info
 from app.game_managment import edit_game_name
+from app.models import Proxy
 
 
-
+def get_session(proxy):
+    for session in app.game_session:
+        if session.proxy == proxy:
+            return session.session
 
 proxy = Blueprint('proxy', 'proxy', template_folder='templates')
 
@@ -20,7 +24,24 @@ def show():
 @proxy.route('/proxy_creator/<id>')
 @login_required
 def proxy_creator(id):
+    domain = request.args.get('domain')
+    proxy_key = request.args.get('proxy')
+    login = request.args.get('login')
+    password = request.args.get('password')
     r = requests.Session()
-    page = r.get('http://quest.ua/GameDetails.aspx?gid='+str(id))
+    app.game_session.append ({'game':id,'proxy':proxy_key,'session':r})
+    page = r.get('http://'+domain+'/GameDetails.aspx?gid='+str(id))
     edit_game_name (id,  get_game_info (page))
+    login_page = r.get ('http://'+domain+'/Login.aspx?login='+login'&password='+password)
+    print (login_page.text)
     return redirect(url_for(request.args.get ("redirect_url")))
+
+@proxy.route('/<id>', methods ['GET'])
+@login_required
+def en_game_proxy(id):
+    r = get_session (id)
+    return r.get ('http://quest.ua').text
+
+
+
+

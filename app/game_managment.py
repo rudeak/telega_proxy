@@ -91,7 +91,7 @@ def proxy_db(id):
                 proxy.chat = chat.id
     try:
         db.session.commit()
-        return 1
+        return proxy.key
     except:
         db.session.rollback()
         return 'помилка запису параметрів проксі в базу данних'

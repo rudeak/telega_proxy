@@ -12,6 +12,7 @@ db = SQLAlchemy(app)
 lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'login'
+game_session = []
 
 from app import views
 from app import forms
