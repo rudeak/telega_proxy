@@ -19,12 +19,13 @@ game_description_class = 'divDescr'
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
     name =soup.find('a', id = game_name_id).get_text()
+
     #soup = BeautifulSoup(page.text)
     #time = soup.find('span', id = game_start_time_id).get_text()
-    soup = BeautifulSoup(page.text)
-    description = soup.find ('div', class_ = game_description_class).prettify()
-    info = {'name':name,'description':description}
+#    soup = BeautifulSoup(page.text)
+#    description = soup.find ('div', class_ = game_description_class).prettify()
+#    info = {'name':name,'description':description}
     
-    print (info)
+    print (soup.prettify())
     
     return name
