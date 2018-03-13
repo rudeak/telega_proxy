@@ -4,7 +4,7 @@ from jinja2 import TemplateNotFound
 from flask_login import login_user, logout_user, current_user, login_required
 import app
 from app.proxy.parser import get_game_info
-from app.game_managment import edit_game_name
+from app.game_managment import edit_game_name, get_domain
 from app.models import Proxy
 
 
@@ -36,11 +36,12 @@ def proxy_creator(id):
     print (login_page.text)
     return redirect(url_for(request.args.get ("redirect_url")))
 
-@proxy.route('/<id>', methods=['GET'])
+@proxy.route('/<id>/<path>', methods=['GET'])
 @login_required
 def en_game_proxy(id):
-    r = get_session (id)
-    return r.get ('http://quest.ua').text
+    r = get_session (id, path)
+    url = 'http://'+get_domain(id)+'/'+path
+    return r.get (url).text
 
 
 

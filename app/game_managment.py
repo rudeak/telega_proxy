@@ -108,3 +108,9 @@ def edit_game_name (id, name):
         db.session.rollback()
         return 'помилка редагування назви гри'
 
+def get_domain (id):
+    proxy = Proxy.query.filter_by (key = id).first()
+    game = Game.query.filter_by (game_id = proxy.game).first()
+    return game.game_domain
+    
+
