@@ -30,7 +30,7 @@ def get_game_info(page):
     
     return name
 
-def s(page, id):
+def change_href (page, id):
     soup = BeautifulSoup(page.text).prettify()
     a = soup.a
     a['href']= '/proxy/'+id+'/'+a['href']
