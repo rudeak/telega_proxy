@@ -36,12 +36,14 @@ def proxy_creator(id):
     print (login_page.text)
     return redirect(url_for(request.args.get ("redirect_url")))
 
-@proxy.route('/<id:path>', methods=['GET'])
+@proxy.route('/<id>/<path>', methods=['GET'])
 @login_required
-def en_game_proxy(id):
+def en_game_proxy(id, path):
     r = get_session (id, path)
     url = 'http://'+get_domain(id)+'/'+path
     return r.get (url).text
+
+    
 
 
 
