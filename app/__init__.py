@@ -24,4 +24,5 @@ from app.proxy.parser import get_game_info
 app.register_blueprint(proxy , url_prefix='/proxy')
 app.register_blueprint(bot , url_prefix='/bot')
 app.register_blueprint(api , url_prefix='/api')
+
 #from app.proxy.game_controller import edit_game_name
