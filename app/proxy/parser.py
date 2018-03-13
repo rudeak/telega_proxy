@@ -22,7 +22,7 @@ def get_game_info(page):
     #soup = BeautifulSoup(page.text)
     #time = soup.find('span', id = game_start_time_id).get_text()
     #soup = BeautifulSoup(page.text)
-    description = soup.find ('div', class_ = game_description_class).get_text()
+    description = soup.find (class_ = game_description_class).get_text()
     info = {'name':name,'description':description}
     
     print (info)
