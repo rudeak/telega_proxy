@@ -39,8 +39,15 @@ def proxy_creator(id):
 @proxy.route('/<id>/<path>', methods=['GET'])
 @login_required
 def en_game_proxy(id, path):
-    r = get_session (id, path)
+    r = get_session (id)
     url = 'http://'+get_domain(id)+'/'+path
+    return r.get (url).text
+
+@proxy.route('/<id>', methods=['GET'])
+@login_required
+def en_game_proxy_root(id):
+    r = get_session (id)
+    url = 'http://'+get_domain(id)
     return r.get (url).text
 
     
