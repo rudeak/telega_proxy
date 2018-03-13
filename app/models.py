@@ -179,3 +179,22 @@ class Proxy (db.Model):
             print ('key ='+str(key))
             key = randint(1000000, 9999999)
         self.key = key
+    
+class GameInfo (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    game_id = db.Column(db.Integer)
+    game_name = db.Column(db.String(120), index=True, unique=False)
+    game_description = db.Column (db.Text)
+    game_start = db.Column (db.DateTime)
+    game_owner = db.Column(db.Integer)
+    
+    def __repr__(self):
+        return '<Game name %r>' % (self.game_name)
+    
+    def __init__(self, game_id, game_name, game_description,game_start, game_owner):
+        self.game_id = game_id
+        self.game_name = game_name
+        self.game_description = game_description
+        self.game_start = game_start
+        self.game_owner = game_owner
+        
