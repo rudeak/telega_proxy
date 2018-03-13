@@ -32,7 +32,7 @@ def proxy_creator(id):
     app.game_session.append ({'game':id,'proxy':proxy_key,'session':r})
     page = r.get('http://'+domain+'/GameDetails.aspx?gid='+str(id))
     edit_game_name (id,  get_game_info (page))
-    login_page = r.get ('http://'+domain+'/Login.aspx?login='+login'&password='+password)
+    login_page = r.get ('http://'+domain+'/Login.aspx?login='+login+'&password='+password)
     print (login_page.text)
     return redirect(url_for(request.args.get ("redirect_url")))
 
