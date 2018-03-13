@@ -42,7 +42,7 @@ def proxy_creator(id):
 def en_game_proxy_root(id):
     r = get_session (id)
     url = 'http://'+get_domain(id)
-    return change_href(r.get (url).text,id)
+    return change_href(r.get (url),id)
 
 
 @proxy.route('/proxy/<id>/<path:path>', methods=['GET'])
