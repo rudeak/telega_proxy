@@ -10,7 +10,7 @@ from app.models import Proxy
 
 def get_session(proxy):
     for session in app.game_session:
-        if session.proxy == proxy:
+        if session['proxy'] == proxy:
             return session.session
 
 proxy = Blueprint('proxy', 'proxy', template_folder='templates')
