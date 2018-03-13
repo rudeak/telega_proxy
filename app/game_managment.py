@@ -109,7 +109,9 @@ def edit_game_name (id, name):
         return 'помилка редагування назви гри'
 
 def get_domain (id):
+    print (id)
     proxy = Proxy.query.filter_by (key = id).first()
+    print (proxy)
     game = Game.query.filter_by (game_id = proxy.game).first()
     return game.game_domain
     
