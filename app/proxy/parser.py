@@ -49,10 +49,11 @@ def level_parser (page):
     print (soup)
     inputs = soup.find('form').findAll('input')
     for input_ in inputs:
-        if input_['name'] == level_id_name:
-            level_id = input_['value']
-        if input_['name'] == level_number_name:
-            level_num = input_['value']
+        if input_.has_attr('name'):
+            if input_['name'] == level_id_name:
+                level_id = input_['value']
+            if input_['name'] == level_number_name:
+                level_num = input_['value']
     print (level_id, level_num)
 
     return page
