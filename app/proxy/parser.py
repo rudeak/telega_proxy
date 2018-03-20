@@ -70,6 +70,8 @@ def get_level_num (pageSoup):
                     'levelNum':level_num })
 
 def get_level_history (pageSoup):
-    history_list = pageSoup.find('ul', class_=history_class)
+    history_list = pageSoup.find('ul', class_=history_class).findAll('li')
+    for item in history_list:
+        print (item)
     print (history_list)
     return 1
