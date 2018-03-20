@@ -4,7 +4,7 @@ from jinja2 import TemplateNotFound
 from flask_login import login_user, logout_user, current_user, login_required
 import app
 from app.proxy.parser import get_game_info, change_href
-from app.game_managment import edit_game_name, get_domain
+from app.game_managment import edit_game_name, get_domain, get_game_id
 from app.models import Proxy
 
 
@@ -41,7 +41,7 @@ def proxy_creator(id):
 @login_required
 def en_game_proxy_root(id):
     r = get_session (id)
-    url = 'http://'+get_domain(id)
+    url = 'http://'+get_domain(id)+'/gameengines/encounter/play/'+get_game_id(id)
     return change_href(r.get (url),id)
 
 
