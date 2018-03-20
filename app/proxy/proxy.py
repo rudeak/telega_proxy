@@ -62,10 +62,10 @@ def en_game_proxy_post(id,path):
 
 @proxy.route('/<id>', methods=['POST'])
 @login_required
-def en_game_proxy_post_root(id,path):
+def en_game_proxy_post_root(id):
         print(request.form.to_dict())
         r = get_session (id)
-        url = 'http://'+get_domain(id)+'/'+path
+        url = 'http://'+get_domain(id)+'/gameengines/encounter/play/'+get_game_id(id)
         return change_href(r.get (url),id)
     
 
