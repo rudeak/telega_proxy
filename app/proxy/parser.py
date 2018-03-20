@@ -19,6 +19,7 @@ game_start_time_id = 'ComingGamesRepeater_ctl00_gameInfo_enContPanel_lblYourTime
 game_description_class = 'divDescr'
 level_id_name = 'LevelId'
 level_number_name = 'LevelNumber'
+history_class = 'history'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -48,6 +49,7 @@ def level_parser (page):
     soup = BeautifulSoup(page)
     soup.prettify()
     print (get_level_num (soup))
+    get_level_history (soup)
     return page
 
 def get_level_num (pageSoup):
@@ -66,3 +68,8 @@ def get_level_num (pageSoup):
     print (level_id, level_num)
     return json.dumps ( {'levelId':level_id,
                     'levelNum':level_num })
+
+def get_level_history (pageSoup):
+    history_list = pageSoup.find('ul', class_=history_class)
+    print (history_list)
+    return 1
