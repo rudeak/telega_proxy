@@ -1,5 +1,6 @@
+import json
 from bs4 import BeautifulSoup
-from flask import jsonify
+
 
 """
 left_panel_tag ='tdContentLeft'
@@ -63,5 +64,5 @@ def get_level_num (pageSoup):
             if input_['name'] == level_number_name:
                 level_num = input_['value']
     print (level_id, level_num)
-    return jsonify( {'levelId':level_id,
+    return json.dumps ( {'levelId':level_id,
                     'levelNum':level_num })
