@@ -20,6 +20,7 @@ game_description_class = 'divDescr'
 level_id_name = 'LevelId'
 level_number_name = 'LevelNumber'
 history_class = 'history'
+correct_answer_class ='color_correct'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -75,7 +76,11 @@ def get_level_history (pageSoup):
     for item in items:
         user = item.find('a').get_text()
         answer = item.find('span').get_text()
-        print (user, answer)
+        if answer['class'] == correct_answer_class:
+            correct = True
+        else:
+            correct = False
+        print (user, answer, correct)
         
         #print (item.get_text())
     #print (history_list)
