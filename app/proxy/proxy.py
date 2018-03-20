@@ -45,7 +45,7 @@ def en_game_proxy_root(id):
     return change_href(r.get (url),id)
 
 
-@proxy.route('/proxy/<id>/<path:path>', methods=['GET'])
+@proxy.route('/proxy/<id>/<path>', methods=['GET'])
 @login_required
 def en_game_proxy(id,path):
     r = requests.Session()

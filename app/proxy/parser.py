@@ -35,7 +35,7 @@ def change_href (page, id):
     soup.prettify()
     for ref in soup.findAll('a', href=True):
         if ref['href'][0] == '/':
-            ref['href'] = 'proxy/'+str(id)+'/'+ref['href']
+            ref['href'] = '/proxy/'+str(id)+ref['href']
     for ref in soup.findAll('a', href=True):
         print (ref['href'])
     return soup.prettify()
