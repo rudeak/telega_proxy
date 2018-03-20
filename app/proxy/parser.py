@@ -73,6 +73,8 @@ def get_level_history (pageSoup):
     history_list = pageSoup.find('ul', class_=history_class)
     items = history_list.findAll('li')
     for item in items:
-        print (item.get_text())
+        user = item.find('a').get_text()
+        print (user)
+        #print (item.get_text())
     #print (history_list)
     return 1
