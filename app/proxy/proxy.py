@@ -67,7 +67,7 @@ def en_game_proxy_post_root(id):
         r = get_session (id)
         url = 'http://'+get_domain(id)+'/gameengines/encounter/play/'+get_game_id(id)
         post_data = {}
-        for k,v in request.form.to_dict()
+        for k,v in request.form.to_dict():
             post_data[k] = v.encode('utf-8')
 
         return change_href(r.post (url, post_data),id)
