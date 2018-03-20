@@ -34,6 +34,5 @@ def change_href (page, id):
     soup = BeautifulSoup(page.text)
     soup.prettify()
     for ref in soup.findAll('a', href=True):
-        print (ref)
-    #print (soup)
+        print (ref['href'])
     return soup.prettify()
