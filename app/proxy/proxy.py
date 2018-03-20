@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, flash, redirect, session, url_for,
 from jinja2 import TemplateNotFound
 from flask_login import login_user, logout_user, current_user, login_required
 import app
-from app.proxy.parser import get_game_info, change_href
+from app.proxy.parser import get_game_info, change_href, level_parser
 from app.game_managment import edit_game_name, get_domain, get_game_id
 from app.models import Proxy
 
@@ -53,6 +53,7 @@ def en_game_proxy_root(id):
 def en_game_proxy_get(id,path):
     r = get_session (id)
     url = 'http://'+get_domain(id)+'/'+path
+    level_parser (change_href(r.get (url),id))
     return change_href(r.get (url),id)
 
 @proxy.route('/<id>/<path:path>', methods=['POST'])
@@ -61,6 +62,7 @@ def en_game_proxy_post(id,path):
         print(request.form.to_dict())
         r = get_session (id)
         url = 'http://'+get_domain(id)+'/'+path
+        level_parser (change_href(r.get (url),id))
         return change_href(r.get (url),id)
 
 @proxy.route('/<id>', methods=['POST'])
@@ -72,7 +74,7 @@ def en_game_proxy_post_root(id):
         post_data = {}
         #for k,v in request.form.to_dict():
         #    post_data[k] = v.encode('utf-8')
-
+        level_parser (change_href(r.get (url),id))
         return change_href(r.post (url, request.form.to_dict()),id)
     
 
