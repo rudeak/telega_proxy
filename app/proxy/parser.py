@@ -47,7 +47,7 @@ def level_parser (page):
     soup = BeautifulSoup(page)
     soup.prettify()
     print (soup)
-    inputs = soup.findAll('form')#.findAll('input', hidden = True)
+    inputs = soup.findAll('form').findAll('input', type = "hidden")
     for input_ in inputs:
         """
         if input_['name'] == level_id_name:
