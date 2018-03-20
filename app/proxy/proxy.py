@@ -48,10 +48,9 @@ def en_game_proxy_root(id):
 @proxy.route('/<id>/<path:path>', methods=['GET'])
 @login_required
 def en_game_proxy(id,path):
-    r = requests.Session()
-    print (path)
-    #url = 'http://'+get_domain(id)+'/'+path
-    return r.get ('http://quest.ua').text
+    r = get_session (id)
+    url = 'http://'+get_domain(id)+'/'+path
+    return change_href(r.get (url),id)
 
     
 
