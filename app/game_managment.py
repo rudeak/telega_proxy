@@ -117,7 +117,7 @@ def get_domain (id):
 def get_game_id (id):
     proxy = Proxy.query.filter_by (key = id).first()
     game = Game.query.filter_by (id = proxy.game).first()
-    return game.game_id
+    return str(game.game_id)
 
     
 
