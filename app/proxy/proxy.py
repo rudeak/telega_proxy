@@ -54,7 +54,7 @@ def en_game_proxy_get(id,path):
 
 @proxy.route('/<id>/<path:path>', methods=['POST'])
 @login_required
-    def en_game_proxy_post(id,path):
+def en_game_proxy_post(id,path):
         print(request.form.to_dict())
         r = get_session (id)
         url = 'http://'+get_domain(id)+'/'+path
