@@ -1,3 +1,4 @@
+import requests
 from app.models import Game, ArchiveGame, Chat, Chat_opt, Proxy, Gamers
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
