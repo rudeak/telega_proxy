@@ -28,5 +28,5 @@ app.register_blueprint(api , url_prefix='/api')
 
 
 for proxy in Proxy.query.all():
-    redirect (url_for('proxy_creator',proxy.key))
+    redirect (url_for('proxy_creator(proxy.key)'))
 #from app.proxy.game_controller import edit_game_name
