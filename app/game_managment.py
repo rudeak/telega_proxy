@@ -128,7 +128,7 @@ def login_game (proxy_id):
     domain = get_domain (proxy_id)
     id = game.game_id
     r = requests.Session()
-    game_session.append ({'game':id,'proxy':proxy,'session':r})
+    game_session.append ({'game':id,'proxy':proxy.key,'session':r})
     page = r.get('http://'+domain+'/GameDetails.aspx?gid='+str(id))
    # edit_game_name (id,  get_game_info (page))
     login_page = r.get ('http://'+domain+'/Login.aspx?login='+login+'&password='+password)
