@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import pymysql
@@ -17,6 +17,7 @@ game_session = []
 from app import views
 from app import forms
 from app import models
+from app.models import Proxy
 from app.proxy.proxy import proxy
 from app.bot.bot import bot
 from app.api.api import api
@@ -25,4 +26,7 @@ app.register_blueprint(proxy , url_prefix='/proxy')
 app.register_blueprint(bot , url_prefix='/bot')
 app.register_blueprint(api , url_prefix='/api')
 
+
+for proxy in Proxy.query.all():
+    redirect (url_for('proxy_creator',proxy.key))
 #from app.proxy.game_controller import edit_game_name
