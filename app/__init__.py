@@ -32,3 +32,6 @@ app.register_blueprint(api , url_prefix='/api')
 #from app.proxy.game_controller import edit_game_name
 for proxy in Proxy.query.all():
     login_game(proxy.key)
+
+for session in game_session:
+    print (session)
