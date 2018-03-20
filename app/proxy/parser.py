@@ -46,8 +46,16 @@ def change_href (page, id):
 def level_parser (page):
     soup = BeautifulSoup(page)
     soup.prettify()
-    print (soup)
-    inputs = soup.find('form').findAll('input')
+    print (get_level_num (soup))
+    return page
+
+def get_level_num (pageSoup):
+    """
+    отримує суп сторінки гри, повертає json:
+    {'levelId':id рівня в ігровій системі,
+    'levelNum':номер рівня в ігрі}
+    """
+    inputs = pageSoup.find('form').findAll('input')
     for input_ in inputs:
         if input_.has_attr('name'):
             if input_['name'] == level_id_name:
@@ -55,5 +63,5 @@ def level_parser (page):
             if input_['name'] == level_number_name:
                 level_num = input_['value']
     print (level_id, level_num)
-
-    return page
+    return jsonify( levelId = level_id,
+                    levelNum = level_num)
