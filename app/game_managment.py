@@ -2,7 +2,7 @@ import requests
 from app.models import Game, ArchiveGame, Chat, Chat_opt, Proxy, Gamers
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
-from app import db
+from app import db, game_session
 from app.gamers_managment import return_gamer_name
 from app.telega_managment import return_chat_name
 
