@@ -10,6 +10,8 @@ from app.models import Proxy
 
 def get_session(proxy):
     for session in app.game_session:
+        print (session)
+    for session in app.game_session:
         if session['proxy'] == proxy:
             return session['session']
 
@@ -40,8 +42,6 @@ def proxy_creator(id):
 @proxy.route('/<id>', methods=['GET'])
 @login_required
 def en_game_proxy_root(id):
-    for session in game_session:
-        print (session)
     r = get_session (id)
     url = 'http://'+get_domain(id)+'/gameengines/encounter/play/'+get_game_id(id)
     return change_href(r.get (url),id)
