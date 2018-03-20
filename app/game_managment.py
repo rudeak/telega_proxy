@@ -1,4 +1,4 @@
-from app.models import Game, ArchiveGame, Chat, Chat_opt, Proxy
+from app.models import Game, ArchiveGame, Chat, Chat_opt, Proxy, Gamers
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from app import db
@@ -119,5 +119,18 @@ def get_game_id (id):
     game = Game.query.filter_by (id = proxy.game).first()
     return str(game.game_id)
 
+def login_game (proxy_id):
+    proxy = Proxy.query.filter_by (key = proxy_id).first()
+    game = Game.query.filter_by (id = proxy.game).first()
+    login = Gamers.query.filter_by (id = game.gamer).first().login
+    password = Gamers.query.filter_by (id = game.gamer).first().password
+    domain = get_domain (proxy_id)
+    id = game.game_id
+    r = requests.Session()
+    app.game_session.append ({'game':id,'proxy':proxy,'session':r})
+    page = r.get('http://'+domain+'/GameDetails.aspx?gid='+str(id))
+    edit_game_name (id,  get_game_info (page))
+    login_page = r.get ('http://'+domain+'/Login.aspx?login='+login+'&password='+password)
+    return 1
     
 

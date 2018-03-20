@@ -22,11 +22,13 @@ from app.proxy.proxy import proxy
 from app.bot.bot import bot
 from app.api.api import api
 from app.proxy.parser import get_game_info
+from app.game_managment import login_game
 app.register_blueprint(proxy , url_prefix='/proxy')
 app.register_blueprint(bot , url_prefix='/bot')
 app.register_blueprint(api , url_prefix='/api')
 
 
-for proxy in Proxy.query.all():
-    redirect (url_for('proxy_creator(proxy.key)'))
+
 #from app.proxy.game_controller import edit_game_name
+for proxy in Proxy.query.all():
+    login_game(proxy.key)
