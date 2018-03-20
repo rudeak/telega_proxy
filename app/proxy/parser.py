@@ -76,7 +76,7 @@ def get_level_history (pageSoup):
     for item in items:
         user = item.find('a').get_text()
         answer = item.find('span').get_text()
-        if answer['class'] == correct_answer_class:
+        if item.find('span')['class'] == correct_answer_class:
             correct = True
         else:
             correct = False
