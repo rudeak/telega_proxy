@@ -48,10 +48,13 @@ def level_parser (page):
     soup.prettify()
     inputs = soup.findAll('input', hidden = True)
     for input_ in inputs:
+        """
         if input_['name'] == level_id_name:
             level_id = input_.get_text()
         if input_['name'] == level_number_name:
             level_num = input_.get_text()
-    print (level_id, level_num)
+        """
+        print (input_)
+    #print (level_id, level_num)
 
     return page
