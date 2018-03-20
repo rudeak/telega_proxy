@@ -63,5 +63,5 @@ def get_level_num (pageSoup):
             if input_['name'] == level_number_name:
                 level_num = input_['value']
     print (level_id, level_num)
-    return jsonify( levelId = level_id,
-                    levelNum = level_num)
+    return jsonify( {'levelId':level_id,
+                    'levelNum':level_num })
