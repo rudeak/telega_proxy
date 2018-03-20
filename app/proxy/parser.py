@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from flask import jsonify
 
 """
 left_panel_tag ='tdContentLeft'
@@ -15,6 +16,8 @@ game_info_table_class = 'gameInfo'
 game_name_id = 'lnkGameTitle'
 game_start_time_id = 'ComingGamesRepeater_ctl00_gameInfo_enContPanel_lblYourTime'
 game_description_class = 'divDescr'
+level_id_name = 'LevelId'
+level_number_name = 'LevelNumber'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -39,3 +42,12 @@ def change_href (page, id):
     for ref in soup.findAll('a', href=True):
         print (ref['href'])
     return soup.prettify()
+
+def level_parser (page):
+    soup = BeautifulSoup(page)
+    soup.prettify()
+    level_id = soup.findAll('input', name= level_id_name)
+    level_num = soup.findAll ('input', name = level_number_name )
+    print (level_id, level_num)
+
+    return page
