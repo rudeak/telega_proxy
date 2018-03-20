@@ -46,7 +46,8 @@ def change_href (page, id):
 def level_parser (page):
     soup = BeautifulSoup(page)
     soup.prettify()
-    inputs = soup.find('form').findAll('input', hidden = True)
+    print (soup)
+    inputs = soup.findAll('form')#.findAll('input', hidden = True)
     for input_ in inputs:
         """
         if input_['name'] == level_id_name:
