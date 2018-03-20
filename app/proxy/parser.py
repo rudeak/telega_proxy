@@ -79,11 +79,12 @@ def get_level_history (pageSoup):
         print (code_date)
         user = item.find('a').get_text()
         answer = item.find('span').get_text()
-        if item.find('span')['class'] == correct_answer_class:
+        answer_class = item.find('span')['class']
+        if  answer_class == correct_answer_class:
             correct = True
             isCode = True
         else:
-            if item.find('span')['class'] == correct_bonus_class:
+            if answer_class == correct_bonus_class:
                 correct = True
                 isCode = False
             else:
