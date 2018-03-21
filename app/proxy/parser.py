@@ -80,7 +80,7 @@ def get_level_history (pageSoup):
         user = item.find('a').get_text()
         answer = item.find('span').get_text()
         answer_class = item.find('span')['class']
-        print ('answer class =' +answer_class)
+        print ('answer class =' +str(answer_class))
         if  answer_class == correct_answer_class:
             correct = True
             isCode = True
