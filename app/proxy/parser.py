@@ -76,8 +76,8 @@ def get_level_history (pageSoup):
     items = history_list.findAll('li')
     for item in items:
         code_date = item.get_text().strip()
-        #code_date = code_date[0, code_date.find('/n')]
-        print (code_date.find('\n'))
+        code_date = code_date[0, code_date.find('/n')]
+        print (code_date)
         user = item.find('a').get_text().strip()
         answer = item.find('span').get_text().strip()
         answer_class = item.find('span')['class']
