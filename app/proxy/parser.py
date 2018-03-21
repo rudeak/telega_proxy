@@ -75,10 +75,10 @@ def get_level_history (pageSoup):
     history_list = pageSoup.find('ul', class_=history_class)
     items = history_list.findAll('li')
     for item in items:
-        code_date = strip(item.get_text())
+        code_date = item.get_text().strip()
         print (code_date)
-        user = strip(item.find('a').get_text())
-        answer = strip(item.find('span').get_text())
+        user = item.find('a').get_text().strip()
+        answer = item.find('span').get_text()strip.()
         answer_class = item.find('span')['class']
         print ('answer class =' +str(answer_class))
         if  answer_class[0] == correct_answer_class:
