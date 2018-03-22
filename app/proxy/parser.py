@@ -26,6 +26,8 @@ correct_answer_class ='color_correct'
 correct_bonus_class = 'color_bonus'
 sectors_div_class = 'cols-wrapper'
 content_div_class = 'content'
+code_not_entered_class = 'color_dis'
+code_entered_class = 'color_correct'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -139,6 +141,8 @@ def get_sectors_count (pageSoup):
 def get_sectors_info(pageSoup):
     sectors =pageSoup.find('div', class_=sectors_div_class).findAll('p')
     print (str(sectors))
+    for sector in sectors:
+        print ('sector name ='+sector.get_text().split(':')[0])
 
     return 1
 def get_code_date(inStr):
