@@ -55,7 +55,8 @@ def level_parser (page):
     soup.prettify()
     print (get_level_num (soup))
     print (get_level_history (soup))
-    print (have_sectors (soup))
+    if have_sectors (soup):
+        get_sectors (soup)
     return page
 
 def get_level_num (pageSoup):
@@ -113,10 +114,17 @@ def have_sectors (pageSoup):
     """
     try:
         sectors = pageSoup.findAll('div', class_=sectors_div_class)
-        print (sectors)
-        return True
+        if len(sectors) > 0:
+            return True
+        else:
+            return False
     except:
         return False
+
+def get_sectors (pageSoup)
+    sectors = pageSoup.findFirst('h3')
+    print (sectors)
+    return 1
 
 def get_code_date(inStr):
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
