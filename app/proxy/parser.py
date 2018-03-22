@@ -155,7 +155,7 @@ def get_sectors_info(pageSoup):
                     answer = code.get_text().strip()
                     print (answer)
                 else:
-                    gamer = code.findAll('a')[0].get_text.strip()
+                    gamer = code.findAll('a')[0].get_text().strip()
                     print(gamer)
                 
 
