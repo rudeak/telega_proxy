@@ -122,8 +122,8 @@ def have_sectors (pageSoup):
         return False
 
 def get_sectors (pageSoup):
-    sectors = pageSoup.findFirst('h3')
-    print (sectors)
+    #sectors = pageSoup.findFirst('h3')
+    print (pageSoup)
     return 1
 
 def get_code_date(inStr):
