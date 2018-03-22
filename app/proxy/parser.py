@@ -77,7 +77,6 @@ def get_level_history (pageSoup):
     items = history_list.findAll('li')
     for item in items:
         code_date = get_code_date(item.get_text().strip())
-        code_date = code_date.split()
         #code_date = code_date[0:code_date.find('/n')]
         print (str(code_date))
         user = item.find('a').get_text().strip()
@@ -104,4 +103,5 @@ def get_level_history (pageSoup):
 def get_code_date(inStr):
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
     date = tmp_date_str
+    date = datetime.strptime (tmp_date_str, %Y/%d/%m %H:%M:%S)
     return date
