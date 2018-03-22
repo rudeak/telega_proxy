@@ -1,5 +1,6 @@
 import json
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 
 """
@@ -75,7 +76,7 @@ def get_level_history (pageSoup):
     history_list = pageSoup.find('ul', class_=history_class)
     items = history_list.findAll('li')
     for item in items:
-        code_date = item.get_text().strip()
+        code_date = get_code_date(item.get_text().strip())
         code_date = code_date.split()
         #code_date = code_date[0:code_date.find('/n')]
         print (str(code_date))
@@ -99,3 +100,8 @@ def get_level_history (pageSoup):
         #print (item.get_text())
     #print (history_list)
     return 1
+
+def get_code_date(inStr):
+    tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
+    date = tmp_date_str
+    return date
