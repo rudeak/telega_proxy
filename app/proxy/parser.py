@@ -122,6 +122,11 @@ def have_sectors (pageSoup):
         return False
 
 def get_sectors_count (pageSoup):
+    """
+    отримує суп сторінки гри повертає json:
+    'all': всього секторів на рівні
+    'need': потрібно для закриття рівня
+    """
     content = pageSoup.find ('div', class_ = content_div_class)
     sectors_count = content.findAll ('h3')[0]
     sectors_span = sectors_count.findAll('span')[0].get_text()
