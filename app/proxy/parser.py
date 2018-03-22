@@ -60,7 +60,7 @@ def level_parser (page):
     print (get_level_history (soup))
     if have_sectors (soup):
         print(get_sectors_count (soup))
-        get_sectors_info (soup)
+        print (get_sectors_info (soup))
     return page
 
 def get_level_num (pageSoup):
@@ -140,6 +140,7 @@ def get_sectors_count (pageSoup):
 
 def get_sectors_info(pageSoup):
     sectors =pageSoup.find('div', class_=sectors_div_class).findAll('p')
+    sectors_list=[]
     for sector in sectors:
         name =sector.get_text().split(':')[0].strip()
        
@@ -157,9 +158,9 @@ def get_sectors_info(pageSoup):
                 else:
                     gamer = code.findAll('a')[0].get_text().strip()
                     print(gamer)
-                
+    sectors_list.append({'name':name,'entered':entered,'answer':answer,'gamer':gamer})            
+    return json.dumps (sectors_list)
 
-    return 1
 def get_code_date(inStr):
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
     tmp_date_str = tmp_date_str.replace ('/', ' ')
