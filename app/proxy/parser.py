@@ -151,9 +151,9 @@ def get_sectors_info(pageSoup):
                 gamer = ''
             else:
                 if code['class'][0] == code_entered_class:
-                entered = True
-                answer = code.get_text()
-                print (answer)
+                    entered = True
+                    answer = code.get_text()
+                    print (answer)
                 
 
     return 1
