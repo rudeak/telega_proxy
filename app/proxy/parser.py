@@ -126,8 +126,9 @@ def get_sectors (pageSoup):
     content = pageSoup.find ('div', class_ = content_div_class)
     sectors_count = content.findAll ('h3')[0]
     sectors_span = sectors_count.findAll('span')[0].get_text()
+    sectors_span = sectors_span.replace (')','')
     sectors_all = [str(s) for s in sectors_count.get_text().split() if s.isdigit()][0]
-    #sectors_need = [str(s) for s in sectors_span.get_text().split() if s.isdigit()][0]
+    sectors_need = [str(s) for s in sectors_span.get_text().split() if s.isdigit()][0]
     print (str(sectors_span))
     return 1
 
