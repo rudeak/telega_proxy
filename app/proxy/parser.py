@@ -107,7 +107,7 @@ def get_level_history (pageSoup):
         history.append ({'time':code_date,'gamer':user,'answer':answer,'correct':correct,'is_code':isCode})
     return json.dumps(history)
 
-def have_sectors (pageSoup)
+def have_sectors (pageSoup):
     """
     отримує суп сторінки гри і повертає True якщо на рівні є сектори
     """
