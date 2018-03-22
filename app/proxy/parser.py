@@ -124,8 +124,9 @@ def have_sectors (pageSoup):
 
 def get_sectors (pageSoup):
     content = pageSoup.find ('div', class_ = content_div_class)
+    sectors_count = content.findAll ('h3')
     #sectors = pageSoup.findFirst('h3')
-    print (content)
+    print (sectors_count)
     return 1
 
 def get_code_date(inStr):
