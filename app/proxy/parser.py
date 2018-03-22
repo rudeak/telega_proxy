@@ -57,7 +57,7 @@ def level_parser (page):
     print (get_level_num (soup))
     print (get_level_history (soup))
     if have_sectors (soup):
-        get_sectors (soup)
+        print(get_sectors_count (soup))
     return page
 
 def get_level_num (pageSoup):
@@ -122,7 +122,7 @@ def have_sectors (pageSoup):
     except:
         return False
 
-def get_sectors (pageSoup):
+def get_sectors_count (pageSoup):
     content = pageSoup.find ('div', class_ = content_div_class)
     sectors_count = content.findAll ('h3')[0]
     sectors_span = sectors_count.findAll('span')[0].get_text()
@@ -130,7 +130,7 @@ def get_sectors (pageSoup):
     sectors_all = [str(s) for s in sectors_count.get_text().split() if s.isdigit()][0]
     sectors_need = [str(s) for s in sectors_span.split() if s.isdigit()][0]
     print (str(sectors_span))
-    return 1
+    return json.dumps({'all':sectors_all,'need':sectors_need})
 
 def get_code_date(inStr):
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
