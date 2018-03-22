@@ -55,6 +55,7 @@ def level_parser (page):
     soup.prettify()
     print (get_level_num (soup))
     print (get_level_history (soup))
+    have_sectors (soup)
     return page
 
 def get_level_num (pageSoup):
