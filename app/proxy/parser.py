@@ -24,6 +24,7 @@ level_number_name = 'LevelNumber'
 history_class = 'history'
 correct_answer_class ='color_correct'
 correct_bonus_class = 'color_bonus'
+sectors_div_class = 'cols-wrapper'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -74,17 +75,23 @@ def get_level_num (pageSoup):
                     'levelNum':level_num })
 
 def get_level_history (pageSoup):
+    """
+    отримує суп сторінки гри повертає історію вводу кодів в форматі json
+    'time': юнікс тайм введення коду
+    'gamer': гравець який ввів код
+    'answer': код
+    'correct': вірний/невірий код (True/False)
+    'is_code': якщо True то був введений код, інакше бонус
+    """
     history = []
     history_list = pageSoup.find('ul', class_=history_class)
     items = history_list.findAll('li')
     for item in items:
         code_date = get_code_date(item.get_text().strip())
         #code_date = code_date[0:code_date.find('/n')]
-        print (str(code_date))
         user = item.find('a').get_text().strip()
         answer = item.find('span').get_text().strip()
         answer_class = item.find('span')['class']
-        print ('answer class =' +str(answer_class))
         if  answer_class[0] == correct_answer_class:
             correct = True
             isCode = True
@@ -97,10 +104,18 @@ def get_level_history (pageSoup):
                 isCode = True
 
         history.append ({'time':code_date,'gamer':user,'answer':answer,'correct':correct,'is_code':isCode})
-        
-        #print (item.get_text())
-    #print (history_list)
     return json.dumps(history)
+
+def have_sectors (pageSoup)
+    """
+    отримує суп сторінки гри і повертає True якщо на рівні є сектори
+    """
+    try:
+        sectors = pageSoup.findAll('div', class_=sectors_div_class)
+        print (sectors)
+        return True
+    except:
+        return False
 
 def get_code_date(inStr):
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
