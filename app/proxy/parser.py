@@ -158,7 +158,7 @@ def get_sectors_info(pageSoup):
                 else:
                     gamer = code.findAll('a')[0].get_text().strip()
                     print(gamer)
-    sectors_list.append({'name':name,'entered':entered,'answer':answer,'gamer':gamer})            
+        sectors_list.append({'name':name,'entered':entered,'answer':answer,'gamer':gamer})            
     return json.dumps (sectors_list)
 
 def get_code_date(inStr):
