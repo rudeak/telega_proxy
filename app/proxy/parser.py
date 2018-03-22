@@ -151,6 +151,7 @@ def get_sectors_info(pageSoup):
                 gamer = ''
             else:
                 entered = True
+                print (code)
                 for answer in code.findAll('span'):
                     print (answer)
 
