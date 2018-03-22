@@ -143,6 +143,11 @@ def get_sectors_info(pageSoup):
     print (str(sectors))
     for sector in sectors:
         print ('sector name ='+sector.get_text().split(':')[0].strip())
+        for code in sector.findAll('span'):
+            if code['class'] == code_not_entered_class:
+                entered = False
+            else:
+                print (code)
 
     return 1
 def get_code_date(inStr):
