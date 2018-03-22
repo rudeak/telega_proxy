@@ -102,6 +102,6 @@ def get_level_history (pageSoup):
 
 def get_code_date(inStr):
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
-    date = tmp_date_str
-    date = datetime.strptime (tmp_date_str, %Y/%d/%m %H:%M:%S)
+    tmp_date_str = tmp_date_str.replace ('/', ' ')
+    date = datetime.strptime (tmp_date_str, '%Y %d %m %H:%M:%S')
     return date
