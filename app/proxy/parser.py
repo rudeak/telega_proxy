@@ -53,7 +53,7 @@ def level_parser (page):
     soup = BeautifulSoup(page)
     soup.prettify()
     print (get_level_num (soup))
-    get_level_history (soup)
+    print (get_level_history (soup))
     return page
 
 def get_level_num (pageSoup):
@@ -74,6 +74,7 @@ def get_level_num (pageSoup):
                     'levelNum':level_num })
 
 def get_level_history (pageSoup):
+    history = []
     history_list = pageSoup.find('ul', class_=history_class)
     items = history_list.findAll('li')
     for item in items:
@@ -95,11 +96,11 @@ def get_level_history (pageSoup):
                 correct = False
                 isCode = True
 
-        print (user, answer, correct)
+        history.append ({'time':code_date,'gamer':user,'answer':answer,'correct':correct,'is_code':isCode})
         
         #print (item.get_text())
     #print (history_list)
-    return 1
+    return json.dumps(history)
 
 def get_code_date(inStr):
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
