@@ -152,8 +152,11 @@ def get_sectors_info(pageSoup):
             else:
                 if code['class'][0] == code_entered_class:
                     entered = True
-                    answer = code.get_text()
+                    answer = code.get_text().strip()
                     print (answer)
+                else:
+                    gamer = code.findAll('a')[0].get_text.strip()
+                    print(gamer)
                 
 
     return 1
