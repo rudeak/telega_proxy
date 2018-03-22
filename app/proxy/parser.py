@@ -138,7 +138,7 @@ def get_sectors_count (pageSoup):
 
 def get_sectors_info(pageSoup):
     sectors =pageSoup.findAll('div', class_=sectors_div_class).findAll('p')
-    print (sectors)
+    print (str(sectors))
 
     return 1
 def get_code_date(inStr):
