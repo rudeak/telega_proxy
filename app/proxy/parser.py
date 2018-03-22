@@ -169,6 +169,7 @@ def get_sectors_info(pageSoup):
     return json.dumps (sectors_list)
 
 def get_code_date(inStr):
+    # ValueError: time data '2018 4:29:58 PM' does not match format '%Y %d %m %H:%M:%S'
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
     tmp_date_str = tmp_date_str.replace ('/', ' ')
     date = datetime.strptime (tmp_date_str, '%Y %d %m %H:%M:%S')
