@@ -126,17 +126,8 @@ def get_sectors (pageSoup):
     content = pageSoup.find ('div', class_ = content_div_class)
     sectors_count = content.findAll ('h3')[0]
     i = 0
-    for s in sectors_count.get_text().split():
-        if s.isdigit():
-            i += 1
-            if i == 1:
-                print ('sectors all ='+s)
-                all_sectors = s
-            else:
-                print ('sectors need ='+s)
-                need_sectors = s
-    #sectors = pageSoup.findFirst('h3')
-    print (sectors_count.get_text())
+    sectors = [for s in sectors_count.get_text().split() if s.isdigit()]
+    print (str(sectors))
     return 1
 
 def get_code_date(inStr):
