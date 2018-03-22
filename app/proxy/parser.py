@@ -145,7 +145,7 @@ def get_sectors_info(pageSoup):
        
         for code in sector.findAll('span'):
             print (code['class'])
-            if code['class'] == code_not_entered_class:
+            if code['class'][0] == code_not_entered_class:
                 entered = False
             else:
                 print (code)
