@@ -127,11 +127,13 @@ def get_sectors (pageSoup):
     sectors_count = content.findAll ('h3')[0]
     i = 0
     for s in sectors_count.get_text().split():
-        if s.isDigit():
+        if s.isdigit():
             i += 1
             if i == 1:
+                print ('sectors all ='+s)
                 all_sectors = s
             else:
+                print ('sectors need ='+s)
                 need_sectors = s
     #sectors = pageSoup.findFirst('h3')
     print (sectors_count)
