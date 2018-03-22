@@ -25,6 +25,7 @@ history_class = 'history'
 correct_answer_class ='color_correct'
 correct_bonus_class = 'color_bonus'
 sectors_div_class = 'cols-wrapper'
+content_div_class = 'content'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -122,8 +123,9 @@ def have_sectors (pageSoup):
         return False
 
 def get_sectors (pageSoup):
+    content = pageSoup.find ('div', class_ = content_div_class)
     #sectors = pageSoup.findFirst('h3')
-    print (pageSoup)
+    print (content)
     return 1
 
 def get_code_date(inStr):
