@@ -137,7 +137,7 @@ def get_sectors_count (pageSoup):
     return json.dumps({'all':sectors_all,'need':sectors_need})
 
 def get_sectors_info(pageSoup):
-    sectors =pageSoup.findAll(pageSoup)[0]
+    sectors =pageSoup.findAll(pageSoup)
     print (sectors)
 
     return 1
