@@ -140,9 +140,9 @@ def get_sectors_count (pageSoup):
 
 def get_sectors_info(pageSoup):
     sectors =pageSoup.find('div', class_=sectors_div_class).findAll('p')
-    print (str(sectors))
     for sector in sectors:
-        print ('sector name ='+sector.get_text().split(':')[0].strip())
+        name =+sector.get_text().split(':')[0].strip())
+        print (sector['class'])
         for code in sector.findAll('span'):
             if code['class'] == code_not_entered_class:
                 entered = False
