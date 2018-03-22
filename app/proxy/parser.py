@@ -152,7 +152,7 @@ def get_sectors_info(pageSoup):
             else:
                 entered = True
                 for answer in code.findAll('span'):
-                    print (answer[0].get_text())
+                    print (answer)
 
     return 1
 def get_code_date(inStr):
