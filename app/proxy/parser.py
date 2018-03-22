@@ -73,7 +73,6 @@ def get_level_num (pageSoup):
                 level_id = input_['value']
             if input_['name'] == level_number_name:
                 level_num = input_['value']
-    print (level_id, level_num)
     return json.dumps ( {'levelId':level_id,
                     'levelNum':level_num })
 
@@ -129,7 +128,6 @@ def get_sectors_count (pageSoup):
     sectors_span = sectors_span.replace (')','')
     sectors_all = [str(s) for s in sectors_count.get_text().split() if s.isdigit()][0]
     sectors_need = [str(s) for s in sectors_span.split() if s.isdigit()][0]
-    print (str(sectors_span))
     return json.dumps({'all':sectors_all,'need':sectors_need})
 
 def get_code_date(inStr):
