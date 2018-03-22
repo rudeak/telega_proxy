@@ -139,13 +139,20 @@ def get_sectors_count (pageSoup):
     return json.dumps({'all':sectors_all,'need':sectors_need})
 
 def get_sectors_info(pageSoup):
+    """
+    отримує суп сторінки повертає json:
+    'name': назва сектору
+    'entered': True якщо сектор закритий
+    'answer': введений код
+    'gamer': логін гравця, що закрив код
+    """
     sectors =pageSoup.find('div', class_=sectors_div_class).findAll('p')
     sectors_list=[]
     for sector in sectors:
         name =sector.get_text().split(':')[0].strip()
        
         for code in sector.findAll('span'):
-            print (code['class'])
+            
             if code['class'][0] == code_not_entered_class:
                 entered = False
                 answer = ''
@@ -154,10 +161,10 @@ def get_sectors_info(pageSoup):
                 if code['class'][0] == code_entered_class:
                     entered = True
                     answer = code.get_text().strip()
-                    print (answer)
+                    
                 else:
                     gamer = code.findAll('a')[0].get_text().strip()
-                    print(gamer)
+                    
         sectors_list.append({'name':name,'entered':entered,'answer':answer,'gamer':gamer})            
     return json.dumps (sectors_list)
 
