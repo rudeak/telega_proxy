@@ -121,7 +121,7 @@ def have_sectors (pageSoup):
     except:
         return False
 
-def get_sectors (pageSoup)
+def get_sectors (pageSoup):
     sectors = pageSoup.findFirst('h3')
     print (sectors)
     return 1
