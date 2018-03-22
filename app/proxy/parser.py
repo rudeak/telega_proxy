@@ -136,7 +136,7 @@ def get_sectors (pageSoup):
                 print ('sectors need ='+s)
                 need_sectors = s
     #sectors = pageSoup.findFirst('h3')
-    print (sectors_count)
+    print (sectors_count.get_text())
     return 1
 
 def get_code_date(inStr):
