@@ -150,10 +150,11 @@ def get_sectors_info(pageSoup):
                 answer = ''
                 gamer = ''
             else:
+                if code['class'][0] == code_entered_class:
                 entered = True
-                print (code)
-                for answer in code.findAll('span'):
-                    print (answer)
+                answer = code.get_text()
+                print (answer)
+                
 
     return 1
 def get_code_date(inStr):
