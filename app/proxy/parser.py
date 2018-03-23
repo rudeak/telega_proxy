@@ -186,7 +186,6 @@ def set_block (html):
     i=1
     first = True
     html_dic = html.split('\n')
-    print (html_dic)
     for z in range(0, len(html_dic)-1):
         
         if html_dic[z].strip() == '<div class="'+spacer+'">' and i==1:
