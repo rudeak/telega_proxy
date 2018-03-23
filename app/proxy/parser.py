@@ -173,8 +173,8 @@ def get_sectors_info(pageSoup):
 def get_task(pageSoup):
     pageSoupCopy = pageSoup
     content = pageSoup.find('div', class_ = content_div_class)
-    content = content.find('div', class_ = spacer)
-    content = content.next_siblings()
+    content = content.div.find(class_ = spacer)
+    content = content.div.next_siblings()
 
 
     
