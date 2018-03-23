@@ -206,6 +206,7 @@ def set_block (html):
             i = 1
     html_dic = rename_block (html_dic)   
     html = ''.join(html_dic)
+    print (html)
     return html
 
 def rename_block (html_dic):
