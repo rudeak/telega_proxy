@@ -184,7 +184,7 @@ def get_task(pageSoup):
     task = blocks.find('div', class_ = 'block_task')
     return json.dumps ({'task':str(task)})
 
-def get_promts (pageSoup)
+def get_promts (pageSoup):
     content = pageSoup.find('div', class_ = content_div_class)
     blocks = BeautifulSoup (set_block(content.prettify()))
     promts = blocks.find('div', class_ 'block_promt')
