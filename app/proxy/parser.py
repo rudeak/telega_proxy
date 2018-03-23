@@ -198,6 +198,7 @@ def get_timer (html):
     timer = timer.find ('script')
     timer = timer.get_text()
     tmp = timer [timer.find(timer_marker_js)+len(timer_marker_js):len(timer)]
+    tmp = tmp.split(',')[0]
     print ('tmp='+tmp)
 
     return 1
