@@ -28,6 +28,7 @@ sectors_div_class = 'cols-wrapper'
 content_div_class = 'content'
 code_not_entered_class = 'color_dis'
 code_entered_class = 'color_correct'
+spacer = 'spacer'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -170,9 +171,12 @@ def get_sectors_info(pageSoup):
     return json.dumps (sectors_list)
 
 def get_task(pageSoup):
-    content = pageSoup.find ('div', content_div_class)
-    content = content.findAll ('h2')[0].replaceWith('')
-    print (content)
+    pageSoupCopy = pageSoup
+    pageSoup.div(class_= content_div_class)
+    pageSoup.div(class_= spacer)
+
+    
+    print (pageSoup)
 
     return 1
 
