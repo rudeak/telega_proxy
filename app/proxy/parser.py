@@ -175,7 +175,7 @@ def get_task(pageSoup):
     отримує суп сторінки повертає json
     'task': повний текст завдання
     """
-    pageSoupCopy = pageSoup
+   
     content = pageSoup.find('div', class_ = content_div_class)
     #print (set_block(content.prettify()))
     #content = content.div(class_ = spacer)
@@ -183,6 +183,12 @@ def get_task(pageSoup):
     blocks = BeautifulSoup (set_block(content.prettify()))
     task = blocks.find('div', class_ = 'block_task')
     return json.dumps ({'task':str(task)})
+
+def get_promts (pageSoup)
+    content = pageSoup.find('div', class_ = content_div_class)
+    blocks = BeautifulSoup (set_block(content.prettify()))
+    promts = blocks.find('div', class_ 'block_promt')
+    return 1
 
 def set_block (html):
     i=1
