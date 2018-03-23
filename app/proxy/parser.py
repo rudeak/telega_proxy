@@ -199,7 +199,7 @@ def get_timer (html):
     timer = BeautifulSoup (html)
     timer = timer.find ('script')
     timer = timer.get_text()
-    items = timer.strip(':')
+    items = timer.strip()
     for x in range (0, len(items)-1):
         print (items[x])
 
