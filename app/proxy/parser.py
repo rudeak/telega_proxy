@@ -63,7 +63,7 @@ def level_parser (page):
         print(get_sectors_count (soup))
         print (get_sectors_info (soup))
     print(get_task(soup))
-    get_promts (soup)
+    get_prompts (soup)
     return page
 
 def get_level_num (pageSoup):
@@ -185,11 +185,11 @@ def get_task(pageSoup):
     task = blocks.find('div', class_ = 'block_task')
     return json.dumps ({'task':str(task)})
 
-def get_promts (pageSoup):
+def get_prompts (pageSoup):
     content = pageSoup.find('div', class_ = content_div_class)
     blocks = BeautifulSoup (set_block(content.prettify()))
-    promts = blocks.find('div', class_ = 'block_promt')
-    print (promts)
+    prompts = blocks.find('div', class_ = 'block_prompt')
+    print (prompts)
     return 1
 
 def set_block (html):
