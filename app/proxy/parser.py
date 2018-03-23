@@ -195,7 +195,8 @@ def set_block (html):
             html_dic[z] =''
             i +=1
         if html_dic[z].strip() == '<div class="spacer">' and i==3:
-            html_dic[z] = ''
+            html_dic[z] = '</div>'
+            html_dic[z+1] = '<div class="block">'
             i = 1
     html = ''.join(html_dic)
     return html
