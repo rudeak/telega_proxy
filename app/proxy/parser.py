@@ -199,7 +199,8 @@ def get_timer (html):
     timer = BeautifulSoup (html)
     timer = timer.find ('script')
     timer = json.dumps (timer.get_text())
-    print (json.dumps (timer.get_text()))
+    timer = timer ['StartCounter']
+    print (timer)
     return 1
 
 def set_block (html):
