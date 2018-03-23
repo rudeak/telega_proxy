@@ -171,7 +171,7 @@ def get_sectors_info(pageSoup):
 
 def get_task(pageSoup):
     content = pageSoup.findAll ('div', content_div_class)
-    content = content.find ('h2').replaceWith('')
+    content = content.findAll ('h2')[0].replaceWith('')
     print (content)
 
     return 1
