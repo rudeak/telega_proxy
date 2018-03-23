@@ -204,6 +204,10 @@ def get_timer (html):
     return 1
 
 def set_block (html):
+    """
+    отримує стрінг хтмл із движка(div.content), 
+    ділить контент на боки <div class= "block"> по класах з двика <div class="spacer">
+    """
     i=1
     first = True
     html_dic = html.split('\n')
@@ -228,6 +232,12 @@ def set_block (html):
     return html
 
 def rename_block (html_dic):
+    """
+    отримує стрінг хтмл переробений на блоки, визначає тип коного блоку:
+    block_task
+    block_bonus
+    block_prompt
+    """
     counter = 0
     for z in range(0, len(html_dic)-1):
         if html_dic[z] == '<div class="block">' and counter == 0:
