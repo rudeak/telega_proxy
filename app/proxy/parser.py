@@ -29,6 +29,7 @@ content_div_class = 'content'
 code_not_entered_class = 'color_dis'
 code_entered_class = 'color_correct'
 spacer = 'spacer'
+timer_marker_js = '"StartCounter":'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -196,7 +197,7 @@ def get_timer (html):
     timer = BeautifulSoup (html)
     timer = timer.find ('script')
     timer = timer.get_text()
-    tmp = timer [timer.find('"StartCounter":'):len(timer)]
+    tmp = timer [timer.find(timer_marker_js)+len(timer_marker_js):len(timer)]
     print ('tmp='+tmp)
 
     return 1
