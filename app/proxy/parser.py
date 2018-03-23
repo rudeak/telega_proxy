@@ -185,16 +185,20 @@ def get_task(pageSoup):
 
 def set_block (html):
     i=1
+    first = True
     html_dic = html.split('\n')
     for z in range(0, len(html_dic)-1):
         
         if html_dic[z].strip() == '<div class="spacer">' and i==1:
             html_dic[z] = '<div class="block">'
-            html_dic[z+1] ='' 
+            if first:
+                html_dic[z+1] ='' 
+                first = False
+                
             i += 1
         if html_dic[z].strip() == '<div class="spacer">' and i == 2:
             html_dic[z] = '</div>' 
-            #html_dic[z+1] ='<div class="block">'
+            html_dic[z+1] ='<div class="block">'
             i = 1
     html = ''.join(html_dic)
     return html
