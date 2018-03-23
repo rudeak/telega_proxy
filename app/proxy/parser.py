@@ -173,15 +173,30 @@ def get_sectors_info(pageSoup):
 def get_task(pageSoup):
     pageSoupCopy = pageSoup
     content = pageSoup.find('div', class_ = content_div_class)
-    content = content.div(class_ = spacer).join()
-    content = content.div.next_siblings()
+    print (set_block(content.prettify()))
+    #content = content.div(class_ = spacer)
+    #content = content.div.next_siblings()
 
 
     
     print (content)
 
     return 1
-
+def set_block (html):
+    i=1
+    html_dic = html.split()
+    for line in html_dic:
+        if line == '<div class="spacer">' and i==1:
+            line = '<div class="block">'
+            i += 1
+        if line == '</div>' and i == 2:
+            line =''
+            i +=1
+        if line == '<div class="spacer">' and i==3:
+            line = ''
+            i = 1
+    html = html_dic.join()
+    return html
 def get_code_date(inStr):
     # ValueError: time data '2018 4:29:58 PM' does not match format '%Y %d %m %H:%M:%S'
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
