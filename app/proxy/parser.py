@@ -176,12 +176,13 @@ def get_task(pageSoup):
     print (set_block(content.prettify()))
     #content = content.div(class_ = spacer)
     #content = content.div.next_siblings()
-
-
+    blocks = BeautifulSoup (set_block(content.prettify()))
+    blocks.findAll('div', class_ = 'block')
     
-    print (content)
+    print (blocks)
 
     return 1
+
 def set_block (html):
     i=1
     html_dic = html.split('\n')
@@ -196,7 +197,7 @@ def set_block (html):
         if html_dic[z].strip() == '<div class="spacer">' and i==3:
             html_dic[z] = ''
             i = 1
-    html = str(html_dic)
+    html = ''.join(html_dic)
     return html
 def get_code_date(inStr):
     # ValueError: time data '2018 4:29:58 PM' does not match format '%Y %d %m %H:%M:%S'
