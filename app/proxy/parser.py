@@ -195,7 +195,7 @@ def set_block (html):
         if line == '<div class="spacer">' and i==3:
             line = ''
             i = 1
-    html = html_dic.join()
+    html = str(html_dic)
     return html
 def get_code_date(inStr):
     # ValueError: time data '2018 4:29:58 PM' does not match format '%Y %d %m %H:%M:%S'
