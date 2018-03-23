@@ -178,9 +178,6 @@ def get_task(pageSoup):
     """
    
     content = pageSoup.find('div', class_ = content_div_class)
-    #print (set_block(content.prettify()))
-    #content = content.div(class_ = spacer)
-    #content = content.div.next_siblings()
     blocks = BeautifulSoup (set_block(content.prettify()))
     task = blocks.find('div', class_ = 'block_task')
     return json.dumps ({'task':str(task)})
@@ -192,7 +189,7 @@ def get_prompts (pageSoup):
     for prompt in prompts:
         if len(prompt.findAll('span', class_ = code_not_entered_class)) != 0:
             get_timer (prompt.prettify())
-            print (prompt)
+            #print (prompt)
     return 1
 
 def get_timer (html):
@@ -206,7 +203,7 @@ def get_timer (html):
 def set_block (html):
     """
     отримує стрінг хтмл із движка(div.content), 
-    ділить контент на боки <div class= "block"> по класах з двика <div class="spacer">
+    ділить контент на боки <div class= "block"> по класах з движка <div class="spacer">
     """
     i=1
     first = True
