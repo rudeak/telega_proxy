@@ -177,7 +177,7 @@ def get_task(pageSoup):
     #content = content.div(class_ = spacer)
     #content = content.div.next_siblings()
     blocks = BeautifulSoup (set_block(content.prettify()))
-    task = blocks.find('div', class_ = 'block_task')
+    task = blocks.find('div', class_ = 'block_task').get_text()
     print (task)
 
     return 1
