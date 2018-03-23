@@ -173,13 +173,12 @@ def get_sectors_info(pageSoup):
 def get_task(pageSoup):
     pageSoupCopy = pageSoup
     content = pageSoup.find('div', class_ = content_div_class)
-    print (set_block(content.prettify()))
+    #print (set_block(content.prettify()))
     #content = content.div(class_ = spacer)
     #content = content.div.next_siblings()
     blocks = BeautifulSoup (set_block(content.prettify()))
-    blocks.findAll('div', class_ = 'block')
-    
-    print (blocks)
+    task = blocks.find('div', class_ = 'block_task')
+    print (task)
 
     return 1
 
