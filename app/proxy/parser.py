@@ -188,7 +188,7 @@ def get_task(pageSoup):
 def get_prompts (pageSoup):
     content = pageSoup.find('div', class_ = content_div_class)
     blocks = BeautifulSoup (set_block(content.prettify()))
-    prompts = blocks.findAll('div', class_ = 'block_prompt')
+    prompts = blocks.find('div', class_ = 'block_prompt')
     for prompt in prompts:
         print (prompt)
     return 1
