@@ -190,13 +190,11 @@ def set_block (html):
         
         if html_dic[z].strip() == '<div class="spacer">' and i==1:
             html_dic[z] = '<div class="block">'
+            html_dic[z+1] ='' 
             i += 1
-        if html_dic[z].strip() == '</div>' and i == 2:
-            html_dic[z] =''
-            i +=1
-        if html_dic[z].strip() == '<div class="spacer">' and i==3:
-            html_dic[z] = '</div>'
-            html_dic[z+1] = '<div class="block">'
+        if html_dic[z].strip() == '<div class="spacer">' and i == 2:
+            html_dic[z] = '</div>' 
+            html_dic[z+1] ='<div class="block">'
             i = 1
     html = ''.join(html_dic)
     return html
