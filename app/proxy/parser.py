@@ -173,7 +173,7 @@ def get_sectors_info(pageSoup):
 def get_task(pageSoup):
     pageSoupCopy = pageSoup
     content = pageSoup.div(class_ = content_div_class)
-    pageSoup.div(class_= spacer)
+    content.h2.repalceWith('')
 
     
     print (content)
