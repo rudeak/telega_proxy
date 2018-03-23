@@ -61,6 +61,7 @@ def level_parser (page):
     if have_sectors (soup):
         print(get_sectors_count (soup))
         print (get_sectors_info (soup))
+    get_task(soup)
     return page
 
 def get_level_num (pageSoup):
@@ -168,9 +169,18 @@ def get_sectors_info(pageSoup):
         sectors_list.append({'name':name,'entered':entered,'answer':answer,'gamer':gamer})            
     return json.dumps (sectors_list)
 
+def get_task(pageSoup):
+    content = pageSoup.findAll ('div', content_div_class)
+    print (content)
+
+    return 1
+
 def get_code_date(inStr):
     # ValueError: time data '2018 4:29:58 PM' does not match format '%Y %d %m %H:%M:%S'
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
     tmp_date_str = tmp_date_str.replace ('/', ' ')
-    date = datetime.strptime (tmp_date_str, '%Y %d %m %H:%M:%S')
+    try:
+        date = datetime.strptime (tmp_date_str, '%Y %d %m %H:%M:%S')
+    except:
+        return 0
     return time.mktime (date.timetuple())
