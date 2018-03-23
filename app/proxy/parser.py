@@ -186,13 +186,13 @@ def set_block (html):
     i=1
     html_dic = html.split()
     for line in html_dic:
-        if line == '<div class="spacer">' and i==1:
-            line = '<div class="block">'
+        if line == 'class="spacer">' and i==1:
+            line = 'class="block">'
             i += 1
         if line == '</div>' and i == 2:
             line =''
             i +=1
-        if line == '<div class="spacer">' and i==3:
+        if line == 'class="spacer">' and i==3:
             line = ''
             i = 1
     html = str(html_dic)
