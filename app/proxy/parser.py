@@ -170,7 +170,7 @@ def get_sectors_info(pageSoup):
     return json.dumps (sectors_list)
 
 def get_task(pageSoup):
-    content = pageSoup.findAll ('div', content_div_class)
+    content = pageSoup.find ('div', content_div_class)
     content = content.findAll ('h2')[0].replaceWith('')
     print (content)
 
