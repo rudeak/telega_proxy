@@ -184,7 +184,7 @@ def get_task(pageSoup):
     return 1
 def set_block (html):
     i=1
-    html_dic = html.split()
+    html_dic = html.split('\n')
     for line in html_dic:
         if line == 'class="spacer">' and i==1:
             line = 'class="block">'
