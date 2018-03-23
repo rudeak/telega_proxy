@@ -182,7 +182,7 @@ def get_task(pageSoup):
     #content = content.div.next_siblings()
     blocks = BeautifulSoup (set_block(content.prettify()))
     task = blocks.find('div', class_ = 'block_task')
-    return json.dumps ({'task':task})
+    return json.dumps ({'task':str(task)})
 
 def set_block (html):
     i=1
