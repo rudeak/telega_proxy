@@ -191,7 +191,14 @@ def get_prompts (pageSoup):
     prompts = blocks.findAll('div', class_ = 'block_prompt')
     for prompt in prompts:
         if len(prompt.findAll('span', class_ = code_not_entered_class)) != 0:
+            get_timer (prompt.prettify())
             print (prompt)
+    return 1
+
+def get_timer (html):
+    timer = BeautifulSoup (html)
+    timer = timer.find ('script')
+    print (timer)
     return 1
 
 def set_block (html):
