@@ -190,9 +190,7 @@ def get_prompts (pageSoup):
     blocks = BeautifulSoup (set_block(content.prettify()))
     prompts = blocks.findAll('div', class_ = 'block_prompt')
     for prompt in prompts:
-        print (prompt)
-        promptSoup = BeautifulSoup (prompt.get_text())
-        if len(promptSoup.findAll('div', class_ = code_not_entered_class)) != 0:
+        if len(prompt.findAll('div', class_ = code_not_entered_class)) != 0:
             print (prompt)
     return 1
 
