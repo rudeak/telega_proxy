@@ -62,7 +62,7 @@ def level_parser (page):
     if have_sectors (soup):
         print(get_sectors_count (soup))
         print (get_sectors_info (soup))
-    get_task(soup)
+    print(get_task(soup))
     return page
 
 def get_level_num (pageSoup):
@@ -171,6 +171,10 @@ def get_sectors_info(pageSoup):
     return json.dumps (sectors_list)
 
 def get_task(pageSoup):
+    """
+    отримує суп сторінки повертає json
+    'task': повний текст завдання
+    """
     pageSoupCopy = pageSoup
     content = pageSoup.find('div', class_ = content_div_class)
     #print (set_block(content.prettify()))
@@ -178,9 +182,7 @@ def get_task(pageSoup):
     #content = content.div.next_siblings()
     blocks = BeautifulSoup (set_block(content.prettify()))
     task = blocks.find('div', class_ = 'block_task').renderContents()
-    print (task)
-
-    return 1
+    return json.dumps ({'task':task})
 
 def set_block (html):
     i=1
