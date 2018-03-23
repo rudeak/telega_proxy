@@ -173,7 +173,7 @@ def get_sectors_info(pageSoup):
 def get_task(pageSoup):
     pageSoupCopy = pageSoup
     content = pageSoup.find('div', class_ = content_div_class)
-    content = content.find('h2', limit =1).replaceWith('')
+    content = content.find('h2').replaceWith('')
 
 
     
