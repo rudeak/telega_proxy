@@ -63,7 +63,7 @@ def level_parser (page):
         print(get_sectors_count (soup))
         print (get_sectors_info (soup))
     print(get_task(soup))
-    get_promts (pageSoup)
+    get_promts (soup)
     return page
 
 def get_level_num (pageSoup):
