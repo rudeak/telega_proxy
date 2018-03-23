@@ -172,8 +172,9 @@ def get_sectors_info(pageSoup):
 
 def get_task(pageSoup):
     pageSoupCopy = pageSoup
-    content = pageSoup.div(class_ = content_div_class)
-    content.h2.repalceWith('')
+    content = pageSoup.find('div', class_ = content_div_class)
+    #content = content.find
+
 
     
     print (content)
