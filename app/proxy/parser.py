@@ -188,7 +188,7 @@ def get_task(pageSoup):
 def get_prompts (pageSoup):
     content = pageSoup.find('div', class_ = content_div_class)
     blocks = BeautifulSoup (set_block(content.prettify()))
-    prompts = blocks.find('div', class_ = 'block_prompt')
+    prompts = blocks.findAll('div', class_ = 'block_prompt').prettify()
     print (prompts)
     return 1
 
@@ -214,7 +214,6 @@ def set_block (html):
             i = 1
     html_dic = rename_block (html_dic)   
     html = ''.join(html_dic)
-    print (html)
     return html
 
 def rename_block (html_dic):
