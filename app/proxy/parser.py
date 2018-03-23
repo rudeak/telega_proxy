@@ -194,10 +194,12 @@ def set_block (html):
             i += 1
         if html_dic[z].strip() == '<div class="spacer">' and i == 2:
             html_dic[z] = '</div>' 
-            html_dic[z+1] ='<div class="block">'
+            #html_dic[z+1] ='<div class="block">'
             i = 1
     html = ''.join(html_dic)
     return html
+
+
 def get_code_date(inStr):
     # ValueError: time data '2018 4:29:58 PM' does not match format '%Y %d %m %H:%M:%S'
     tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
