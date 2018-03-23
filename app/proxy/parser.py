@@ -198,7 +198,7 @@ def get_prompts (pageSoup):
 def get_timer (html):
     timer = BeautifulSoup (html)
     timer = timer.find ('script')
-    timer = json.dumps (timer)
+    timer = json.dumps (timer.get_text())
     print (timer)
     return 1
 
