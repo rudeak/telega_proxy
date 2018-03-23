@@ -198,9 +198,11 @@ def get_prompts (pageSoup):
 def get_timer (html):
     timer = BeautifulSoup (html)
     timer = timer.find ('script')
-    timer = json.loads (timer.get_text())
-    timer = timer ['StartCounter']
-    print (timer)
+    timer = timer.get_text()
+    items = timer.strip(':')
+    for x in range (0, len(items)-1):
+        print (items[x])
+
     return 1
 
 def set_block (html):
