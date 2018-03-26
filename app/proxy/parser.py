@@ -198,10 +198,6 @@ def get_task(pageSoup):
     """
    
     content = pageSoup.find('div', class_ = content_div_class)
-    try:
-        content.find ('h3', class_= timer_class).replaceWith('')
-    except:
-        print ('get_task () up not found')
     blocks = BeautifulSoup (set_block(content.prettify()))
     task = blocks.find('div', class_ = 'block_task')
     print ('task = '+ str(blocks))
