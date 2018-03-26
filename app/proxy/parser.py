@@ -30,6 +30,7 @@ code_not_entered_class = 'color_dis'
 code_entered_class = 'color_correct'
 spacer = 'spacer'
 timer_marker_js = '"StartCounter":'
+timer_class ='timer'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -144,7 +145,7 @@ def get_sectors_count (pageSoup):
     'need': потрібно для закриття рівня
     """
     content = pageSoup.find ('div', class_ = content_div_class)
-    sectors_count = content.findAll ('h3')[0]
+    sectors_count = content.findAll ('h3', class_ !=timer_class)[0]
     sectors_span = sectors_count.findAll('span')[0].get_text()
     sectors_span = sectors_span.replace (')','')
     sectors_all = [str(s) for s in sectors_count.get_text().split() if s.isdigit()][0]
