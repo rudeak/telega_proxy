@@ -314,6 +314,7 @@ def rename_block (html_dic):
     block_task
     block_bonus
     block_prompt
+    block_penalty
     """
     counter = 0
     for z in range(0, len(html_dic)-1):
