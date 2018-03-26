@@ -256,9 +256,10 @@ def get_bonuses (pageSoup):
 def get_up (pageSoup):
     try:
         content = pageSoup.find ('h3', class_= timer_class)
+        return get_timer (content.prettify())
     except:
         return str(time.mktime (datetime.now().timetuple()))
-    return get_timer (content.prettify())
+    
 
 def get_timer (html):
     """
