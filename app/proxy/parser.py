@@ -149,6 +149,7 @@ def get_sectors_count (pageSoup):
 
     content = pageSoup.find ('div', class_ = content_div_class)
     #1522082148.0
+    
     #content.find ('h3', class_= timer_class).replaceWith('')
     sectors_count = content.findAll ('h3')[0]
     sectors_span = sectors_count.findAll('span')[0].get_text()
@@ -256,7 +257,7 @@ def get_up (pageSoup):
         content = pageSoup.find ('h3', class_= timer_class)
         return get_timer (content.prettify())
     except:
-        print ('up not found')
+        print ('get_up() up not found')
         return str(time.mktime (datetime.now().timetuple()))
     
 
