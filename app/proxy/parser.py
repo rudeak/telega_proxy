@@ -83,7 +83,7 @@ def level_parser (page):
                         'prompts':prompts,
                         'bonuses':bonuses})
     print (level)
-    return set_block (page.text)
+    return set_block (page)
 
 def get_level_num (pageSoup):
     """
