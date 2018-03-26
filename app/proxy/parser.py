@@ -185,13 +185,12 @@ def get_task(pageSoup):
     return json.dumps ({'task':str(task)})
 
 def get_prompts (pageSoup):
-"""
-отримує суп сторінки повертає json
-'number': номер підказки
-'text': хтмл підказки
-'timer': час до появи підказки
-"""
-
+    """
+    отримує суп сторінки повертає json
+    'number': номер підказки
+    'text': хтмл підказки
+    'timer': час до появи підказки
+    """
     content = pageSoup.find('div', class_ = content_div_class)
     blocks = BeautifulSoup (set_block(content.prettify()))
     prompts = blocks.findAll('div', class_ = 'block_prompt')
