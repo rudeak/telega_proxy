@@ -205,7 +205,7 @@ def get_prompts (pageSoup):
     return json.dumps(jprompt)
 
 def get_bonuses (pageSoup):
-    
+
     content = pageSoup.find('div', class_ = content_div_class)
     blocks = BeautifulSoup (set_block(content.prettify()))
     bonuses = blocks.findAll('div', class_ = 'block_bonus')
@@ -219,7 +219,7 @@ def get_bonuses (pageSoup):
         else:
             jprompt.append ({'number':counter, 'text':str(prompt), 'timer':''})
         """
-    return json.dumps(jprompt)
+    return json.dumps(jbonus)
 
 def get_timer (html):
     """
