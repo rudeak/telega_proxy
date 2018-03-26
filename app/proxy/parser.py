@@ -312,15 +312,14 @@ def rename_block (html_dic):
     block_prompt
     block_penalty
     """
-    counter = -1
+    counter = 0
     for z in range(0, len(html_dic)-1):
-        if html_dic[z] == '<div class="block">' and counter == -1 and html_dic[z+1].strip()=='<h3 class="'+timer_class+'">':
-           html_dic[z] = '<div class="block_timer">'
-           counter = 0
-           
         if html_dic[z] == '<div class="block">' and counter == 0:
-            html_dic[z] = '<div class="block_sectors">' 
-            counter = 1
+            if html_dic[z+1].strip()!='<h3 class="'+timer_class+'">'
+                html_dic[z] = '<div class="block_sectors">' 
+                counter = 1
+            else:
+                html_dic[z] = '<div class="block_timer">'
 
         if html_dic[z] == '<div class="block">' and counter == 1:
             html_dic[z] = '<div class="block_task">' 
