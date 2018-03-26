@@ -68,7 +68,11 @@ def level_parser (page):
     soup = BeautifulSoup(page)
     soup.prettify()    
     task = get_task(soup)
+    soup = BeautifulSoup(page)
+    soup.prettify()  
     prompts = get_prompts (soup)
+    soup = BeautifulSoup(page)
+    soup.prettify()  
     bonuses = get_bonuses (soup)
     level = json.dumps({'levelinfo':levelInfo,
                         'history':history, 
@@ -152,7 +156,7 @@ def get_sectors_count (pageSoup):
     content = pageSoup.find ('div', class_ = content_div_class)
     #1522082148.0
     
-    #content.find ('h3', class_= timer_class).replaceWith('')
+    content.find ('h3', class_= timer_class).replaceWith('')
     sectors_count = content.findAll ('h3')[0]
     sectors_span = sectors_count.findAll('span')[0].get_text()
     sectors_span = sectors_span.replace (')','')
