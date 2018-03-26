@@ -70,6 +70,7 @@ def level_parser (page):
                         'history':history, 
                         'sectors_count':sectors_count, 
                         'sectors_info':sectors_info,
+                        'task':task,
                         'prompts':prompts,
                         'bonuses':bonuses})
     print (level)
