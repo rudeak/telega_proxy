@@ -66,6 +66,8 @@ def level_parser (page):
     if have_sectors (soup):
         sectors_count = get_sectors_count (soup)
         sectors_info = get_sectors_info (soup)
+    soup = BeautifulSoup(page)
+    soup.prettify()
     task = get_task(soup)
     prompts = get_prompts (soup)
     bonuses = get_bonuses (soup)
