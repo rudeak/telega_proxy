@@ -190,18 +190,19 @@ def get_prompts (pageSoup):
     for prompt in prompts:
         if len(prompt.findAll('span', class_ = code_not_entered_class)) != 0:
             get_timer (prompt.prettify())
-            #print (prompt)
+            print (prompt)
     return 1
 
 def get_timer (html):
+    """
+    отримує хтмл з тегом script витягує із скрипта час до підказки і повертає юнікстайм
+    """
     timer = BeautifulSoup (html)
     timer = timer.find ('script')
     timer = timer.get_text()
     tmp = timer [timer.find(timer_marker_js)+len(timer_marker_js):len(timer)]
     tmp = tmp.split(',')[0]
     unixtime = int(time.mktime (datetime.now().timetuple()))+int (tmp)
-    print ('unix time='+str(unixtime))
-
     return str(unixtime) 
 
 def set_block (html):
