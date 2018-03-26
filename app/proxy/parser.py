@@ -260,10 +260,10 @@ def set_block (html):
             html_dic[z] = '</div>' 
             html_dic[z+1] ='<div class="block">'
             i = 1
-    
+    print (''.join(html_dic))
     html_dic = rename_block (html_dic)   
     html = ''.join(html_dic)
-    print (html)
+    
     return html
 
 def rename_block (html_dic):
