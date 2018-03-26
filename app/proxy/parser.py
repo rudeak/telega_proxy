@@ -65,6 +65,7 @@ def level_parser (page):
         print (get_sectors_info (soup))
     print(get_task(soup))
     print(get_prompts (soup))
+    get_bonuses (soup)
     return page
 
 def get_level_num (pageSoup):
@@ -184,6 +185,13 @@ def get_task(pageSoup):
     return json.dumps ({'task':str(task)})
 
 def get_prompts (pageSoup):
+"""
+отримує суп сторінки повертає json
+'number': номер підказки
+'text': хтмл підказки
+'timer': час до появи підказки
+"""
+
     content = pageSoup.find('div', class_ = content_div_class)
     blocks = BeautifulSoup (set_block(content.prettify()))
     prompts = blocks.findAll('div', class_ = 'block_prompt')
@@ -195,6 +203,22 @@ def get_prompts (pageSoup):
             jprompt.append ({'number':counter, 'text':'', 'timer':get_timer (prompt.prettify())})
         else:
             jprompt.append ({'number':counter, 'text':str(prompt), 'timer':''})
+    return json.dumps(jprompt)
+
+def get_bonuses (pageSoup)
+    content = pageSoup.find('div', class_ = content_div_class)
+    blocks = BeautifulSoup (set_block(content.prettify()))
+    bonuses = blocks.findAll('div', class_ = 'block_bonus')
+    counter = 0
+    jbonus = []
+    for bonus in bonuses:
+        counter +=1
+        print (bonus)
+        """if len(prompt.findAll('span', class_ = code_not_entered_class)) != 0:
+            jprompt.append ({'number':counter, 'text':'', 'timer':get_timer (prompt.prettify())})
+        else:
+            jprompt.append ({'number':counter, 'text':str(prompt), 'timer':''})
+        """
     return json.dumps(jprompt)
 
 def get_timer (html):
