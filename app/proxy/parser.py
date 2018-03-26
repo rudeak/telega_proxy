@@ -58,14 +58,21 @@ def change_href (page, id):
 def level_parser (page):
     soup = BeautifulSoup(page)
     soup.prettify()
-    print (get_level_num (soup))
-    print (get_level_history (soup))
+    levelInfo = get_level_num (soup)
+    history = get_level_history (soup)
     if have_sectors (soup):
-        print(get_sectors_count (soup))
-        print (get_sectors_info (soup))
-    print(get_task(soup))
-    print(get_prompts (soup))
-    print (get_bonuses (soup))
+        sectors_count = get_sectors_count (soup)
+        sectors_info = get_sectors_info (soup)
+    task = get_task(soup)
+    prompts = get_prompts (soup)
+    bonuses = get_bonuses (soup)
+    level = json.dumps({'levelinfo':levelInfo,
+                        'history':history, 
+                        'sectors_count':sectors_count, 
+                        'sectors_info':sectors_info,
+                        'prompts':prompts,
+                        'bonuses':bonuses})
+    print (level)
     return page
 
 def get_level_num (pageSoup):
