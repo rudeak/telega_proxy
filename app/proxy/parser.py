@@ -312,6 +312,7 @@ def rename_block (html_dic):
     block_penalty
     """
     counter = 0
+    penalty = False
     for z in range(0, len(html_dic)-1):
         if html_dic[z] == '<div class="block">' and counter == 0:
             print ('next block =' +html_dic[z+2].strip())
@@ -326,10 +327,13 @@ def rename_block (html_dic):
             counter = 2
         if html_dic[z] == '<div class="block">' and counter == 2:
           if html_dic[z+1].strip() != '<h3 class="'+penalty_h3_class+'">':
+                if penalty:
+                   html_dic[z] = '<div class="block_penalty">' 
                 html_dic[z] = '<div class="block_prompt">'
                 counter = 2
           else:
                 html_dic[z] = '<div class="block_penalty">'
+                penalty = True
                 counter = 2
         if html_dic[z] == '<div class="block">' and html_dic[z+1].strip() == '<h3 class="'+correct_bonus_class+'">' or html_dic[z+1].strip() == '<h3 class="'+code_entered_class+'">':
            html_dic[z] = '<div class="block_bonus">' 
