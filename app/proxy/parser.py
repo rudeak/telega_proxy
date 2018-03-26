@@ -221,7 +221,10 @@ def get_prompts (pageSoup):
 def get_bonuses (pageSoup):
 
     content = pageSoup.find('div', class_ = content_div_class)
-    content.find ('h3', class_= timer_class).replaceWith('')
+    try:
+        content.find ('h3', class_= timer_class).replaceWith('')
+    except:
+        print (content.prettify())
     blocks = BeautifulSoup (set_block(content.prettify()))
     bonuses = blocks.findAll('div', class_ = 'block_bonus')
     counter = 0
