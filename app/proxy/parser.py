@@ -144,8 +144,9 @@ def get_sectors_count (pageSoup):
     'all': всього секторів на рівні
     'need': потрібно для закриття рівня
     """
+
     content = pageSoup.find ('div', class_ = content_div_class)
-    content = content.find ('h3', class_= timer_class).replaceWith('')
+    content.find ('h3', class_= timer_class).replaceWith('')
     sectors_count = content.findAll ('h3')[0]
     sectors_span = sectors_count.findAll('span')[0].get_text()
     sectors_span = sectors_span.replace (')','')
