@@ -187,10 +187,14 @@ def get_prompts (pageSoup):
     content = pageSoup.find('div', class_ = content_div_class)
     blocks = BeautifulSoup (set_block(content.prettify()))
     prompts = blocks.findAll('div', class_ = 'block_prompt')
+    counter = 0
+    jprompt = []
     for prompt in prompts:
+        counter +=1
+        print (prompt)
         if len(prompt.findAll('span', class_ = code_not_entered_class)) != 0:
-            get_timer (prompt.prettify())
-            print (prompt)
+            jprompt.append ({'number':counter, 'text':'', 'timer':get_timer (prompt.prettify())})
+            
     return 1
 
 def get_timer (html):
