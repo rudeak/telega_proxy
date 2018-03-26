@@ -205,7 +205,10 @@ def get_prompts (pageSoup):
     'timer': час до появи підказки
     """
     content = pageSoup.find('div', class_ = content_div_class)
-    content.find ('h3', class_= timer_class).replaceWith('')
+    try:
+        content.find ('h3', class_= timer_class).replaceWith('')
+    except:
+        print (content.prettify())
     blocks = BeautifulSoup (set_block(content.prettify()))
     prompts = blocks.findAll('div', class_ = 'block_prompt')
     counter = 0
