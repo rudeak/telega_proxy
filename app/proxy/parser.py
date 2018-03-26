@@ -282,13 +282,13 @@ def rename_block (html_dic):
     """
     counter = 0
     for z in range(0, len(html_dic)-1):
-        
+        if html_dic[z] == '<div class="block">' and counter == 1 and html_dic[z+1]=='<h3 class="timer">':
+           html_dic[z] = '<div class="block_timer">'
         if html_dic[z] == '<div class="block">' and counter == 0:
             html_dic[z] = '<div class="block_sectors">' 
             
             counter = 1
-        if html_dic[z] == '<div class="block">' and counter == 1 and html_dic[z+1]=='<h3 class="timer">':
-           html_dic[z] = '<div class="block_timer">'
+
         if html_dic[z] == '<div class="block">' and counter == 1:
             html_dic[z] = '<div class="block_task">' 
             counter = 2
