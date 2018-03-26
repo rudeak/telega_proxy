@@ -61,10 +61,7 @@ def level_parser (page):
     soup.prettify()
     levelInfo = get_level_num (soup)
     history = get_level_history (soup)
-    print ('--------------------------------------------------')
-    print ('3')
-    print (soup)
-    print ('--------------------------------------------------')
+    time_up = get_up (soup)
     if have_sectors (soup):
         sectors_count = get_sectors_count (soup)
         sectors_info = get_sectors_info (soup)
@@ -73,7 +70,7 @@ def level_parser (page):
     bonuses = get_bonuses (soup)
     level = json.dumps({'levelinfo':levelInfo,
                         'history':history, 
-                        'up':get_up (soup),
+                        'up':time_up,
                         'sectors_count':sectors_count, 
                         'sectors_info':sectors_info,
                         'task':task,
