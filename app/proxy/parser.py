@@ -69,6 +69,7 @@ def level_parser (page):
     bonuses = get_bonuses (soup)
     level = json.dumps({'levelinfo':levelInfo,
                         'history':history, 
+                        'up':get_up (soup),
                         'sectors_count':sectors_count, 
                         'sectors_info':sectors_info,
                         'task':task,
@@ -191,6 +192,7 @@ def get_task(pageSoup):
     """
    
     content = pageSoup.find('div', class_ = content_div_class)
+    content.find ('h3', class_= timer_class).replaceWith('')
     blocks = BeautifulSoup (set_block(content.prettify()))
     task = blocks.find('div', class_ = 'block_task')
     return json.dumps ({'task':str(task)})
@@ -203,6 +205,7 @@ def get_prompts (pageSoup):
     'timer': час до появи підказки
     """
     content = pageSoup.find('div', class_ = content_div_class)
+    content.find ('h3', class_= timer_class).replaceWith('')
     blocks = BeautifulSoup (set_block(content.prettify()))
     prompts = blocks.findAll('div', class_ = 'block_prompt')
     counter = 0
@@ -218,6 +221,7 @@ def get_prompts (pageSoup):
 def get_bonuses (pageSoup):
 
     content = pageSoup.find('div', class_ = content_div_class)
+    content.find ('h3', class_= timer_class).replaceWith('')
     blocks = BeautifulSoup (set_block(content.prettify()))
     bonuses = blocks.findAll('div', class_ = 'block_bonus')
     counter = 0
@@ -235,6 +239,10 @@ def get_bonuses (pageSoup):
             else:
                 jbonus.append ({'number':counter, 'text':str(bonus),'bonus_text':'', 'completed':False, 'passed':False})
     return json.dumps(jbonus)
+
+def get_up (pageSoup):
+    content = pageSoup.find ('h3', class_= timer_class)
+    return get_timer (content.prettify())
 
 def get_timer (html):
     """
