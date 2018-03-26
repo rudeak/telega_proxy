@@ -279,7 +279,7 @@ def rename_block (html_dic):
         if html_dic[z] == '<div class="block">' and counter == 2:
            html_dic[z] = '<div class="block_prompt">' 
            counter = 2
-        if html_dic[z] == '<div class="block">' and html_dic[z+1].strip() == '<h3 class="'+correct_bonus_class+'">' or html_dic[z+1].strip() == '<h3 class="'+code_entered_class+'">':
+        if html_dic[z] == '<div class="block">' and html_dic[z+1].strip() == '<h3 class="'+correct_bonus_class+'">' or html_dic[z+1].strip() == '<h3 class="'+code_entered_class+'">' or html_dic[z+1].strip() == '<span class="color_dis">':
            html_dic[z] = '<div class="block_bonus">' 
            counter = 3
     return html_dic
