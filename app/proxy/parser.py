@@ -199,7 +199,7 @@ def get_timer (html):
     timer = timer.get_text()
     tmp = timer [timer.find(timer_marker_js)+len(timer_marker_js):len(timer)]
     tmp = tmp.split(',')[0]
-    unixtime = int(time.mktime (datetime.now()))+int (tmp)
+    unixtime = int(time.mktime (datetime.now().timetuple()))+int (tmp)
     print ('unix time='+str(unixtime))
 
     return str(unixtime) 
