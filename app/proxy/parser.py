@@ -204,7 +204,7 @@ def get_task(pageSoup):
         print ('get_task () up not found')
     blocks = BeautifulSoup (set_block(content.prettify()))
     task = blocks.find('div', class_ = 'block_task')
-    print ('task = '+ str(task))
+    print ('task = '+ str(blocks))
     return json.dumps ({'task':str(task)})
 
 def get_prompts (pageSoup):
