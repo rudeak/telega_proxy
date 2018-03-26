@@ -192,7 +192,7 @@ def get_task(pageSoup):
     """
    
     content = pageSoup.find('div', class_ = content_div_class)
-        print (content)
+    print (content)
     try:
         content.find ('h3', class_= timer_class).replaceWith('')
     except:
