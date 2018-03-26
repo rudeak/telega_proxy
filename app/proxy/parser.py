@@ -31,6 +31,7 @@ code_entered_class = 'color_correct'
 spacer = 'spacer'
 timer_marker_js = '"StartCounter":'
 timer_class ='timer'
+penalty_h3_class = 'inline'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -327,8 +328,12 @@ def rename_block (html_dic):
             html_dic[z] = '<div class="block_task">' 
             counter = 2
         if html_dic[z] == '<div class="block">' and counter == 2:
-           html_dic[z] = '<div class="block_prompt">'
-           counter = 2
+          if html_dic[z+1] != '<h3 class="'+penalty_h3_class+'">':
+                html_dic[z] = '<div class="block_prompt">'
+                counter = 2
+          else:
+                html_dic[z] = '<div class="block_penalty">'
+                counter = 2
         if html_dic[z] == '<div class="block">' and html_dic[z+1].strip() == '<h3 class="'+correct_bonus_class+'">' or html_dic[z+1].strip() == '<h3 class="'+code_entered_class+'">':
            html_dic[z] = '<div class="block_bonus">' 
            
