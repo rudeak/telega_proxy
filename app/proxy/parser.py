@@ -274,7 +274,10 @@ def get_bonuses (pageSoup):
     return json.dumps(jbonus)
 
 def get_up (pageSoup):
-    content = pageSoup.find ('h3', class_= timer_class)
+    try:
+        content = pageSoup.find ('h3', class_= timer_class)
+    except:
+        return str(time.mktime (datetime.now().timetuple())
     return get_timer (content.prettify())
 
 def get_timer (html):
