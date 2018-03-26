@@ -247,7 +247,7 @@ def set_block (html):
     html_dic = html.split('\n')
     for z in range(0, len(html_dic)-1):
         if html_dic[z].strip() == '<div class="'+spacer+'">' and i==1:
-            print (html_dic[z].strip())
+            print (html_dic[z].strip()+str(i))
             html_dic[z] = '<div class="block">'
             if first:
                 html_dic[z+1] ='' 
