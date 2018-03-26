@@ -299,7 +299,6 @@ def set_block (html):
             i = 1
     html_dic = rename_block (html_dic)   
     html = ''.join(html_dic)
-    print (html)
     return html
 
 def rename_block (html_dic):
@@ -315,6 +314,7 @@ def rename_block (html_dic):
     counter = 0
     for z in range(0, len(html_dic)-1):
         if html_dic[z] == '<div class="block">' and counter == 0:
+            print ('next block =' +html_dic[z+1].strip())
             if html_dic[z+1].strip()!='<h3 class="'+timer_class+'">':
                 html_dic[z] = '<div class="block_sectors">' 
                 counter = 1
