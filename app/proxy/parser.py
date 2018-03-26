@@ -198,7 +198,7 @@ def get_task(pageSoup):
     try:
         content.find ('h3', class_= timer_class).replaceWith('')
     except:
-        print ('up not found')
+        print ('get_task () up not found')
     blocks = BeautifulSoup (set_block(content.prettify()))
     task = blocks.find('div', class_ = 'block_task')
     return json.dumps ({'task':str(task)})
@@ -214,7 +214,7 @@ def get_prompts (pageSoup):
     try:
         content.find ('h3', class_= timer_class).replaceWith('')
     except:
-        print ('up not found')
+        print ('get_prompts() up not found')
     blocks = BeautifulSoup (set_block(content.prettify()))
     prompts = blocks.findAll('div', class_ = 'block_prompt')
     counter = 0
@@ -233,7 +233,7 @@ def get_bonuses (pageSoup):
     try:
         content.find ('h3', class_= timer_class).replaceWith('')
     except:
-        print ('up not found')
+        print ('get bonuses() up not found')
     blocks = BeautifulSoup (set_block(content.prettify()))
     bonuses = blocks.findAll('div', class_ = 'block_bonus')
     counter = 0
