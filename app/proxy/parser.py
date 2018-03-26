@@ -192,7 +192,11 @@ def get_task(pageSoup):
     """
    
     content = pageSoup.find('div', class_ = content_div_class)
-    content.find ('h3', class_= timer_class).replaceWith('')
+        print (content)
+    try:
+        content.find ('h3', class_= timer_class).replaceWith('')
+    except:
+        print (content.prettify())
     blocks = BeautifulSoup (set_block(content.prettify()))
     task = blocks.find('div', class_ = 'block_task')
     return json.dumps ({'task':str(task)})
