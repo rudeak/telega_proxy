@@ -305,6 +305,8 @@ def set_block (html):
 def rename_block (html_dic):
     """
     отримує стрінг хтмл переробений на блоки, визначає тип коного блоку:
+    block_sectors
+    block_timer
     block_task
     block_bonus
     block_prompt
