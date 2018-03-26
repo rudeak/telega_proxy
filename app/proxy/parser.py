@@ -211,10 +211,6 @@ def get_prompts (pageSoup):
     'timer': час до появи підказки
     """
     content = pageSoup.find('div', class_ = content_div_class)
-    try:
-        content.find ('h3', class_= timer_class).replaceWith('')
-    except:
-        print ('get_prompts() up not found')
     blocks = BeautifulSoup (set_block(content.prettify()))
     prompts = blocks.findAll('div', class_ = 'block_prompt')
     counter = 0
@@ -230,10 +226,6 @@ def get_prompts (pageSoup):
 def get_bonuses (pageSoup):
 
     content = pageSoup.find('div', class_ = content_div_class)
-    try:
-        content.find ('h3', class_= timer_class).replaceWith('')
-    except:
-        print ('get bonuses() up not found')
     blocks = BeautifulSoup (set_block(content.prettify()))
     bonuses = blocks.findAll('div', class_ = 'block_bonus')
     counter = 0
