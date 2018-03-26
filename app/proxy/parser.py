@@ -215,7 +215,7 @@ def get_bonuses (pageSoup):
         counter +=1
         print (bonus)
         if len(bonus.findAll('span', class_ = code_not_entered_class)) != 0:
-            jprompt.append ({'number':counter, 'text':'','bonus_text':'', 'completed':False, 'passed':True})
+            jbonus.append ({'number':counter, 'text':'','bonus_text':'', 'completed':False, 'passed':True})
         else:
             if len (bonus.findAll('h3', class_ = code_entered_class)) != 0:
                 if len (bonus.findAll('p')) != 0:
