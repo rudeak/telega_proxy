@@ -65,7 +65,7 @@ def level_parser (page):
         print (get_sectors_info (soup))
     print(get_task(soup))
     print(get_prompts (soup))
-    get_bonuses (soup)
+    print (get_bonuses (soup))
     return page
 
 def get_level_num (pageSoup):
@@ -214,11 +214,16 @@ def get_bonuses (pageSoup):
     for bonus in bonuses:
         counter +=1
         print (bonus)
-        """if len(prompt.findAll('span', class_ = code_not_entered_class)) != 0:
-            jprompt.append ({'number':counter, 'text':'', 'timer':get_timer (prompt.prettify())})
+        if len(bonus.findAll('span', class_ = code_not_entered_class)) != 0:
+            jprompt.append ({'number':counter, 'text':'','bonus_text':'', 'completed':False, 'passed':True})
         else:
-            jprompt.append ({'number':counter, 'text':str(prompt), 'timer':''})
-        """
+            if len (bonus.findAll('h3', class_ = code_entered_class)) != 0:
+                if len (bonus.findAll('p')) != 0:
+                    jbonus.append ({'number':counter, 'text':str(bonus.h3),'bonus_text':str(bonus.p), 'completed':True, 'passed':False})
+                else:
+                    jbonus.append ({'number':counter, 'text':str(bonus.h3),'bonus_text':'', 'completed':True, 'passed':False})
+            else:
+                jbonus.append ({'number':counter, 'text':str(bonus),'bonus_text':'', 'completed':False, 'passed':False})
     return json.dumps(jbonus)
 
 def get_timer (html):
@@ -279,7 +284,7 @@ def rename_block (html_dic):
         if html_dic[z] == '<div class="block">' and counter == 2:
            html_dic[z] = '<div class="block_prompt">' 
            counter = 2
-        if html_dic[z] == '<div class="block">' and html_dic[z+1].strip() == '<h3 class="'+correct_bonus_class+'">' or html_dic[z+1].strip() == '<h3 class="'+code_entered_class+'">' or html_dic[z+1].strip() == '<span class="color_dis">':
+        if html_dic[z] == '<div class="block">' and html_dic[z+1].strip() == '<h3 class="'+correct_bonus_class+'">' or html_dic[z+1].strip() == '<h3 class="'+code_entered_class+'">' or html_dic[z+1].strip() == '<span class="'+code_not_entered_class+'">':
            html_dic[z] = '<div class="block_bonus">' 
            counter = 3
     return html_dic
