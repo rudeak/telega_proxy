@@ -69,14 +69,14 @@ def level_parser (page):
     task = get_task(soup)
     prompts = get_prompts (soup)
     bonuses = get_bonuses (soup)
-    level = json.dumps({'levelinfo':levelInfo,
+    level ={'levelinfo':levelInfo,
                         'history':history, 
                         'up':time_up,
                         'sectors_count':sectors_count, 
                         'sectors_info':sectors_info,
                         'task':task,
                         'prompts':prompts,
-                        'bonuses':bonuses})
+                        'bonuses':bonuses}
     print (level)
     return set_block (page)
 
