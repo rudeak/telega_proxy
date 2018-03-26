@@ -64,7 +64,7 @@ def level_parser (page):
         print(get_sectors_count (soup))
         print (get_sectors_info (soup))
     print(get_task(soup))
-    get_prompts (soup)
+    print(get_prompts (soup))
     return page
 
 def get_level_num (pageSoup):
@@ -191,11 +191,12 @@ def get_prompts (pageSoup):
     jprompt = []
     for prompt in prompts:
         counter +=1
+        jprompt.append ({'number':counter, 'text':prompt.get_text(), 'timer':''})
         print (prompt)
         if len(prompt.findAll('span', class_ = code_not_entered_class)) != 0:
             jprompt.append ({'number':counter, 'text':'', 'timer':get_timer (prompt.prettify())})
             
-    return 1
+    return json.dumps(jprompt)
 
 def get_timer (html):
     """
