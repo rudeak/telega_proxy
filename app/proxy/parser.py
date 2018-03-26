@@ -328,7 +328,7 @@ def rename_block (html_dic):
             html_dic[z] = '<div class="block_task">' 
             counter = 2
         if html_dic[z] == '<div class="block">' and counter == 2:
-          if html_dic[z+1] != '<h3 class="'+penalty_h3_class+'">':
+          if html_dic[z+1].strip() != '<h3 class="'+penalty_h3_class+'">':
                 html_dic[z] = '<div class="block_prompt">'
                 counter = 2
           else:
