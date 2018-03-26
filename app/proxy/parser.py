@@ -213,7 +213,6 @@ def get_bonuses (pageSoup):
     jbonus = []
     for bonus in bonuses:
         counter +=1
-        print (bonus)
         if len(bonus.findAll('span', class_ = code_not_entered_class)) != 0:
             jbonus.append ({'number':counter, 'text':'','bonus_text':'', 'completed':False, 'passed':True})
         else:
