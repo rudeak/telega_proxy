@@ -274,18 +274,22 @@ def rename_block (html_dic):
     """
     counter = 0
     for z in range(0, len(html_dic)-1):
-        print (html_dic[z]+str(counter))
+        
         if html_dic[z] == '<div class="block">' and counter == 0:
             html_dic[z] = '<div class="block_sectors">' 
+            print (html_dic[z]+str(counter))
             counter = 1
         if html_dic[z] == '<div class="block">' and counter == 1:
             html_dic[z] = '<div class="block_task">' 
+            print (html_dic[z]+str(counter))
             counter = 2
         if html_dic[z] == '<div class="block">' and counter == 2:
-           html_dic[z] = '<div class="block_prompt">' 
+           html_dic[z] = '<div class="block_prompt">'
+           print (html_dic[z]+str(counter)) 
            counter = 2
         if html_dic[z] == '<div class="block">' and (html_dic[z+1].strip() == '<h3 class="'+correct_bonus_class+'">' or html_dic[z+1].strip() == '<h3 class="'+code_entered_class+'">' or html_dic[z+1].strip() == '<span class="'+code_not_entered_class+'">'):
            html_dic[z] = '<div class="block_bonus">' 
+           print (html_dic[z]+str(counter))
            counter = 3
     
     return html_dic
