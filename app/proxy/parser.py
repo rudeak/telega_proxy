@@ -73,7 +73,7 @@ def level_parser (page):
     prompts = get_prompts (soup)
     bonuses = get_bonuses (soup)
     level ={'levelinfo':levelInfo,
-                        'block', get_blockage_info (soup),
+                        'block': get_blockage_info (soup),
                         'history':history, 
                         'up':time_up,
                         'sectors_count':sectors_count, 
