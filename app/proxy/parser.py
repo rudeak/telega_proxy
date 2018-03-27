@@ -244,6 +244,12 @@ def get_penalty (pageSoup):
                 jprompt.append ({'number':counter, 'text':'', 'timer':get_timer (prompt.prettify())})
         else:
             jprompt.append ({'number':counter, 'text':str(prompt), 'timer':''})
+    prompts = blocks.findAll('div', class_ = 'block_prompt')
+    for prompt in prompts:
+        counter +=1
+        if len(prompt.findAll('span', class_ = code_not_entered_class)) != 0:
+            if str(prompt).find('Penalty') > 0:
+                jprompt.append ({'number':counter, 'text':'', 'timer':get_timer (prompt.prettify())})
     return json.dumps(jprompt)
 
 
