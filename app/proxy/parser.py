@@ -32,6 +32,7 @@ spacer = 'spacer'
 timer_marker_js = '"StartCounter":'
 timer_class ='timer'
 penalty_h3_class = 'inline'
+answer_block_div_class ='hint blockageinfo'
 
 def get_game_info(page):
     soup = BeautifulSoup(page.text)
@@ -72,6 +73,7 @@ def level_parser (page):
     prompts = get_prompts (soup)
     bonuses = get_bonuses (soup)
     level ={'levelinfo':levelInfo,
+                        'block', get_blockage_info (soup),
                         'history':history, 
                         'up':time_up,
                         'sectors_count':sectors_count, 
@@ -82,6 +84,13 @@ def level_parser (page):
                         'bonuses':bonuses}
     print (level)
     return set_block (page)
+
+def get_blockage_info (pageSoup):
+    if len(pageSoup.findAll('div', class_ = answer_block_div_class))>0:
+        return True
+    else:
+        return False
+
 
 def get_level_num (pageSoup):
     """
