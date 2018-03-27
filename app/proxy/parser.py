@@ -218,7 +218,8 @@ def get_prompts (pageSoup):
     for prompt in prompts:
         counter +=1
         if len(prompt.findAll('span', class_ = code_not_entered_class)) != 0:
-            jprompt.append ({'number':counter, 'text':'', 'timer':get_timer (prompt.prettify())})
+            if str(prompt).find('Penalty') < 0:
+                jprompt.append ({'number':counter, 'text':'', 'timer':get_timer (prompt.prettify())})
         else:
             jprompt.append ({'number':counter, 'text':str(prompt), 'timer':''})
     return json.dumps(jprompt)
