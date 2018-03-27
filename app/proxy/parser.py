@@ -78,6 +78,7 @@ def level_parser (page):
                         'sectors_info':sectors_info,
                         'task':task,
                         'prompts':prompts,
+                        'penalty':get_penalty (soup),
                         'bonuses':bonuses}
     print (level)
     return set_block (page)
@@ -223,6 +224,28 @@ def get_prompts (pageSoup):
         else:
             jprompt.append ({'number':counter, 'text':str(prompt), 'timer':''})
     return json.dumps(jprompt)
+
+def get_penalty (pageSoup):
+    """
+    отримує суп сторінки повертає json
+    'number': номер підказки
+    'text': хтмл підказки
+    'timer': час до появи підказки
+    """
+    content = pageSoup.find('div', class_ = content_div_class)
+    blocks = BeautifulSoup (set_block(content.prettify()))
+    prompts = blocks.findAll('div', class_ = 'block_penalty')
+    counter = 0
+    jprompt = []
+    for prompt in prompts:
+        counter +=1
+        if len(prompt.findAll('span', class_ = code_not_entered_class)) != 0:
+            if str(prompt).find('Penalty') > 0:
+                jprompt.append ({'number':counter, 'text':'', 'timer':get_timer (prompt.prettify())})
+        else:
+            jprompt.append ({'number':counter, 'text':str(prompt), 'timer':''})
+    return json.dumps(jprompt)
+
 
 def get_bonuses (pageSoup):
 
