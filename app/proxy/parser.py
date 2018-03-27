@@ -377,10 +377,19 @@ def rename_block (html_dic):
 
 def get_code_date(inStr):
     # ValueError: time data '2018 4:29:58 PM' does not match format '%Y %d %m %H:%M:%S'
-    tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
-    tmp_date_str = tmp_date_str.replace ('/', ' ')
-    try:
-        date = datetime.strptime (tmp_date_str, '%Y %d %m %H:%M:%S')
-    except:
-        return 0
-    return time.mktime (date.timetuple())
+    if inStr.find ('/') > 0:
+        tmp_date_str = str(datetime.now().year)+'/'+inStr.split()[0]+' '+ inStr.split()[1]
+        tmp_date_str = tmp_date_str.replace ('/', ' ')
+        try:
+            date = datetime.strptime (tmp_date_str, '%Y %d %m %H:%M:%S')
+        except:
+            return 0
+        return time.mktime (date.timetuple())
+    else:
+        tmp_date_str = str(datetime.now().year)+' '+ str(datetime.now().day)+' '+str(datetime.now().month)+' '+ inStr.split()[0]+' '+ inStr.split()[1]
+        try:
+            date = datetime.strptime (tmp_date_str, '%Y %d %m %I:%M:%S %p')
+        except:
+            return 0
+        return time.mktime (date.timetuple())
+
