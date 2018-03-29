@@ -17,7 +17,7 @@ class User(db.Model):
     login = db.Column(db.String(64), index=True, unique=True)
     password = db.Column(db.String(120), index=True, unique=False)
     email = db.Column(db.String(120), index=True, unique=True)
-    role = db.Column(db.Smalldb.Integer, default=ROLE_USER)
+    role = db.Column(db.SmallInteger, default=ROLE_USER)
 
     def __init__(self, login, email, password, role):
         self.login = login
