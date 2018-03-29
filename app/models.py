@@ -250,7 +250,7 @@ class EnTask(db.Model):
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
-    en_task_text = db.Column(TEXT)
+    en_task_text = db.Column(db.Text)
 
     enlvl = db.relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enTask")
 
@@ -271,7 +271,7 @@ class EnPrompt(db.Model):
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_level_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_prompt_no = db.Column(db.SmallInteger)
-    en_prompt_text = db.Column(TEXT)
+    en_prompt_text = db.Column(db.Text)
     en_prompt_time = db.Column(DOUBLE)
 
     enlvl = db.relationship("EnLvl", foreign_keys=[en_level_no], backref="enPrompt")
@@ -293,7 +293,7 @@ class EnBonu(db.Model):
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_bonus_no = db.Column(db.Integer)
-    en_bonus_text = db.Column(TEXT)
+    en_bonus_text = db.Column(db.Text)
 
     enlvl = db.relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enBonus")
 
@@ -314,7 +314,7 @@ class EnPenalty(db.Model):
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_penalty_no = db.Column(db.Integer)
-    en_penalty_text = db.Column(TEXT)
+    en_penalty_text = db.Column(db.Text)
 
     enlvl = db.relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enPenalty")
 
