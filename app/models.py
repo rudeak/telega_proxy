@@ -212,7 +212,7 @@ class EnGameJson( db.Model):
     def __str__(self):
         return "<EnJson(%(en_game_id)s, %(id)s)>" % self.__dict__
     
-    def __init__ (json):
+    def __init__ (self, json):
         self.json = json
 
 
