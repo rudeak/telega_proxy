@@ -204,7 +204,7 @@ class GameInfo (db.Model):
 
 class EnGameJson( db.Model):
     id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
-    json = db.Column (db.JSON)
+    json = db.Column (db.Json)
     
     def __repr__(self):
         return self.__str__()
