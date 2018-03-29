@@ -205,10 +205,7 @@ class GameInfo (db.Model):
 
 class EnGame(db.Model):
 
-    __tablename__ = 'en_game'
-    __table_args__ = (
-        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
-    )
+
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)
@@ -222,10 +219,7 @@ class EnGame(db.Model):
 
 class EnLvl(db.Model):
 
-    __tablename__ = 'en_lvl'
-    __table_args__ = (
-        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
-    )
+
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer, db.ForeignKey("en_game.en_game_id"), index=True)
@@ -243,10 +237,7 @@ class EnLvl(db.Model):
 
 class EnTask(db.Model):
 
-    __tablename__ = 'en_task'
-    __table_args__ = (
-        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
-    )
+
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
@@ -263,10 +254,7 @@ class EnTask(db.Model):
 
 class EnPrompt(db.Model):
 
-    __tablename__ = 'en_prompt'
-    __table_args__ = (
-        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
-    )
+
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_level_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
@@ -285,10 +273,7 @@ class EnPrompt(db.Model):
 
 class EnBonu(db.Model):
 
-    __tablename__ = 'en_bonus'
-    __table_args__ = (
-        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
-    )
+
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
@@ -306,10 +291,7 @@ class EnBonu(db.Model):
 
 class EnPenalty(db.Model):
 
-    __tablename__ = 'en_penalty'
-    __table_args__ = (
-        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
-    )
+
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
