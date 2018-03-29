@@ -210,8 +210,8 @@ class EnGame(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_game_id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)
+    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_game_id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)
 
     def __repr__(self):
         return self.__str__()
@@ -227,10 +227,10 @@ class EnLvl(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_game_id = Column(INTEGER, ForeignKey("en_game.en_game_id"), index=True)
-    en_lvl_id = Column(INTEGER)
-    en_lvl_no = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)
+    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_game_id = db.Column(INTEGER, ForeignKey("en_game.en_game_id"), index=True)
+    en_lvl_id = db.Column(INTEGER)
+    en_lvl_no = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)
 
     engame = relationship("EnGame", foreign_keys=[en_game_id], backref="enLvl")
 
@@ -248,9 +248,9 @@ class EnTask(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
-    en_task_text = Column(TEXT)
+    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_lvl_no = db.Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_task_text = db.Column(TEXT)
 
     enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enTask")
 
@@ -268,11 +268,11 @@ class EnPrompt(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_level_no = Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
-    en_prompt_no = Column(SMALLINT)
-    en_prompt_text = Column(TEXT)
-    en_prompt_time = Column(DOUBLE)
+    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_level_no = db.Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_prompt_no = db.Column(SMALLINT)
+    en_prompt_text = db.Column(TEXT)
+    en_prompt_time = db.Column(DOUBLE)
 
     enlvl = relationship("EnLvl", foreign_keys=[en_level_no], backref="enPrompt")
 
@@ -290,10 +290,10 @@ class EnBonu(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
-    en_bonus_no = Column(INTEGER)
-    en_bonus_text = Column(TEXT)
+    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_lvl_no = db.Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_bonus_no = db.Column(INTEGER)
+    en_bonus_text = db.Column(TEXT)
 
     enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enBonus")
 
@@ -311,10 +311,10 @@ class EnPenalty(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
-    en_penalty_no = Column(INTEGER)
-    en_penalty_text = Column(TEXT)
+    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_lvl_no = db.Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_penalty_no = db.Column(INTEGER)
+    en_penalty_text = db.Column(TEXT)
 
     enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enPenalty")
 
