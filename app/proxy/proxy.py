@@ -75,7 +75,7 @@ def en_game_proxy_post_root(id):
         #for k,v in request.form.to_dict():
         #    post_data[k] = v.encode('utf-8')
         level_parser (change_href(r.get (url),id))
-        return change_href(r.post (url, request.form.to_dict()),id))
+        return change_href(r.post (url, request.form.to_dict()),id)
     
 
 
