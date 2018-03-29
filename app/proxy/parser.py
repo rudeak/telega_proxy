@@ -86,14 +86,16 @@ def level_parser (page):
                         'prompts':prompts,
                         'penalty':get_penalty (soup),
                         'bonuses':bonuses}
-    print (level)
+    #print (level)
     dbJson = EnGameJson()
     dbJson.json = level
     db.session.add (dbJson)
     try:
         db.session.commit()
+        print ('added')
     except:
         db.session.rollback()
+        print ('not added')
     for result in EnGameJson.query.all():
         print (result)
     return {'html':set_block (page),'json':level}
