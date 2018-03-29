@@ -90,12 +90,12 @@ def level_parser (page):
     dbJson = EnGameJson(level)
     #dbJson.json = 
     db.session.add (dbJson)
-    try:
+    #try:
         db.session.commit()
         print ('added')
-    except:
-        db.session.rollback()
-        print ('not added')
+    #except:
+    #    db.session.rollback()
+    #    print ('not added')
     for result in EnGameJson.query.all():
         print (result)
     return {'html':set_block (page),'json':level}
