@@ -198,3 +198,129 @@ class GameInfo (db.Model):
         self.game_start = game_start
         self.game_owner = game_owner
         
+#--------------------------------
+# моделі сценарія гри
+#--------------------------------
+
+
+class EnGame(db.Model):
+
+    __tablename__ = 'en_game'
+    __table_args__ = (
+        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
+    )
+
+    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_game_id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnGame(%(en_game_id)s, %(id)s)>" % self.__dict__
+
+
+class EnLvl(db.Model):
+
+    __tablename__ = 'en_lvl'
+    __table_args__ = (
+        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
+    )
+
+    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_game_id = Column(INTEGER, ForeignKey("en_game.en_game_id"), index=True)
+    en_lvl_id = Column(INTEGER)
+    en_lvl_no = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)
+
+    engame = relationship("EnGame", foreign_keys=[en_game_id], backref="enLvl")
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnLvl(%(id)s, %(en_lvl_no)s)>" % self.__dict__
+
+
+class EnTask(db.Model):
+
+    __tablename__ = 'en_task'
+    __table_args__ = (
+        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
+    )
+
+    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_lvl_no = Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_task_text = Column(TEXT)
+
+    enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enTask")
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnTask(%(id)s)>" % self.__dict__
+
+
+class EnPrompt(db.Model):
+
+    __tablename__ = 'en_prompt'
+    __table_args__ = (
+        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
+    )
+
+    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_level_no = Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_prompt_no = Column(SMALLINT)
+    en_prompt_text = Column(TEXT)
+    en_prompt_time = Column(DOUBLE)
+
+    enlvl = relationship("EnLvl", foreign_keys=[en_level_no], backref="enPrompt")
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnPrompt(%(id)s)>" % self.__dict__
+
+
+class EnBonu(db.Model):
+
+    __tablename__ = 'en_bonus'
+    __table_args__ = (
+        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
+    )
+
+    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_lvl_no = Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_bonus_no = Column(INTEGER)
+    en_bonus_text = Column(TEXT)
+
+    enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enBonus")
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnBonu(%(id)s)>" % self.__dict__
+
+
+class EnPenalty(db.Model):
+
+    __tablename__ = 'en_penalty'
+    __table_args__ = (
+        {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
+    )
+
+    id = Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_lvl_no = Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_penalty_no = Column(INTEGER)
+    en_penalty_text = Column(TEXT)
+
+    enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enPenalty")
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnPenalty(%(id)s)>" % self.__dict__
+
