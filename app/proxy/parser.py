@@ -51,7 +51,7 @@ def get_game_info(page):
 def change_href (page, id):
     soup = BeautifulSoup(page.text)
     soup.prettify()
-    soup.find('div', class_ = "header").replaceWith('')
+    #soup.find('div', class_ = "header").replaceWith('')
     for ref in soup.findAll('a', href=True):
         if ref['href'][0] == '/':
             ref['href'] = '/proxy/'+str(id)+ref['href']
@@ -84,7 +84,7 @@ def level_parser (page):
                         'penalty':get_penalty (soup),
                         'bonuses':bonuses}
     print (level)
-    return set_block (page)
+    return {'html':set_block (page),'json':level}
 
 def get_blockage_info (pageSoup):
     if len(pageSoup.findAll('div', class_ = answer_block_div_class))>0:
