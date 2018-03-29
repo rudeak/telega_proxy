@@ -209,8 +209,8 @@ class EnGame(db.Model):
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
-    levles = db.relationship ("EnLvl")
-
+    proxy_key = db.Column(db.Integer)
+    
     def __repr__(self):
         return self.__str__()
 
@@ -223,9 +223,9 @@ class EnLvl(db.Model):
 
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_game_id = db.Column(db.Integer, db.ForeignKey('EnGame.id'))
+    en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
-    en_lvl_no = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)
+    en_lvl_no = db.Column(db.Integer)
 
     
 
@@ -241,10 +241,9 @@ class EnTask(db.Model):
 
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_level_id = db.Column(db.Integer)
     en_task_text = db.Column(db.Text)
-
-    enlvl = db.relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enTask")
+   
 
     def __repr__(self):
         return self.__str__()
@@ -258,12 +257,12 @@ class EnPrompt(db.Model):
 
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_level_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_level_id = db.Column(db.Integer)
     en_prompt_no = db.Column(db.SmallInteger)
     en_prompt_text = db.Column(db.Text)
     en_prompt_time = db.Column(db.Float)
 
-    enlvl = db.relationship("EnLvl", foreign_keys=[en_level_no], backref="enPrompt")
+    
 
     def __repr__(self):
         return self.__str__()
@@ -277,11 +276,11 @@ class EnBonus(db.Model):
 
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_lvl_id = db.Column(db.Integer)
     en_bonus_no = db.Column(db.Integer)
     en_bonus_text = db.Column(db.Text)
 
-    enlvl = db.relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enBonus")
+    
 
     def __repr__(self):
         return self.__str__()
@@ -295,11 +294,11 @@ class EnPenalty(db.Model):
 
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_lvl_id = db.Column(db.Integer)
     en_penalty_no = db.Column(db.Integer)
     en_penalty_text = db.Column(db.Text)
 
-    enlvl = db.relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enPenalty")
+    
 
     def __repr__(self):
         return self.__str__()
