@@ -91,8 +91,8 @@ def level_parser (page):
     #dbJson.json = 
     db.session.add (dbJson)
     #try:
-        db.session.commit()
-        print ('added')
+    db.session.commit()
+    print ('added')
     #except:
     #    db.session.rollback()
     #    print ('not added')
