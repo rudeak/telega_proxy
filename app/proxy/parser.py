@@ -87,8 +87,8 @@ def level_parser (page):
                         'penalty':get_penalty (soup),
                         'bonuses':bonuses}
     #print (level)
-    dbJson = EnGameJson()
-    dbJson.json = level
+    dbJson = EnGameJson(level)
+    #dbJson.json = 
     db.session.add (dbJson)
     try:
         db.session.commit()
