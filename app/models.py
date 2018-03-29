@@ -272,7 +272,7 @@ class EnPrompt(db.Model):
     en_level_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_prompt_no = db.Column(db.SmallInteger)
     en_prompt_text = db.Column(db.Text)
-    en_prompt_time = db.Column(DOUBLE)
+    en_prompt_time = db.Column(db.Float)
 
     enlvl = db.relationship("EnLvl", foreign_keys=[en_level_no], backref="enPrompt")
 
