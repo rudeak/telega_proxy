@@ -202,6 +202,16 @@ class GameInfo (db.Model):
 # моделі сценарія гри
 #--------------------------------
 
+class EnGameJson( db.Model):
+    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    json = db.Column (db.Text)
+    
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnJson(%(en_game_id)s, %(id)s)>" % self.__dict__
+
 
 class EnGame(db.Model):
 

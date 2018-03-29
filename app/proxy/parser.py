@@ -1,5 +1,7 @@
 import json
 import time
+from app.models import EnGameJson
+from sqlalchemy.orm import sessionmaker
 from bs4 import BeautifulSoup
 from datetime import datetime
 
@@ -84,6 +86,13 @@ def level_parser (page):
                         'penalty':get_penalty (soup),
                         'bonuses':bonuses}
     print (level)
+    dbJson = EnGameJson()
+    dbJson.json = level
+    db.session.add (dbJson)
+    try:
+        db.session.commit()
+    except:
+        db.session.rollback()
     return {'html':set_block (page),'json':level}
 
 def get_blockage_info (pageSoup):
