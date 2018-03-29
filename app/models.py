@@ -208,7 +208,8 @@ class EnGame(db.Model):
 
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_game_id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)
+    en_game_id = db.Column(db.Integer)
+    levles = db.relationship (EnLvl)
 
     def __repr__(self):
         return self.__str__()
@@ -222,11 +223,11 @@ class EnLvl(db.Model):
 
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_game_id = db.Column(db.Integer, db.ForeignKey("en_game.en_game_id"), index=True)
+    en_game_id = Column(db.Integer, db.ForeignKey(EnGame.en_game_id))
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)
 
-    engame = db.relationship("EnGame", foreign_keys=[en_game_id], backref="enLvl")
+    
 
     def __repr__(self):
         return self.__str__()
@@ -271,7 +272,7 @@ class EnPrompt(db.Model):
         return "<EnPrompt(%(id)s)>" % self.__dict__
 
 
-class EnBonu(db.Model):
+class EnBonus(db.Model):
 
 
 
@@ -286,7 +287,7 @@ class EnBonu(db.Model):
         return self.__str__()
 
     def __str__(self):
-        return "<EnBonu(%(id)s)>" % self.__dict__
+        return "<EnBonus(%(id)s)>" % self.__dict__
 
 
 class EnPenalty(db.Model):
