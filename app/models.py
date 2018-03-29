@@ -232,7 +232,7 @@ class EnLvl(db.Model):
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)
 
-    engame = relationship("EnGame", foreign_keys=[en_game_id], backref="enLvl")
+    engame = db.relationship("EnGame", foreign_keys=[en_game_id], backref="enLvl")
 
     def __repr__(self):
         return self.__str__()
@@ -252,7 +252,7 @@ class EnTask(db.Model):
     en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_task_text = db.Column(TEXT)
 
-    enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enTask")
+    enlvl = db.relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enTask")
 
     def __repr__(self):
         return self.__str__()
@@ -274,7 +274,7 @@ class EnPrompt(db.Model):
     en_prompt_text = db.Column(TEXT)
     en_prompt_time = db.Column(DOUBLE)
 
-    enlvl = relationship("EnLvl", foreign_keys=[en_level_no], backref="enPrompt")
+    enlvl = db.relationship("EnLvl", foreign_keys=[en_level_no], backref="enPrompt")
 
     def __repr__(self):
         return self.__str__()
@@ -295,7 +295,7 @@ class EnBonu(db.Model):
     en_bonus_no = db.Column(db.Integer)
     en_bonus_text = db.Column(TEXT)
 
-    enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enBonus")
+    enlvl = db.relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enBonus")
 
     def __repr__(self):
         return self.__str__()
@@ -316,7 +316,7 @@ class EnPenalty(db.Model):
     en_penalty_no = db.Column(db.Integer)
     en_penalty_text = db.Column(TEXT)
 
-    enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enPenalty")
+    enlvl = db.relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enPenalty")
 
     def __repr__(self):
         return self.__str__()
