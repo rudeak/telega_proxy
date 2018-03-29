@@ -13,11 +13,11 @@ TELEGA_SUPERUSER = 2
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.db.Integer, primary_key=True)
     login = db.Column(db.String(64), index=True, unique=True)
     password = db.Column(db.String(120), index=True, unique=False)
     email = db.Column(db.String(120), index=True, unique=True)
-    role = db.Column(db.SmallInteger, default=ROLE_USER)
+    role = db.Column(db.Smalldb.Integer, default=ROLE_USER)
 
     def __init__(self, login, email, password, role):
         self.login = login
@@ -45,11 +45,11 @@ class User(db.Model):
 
 
 class Gamers (db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.db.Integer, primary_key=True)
     login = db.Column(db.String(64), index=True, unique=False)
     password = db.Column(db.String(120), index=True, unique=False)
     comment = db.Column(db.String(120), index=True, unique=False)
-    creator_id = db.Column(db.Integer)
+    creator_id = db.Column(db.db.Integer)
 
     def __repr__(self):
         return '<User %r>' % (self.login)
@@ -62,12 +62,12 @@ class Gamers (db.Model):
 
 
 class Telegram_Users (db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.db.Integer, primary_key=True)
     tg_login = db.Column(db.String(64), index=True, unique=True)
     tg_id = db.Column(db.String(64), index=True, unique=True)
-    telega_id = db.Column(db.Integer, index=True, unique=False)
-    telega_role = db.Column(db.SmallInteger, default=TELEGA_USER)
-    creator_id = db.Column(db.Integer)
+    telega_id = db.Column(db.db.Integer, index=True, unique=False)
+    telega_role = db.Column(db.Smalldb.Integer, default=TELEGA_USER)
+    creator_id = db.Column(db.db.Integer)
 
     def __repr__(self):
         return '<User %r>' % (self.tg_login)
@@ -81,11 +81,11 @@ class Telegram_Users (db.Model):
 
 
 class Chat (db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    tg_id = db.Column(db.Integer, index=True, unique=True)
+    id = db.Column(db.db.Integer, primary_key=True)
+    tg_id = db.Column(db.db.Integer, index=True, unique=True)
     name = db.Column(db.String(120), index=True, unique=False)
     avatar = db.Column(db.String(120), index=True, unique=False)
-    game_id = db.Column(db.Integer)
+    game_id = db.Column(db.db.Integer)
     chat_date = db.Column(db.DateTime)
 
     def __repr__(self):
@@ -100,16 +100,16 @@ class Chat (db.Model):
 
 
 class Chat_opt (db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    chat = db.Column(db.Integer, unique=True)
+    id = db.Column(db.db.Integer, primary_key=True)
+    chat = db.Column(db.db.Integer, unique=True)
     proxy = db.Column(db.Boolean, default=True)
     multi_proxy = db.Column(db.Boolean, default=False)
     bonuses = db.Column(db.Boolean, default=True)
-    bonuses_count = db.Column(db.Integer, default=5)
+    bonuses_count = db.Column(db.db.Integer, default=5)
     codes = db.Column(db.Boolean, default=True)
     codes_deny = db.Column(db.Boolean, default=True)
     vote = db.Column(db.Boolean, default=True)
-    vote_percent = db.Column(db.Integer, default=30)
+    vote_percent = db.Column(db.db.Integer, default=30)
 
     def __repr__(self):
         return '<Chat %r>' % (self.chat)
@@ -127,14 +127,14 @@ class Chat_opt (db.Model):
 
 
 class Game (db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.db.Integer, primary_key=True)
     game_date = db.Column(db.DateTime)
     game_domain = db.Column(db.String(120))
-    game_id = db.Column(db.Integer)
+    game_id = db.Column(db.db.Integer)
     game_name = db.Column(db.String(120), index=True, unique=False)
-    gamer = db.Column(db.Integer)
-    chat = db.Column(db.Integer)
-    owner = db.Column(db.Integer)
+    gamer = db.Column(db.db.Integer)
+    chat = db.Column(db.db.Integer)
+    owner = db.Column(db.db.Integer)
 
     def __repr__(self):
         return '<Game %r>' % (self.game_name)
@@ -150,7 +150,7 @@ class Game (db.Model):
 
 
 class ArchiveGame (Game):
-    #    id = db.Column(db.Integer, primary_key = True)
+    #    id = db.Column(db.db.Integer, primary_key = True)
     achive_date = db.Column(db.DateTime)
 
     def __repr__(self):
@@ -161,10 +161,10 @@ class ArchiveGame (Game):
 
 
 class Proxy (db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    game = db.Column(db.Integer)
-    chat = db.Column(db.Integer)
-    key = db.Column(db.Integer)
+    id = db.Column(db.db.Integer, primary_key=True)
+    game = db.Column(db.db.Integer)
+    chat = db.Column(db.db.Integer)
+    key = db.Column(db.db.Integer)
     creation_date = db.Column(db.DateTime)
 
     def __repr__(self):
@@ -181,12 +181,12 @@ class Proxy (db.Model):
         self.key = key
     
 class GameInfo (db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    game_id = db.Column(db.Integer)
+    id = db.Column(db.db.Integer, primary_key=True)
+    game_id = db.Column(db.db.Integer)
     game_name = db.Column(db.String(120), index=True, unique=False)
     game_description = db.Column (db.Text)
     game_start = db.Column (db.DateTime)
-    game_owner = db.Column(db.Integer)
+    game_owner = db.Column(db.db.Integer)
     
     def __repr__(self):
         return '<Game name %r>' % (self.game_name)
@@ -210,8 +210,8 @@ class EnGame(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_game_id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)
+    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_game_id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)
 
     def __repr__(self):
         return self.__str__()
@@ -227,10 +227,10 @@ class EnLvl(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_game_id = db.Column(INTEGER, ForeignKey("en_game.en_game_id"), index=True)
-    en_lvl_id = db.Column(INTEGER)
-    en_lvl_no = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)
+    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_game_id = db.Column(db.Integer, ForeignKey("en_game.en_game_id"), index=True)
+    en_lvl_id = db.Column(db.Integer)
+    en_lvl_no = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)
 
     engame = relationship("EnGame", foreign_keys=[en_game_id], backref="enLvl")
 
@@ -248,8 +248,8 @@ class EnTask(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = db.Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_lvl_no = db.Column(db.Integer, ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_task_text = db.Column(TEXT)
 
     enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enTask")
@@ -268,8 +268,8 @@ class EnPrompt(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_level_no = db.Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_level_no = db.Column(db.Integer, ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_prompt_no = db.Column(SMALLINT)
     en_prompt_text = db.Column(TEXT)
     en_prompt_time = db.Column(DOUBLE)
@@ -290,9 +290,9 @@ class EnBonu(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = db.Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
-    en_bonus_no = db.Column(INTEGER)
+    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_lvl_no = db.Column(db.Integer, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_bonus_no = db.Column(db.Integer)
     en_bonus_text = db.Column(TEXT)
 
     enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enBonus")
@@ -311,9 +311,9 @@ class EnPenalty(db.Model):
         {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
     )
 
-    id = db.Column(INTEGER, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = db.Column(INTEGER, ForeignKey("en_lvl.en_lvl_no"), index=True)
-    en_penalty_no = db.Column(INTEGER)
+    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_lvl_no = db.Column(db.Integer, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_penalty_no = db.Column(db.Integer)
     en_penalty_text = db.Column(TEXT)
 
     enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enPenalty")
