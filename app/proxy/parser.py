@@ -51,6 +51,7 @@ def get_game_info(page):
 def change_href (page, id):
     soup = BeautifulSoup(page.text)
     soup.prettify()
+    soup.find('div', class_ = "header").replaceWith('')
     for ref in soup.findAll('a', href=True):
         if ref['href'][0] == '/':
             ref['href'] = '/proxy/'+str(id)+ref['href']

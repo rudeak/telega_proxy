@@ -306,3 +306,19 @@ class EnPenalty(db.Model):
     def __str__(self):
         return "<EnPenalty(%(id)s)>" % self.__dict__
 
+class EnLog(db.Model):
+
+    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    en_lvl_id = db.Column(db.Integer)
+    en_gamer = db.Column(db.String)
+    en_answer = db.Column (db.String)
+    en_is_answer = db.Column (db.Boolean)
+    en_is_correct = db.Column (db.Boolean)
+    en_date = db.Column (db.Float)
+   
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnLog(%(id)s)>" % self.__dict__

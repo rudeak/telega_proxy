@@ -54,7 +54,7 @@ def en_game_proxy_get(id,path):
     r = get_session (id)
     url = 'http://'+get_domain(id)+'/'+path
     level_parser (change_href(r.get (url),id))
-    return change_href(r.get (url),id)
+    return level_parser (change_href(r.get (url),id))
 
 @proxy.route('/<id>/<path:path>', methods=['POST'])
 @login_required
@@ -75,7 +75,7 @@ def en_game_proxy_post_root(id):
         #for k,v in request.form.to_dict():
         #    post_data[k] = v.encode('utf-8')
         level_parser (change_href(r.get (url),id))
-        return change_href(r.post (url, request.form.to_dict()),id)
+        return level_parser(change_href(r.post (url, request.form.to_dict()),id))
     
 
 
