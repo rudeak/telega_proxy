@@ -44,8 +44,8 @@ def proxy_creator(id):
 def en_game_proxy_root(id):
     r = get_session (id)
     url = 'http://'+get_domain(id)+'/gameengines/encounter/play/'+get_game_id(id)
-    level_parser (change_href(r.get (url),id))
-    return level_parser (change_href(r.get (url),id))['html'] #change_href(r.get (url),id)
+    #level_parser (change_href(r.get (url),id))
+    return change_href(r.get (url),id) #level_parser (change_href(r.get (url),id))['html'] #
 
 
 @proxy.route('/<id>/<path:path>', methods=['GET'])
