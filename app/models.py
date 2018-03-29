@@ -249,7 +249,7 @@ class EnTask(db.Model):
     )
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = db.Column(db.Integer, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_task_text = db.Column(TEXT)
 
     enlvl = relationship("EnLvl", foreign_keys=[en_lvl_no], backref="enTask")
