@@ -228,7 +228,7 @@ class EnLvl(db.Model):
     )
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_game_id = db.Column(db.Integer, ForeignKey("en_game.en_game_id"), index=True)
+    en_game_id = db.Column(db.Integer, db.ForeignKey("en_game.en_game_id"), index=True)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)
 
@@ -269,7 +269,7 @@ class EnPrompt(db.Model):
     )
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_level_no = db.Column(db.Integer, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_level_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_prompt_no = db.Column(db.SmallInteger)
     en_prompt_text = db.Column(TEXT)
     en_prompt_time = db.Column(DOUBLE)
@@ -291,7 +291,7 @@ class EnBonu(db.Model):
     )
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = db.Column(db.Integer, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_bonus_no = db.Column(db.Integer)
     en_bonus_text = db.Column(TEXT)
 
@@ -312,7 +312,7 @@ class EnPenalty(db.Model):
     )
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_lvl_no = db.Column(db.Integer, ForeignKey("en_lvl.en_lvl_no"), index=True)
+    en_lvl_no = db.Column(db.Integer, db.ForeignKey("en_lvl.en_lvl_no"), index=True)
     en_penalty_no = db.Column(db.Integer)
     en_penalty_text = db.Column(TEXT)
 
