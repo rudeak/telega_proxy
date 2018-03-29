@@ -66,7 +66,7 @@ class Telegram_Users (db.Model):
     tg_login = db.Column(db.String(64), index=True, unique=True)
     tg_id = db.Column(db.String(64), index=True, unique=True)
     telega_id = db.Column(db.Integer, index=True, unique=False)
-    telega_role = db.Column(db.Smalldb.Integer, default=TELEGA_USER)
+    telega_role = db.Column(db.SmallInteger, default=TELEGA_USER)
     creator_id = db.Column(db.Integer)
 
     def __repr__(self):
@@ -270,7 +270,7 @@ class EnPrompt(db.Model):
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_level_no = db.Column(db.Integer, ForeignKey("en_lvl.en_lvl_no"), index=True)
-    en_prompt_no = db.Column(SMALLINT)
+    en_prompt_no = db.Column(db.SmallInteger)
     en_prompt_text = db.Column(TEXT)
     en_prompt_time = db.Column(DOUBLE)
 
