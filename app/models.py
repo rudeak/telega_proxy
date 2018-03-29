@@ -223,7 +223,7 @@ class EnLvl(db.Model):
 
 
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    en_game_id = db.Column(db.Integer, db.ForeignKey('EnGame.en_game_id'))
+    en_game_id = db.Column(db.Integer, db.ForeignKey('EnGame.id'))
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)
 
