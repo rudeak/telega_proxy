@@ -43,7 +43,7 @@ def en_game_logger (proxy_key, page_json):
 
 def en_level_info_updater (lvl, pageJson):
     lvl.en_answer_block = pageJson['block']
-    sectors_counter = json.loads(pageJson['sectors'])
+    sectors_counter = json.loads(pageJson['sectors_count'])
     lvl.en_sectors_count = sectors_counter['all']
     en_sectors_need =  sectors_counter ['need']
     sectors_counter = json.loads ['sectors_info']
