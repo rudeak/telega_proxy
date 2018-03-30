@@ -6,7 +6,7 @@ import app
 from app.proxy.parser import get_game_info, change_href, level_parser
 from app.game_managment import edit_game_name, get_domain, get_game_id
 from app.models import Proxy
-from game_controller import en_game_logger
+from app.proxy.game_controller import en_game_logger
 
 
 def get_session(proxy):
