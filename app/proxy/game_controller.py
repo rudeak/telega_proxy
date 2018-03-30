@@ -37,3 +37,6 @@ def en_game_logger (proxy_key, page_json):
 
     return 1
 
+def en_level_info_updater (lvl):
+    return None
+

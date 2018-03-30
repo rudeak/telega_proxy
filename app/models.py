@@ -243,7 +243,10 @@ class EnLvl(db.Model):
     en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer)
-
+    en_answer_block = db.Column(db.Boolean)
+    en_sectors_count = db.Column(db.Integer)
+    en_sectors_need = db.Column(db.Integer)
+    en_sectors_closed = db.Column(db.Integer)
     
 
     def __repr__(self):
