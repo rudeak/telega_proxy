@@ -1,6 +1,6 @@
 import json
 from app import db
-from app.models import EnGame
+from app.models import EnGame, EnLvl
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from app.game_managment import edit_game_name, get_domain, get_game_id
@@ -23,5 +23,8 @@ def en_game_logger (proxy_key, page_json):
             db.session.rollback()
     levelInfo = json.loads(page_json ['levelinfo'])
     print (levelInfo['levelId'])
+    if EnLvl.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNo']).count() == 0:
+        print ('new level found')
+
     return 1
 
