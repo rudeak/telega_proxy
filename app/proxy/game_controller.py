@@ -34,7 +34,7 @@ def en_game_logger (proxy_key, page_json):
         except:
             db.session.rollback()
             print('помилка створення новго рівня гри')
-    en_level_info_updater (lvl, pageJson)
+    en_level_info_updater (lvl, page_json)
     return 1
 
 def en_level_info_updater (lvl, pageJson):
@@ -44,6 +44,9 @@ def en_level_info_updater (lvl, pageJson):
     en_sectors_need =  sectors_counter ['need']
     sectors_counter = json.loads ['sectors_info']
     print (sectors_counter)
+    for sector in sectors_counter:
+        print (sector)
     en_sectors_closed = 0
+    print(lvl)
     return None
 
