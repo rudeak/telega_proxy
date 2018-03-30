@@ -220,7 +220,7 @@ class EnGame(db.Model):
 
 
 
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     proxy_key = db.Column(db.Integer)
     
@@ -234,12 +234,12 @@ class EnGame(db.Model):
         self.en_game_id = en_game_id
         self.proxy_key = proxy_key
 
-"""
+
 class EnLvl(db.Model):
 
 
 
-    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer)
@@ -252,7 +252,12 @@ class EnLvl(db.Model):
     def __str__(self):
         return "<EnLvl(%(id)s, %(en_lvl_no)s)>" % self.__dict__
 
+    def __init__(self, en_game_id, en_lvl_id, en_lvl_no):
+        self.en_game_id = en_game_id
+        self.en_lvl_id = en_lvl_id
+        self.en_lvl_no = en_lvl_no
 
+"""
 class EnTask(db.Model):
 
 
