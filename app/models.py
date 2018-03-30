@@ -339,4 +339,4 @@ class EnLog(db.Model):
 
     def __str__(self):
         return "<EnLog(%(id)s)>" % self.__dict__
-""""
+"""
