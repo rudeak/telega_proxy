@@ -234,7 +234,7 @@ class EnGame(db.Model):
         self.en_game_id = en_game_id
         self.proxy_key = proxy_key
 
-
+"""
 class EnLvl(db.Model):
 
 
@@ -339,3 +339,4 @@ class EnLog(db.Model):
 
     def __str__(self):
         return "<EnLog(%(id)s)>" % self.__dict__
+""""
