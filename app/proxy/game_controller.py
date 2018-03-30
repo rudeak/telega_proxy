@@ -38,7 +38,12 @@ def en_game_logger (proxy_key, page_json):
     else:
         lvl = EnLvl.query.filter_by(en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).first()
         en_level_info_updater (lvl, page_json)
-    
+        print (lvl.en_sectors_need)
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            print ('Помилка оновлення даних рівня')
     return 1
 
 def en_level_info_updater (lvl, pageJson):
@@ -48,9 +53,11 @@ def en_level_info_updater (lvl, pageJson):
     en_sectors_need =  sectors_counter ['need']
     sectors_counter = json.loads (pageJson['sectors_info'])
     print (sectors_counter)
+    closed = 0
     for sector in sectors_counter:
-        print (sector)
-    en_sectors_closed = 0
-    print(lvl)
+        if sector['entered']:
+            closed +=1
+    en_sectors_closed = closed
+    print(lvl.en_sectors_closed)
     return None
 
