@@ -96,8 +96,8 @@ def level_parser (page):
     except:
         db.session.rollback()
         print ('not added')
-    for result in EnGameJson.query.all():
-        print (result)
+    #for result in EnGameJson.query.all():
+    #    print (result)
     return {'html':set_block (page),'json':level}
 
 def get_blockage_info (pageSoup):
@@ -231,7 +231,7 @@ def get_task(pageSoup):
     content = pageSoup.find('div', class_ = content_div_class)
     blocks = BeautifulSoup (set_block(content.prettify()))
     task = blocks.find('div', class_ = 'block_task')
-    print ('task = '+ str(blocks))
+    #print ('task = '+ str(blocks))
     return json.dumps ({'task':str(task)})
 
 def get_prompts (pageSoup):
@@ -366,7 +366,7 @@ def rename_block (html_dic):
     penalty = False
     for z in range(0, len(html_dic)-1):
         if html_dic[z] == '<div class="block">' and counter == 0:
-            print ('next block =' +html_dic[z+2].strip())
+            #print ('next block =' +html_dic[z+2].strip())
             if html_dic[z+2].strip()!='<h3 class="'+timer_class+'">':
                 html_dic[z] = '<div class="block_sectors">' 
                 counter = 1
