@@ -10,8 +10,9 @@ def en_game_info_create(page, user_id):
     return 1
 
 def en_game_logger (proxy_key, page_json):
-    #print (page_json)
+    print (page_json)
     #print ('game id ='+str(get_game_id(proxy_key)))
+    # створення нової гри
     if EnGame.query.filter_by (en_game_id = get_game_id(proxy_key), proxy_key = proxy_key).count()==0:
         print ('new game found')
         game = EnGame (get_game_id(proxy_key), proxy_key)
@@ -21,12 +22,13 @@ def en_game_logger (proxy_key, page_json):
         except:
             print ('помилка створення нового сценарю гри')
             db.session.rollback()
+    # створення нового рівня
     levelInfo = json.loads(page_json ['levelinfo'])
-    print (levelInfo['levelId'])
+    #print (levelInfo['levelId'])
     if EnLvl.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).count() == 0:
         lvl = EnLvl (get_game_id(proxy_key), levelInfo['levelId'], levelInfo['levelNum'])
         db.session.add(lvl)
-        print ('new level found')
+        #print ('new level found')
         try:
             db.session.commit()
         except:
