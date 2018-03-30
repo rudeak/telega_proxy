@@ -23,8 +23,15 @@ def en_game_logger (proxy_key, page_json):
             db.session.rollback()
     levelInfo = json.loads(page_json ['levelinfo'])
     print (levelInfo['levelId'])
-    if EnLvl.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNo']).count() == 0:
+    if EnLvl.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).count() == 0:
+        lvl = EnLvl (get_game_id(proxy_key), levelInfo['levelId'], levelInfo['levelNum'])
+        db.session.add(lvl)
         print ('new level found')
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            print('помилка створення новго рівня гри')
 
     return 1
 
