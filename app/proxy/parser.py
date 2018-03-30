@@ -38,7 +38,7 @@ penalty_h3_class = 'inline'
 answer_block_div_class ='hint blockageinfo'
 
 def get_game_info(page):
-    soup = BeautifulSoup(page.text)
+    soup = BeautifulSoup(page.text, "lxml")
     name =soup.find('a', id = game_name_id).get_text()
 
     #soup = BeautifulSoup(page.text)
