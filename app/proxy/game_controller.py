@@ -22,6 +22,6 @@ def en_game_logger (proxy_key, page_json):
             print ('помилка створення нового сценарю гри')
             db.session.rollback()
     levelInfo = json.dumps(page_json ['levelinfo'])
-    print (levelInfo)
+    print (levelInfo['levelId'])
     return 1
 
