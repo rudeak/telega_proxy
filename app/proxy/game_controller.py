@@ -46,7 +46,7 @@ def en_level_info_updater (lvl, pageJson):
     sectors_counter = json.loads(pageJson['sectors_count'])
     lvl.en_sectors_count = sectors_counter['all']
     en_sectors_need =  sectors_counter ['need']
-    sectors_counter = json.loads ['sectors_info']
+    sectors_counter = json.loads (pageJson['sectors_info'])
     print (sectors_counter)
     for sector in sectors_counter:
         print (sector)
