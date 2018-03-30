@@ -5,7 +5,7 @@ from datetime import datetime
 from app.game_managment import edit_game_name, get_domain, get_game_id
 
 
-def en_game_info_create(page, user_id)
+def en_game_info_create(page, user_id):
     return 1
 
 def en_game_logger (proxy_key, page_json):
