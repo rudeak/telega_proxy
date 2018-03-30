@@ -1,3 +1,4 @@
+import json
 from app import db
 from app.models import EnGame
 from sqlalchemy.orm import sessionmaker
@@ -20,7 +21,7 @@ def en_game_logger (proxy_key, page_json):
         except:
             print ('помилка створення нового сценарю гри')
             db.session.rollback()
-    levelInfo = page_json ['levelinfo']['levelId']
+    levelInfo = json.dumps(page_json ['levelinfo'])
     print (levelInfo)
     return 1
 
