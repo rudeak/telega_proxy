@@ -220,7 +220,7 @@ class EnGame(db.Model):
 
 
 
-    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     proxy_key = db.Column(db.Integer)
     
