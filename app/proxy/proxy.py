@@ -45,7 +45,7 @@ def proxy_creator(id):
 def en_game_proxy_root(id):
     r = get_session (id)
     url = 'http://'+get_domain(id)+'/gameengines/encounter/play/'+get_game_id(id)
-    en_game_logger(id,level_parser (change_href(r.get (url),id))['json'])
+    #en_game_logger(id,level_parser (change_href(r.get (url),id))['json'])
     return level_parser (change_href(r.get (url),id))['html'] # change_href(r.get (url),id) #
 
 
