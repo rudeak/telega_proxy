@@ -2,6 +2,7 @@ import json
 import time
 from app import db
 from app.models import EnGameJson
+from app.game_managment import get_game_id
 from sqlalchemy.orm import sessionmaker
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -63,7 +64,10 @@ def change_href (page, id):
             ref['href'] = '/proxy/'+str(id)+ref['href']
     for ref in soup.findAll('a', href=True):
         print (ref['href'])
-    return soup.prettify()
+    page = soup.prettify().relace ('/gameengines/encounter/play/'+str(get_game_id(id))+'/',
+                                    '/proxy/'+str(id))
+    
+    return page
 
 def level_parser (page):
     soup = BeautifulSoup(page)
