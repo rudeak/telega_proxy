@@ -54,7 +54,10 @@ def get_game_info(page):
 def change_href (page, id):
     soup = BeautifulSoup(page.text)
     soup.prettify()
-    soup.find('div', class_ = "header").replaceWith('')
+    try:
+        soup.find('div', class_ = "header").replaceWith('')
+    except:
+        print ('гра ще не почалася')
     for ref in soup.findAll('a', href=True):
         if ref['href'][0] == '/':
             ref['href'] = '/proxy/'+str(id)+ref['href']
@@ -65,7 +68,10 @@ def change_href (page, id):
 def level_parser (page):
     soup = BeautifulSoup(page)
     soup.prettify()
-    levelInfo = get_level_num (soup)
+    try:
+        levelInfo = get_level_num (soup)
+    except:
+        return {'html':page,'json':'{game:None}'}
     history = get_level_history (soup)
     time_up = get_up (soup)
     if have_sectors (soup):
