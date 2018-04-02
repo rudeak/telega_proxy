@@ -11,7 +11,7 @@ def en_game_info_create(page, user_id):
 
 def en_game_logger (proxy_key, page_json):
     print (page_json)
-    if !page_json['level']:
+    if page_json['level'] == False:
         return 0
     #print ('game id ='+str(get_game_id(proxy_key)))
     # створення нової гри
