@@ -75,7 +75,7 @@ def level_parser (page):
     try:
         levelInfo = get_level_num (soup)
     except:
-        return {'html':page,'json':{'level':False}}
+        return {'html':page,'json':{'levelinfo':False}}
     history = get_level_history (soup)
     time_up = get_up (soup)
     if have_sectors (soup):
