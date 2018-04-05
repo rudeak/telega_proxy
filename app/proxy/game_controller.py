@@ -48,7 +48,7 @@ def en_game_logger (proxy_key, page_json):
 def en_level_info_updater (proxy_key, pageJson):
     levelInfo = json.loads(pageJson ['levelinfo'])
     lvl = EnLvl.query.filter_by(en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).first()
-    print (lvl)
+    # TODO перевірка чи нічого не змінилося в рівні і додавання в сигнали боту
     lvl.en_answer_block = pageJson['block']
     sectors_counter = json.loads(pageJson['sectors_count'])
     lvl.en_sectors_count = sectors_counter['all']
@@ -65,5 +65,9 @@ def en_level_info_updater (proxy_key, pageJson):
     except:
             db.session.rollback()
             print ('Помилка оновлення даних рівня')
+    return None
+
+def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson)
+
     return None
 

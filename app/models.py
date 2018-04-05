@@ -260,6 +260,12 @@ class EnLvl(db.Model):
         self.en_lvl_id = en_lvl_id
         self.en_lvl_no = en_lvl_no
 
+class EnSectors (db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    en_game_id = db.Column(db.Integer)
+    en_lvl_id = db.Column(db.Integer)
+    en_lvl_no = db.Column(db.Integer)
+
 """
 class EnTask(db.Model):
 
