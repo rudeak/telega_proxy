@@ -54,7 +54,8 @@ def en_level_info_updater (proxy_key, pageJson):
     lvl.en_sectors_count = sectors_counter['all']
     lvl.en_sectors_need =  sectors_counter ['need']
     sectors_counter = json.loads (pageJson['sectors_info'])
-    print ('sectors' + str(sectors_counter))
+    
+    en_sectors_logger (proxy_key, levelInfo['levelId'], levelInfo['levelNum'], sectors_counter)
     closed = 0
     for sector in sectors_counter:
         if sector['entered']:
@@ -68,6 +69,6 @@ def en_level_info_updater (proxy_key, pageJson):
     return None
 
 def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson)
-
+    print ('sectors' + str(sectors_counter))
     return None
 
