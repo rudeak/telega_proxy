@@ -56,14 +56,15 @@ def en_level_info_updater (proxy_key, pageJson):
     lvl.en_answer_block = pageJson['block']
     sectors_counter = json.loads(pageJson['sectors_count'])
     lvl.en_sectors_count = sectors_counter['all']
-    en_sectors_need =  sectors_counter ['need']
+    lvl.en_sectors_need =  sectors_counter ['need']
     sectors_counter = json.loads (pageJson['sectors_info'])
     print (sectors_counter)
     closed = 0
     for sector in sectors_counter:
         if sector['entered']:
             closed +=1
-    en_sectors_closed = closed
-    print(en_sectors_closed)
+    lvl.en_sectors_closed = closed
+    print(lvl.en_sectors_closed)
+    print ('sectors block:'+ str(lvl.en_answer_block) + ' sectors count' + str(lvl.en_sectors_count), 'sectors closed: '+ str(lvl.en_sectors_closed)
     return None
 
