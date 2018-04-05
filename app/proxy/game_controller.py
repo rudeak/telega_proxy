@@ -50,6 +50,7 @@ def en_game_logger (proxy_key, page_json):
     return 1
 
 def en_level_info_updater (proxy_key, pageJson):
+    levelInfo = json.loads(page_json ['levelinfo'])
     lvl = EnLvl.query.filter_by(en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).first()
     print (lvl)
     lvl.en_answer_block = pageJson['block']
