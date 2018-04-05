@@ -29,17 +29,17 @@ def en_game_logger (proxy_key, page_json):
     #print (levelInfo['levelId'])
     if EnLvl.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).count() == 0:
         lvl = EnLvl (get_game_id(proxy_key), levelInfo['levelId'], levelInfo['levelNum'])
-        en_level_info_updater (lvl, page_json)
         db.session.add(lvl)
         #print ('new level found')
         try:
             db.session.commit()
+            en_level_info_updater (proxy_key, page_json)
         except:
             db.session.rollback()
             print('помилка створення новго рівня гри')
     else:
         lvl = EnLvl.query.filter_by(en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).first()
-        en_level_info_updater (lvl, page_json)
+        en_level_info_updater (proxy_key, page_json)
         print ('old level found')
         #print (lvl)
         try:
@@ -49,7 +49,8 @@ def en_game_logger (proxy_key, page_json):
             print ('Помилка оновлення даних рівня')
     return 1
 
-def en_level_info_updater (lvl, pageJson):
+def en_level_info_updater (proxy_key, pageJson):
+    lvl = EnLvl.query.filter_by(en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).first()
     print (lvl)
     lvl.en_answer_block = pageJson['block']
     sectors_counter = json.loads(pageJson['sectors_count'])
