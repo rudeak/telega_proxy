@@ -64,6 +64,6 @@ def en_level_info_updater (proxy_key, pageJson):
         if sector['entered']:
             closed +=1
     en_sectors_closed = closed
-    print(lvl.en_sectors_closed)
+    print(en_sectors_closed)
     return None
 
