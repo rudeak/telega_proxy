@@ -265,6 +265,21 @@ class EnSectors (db.Model):
     en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer)
+    en_sector_name = db.Column(db.Text)
+    en_sector_entered = db.Column(db.Boolean)
+    en_sector_answer = db.Column(db.Text)
+    en_gamer = db.Column(db.Text)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnSectors(%(id)s, %(en_sector_name)s)>" % self.__dict__
+    
+    def __init__(self, en_game_id, en_lvl_id, en_lvl_no):
+        self.en_game_id = en_game_id
+        self.en_lvl_id = en_lvl_id
+        self.en_lvl_no = en_lvl_no
 
 """
 class EnTask(db.Model):
