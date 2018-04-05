@@ -69,6 +69,6 @@ def en_level_info_updater (proxy_key, pageJson):
     return None
 
 def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
-    print ('sectors' + str(sectors_counter))
+    print ('sectors' + str(sectorsJson))
     return None
 
