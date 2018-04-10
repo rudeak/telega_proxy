@@ -23,7 +23,7 @@ class AddGamerForm(FlaskForm):
 
 class ChatOptionsForm (FlaskForm):
     proxy = BooleanField('proxy', validators= [Required()])
-    multi_proxy = BooleanField('muli proxy', validators= [Required()])
+    multi_proxy = BooleanField('multi proxy', validators= [Required()])
     bonuses = BooleanField('bonuses', validators= [Required()])  
     bonuses_count = DecimalField ('bonuses count', validators=[Required()])
     codes = BooleanField('codes', validators= [Required()])
