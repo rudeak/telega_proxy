@@ -62,6 +62,8 @@ def signup():
     if form.validate_on_submit():
         if form.new_password1.data != form.new_password2.data:
             return render_template('signup.html', error='Паролі не співпадають', form=form)
+        if form.new_password1 == '':
+            return render_template('login.html', error='Пароль порожній', form=form)
         if form.new_password1.data == form.new_password2.data and form.newlogin is not None:
             registration_result = register_user(
                 form.newlogin.data, form.new_email.data, form.new_password1.data)
