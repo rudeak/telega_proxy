@@ -5,12 +5,14 @@ from wtforms.validators import Required
 class LoginForm(FlaskForm):
     login = TextField('login')
     password = TextField('password')
+
+class SignupForm(FlaskForm):
     newlogin = TextField('newlogin')
     new_email = TextField('new_email')
     new_password1 = TextField('new_password1')
     new_password2 = TextField('new_password2')
-    isLogin = BooleanField('isLogin', default = True)
-    isRegister = BooleanField('isRegister', default = True)
+#    isLogin = BooleanField('isLogin', default = True)
+#    isRegister = BooleanField('isRegister', default = True)
 
 class RoleEdit(FlaskForm):
     role = SelectField('role',choices=[('0', 'Користувач'), ('1', 'Адміністратор'), ('2', 'Суперкористувач')], validators = [Required()])

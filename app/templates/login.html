@@ -11,7 +11,7 @@
           <section class="login_content">
             <form action="" method="post" name="login">
                 {{form.hidden_tag()}}
-              <h1>Увійти</h1>
+              <h1>Вхід</h1>
               <div>
                 <input type="text" name="login" class="form-control" placeholder="Користувач" required="" />
               </div>
@@ -27,52 +27,7 @@
 
               <div class="separator">
                 <p class="change_link">Новачок?
-                  <a href="#signup" class="to_register"> Створити обліковий запис </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1><i class="fa fa-shopping-cart"></i> Telega 2.0</h1>
-                  <p>{{ about }}</p>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
-
-        <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            <form name=" regiser"action="" method="post">
-              <h1>Зареєструватись</h1>
-              <div>
-                <input name="newlogin" type="text" class="form-control" placeholder="Логін" required="" />
-              </div>
-              <div>
-                <input name = "new_email" type="email" class="form-control" placeholder="Електронна пошта" required="" />
-              </div>
-              <div>
-                <input name = "new_password1" type="password" class="form-control" placeholder="Пароль" required="" />
-              </div>
-              <div>
-                <input name = "new_password2" type="password" class="form-control" placeholder="Повторити пароль" required="" />
-              </div>
-              {% if error %}
-              <div class="alert alert-danger alert-dismissible fade in" role="alert">
-	             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-      		     <strong>{{error}}</strong>
-         	     </div>
-              {% endif %}
-               <div allign = "center">
-                <input type="submit" class="btn btn-default submit" value="Зарeєструватись">
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">Вже зареєстрований ?
-                  <a href="#signin" class="to_register"> Увійти </a>
+                  <a href="signup" class="to_register"> Створити обліковий запис </a>
                 </p>
 
                 <div class="clearfix"></div>

@@ -407,3 +407,5 @@ paket-files/
 
 # End of https://www.gitignore.io/api/python,visualstudio,visualstudiocode
 .vscode/settings.json
+__pycache__/config.cpython-36.pyc
+.vscode/settings.json

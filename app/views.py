@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
-from app.forms import LoginForm, RoleEdit, AddGamerForm, ChatOptionsForm, NewGameForm
+from app.forms import LoginForm, SignupForm, RoleEdit, AddGamerForm, ChatOptionsForm, NewGameForm
 from app.models import User, ROLE_USER, ROLE_ADMIN, Chat_opt, Chat, Gamers, Game
 from app.user_managment import register_user, signin_user, users_list, edit_role
 from app.gamers_managment import gamers_list, add_gamer_db, return_gamer_name, edit_gamer, delete_gamer
@@ -44,26 +44,34 @@ def login():
         return redirect(url_for('index'))
     print(g.user)
     form = LoginForm()
-    if form.login.data != '' and form.login.data is not None:
+    if form.validate_on_submit():
         if signin_user(form.login.data, form.password.data):
             login_user(signin_user(form.login.data, form.password.data), True)
             return redirect(url_for('index'))
         else:
             return render_template('login.html', error='Невірний пароль', form=form)
-    else:
+    return render_template('login.html', title='Увійти', form=form)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    print(current_user)
+    if g.user is not None and g.user.is_authenticated:
+        return redirect(url_for('index'))
+    print(g.user)
+    form = SignupForm()
+    if form.validate_on_submit():
         if form.new_password1.data != form.new_password2.data:
-            return render_template('login.html', error='Паролі не співпадають', form=form)
+            return render_template('signup.html', error='Паролі не співпадають', form=form)
         if form.new_password1.data == form.new_password2.data and form.newlogin is not None:
             registration_result = register_user(
                 form.newlogin.data, form.new_email.data, form.new_password1.data)
             if registration_result == 1:
                 return redirect(url_for('login'))
             else:
-                return render_template('login.html', error=registration_result, form=form)
+                return render_template('signup.html', error=registration_result, form=form)
         else:
-            return render_template('login.html', form=form)
-    return render_template('login.html', title='Увійти', form=form)
-
+            return render_template('signup.html', form=form)
+    return render_template('signup.html', form=form)
 
 @app.route('/user/<nickname>')
 @login_required
