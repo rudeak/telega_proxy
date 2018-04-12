@@ -194,7 +194,34 @@ def en_task_logger (proxy_key, en_lvl_id, en_lvl_no, taskJson):
                                          en_lvl_no = en_lvl_no).count() == 0:
         print ('New task cretation')
         print (taskJson)
-        #en_task = EnTask (get_game_id(proxy_key), en_lvl_id, en_lvl_no, )
+        en_task = EnTask (get_game_id(proxy_key), en_lvl_id, en_lvl_no, taskJson['task'])
+        db.session.add(en_task)
+        try:
+            db.session.commit()
+            print ('task added')
+        except:
+            db.session.rollback()
+            print ('error adding task text')
+    else:
+        en_task = EnTask.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                          en_lvl_id = en_lvl_id, 
+                                          en_lvl_no = en_lvl_no).first()
+        if en_task.en_task_text != taskJson['task']:
+            en_task.en_task_text = taskJson['task']
+            print ('task text changed') # TODO добавити сигнал боту про зміну тексту завдання
+            try:
+                db.session.commit()
+            except:
+                db.session.rollback()
+    print_task_from_db (proxy_key, en_lvl_id, en_lvl_no)
+    return None
+
+def print_task_from_db (proxy_key, en_lvl_id, en_lvl_no):
+    en_task = EnTask.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                          en_lvl_id = en_lvl_id, 
+                                          en_lvl_no = en_lvl_no).all()
+    for task in en_task:
+        print (task)
     return None
                                   
 
