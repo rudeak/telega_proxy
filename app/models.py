@@ -319,7 +319,7 @@ class EnPrompt (db.Model):
         return self.__str__()
 
     def __str__(self):
-        return "<EnPrompt(%(id)s, %(en_prompt_text)s)>" % self.__dict__
+        return "<EnPrompt(%(id)s, %(en_prompt_text)s, %(en_prompt_data)s)>" % self.__dict__
     
     def __init__(self, en_game_id, en_lvl_id, en_lvl_no, en_prompt_no, en_prompt_text, en_prompt_data):
         self.en_game_id = en_game_id
