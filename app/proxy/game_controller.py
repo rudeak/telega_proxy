@@ -251,7 +251,7 @@ def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
             db.session.add (en_prompt)
             try:
                 db.session.commit()
-                print ('prompt added')
+                print ('prompt added') # TODO прописати сигнали боту по підказках
             except:
                 db.session.rollback()
                 print ('prompt error')
@@ -263,6 +263,8 @@ def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
         # перевірки чи не змінилася кількість підказок
 
         for prompt in prompts:
+            if prompt['timer'] == '':
+                    prompt['timer'] = '0'
             en_prompt = EnPrompt.query.filter_by (en_game_id = get_game_id(proxy_key),
                                                     en_lvl_id = en_lvl_id,
                                                     en_lvl_no = en_lvl_no,
@@ -272,6 +274,13 @@ def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 if en_prompt.en_prompt_text != prompt['text']:
                     # TODO подати сигнал боту що змінився текст підказки
                     en_prompt.en_prompt_text = prompt['text']
+                if en_prompt.en_prompt_data != prompt['timer']:
+                    # якщо час == 0 тоді додати сигнал боту про появу нової підказки
+                    if prompt['timer'] == 0:
+                        print ('new prompt appeared') #TODO сигнал про нову підказку
+                    else:
+                        # змінився час до підказки
+                        print ('prompt timer changed') # TODO перезаписати сигнали боту по підказках
                     try:
                         db.session.commit()
                         print ('new prompt text written')
