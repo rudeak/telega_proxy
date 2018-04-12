@@ -107,7 +107,7 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
     else:
         if EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count() != sectors_counter(sectorsJson):
             #TODO повідомлення про зміну кількості секторів
-            print ('level sectors coutn was changed!!!')
+            print ('level sectors count was changed!!!')
             counter = 1
             for sector in sectorsJson:
 
@@ -143,6 +143,7 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                   en_lvl_id = en_lvl_id, 
                                   en_lvl_no = en_lvl_no, 
                                   en_sector_no = counter).first()
+        print ('sector No:' + str(en_sector.en_sector_no)+ ' sector name ' + en_sector.en_sector_name + ' closed:' + str(en_sector.en_sector_entered) + ' answer: '+ en_sector.en_sector_answer + ' gamer: ' + en_sector.en_gamer)
         if sectors['name'] != en_sector.en_sector_name:
             print ('sector #' + str(counter) + ' name was changed to ' + str(sectors['name']))
             # TODO сигнал боту про зміну назви сектора
