@@ -223,6 +223,10 @@ def print_task_from_db (proxy_key, en_lvl_id, en_lvl_no):
     for task in en_task:
         print (task)
     return None
+
+def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, taskJson):
+    print ('prompts logger')
+    return None
                                   
 
 
