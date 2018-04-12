@@ -94,9 +94,9 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                   sectors['answer'],
                                   sectors['gamer'])
             db.session.add(en_sector)
-            db.session.commit()
+            print ('sector No:' + str(sector.en_sector_no)+ ' sector name ' + sector.en_sector_name + ' closed:' + str(sector.en_sector_entered) + ' answer: '+ sector.en_sector_answer + ' gamer: ' + sector.en_gamer)
             try:
-                
+                db.session.commit()    
                 counter +=1
                 print ('sector added')
             except:
@@ -125,8 +125,6 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                   sectors['answer'],
                                   sectors['gamer'])
                     db.session.add(en_sector)
-                    print ('sector No:' + str(sector.en_sector_no)+ ' sector name ' + sector.en_sector_name + ' closed:' + str(sector.en_sector_entered) + ' answer: '+ sector.en_sector_answer + ' gamer: ' + sector.en_gamer)
-                    db.session.commit()
                     try:
                         db.session.commit()
                         counter +=1
