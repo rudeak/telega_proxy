@@ -130,7 +130,7 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
     # інформація про сектори поновляється в будь якому випадку
     print ('level sectors info updating')
     counter = 1
-    for sector in sectorsJson:
+    for sectors in sectorsJson:
         updated = False
         en_sector = EnSectors.query.filter_by(en_game_id = get_game_id(proxy_key), 
                                   en_lvl_id = en_lvl_id, 
