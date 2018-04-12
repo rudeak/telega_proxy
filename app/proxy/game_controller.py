@@ -71,12 +71,14 @@ def en_level_info_updater (proxy_key, pageJson):
 def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
     # TODO перевірка чи не змінилась кількість секторів і їх назви і закритість
     print ('sectors' + str(sectorsJson))
+    
     print ('sectors count'+ str (sectors_counter(sectorsJson)))
     # якщо ще не внесені сектори в рівень то створюємо нові
     if EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count() == 0:
         print ('no sectors was logged!!!') #TODO повідомлення про додавання секторів
         counter = 1
         for sectors in sectorsJson:
+            print ('sector #' + counter + ' name = '+ sectorsJson['name'])
             en_sector = EnSectors(get_game_id(proxy_key), 
                                   en_lvl_id, 
                                   en_lvl_no, 
