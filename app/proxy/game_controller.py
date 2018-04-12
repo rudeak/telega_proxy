@@ -26,6 +26,8 @@ def en_game_logger (proxy_key, page_json):
             db.session.rollback()
     # створення нового рівня
     levelInfo = json.loads(page_json ['levelinfo'])
+    en_lvl_id = levelInfo['levelId']
+    en_lvl_no = levelInfo['levelNum']
     #print (levelInfo['levelId'])
     if EnLvl.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).count() == 0:
         lvl = EnLvl (get_game_id(proxy_key), levelInfo['levelId'], levelInfo['levelNum'])
