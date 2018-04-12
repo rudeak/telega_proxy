@@ -78,15 +78,15 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
         print ('no sectors was logged!!!') #TODO повідомлення про додавання секторів
         counter = 1
         for sectors in sectorsJson:
-            print ('sector #' + str(counter) + ' name = '+ sectorsJson['name'])
+            print ('sector #' + str(counter) + ' name = '+ sectors['name'])
             en_sector = EnSectors(get_game_id(proxy_key), 
                                   en_lvl_id, 
                                   en_lvl_no, 
                                   counter, 
-                                  sectorsJson['name'],
-                                  sectorsJson['entered'],
-                                  sectorsJson['answer'],
-                                  sectorsJson['gamer'])
+                                  sectors['name'],
+                                  sectors['entered'],
+                                  sectors['answer'],
+                                  sectors['gamer'])
             db.session.add(en_sector)
             try:
                 db.commit()
@@ -111,10 +111,10 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                   en_lvl_id, 
                                   en_lvl_no, 
                                   counter, 
-                                  sectorsJson['name'],
-                                  sectorsJson['entered'],
-                                  sectorsJson['answer'],
-                                  sectorsJson['gamer'])
+                                  sectors['name'],
+                                  sectors['entered'],
+                                  sectors['answer'],
+                                  sectors['gamer'])
                     db.session.add(en_sector)
                     try:
                         db.commit()
@@ -132,23 +132,23 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                   en_lvl_id = en_lvl_id, 
                                   en_lvl_no = en_lvl_no, 
                                   en_sector_no = counter).first()
-        if sectorsJson['name'] != en_sector.en_sector_name:
-            print ('sector #' + str(counter) + ' name was changed to ' + str(sectorsJson['name']))
+        if sectors['name'] != en_sector.en_sector_name:
+            print ('sector #' + str(counter) + ' name was changed to ' + str(sectors['name']))
             # TODO сигнал боту про зміну назви сектора
             updated = True
-            en_sector.en_sector_name = sectorsJson['name']
-        if sectorsJson ['entered'] != en_sector.en_sector_entered:
+            en_sector.en_sector_name = sectors['name']
+        if sectors ['entered'] != en_sector.en_sector_entered:
             # TODO сигнал боту про введення сектора
             print ('sector #' + str(counter) + ' name was closed by code ' + sectorsJson['answer'] + ' by gamer '+ sectorsJson['gamer'])
             updated = True
             en_sector.en_sector_entered = True
-            en_sector.en_sector_answer = sectorsJson['answer']
-            en_sector.en_gamer = sectorsJson['gamer']
+            en_sector.en_sector_answer = sectors['answer']
+            en_sector.en_gamer = sectors['gamer']
         if updated:
             try:
                 db.commit()
                 counter +=1
-                print ('sector updated')
+                print ('sector updated #' + str (counter))
             except:
                 db.rollback()
                 print ('sector updating error')
