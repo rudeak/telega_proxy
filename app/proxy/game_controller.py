@@ -34,14 +34,14 @@ def en_game_logger (proxy_key, page_json):
         try:
             db.session.commit()
             en_level_info_updater (proxy_key, page_json)
-            en_task_logger (proxy_key, levelInfo['levelId'], levelInfo['levelNum'], page_json['task'])
+            en_task_logger (proxy_key, levelInfo['levelId'], levelInfo['levelNum'], json.loads(page_json)['task'])
         except:
             db.session.rollback()
             print('помилка створення новго рівня гри')
     else:
  #       lvl = EnLvl.query.filter_by(en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).first()
         en_level_info_updater (proxy_key, page_json)
-        en_task_logger (proxy_key, levelInfo['levelId'], levelInfo['levelNum'], page_json['task'])
+        en_task_logger (proxy_key, levelInfo['levelId'], levelInfo['levelNum'], json.loads(page_json)['task'])
         print ('old level found')
         #print (lvl)
 
