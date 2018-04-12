@@ -240,7 +240,7 @@ def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                 en_lvl_id = en_lvl_id, 
                                 en_lvl_no = en_lvl_no).count() == 0:
         for prompt in prompts:
-            if prompt['timer'] == None:
+            if prompt['timer'] == '':
                 prompt['timer'] = '0'
             en_prompt = EnPrompt (get_game_id(proxy_key), 
                                     en_lvl_id, 
@@ -279,7 +279,7 @@ def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                         print ('error updating prompt text')
             else:
                 # TODO подати сигнал боту, що додалася нова підказкка
-                if prompt['timer'] == None:
+                if prompt['timer'] == '':
                     prompt['timer'] = '0'
                 en_prompt = EnPrompt (get_game_id(proxy_key), 
                                     en_lvl_id, 
