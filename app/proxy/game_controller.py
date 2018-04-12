@@ -89,11 +89,11 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                   sectors['gamer'])
             db.session.add(en_sector)
             try:
-                db.commit()
+                db.sesion.commit()
                 counter +=1
                 print ('sector added')
             except:
-                db.rollback()
+                db.session.rollback()
                 print ('sector adding error')
     #Якщо вже є сектори то перевіряємо чи кількість не змінилася
     else:
@@ -116,12 +116,13 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                   sectors['answer'],
                                   sectors['gamer'])
                     db.session.add(en_sector)
+                    db.session.commit()
                     try:
-                        db.commit()
+                        db.session.commit()
                         counter +=1
                         print ('sector added')
                     except:
-                        db.rollback()
+                        db.session.rollback()
                         print ('sector adding error')
     # інформація про сектори поновляється в будь якому випадку
     print ('level sectors info updating')
@@ -146,11 +147,11 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
             en_sector.en_gamer = sectors['gamer']
         if updated:
             try:
-                db.commit()
+                db.session.commit()
                 counter +=1
                 print ('sector updated #' + str (counter))
             except:
-                db.rollback()
+                db.session.rollback()
                 print ('sector updating error')
     return None
 
