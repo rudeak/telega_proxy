@@ -1,6 +1,6 @@
 import json
 from app import db
-from app.models import EnGame, EnLvl, EnSectors, EnTask
+from app.models import EnGame, EnLvl, EnSectors, EnTask, EnPrompt
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from app.game_managment import edit_game_name, get_domain, get_game_id
@@ -232,6 +232,76 @@ def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
     prompts = json.loads(pageJson['prompts'])
     print ('prompts logger')
     print (prompts)
+    # якщо немає піказок тоді вернутись
+    if prompts == None: 
+        return None
+    # якщо не створені підказки в базі то створити їх
+    if EnPrompt.query.filter_by(en_game_id = get_game_id(proxy_key), 
+                                en_lvl_id = en_lvl_id, 
+                                en_lvl_no = en_lvl_no).count() == 0:
+        for prompt in prompts:
+            en_prompt = EnPrompt (get_game_id(proxy_key), 
+                                    en_lvl_id, 
+                                    en_lvl_no,
+                                    prompt['number'], 
+                                    prompt['text'], 
+                                    int(prompt['timer']))
+            db.session.add (en_prompt)
+            try:
+                db.session.commit()
+                print ('prompt added')
+            except:
+                db.session.rollback()
+                print ('prompt error')
+    if prompts.count() != EnPrompt.query.filter_by(en_game_id = get_game_id(proxy_key), 
+                                                        en_lvl_id = en_lvl_id, 
+                                                        en_lvl_no = en_lvl_no).count():
+        print ('prompts count changed') # TODO сигнал боту що кількість підказок змінилася
+        # перевірки чи не змінилася кількість підказок
+
+        for prompt in prompts:
+            en_prompt = EnPrompt.query.filter_by (en_game_id = get_game_id(proxy_key),
+                                                    en_lvl_id = en_lvl_id,
+                                                    en_lvl_no = en_lvl_no,
+                                                    en_prompt_no = prompt['number']).first()
+        # якщо підказка з таким номером є то перевірити чи не змінився її текст
+            if en_prompt != None:
+                if en_prompt.en_prompt_text != prompt['text']:
+                    # TODO подати сигнал боту що змінився текст підказки
+                    en_prompt.en_prompt_text = prompt['text']
+                    try:
+                        db.session.commit()
+                        print ('new prompt text written')
+                    except:
+                        db.session.rollback()
+                        print ('error updating prompt text')
+            else:
+                # TODO подати сигнал боту, що додалася нова підказкка
+                en_prompt = EnPrompt (get_game_id(proxy_key), 
+                                    en_lvl_id, 
+                                    en_lvl_no,
+                                    prompt['number'], 
+                                    prompt['text'], 
+                                    int(prompt['timer']))
+                db.session.add (en_prompt)
+                try:
+                    db.session.commit()
+                    print ('prompt added')
+                except:
+                    db.session.rollback()
+                    print ('prompt error')
+    print_prompts_from_db (proxy_key, en_lvl_id, en_lvl_no)
+    return None
+
+def print_prompts_from_db (proxy_key, en_lvl_id, en_lvl_no):
+
+    en_prompt = EnPrompt.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                          en_lvl_id = en_lvl_id, 
+                                          en_lvl_no = en_lvl_no).all()
+    print ('------------------------START DB prompts printing -------------------')                                          
+    for prompt in en_prompt:
+        print (promt)
+    print ('------------------------END DB prompts printing -------------------')
     return None
                                   
 
