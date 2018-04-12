@@ -78,7 +78,7 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
         print ('no sectors was logged!!!') #TODO повідомлення про додавання секторів
         counter = 1
         for sectors in sectorsJson:
-            print ('sector #' + counter + ' name = '+ sectorsJson['name'])
+            print ('sector #' + str(counter) + ' name = '+ sectorsJson['name'])
             en_sector = EnSectors(get_game_id(proxy_key), 
                                   en_lvl_id, 
                                   en_lvl_no, 
