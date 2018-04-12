@@ -73,7 +73,11 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
     print ('sectors' + str(sectorsJson))
     
     print ('sectors count'+ str (sectors_counter(sectorsJson)))
+
     print ('sectors in DB ' + str(EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count()))
+
+    print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no)
+    
     # якщо ще не внесені сектори в рівень то створюємо нові
     if EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count() == 0:
         print ('no sectors was logged!!!') #TODO повідомлення про додавання секторів
@@ -163,4 +167,14 @@ def sectors_counter (sectorsJson):
     for sector in sectorsJson:
         counter +=1
     return counter
+
+def print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no):
+    sectors = EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                         en_lvl_id = en_lvl_id, 
+                                         en_lvl_no = en_lvl_no).all()
+    for sector in sectors:
+        print ('sector No:' + str(sector.en_sector_no)+ ' sector name ' + sector.en_sector_name + ' closed:' + str(sector.en_sector_entered) + ' answer: '+ sector.en_sector_answer + ' gamer: ' + sector.en_sector_gamer)
+    return None
+                                  
+
 
