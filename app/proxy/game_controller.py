@@ -1,6 +1,6 @@
 import json
 from app import db
-from app.models import EnGame, EnLvl, EnSectors
+from app.models import EnGame, EnLvl, EnSectors, EnTask
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from app.game_managment import edit_game_name, get_domain, get_game_id
@@ -184,6 +184,14 @@ def print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no):
     for sector in sectors:
         print ('sector No:' + str(sector.en_sector_no)+ ' sector name ' + sector.en_sector_name + ' closed:' + str(sector.en_sector_entered) + ' answer: '+ sector.en_sector_answer + ' gamer: ' + sector.en_gamer)
     print ('------------------------END DB sectors printing -------------------')
+    return None
+
+def en_task_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
+    if EnTask.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                         en_lvl_id = en_lvl_id, 
+                                         en_lvl_no = en_lvl_no).count() == 0:
+        print ('New task cretation')
+        en_task = EnTask (get_game_id(proxy_key), en_lvl_id, en_lvl_no, )
     return None
                                   
 

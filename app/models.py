@@ -287,6 +287,25 @@ class EnSectors (db.Model):
         self.en_sector_answer = en_sector_answer
         self.en_gamer = en_gamer
 
+class EnTask (db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    en_game_id = db.Column(db.Integer)
+    en_lvl_id = db.Column(db.Integer)
+    en_lvl_no = db.Column(db.Integer)
+    en_task_text = db.Column(db.Text)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnTask(%(id)s, %(en_task_text)s)>" % self.__dict__
+    
+    def __init__(self, en_game_id, en_lvl_id, en_lvl_no, en_task_text):
+        self.en_game_id = en_game_id
+        self.en_lvl_id = en_lvl_id
+        self.en_lvl_no = en_lvl_no
+        self.en_task_text = en_task_text
+
 """
 class EnTask(db.Model):
 
