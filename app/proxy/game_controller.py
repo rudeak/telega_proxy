@@ -76,7 +76,7 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
 
     print ('sectors in DB ' + str(EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count()))
 
-    print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no)
+    #print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no)
 
     # якщо ще не внесені сектори в рівень то створюємо нові
     if EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count() == 0:
