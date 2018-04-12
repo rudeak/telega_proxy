@@ -73,6 +73,7 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
     print ('sectors' + str(sectorsJson))
     
     print ('sectors count'+ str (sectors_counter(sectorsJson)))
+    print ('sectors in DB ' + str(EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count()))
     # якщо ще не внесені сектори в рівень то створюємо нові
     if EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count() == 0:
         print ('no sectors was logged!!!') #TODO повідомлення про додавання секторів
@@ -88,8 +89,9 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                   sectors['answer'],
                                   sectors['gamer'])
             db.session.add(en_sector)
+            db.sesion.commit()
             try:
-                db.sesion.commit()
+                
                 counter +=1
                 print ('sector added')
             except:
@@ -97,12 +99,12 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                 print ('sector adding error')
     #Якщо вже є сектори то перевіряємо чи кількість не змінилася
     else:
-        print ('sectors in DB ' + str(EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count()))
         if EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count() != sectors_counter(sectorsJson):
             #TODO повідомлення про зміну кількості секторів
             print ('level sectors coutn was changed!!!')
             counter = 1
             for sector in sectorsJson:
+
                 if EnSectors.query.filter_by(en_game_id = get_game_id(proxy_key), 
                                             en_lvl_id = en_lvl_id, 
                                             en_lvl_no = en_lvl_no, 
