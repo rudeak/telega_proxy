@@ -255,7 +255,8 @@ def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
             except:
                 db.session.rollback()
                 print ('prompt error')
-    if prompts.count() != EnPrompt.query.filter_by(en_game_id = get_game_id(proxy_key), 
+    print ('prompts length =' + str (len(prompts)))
+    if len(prompts) != EnPrompt.query.filter_by(en_game_id = get_game_id(proxy_key), 
                                                         en_lvl_id = en_lvl_id, 
                                                         en_lvl_no = en_lvl_no).count():
         print ('prompts count changed') # TODO сигнал боту що кількість підказок змінилася
