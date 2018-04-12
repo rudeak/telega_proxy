@@ -353,13 +353,13 @@ def en_bonus_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
         if en_bonus == None: #якщо бонус з таким номером не знайдено значить він новий
             # TODO послати сигнал боту що додався новий бонус
                        en_bonus = EnBonus (get_game_id(proxy_key), 
-                                en_lvl_id, 
-                                en_lvl_no, 
-                                bonus['number'], 
-                                bonus ['text'],
-                                bonus['bonus_text'],
-                                bonus['completed'],
-                                bonus['passed'])
+                                            en_lvl_id, 
+                                            en_lvl_no, 
+                                            bonus['number'], 
+                                            bonus ['text'],
+                                            bonus['bonus_text'],
+                                            bonus['completed'],
+                                            bonus['passed'])
                         db.session.add(bonus)
                         try:
                             db.session.commit()
