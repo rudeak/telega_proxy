@@ -159,11 +159,12 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
         if updated:
             try:
                 db.session.commit()
-                counter +=1
+                
                 print ('sector updated #' + str (counter))
             except:
                 db.session.rollback()
                 print ('sector updating error')
+        counter +=1
     print ('------------------------END update sector printing -------------------')
     return None
 
