@@ -329,6 +329,41 @@ class EnPrompt (db.Model):
         self.en_prompt_text = en_prompt_text
         self.en_prompt_data = en_prompt_data
 
+class EnBonus (db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    en_game_id = db.Column(db.Integer)
+    en_lvl_id = db.Column(db.Integer)
+    en_lvl_no = db.Column(db.Integer)
+    en_bonus_no = db.Column(db.Integer)
+    en_bonus_text = db.Column(db.Text)
+    en_bonus_prompt_text = db.Column(db.Text)
+    en_bonus_completed = db.Column(db.Boolean)
+    en_bonus_passed = db.Column(db.Boolean)
+    en_gamer = db.Column(db.Text)
+    en_bonus_answer = db.Column(db.Text)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnPrompt(%(id)s, %(en_bonus_text)s, %(en_bonus_completed)s)>" % self.__dict__
+    
+    def __init__(self, en_game_id, en_lvl_id, 
+                en_lvl_no, 
+                en_bonus_no, 
+                en_bonus_text, 
+                en_bonus_prompt_text,
+                en_bonus_completed,
+                en_bonus_passed):
+        self.en_game_id = en_game_id
+        self.en_lvl_id = en_lvl_id
+        self.en_lvl_no = en_lvl_no
+        self.en_bonus_no = en_bonus_no
+        self.en_bonus_text = en_bonus_no
+        self.en_bonus_prompt_text = en_bonus_prompt_text
+        self.en_bonus_completed = en_bonus_completed
+        self.en_bonus_passed = en_bonus_passed
+
 
 """
 class EnTask(db.Model):

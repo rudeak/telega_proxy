@@ -1,6 +1,6 @@
 import json
 from app import db
-from app.models import EnGame, EnLvl, EnSectors, EnTask, EnPrompt
+from app.models import EnGame, EnLvl, EnSectors, EnTask, EnPrompt, EnBonus
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from app.game_managment import edit_game_name, get_domain, get_game_id
@@ -323,7 +323,81 @@ def print_prompts_from_db (proxy_key, en_lvl_id, en_lvl_no):
 def en_bonus_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
     bonuses = json.loads (pageJson['bonuses'])
     print ('------------------------START bonus logger -------------------') 
+    if len (bonuses) == 0:
+        return None #якщо бонусів немає то виходимо
+    if EnBonus.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                en_lvl_id = en_lvl_id, 
+                                en_lvl_no = en_lvl_no).count() == 0: #якщо в базі немає бонусів тоді створюємо їх
+        for bonus in bonuses:
+            en_bonus = EnBonus (get_game_id(proxy_key), 
+                                en_lvl_id, 
+                                en_lvl_no, 
+                                bonus['number'], 
+                                bonus ['text'],
+                                bonus['bonus_text'],
+                                bonus['completed'],
+                                bonus['passed'])
+            db.session.add(bonus)
+            try:
+                db.session.commit()
+                print ('new bonus added')
+            except:
+                db.session.rollback()
+                print ('error adding new bonus')
+    
+    for bonus in bonuses:
+        en_bonus = EnBonus.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                            en_lvl_id = en_lvl_id, 
+                                            en_lvl_no = en_lvl_no,
+                                            en_bonus_no = bonus['number']).first()
+        if en_bonus == None: #якщо бонус з таким номером не знайдено значить він новий
+            # TODO послати сигнал боту що додався новий бонус
+                       en_bonus = EnBonus (get_game_id(proxy_key), 
+                                en_lvl_id, 
+                                en_lvl_no, 
+                                bonus['number'], 
+                                bonus ['text'],
+                                bonus['bonus_text'],
+                                bonus['completed'],
+                                bonus['passed'])
+                        db.session.add(bonus)
+                        try:
+                            db.session.commit()
+                            print ('new bonus added')
+                        except:
+                            db.session.rollback()
+                            print ('error adding new bonus')
+        if en_bonus.en_bonus_text != bonus ['text']:
+            # TODO послати сигнал боту що змінився текст бонусу
+            en_bonus.en_bonus_text = bonus ['text']
+        if en_bonus.en_bonus_prompt_text != bonus['bonus_text']:
+            # TODO послати сигнал боту що змінився текст бонусної підказки
+            en_bonus.en_bonus_prompt_text = bonus['bonus_text']
+        if en_bonus.en_bonus_completed != bonus['completed']:
+            # TODO послати сигнал боту що бонус закрився
+            en_bonus.en_bonus_completed = bonus['completed']
+        if en_bonus.en_bonus_passed != bonus['passed']:
+            # TODO послати сигнал боту, що бонус пропустили
+            en_bonus.en_bonus_passed != bonus['passed']
+        try:
+            db.session.commit()
+            print ('bonus data updated')
+        except:
+            db.session.rollback()
+            print ('error while updating bonus data')
     print (bonuses)
     print ('------------------------END bonus logger -------------------') 
+    print_bonuses_from_db (proxy_key, en_lvl_id, en_lvl_no)
+    return None
+
+def print_bonuses_from_db (proxy_key, en_lvl_id, en_lvl_no):
+
+    en_bonus = EnBonus.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                          en_lvl_id = en_lvl_id, 
+                                          en_lvl_no = en_lvl_no).all()
+    print ('------------------------START DB bonuses printing -------------------')                                          
+    for bonus in en_bonus:
+        print (bonus)
+    print ('------------------------END DB bonuses printing -------------------')
     return None
 
