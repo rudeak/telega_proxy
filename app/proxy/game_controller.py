@@ -318,5 +318,9 @@ def print_prompts_from_db (proxy_key, en_lvl_id, en_lvl_no):
     print ('------------------------END DB prompts printing -------------------')
     return None
                                   
-
+def en_bonus_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
+    bonuses = json.lads (pageJson[bonuses])
+    print ('bonus logger')
+    print (bonuses)
+    return None
 
