@@ -225,7 +225,9 @@ def print_task_from_db (proxy_key, en_lvl_id, en_lvl_no):
     return None
 
 def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, taskJson):
+    prompts = json.loads(taskJson['prompts'])
     print ('prompts logger')
+    print (prompts)
     return None
                                   
 
