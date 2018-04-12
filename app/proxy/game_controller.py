@@ -180,6 +180,8 @@ def print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no):
     print (sectors)                                        
     for sector in sectors:
         print ('sector No:' + str(sector.en_sector_no)+ ' sector name ' + sector.en_sector_name + ' closed:' + str(sector.en_sector_entered) + ' answer: '+ sector.en_sector_answer + ' gamer: ' + sector.en_gamer)
+        db.session.delete(sector) ## TODO DELETE THIS!!!!!!
+        db.session.commit() ## TODO DELETE THIS!!!!!!
     print ('------------------------END DB sectors printing -------------------')
     return None
                                   
