@@ -305,7 +305,7 @@ def print_prompts_from_db (proxy_key, en_lvl_id, en_lvl_no):
                                           en_lvl_no = en_lvl_no).all()
     print ('------------------------START DB prompts printing -------------------')                                          
     for prompt in en_prompt:
-        print (promt)
+        print (prompt)
     print ('------------------------END DB prompts printing -------------------')
     return None
                                   
