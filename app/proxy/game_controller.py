@@ -69,6 +69,14 @@ def en_level_info_updater (proxy_key, pageJson):
     return None
 
 def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
+    # TODO перевірка чи не змінилась кількість секторів і їх назви і закритість
     print ('sectors' + str(sectorsJson))
+    print ('sectors count'+ str (sectors_counter(sectorsJson)))
     return None
+
+def sectors_counter (sectorsJson):
+    counter = 0
+    for sector in sectorsJson:
+        counter +=1
+    return counter
 
