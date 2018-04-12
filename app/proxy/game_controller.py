@@ -89,7 +89,7 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                   sectors['answer'],
                                   sectors['gamer'])
             db.session.add(en_sector)
-            db.sesion.commit()
+            db.session.commit()
             try:
                 
                 counter +=1
