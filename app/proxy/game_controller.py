@@ -172,6 +172,8 @@ def print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no):
     sectors = EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), 
                                          en_lvl_id = en_lvl_id, 
                                          en_lvl_no = en_lvl_no).all()
+                                         
+    print ('------------------------DB sectors printing -------------------')
     print (sectors)                                        
     for sector in sectors:
         print ('sector No:' + str(sector.en_sector_no)+ ' sector name ' + sector.en_sector_name + ' closed:' + str(sector.en_sector_entered) + ' answer: '+ sector.en_sector_answer + ' gamer: ' + sector.en_gamer)
