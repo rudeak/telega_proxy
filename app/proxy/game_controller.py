@@ -1,6 +1,6 @@
 import json
 from app import db
-from app.models import EnGame, EnLvl
+from app.models import EnGame, EnLvl, EnSectors
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from app.game_managment import edit_game_name, get_domain, get_game_id
@@ -72,6 +72,84 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
     # TODO перевірка чи не змінилась кількість секторів і їх назви і закритість
     print ('sectors' + str(sectorsJson))
     print ('sectors count'+ str (sectors_counter(sectorsJson)))
+    # якщо ще не внесені сектори в рівень то створюємо нові
+    if EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).all().count() == 0:
+        print ('no sectors was logged!!!') #TODO повідомлення про додавання секторів
+        counter = 1
+        for sectors in sectorsJson:
+            en_sector = EnSectors(get_game_id(proxy_key), 
+                                  en_lvl_id, 
+                                  en_lvl_no, 
+                                  counter, 
+                                  sectorsJson['name'],
+                                  sectorsJson['entered'],
+                                  sectorsJson['answer'],
+                                  sectorsJson['gamer'])
+            db.session.add(en_sector)
+            try:
+                db.commit()
+                counter +=1
+                print ('sector added')
+            except:
+                db.rollback()
+                print ('sector adding error')
+    #Якщо вже є сектори то перевіряємо чи кількість не змінилася
+    else:
+        if EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).all().count() != sectors_counter(sectorsJson):
+            #TODO повідомлення про зміну кількості секторів
+            print ('level sectors coutn was changed!!!')
+            counter = 1
+            for sector in sectorsJson:
+                if EnSectors.query.filter_by(en_game_id = get_game_id(proxy_key), 
+                                            en_lvl_id = en_lvl_id, 
+                                            en_lvl_no = en_lvl_no, 
+                                            en_sector_no = counter).all().count() == 0:
+                    print ('sector was added')
+                    en_sector = EnSectors(get_game_id(proxy_key), 
+                                  en_lvl_id, 
+                                  en_lvl_no, 
+                                  counter, 
+                                  sectorsJson['name'],
+                                  sectorsJson['entered'],
+                                  sectorsJson['answer'],
+                                  sectorsJson['gamer'])
+                    db.session.add(en_sector)
+                    try:
+                        db.commit()
+                        counter +=1
+                        print ('sector added')
+                    except:
+                        db.rollback()
+                        print ('sector adding error')
+    # інформація про сектори поновляється в будь якому випадку
+    print ('level sectors info updating')
+    counter = 1
+    for sector in sectorsJson:
+        updated = False
+        en_sector = EnSectors.query.filter_by(en_game_id = get_game_id(proxy_key), 
+                                  en_lvl_id = en_lvl_id, 
+                                  en_lvl_no = en_lvl_no, 
+                                  en_sector_no = counter).first()
+        if sectorsJson['name'] != en_sector.en_sector_name:
+            print ('sector #' + str(counter) + ' name was changed to ' + str(sectorsJson['name']))
+            # TODO сигнал боту про зміну назви сектора
+            updated = True
+            en_sector.en_sector_name = sectorsJson['name']
+        if sectorsJson ['entered'] != en_sector.en_sector_entered:
+            # TODO сигнал боту про введення сектора
+            print ('sector #' + str(counter) + ' name was closed by code ' + sectorsJson['answer'] + ' by gamer '+ sectorsJson['gamer'])
+            updated = True
+            en_sector.en_sector_entered = True
+            en_sector.en_sector_answer = sectorsJson['answer']
+            en_sector.en_gamer = sectorsJson['gamer']
+        if updated:
+            try:
+                db.commit()
+                counter +=1
+                print ('sector updated')
+            except:
+                db.rollback()
+                print ('sector updating error')
     return None
 
 def sectors_counter (sectorsJson):
