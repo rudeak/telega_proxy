@@ -102,7 +102,7 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
             except:
                 db.session.rollback()
                 print ('sector adding error')
-    print ('------------------------END adding sector printing -------------------')
+        print ('------------------------END adding sector printing -------------------')
     #Якщо вже є сектори то перевіряємо чи кількість не змінилася
     else:
         if EnSectors.query.filter_by (en_game_id = get_game_id(proxy_key), en_lvl_id = en_lvl_id, en_lvl_no = en_lvl_no).count() != sectors_counter(sectorsJson):
