@@ -134,7 +134,9 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
     # інформація про сектори поновляється в будь якому випадку
     print ('level sectors info updating')
     counter = 1
+    print ('------------------------START update sector printing -------------------')
     for sectors in sectorsJson:
+    print (sectors)
         updated = False
         en_sector = EnSectors.query.filter_by(en_game_id = get_game_id(proxy_key), 
                                   en_lvl_id = en_lvl_id, 
@@ -160,6 +162,7 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
             except:
                 db.session.rollback()
                 print ('sector updating error')
+    print ('------------------------END update sector printing -------------------')
     return None
 
 def sectors_counter (sectorsJson):
@@ -173,10 +176,11 @@ def print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no):
                                          en_lvl_id = en_lvl_id, 
                                          en_lvl_no = en_lvl_no).all()
                                          
-    print ('------------------------DB sectors printing -------------------')
+    print ('------------------------START DB sectors printing -------------------')
     print (sectors)                                        
     for sector in sectors:
         print ('sector No:' + str(sector.en_sector_no)+ ' sector name ' + sector.en_sector_name + ' closed:' + str(sector.en_sector_entered) + ' answer: '+ sector.en_sector_answer + ' gamer: ' + sector.en_gamer)
+    print ('------------------------END DB sectors printing -------------------')
     return None
                                   
 
