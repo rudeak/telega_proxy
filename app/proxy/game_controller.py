@@ -143,7 +143,7 @@ def en_sectors_logger (proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
             en_sector.en_sector_name = sectors['name']
         if sectors ['entered'] != en_sector.en_sector_entered:
             # TODO сигнал боту про введення сектора
-            print ('sector #' + str(counter) + ' name was closed by code ' + sectorsJson['answer'] + ' by gamer '+ sectorsJson['gamer'])
+            print ('sector #' + str(counter) + ' name was closed by code ' + sectors['answer'] + ' by gamer '+ sectors['gamer'])
             updated = True
             en_sector.en_sector_entered = True
             en_sector.en_sector_answer = sectors['answer']
