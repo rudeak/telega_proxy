@@ -352,21 +352,21 @@ def en_bonus_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                             en_bonus_no = bonus['number']).first()
         if en_bonus == None: #якщо бонус з таким номером не знайдено значить він новий
             # TODO послати сигнал боту що додався новий бонус
-                       en_bonus = EnBonus (get_game_id(proxy_key), 
-                                            en_lvl_id, 
-                                            en_lvl_no, 
-                                            bonus['number'], 
-                                            bonus ['text'],
-                                            bonus['bonus_text'],
-                                            bonus['completed'],
-                                            bonus['passed'])
-                        db.session.add(bonus)
-                        try:
-                            db.session.commit()
-                            print ('new bonus added')
-                        except:
-                            db.session.rollback()
-                            print ('error adding new bonus')
+            en_bonus = EnBonus (get_game_id(proxy_key), 
+                                en_lvl_id, 
+                                en_lvl_no, 
+                                bonus['number'], 
+                                bonus ['text'],
+                                bonus['bonus_text'],
+                                bonus['completed'],
+                                bonus['passed'])
+            db.session.add(bonus)
+            try:
+                db.session.commit()
+                print ('new bonus added')
+            except:
+                db.session.rollback()
+                print ('error adding new bonus')
         if en_bonus.en_bonus_text != bonus ['text']:
             # TODO послати сигнал боту що змінився текст бонусу
             en_bonus.en_bonus_text = bonus ['text']
