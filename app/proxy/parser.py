@@ -370,11 +370,12 @@ def set_block (html):
             html_dic[z] = '</div>' 
             html_dic[z+1] ='<div class="block">'
             i = 1
-    html_dic = rename_block (html_dic)   
-    html = ''.join(html_dic)
     print ('-----------------------START SET BLOCK PRINTING---------------------')
     print (html)
     print ('-----------------------END SET BLOCK PRINTING---------------------')
+    html_dic = rename_block (html_dic)   
+    html = ''.join(html_dic)
+
     return html
 
 def rename_block (html_dic):
