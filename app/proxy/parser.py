@@ -371,7 +371,8 @@ def set_block (html):
             html_dic[z+1] ='<div class="block">'
             i = 1
     print ('-----------------------START SET BLOCK PRINTING---------------------')
-    print (html_dic)
+    soup = BeautifulSoup(''.join(html_dic))
+    print (soup)
     print ('-----------------------END SET BLOCK PRINTING---------------------')
     html_dic = rename_block (html_dic)   
     html = ''.join(html_dic)
