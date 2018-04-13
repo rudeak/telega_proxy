@@ -213,9 +213,14 @@ def get_sectors_info(pageSoup):
     'answer': введений код
     'gamer': логін гравця, що закрив код
     """
-    sectors =pageSoup.find('div', class_=sectors_div_class).findAll('p')
-
     sectors_list=[]
+    try: # заглушка якщо один код на рівні TODO переробити !!!!
+        sectors =pageSoup.find('div', class_=sectors_div_class).findAll('p')
+    except:
+        sectors_list.append({'name':'Sector 1','entered':False,'answer':'','gamer':''})
+        return json.dumps (sectors_list)
+
+    
     for sector in sectors:
         name =sector.get_text().split(':')[0].strip()
        
@@ -234,8 +239,7 @@ def get_sectors_info(pageSoup):
                     gamer = code.findAll('a')[0].get_text().strip()
                     
         sectors_list.append({'name':name,'entered':entered,'answer':answer,'gamer':gamer})
-    if len (sectors_list) == 0:
-        sectors_list.append({'name':'Sector 1','entered':False,'answer':'','gamer':''})
+    
     return json.dumps (sectors_list)
 
 def get_task(pageSoup):
