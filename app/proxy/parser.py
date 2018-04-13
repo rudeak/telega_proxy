@@ -463,11 +463,11 @@ def rename_block_bs(html):
             block = block.prettify().replace ('"block"', '"block_timer"')
         if len (block_parse.findAll('div', class_ = sectors_div_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_sectors"')
-        if len (block_parse,findAll('h3', class_ = penalty_h3_class)) > 0:
+        if len (block_parse.findAll('h3', class_ = penalty_h3_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_penalty"')
-        if len (block_parse,findAll('h3', class_ = correct_bonus_class)) > 0:
+        if len (block_parse.findAll('h3', class_ = correct_bonus_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_bonus"')
-        if len (block_parse,findAll('span', class_ = code_not_entered_class)) > 0: 
+        if len (block_parse.findAll('span', class_ = code_not_entered_class)) > 0: 
             block = block.prettify().replace ('"block"', '"block_bonus"')
         html_out = html_out+str(block)
     print (html_out)
