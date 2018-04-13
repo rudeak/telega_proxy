@@ -470,7 +470,7 @@ def rename_block_bs(html):
         if len (block_parse.findAll('h3', class_ = code_entered_class)) > 0: 
             block = block.prettify().replace ('"block"', '"block_bonus"')
         if find_task(block_parse):
-            block = block.prettify().replace ('"block"', '"block_task"')
+            block = block.replace ('"block"', '"block_task"')
         html_out = html_out+str(block)
     print (html_out)
     return html_out
