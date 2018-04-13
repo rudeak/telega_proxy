@@ -39,6 +39,7 @@ def en_game_logger (proxy_key, page_json):
             en_task_logger (proxy_key, levelInfo['levelId'], levelInfo['levelNum'], page_json)
             en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, page_json)
             en_bonus_logger (proxy_key, en_lvl_id, en_lvl_no, page_json)
+            en_history_logger (proxy_key, en_lvl_id, en_lvl_no, page_json)
         except:
             db.session.rollback()
             print('помилка створення новго рівня гри')
@@ -48,6 +49,7 @@ def en_game_logger (proxy_key, page_json):
         en_task_logger (proxy_key, levelInfo['levelId'], levelInfo['levelNum'], page_json)
         en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, page_json)
         en_bonus_logger (proxy_key, en_lvl_id, en_lvl_no, page_json)
+        en_history_logger (proxy_key, en_lvl_id, en_lvl_no, page_json)
         print ('old level found')
         #print (lvl)
 
@@ -429,7 +431,7 @@ def en_history_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 except:
                     db.session.rollback ()
                     print ('error loggin history')
-                
+    print_history_from_db (proxy_key, en_lvl_id, en_lvl_no)
     return None
 
     def print_history_from_db (proxy_key, en_lvl_id, en_lvl_no):
