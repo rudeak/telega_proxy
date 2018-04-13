@@ -339,6 +339,8 @@ def get_timer (html):
     """
     timer = BeautifulSoup (html)
     timer = timer.find ('script')
+    if timer == None:
+        return str(0)
     timer = timer.get_text()
     tmp = timer [timer.find(timer_marker_js)+len(timer_marker_js):len(timer)]
     tmp = tmp.split(',')[0]
