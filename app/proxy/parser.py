@@ -469,9 +469,18 @@ def rename_block_bs(html):
             block = block.prettify().replace ('"block"', '"block_bonus"')
         if len (block_parse.findAll('h3', class_ = code_entered_class)) > 0: 
             block = block.prettify().replace ('"block"', '"block_bonus"')
+        if find_task:
+            block = block.prettify().replace ('"block"', '"block_task"')
         html_out = html_out+str(block)
     print (html_out)
     return html_out
+
+def find_task (block):
+    header_h3 = block.findAll ('h3')[0]
+    if header_h3.prettify().find('Task'):
+        return True
+    else:
+        return False
 
 
 def get_code_date(inStr):
