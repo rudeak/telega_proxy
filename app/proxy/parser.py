@@ -232,7 +232,9 @@ def get_sectors_info(pageSoup):
                 else:
                     gamer = code.findAll('a')[0].get_text().strip()
                     
-        sectors_list.append({'name':name,'entered':entered,'answer':answer,'gamer':gamer})            
+        sectors_list.append({'name':name,'entered':entered,'answer':answer,'gamer':gamer})
+        if len (sectors_list) == 0:
+            sectors_list.append({'name':'Sector 1','entered':False,'answer':'','gamer':''})
     return json.dumps (sectors_list)
 
 def get_task(pageSoup):
