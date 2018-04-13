@@ -372,6 +372,9 @@ def set_block (html):
             i = 1
     html_dic = rename_block (html_dic)   
     html = ''.join(html_dic)
+    print ('-----------------------START SET BLOCK PRINTING---------------------')
+    print (html)
+    print ('-----------------------END SET BLOCK PRINTING---------------------')
     return html
 
 def rename_block (html_dic):
