@@ -459,6 +459,7 @@ def rename_block_bs(html):
     html_out =''
     for block in blocks:
         html_out += block.prettify()
+        print (block['class'])
     return html_out
 
 
