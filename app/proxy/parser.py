@@ -460,6 +460,7 @@ def rename_block_bs(html):
     for block in blocks:
         block_parse = BeautifulSoup (block.prettify(), 'lxml')
         if len (block_parse.findAll ('h3', class_ = timer_class))> 0:
+            block = block.prettify().replace ('"block"', '"block_timer"')
             print (block)
     return html_out
 
