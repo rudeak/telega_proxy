@@ -427,6 +427,9 @@ def rename_block (html_dic):
 
 def rename_block_bs (html):
     soup = BeautifulSoup (html, 'lxml')
+    blocks = soup.find ('div', class_ = 'block')
+    for block in blocks:
+        print (block)
     html_out = soup.prettify()
     return html_out
 
