@@ -463,7 +463,7 @@ def rename_block_bs(html):
             block = block.prettify().replace ('"block"', '"block_timer"')
         if len (block_parse.findAll('div', class_ = sectors_div_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_sectors"')
-        html_out += block
+        html_out += block.prettify()
     print (html_out)
     return html_out
 
