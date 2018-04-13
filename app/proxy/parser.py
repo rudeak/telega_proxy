@@ -83,7 +83,7 @@ def level_parser (page):
         sectors_info = get_sectors_info (soup)
     else:
         sectors_count = json.dumps({'all':1,'need':1})
-        sectors_info = json.dumps ({'name':'1','entered':False,'answer':'','gamer':''})
+        sectors_info = get_sectors_info (soup)
     soup = BeautifulSoup(page)
     soup.prettify()
     task = get_task(soup)
@@ -214,6 +214,7 @@ def get_sectors_info(pageSoup):
     'gamer': логін гравця, що закрив код
     """
     sectors =pageSoup.find('div', class_=sectors_div_class).findAll('p')
+
     sectors_list=[]
     for sector in sectors:
         name =sector.get_text().split(':')[0].strip()
