@@ -458,6 +458,7 @@ def rename_block_bs(html):
     blocks = soup.findAll('div', class_='block')
     html_out =''
     for block in blocks:
+        block = block.select('block')
         print (block)
     return html_out
 
