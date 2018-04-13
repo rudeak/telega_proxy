@@ -455,10 +455,11 @@ def rename_block(html_dic):
 
 def rename_block_bs(html):
     soup = BeautifulSoup(html, 'lxml')
-    blocks = soup.select('div', class_='block')
+    blocks = soup.findAll('div', class_='block')
     html_out =''
     for block in blocks:
-        html_out += block.prettify()
+        block = BeautifulSoup(block, 'lxml')
+        block = block.select('div', class_='block')
         print (block['class'])
     return html_out
 
