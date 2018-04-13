@@ -1,6 +1,6 @@
 import json
 from app import db
-from app.models import EnGame, EnLvl, EnSectors, EnTask, EnPrompt, EnBonus
+from app.models import EnGame, EnLvl, EnSectors, EnTask, EnPrompt, EnBonus, EnHistory
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from app.game_managment import edit_game_name, get_domain, get_game_id
@@ -401,3 +401,44 @@ def print_bonuses_from_db (proxy_key, en_lvl_id, en_lvl_no):
     print ('------------------------END DB bonuses printing -------------------')
     return None
 
+def en_history_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
+    history = json.loads (pageJson['history'])
+    if len(history) == 0:
+        return None
+    if len(history) != EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                                  en_lvl_id = en_lvl_id, 
+                                                  en_lvl_no = en_lvl_no).count():
+        for story in history:
+            if EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                          en_lvl_id = en_lvl_id, 
+                                          en_lvl_no = en_lvl_no,
+                                          en_gamer = story['gamer'],
+                                          en_answer = story['answer']).count() == 0:
+                en_history = EnHistory (get_game_id(proxy_key), 
+                                        en_lvl_id, 
+                                        en_lvl_no,
+                                        story['gamer'],
+                                        story['answer'],
+                                        story['time'],
+                                        story ['is_code'],
+                                        story ['correct'])
+                db.session.add(en_history)
+                try:
+                    db.session.commit()
+                    print ('history element logged')
+                except:
+                    db.session.rollback ()
+                    print ('error loggin history')
+                
+    return None
+
+    def print_history_from_db (proxy_key, en_lvl_id, en_lvl_no):
+
+    en_history = EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                          en_lvl_id = en_lvl_id, 
+                                          en_lvl_no = en_lvl_no).all()
+    print ('------------------------START DB history printing -------------------')                                          
+    for story in en_history:
+        print (story)
+    print ('------------------------END DB history printing -------------------')
+    return None

@@ -346,7 +346,7 @@ class EnBonus (db.Model):
         return self.__str__()
 
     def __str__(self):
-        return "<EnPrompt(%(id)s, %(en_bonus_text)s, %(en_bonus_completed)s)>" % self.__dict__
+        return "<EnBonus(%(id)s, %(en_bonus_text)s, %(en_bonus_completed)s)>" % self.__dict__
     
     def __init__(self, en_game_id, en_lvl_id, 
                 en_lvl_no, 
@@ -363,6 +363,39 @@ class EnBonus (db.Model):
         self.en_bonus_prompt_text = en_bonus_prompt_text
         self.en_bonus_completed = en_bonus_completed
         self.en_bonus_passed = en_bonus_passed
+
+class EnHistory (db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    en_game_id = db.Column(db.Integer)
+    en_lvl_id = db.Column(db.Integer)
+    en_lvl_no = db.Column(db.Integer)
+    en_gamer = db.Column(db.Text)
+    en_answer = db.Column(db.Text)
+    en_time = db.Column (db.Integer)
+    en_is_code = db.Column (db.Boolean)
+    en_correct = db.Column (db.Boolean)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnHistory(%(id)s, %(en_answer)s, %(en_gamer)s, %(en_correct)s)>" % self.__dict__
+    
+    def __init__(self, en_game_id, en_lvl_id, 
+                en_lvl_no, 
+                en_gamer, 
+                en_answer, 
+                en_time,
+                en_is_code,
+                en_correct):
+        self.en_game_id = en_game_id
+        self.en_lvl_id = en_lvl_id
+        self.en_lvl_no = en_lvl_no
+        self.en_gamer = en_gamer
+        self.en_answer = en_answer
+        self.en_time = en_time
+        self.en_is_code = en_is_code
+        self.en_correct = en_correct
 
 
 """
