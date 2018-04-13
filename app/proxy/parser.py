@@ -477,12 +477,14 @@ def rename_block_bs(html):
     return html_out
 
 def find_task (block):
+    print('-----------------------START FIND TASK---------------------')
     print (block)
     header_h3 = block.find ('h3')
     if header_h3 == None:
         return False
 
     print (header_h3)
+    print('-----------------------END FIND TASK---------------------')
     if header_h3.prettify().find('Task'):
         return True
     else:
