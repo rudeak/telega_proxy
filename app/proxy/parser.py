@@ -485,7 +485,7 @@ def find_task (block):
 
     print (header_h3)
     print('-----------------------END FIND TASK---------------------')
-    if str(header_h3.prettify()).find('Task'):
+    if header_h3.get_text().find('Task'):
         print ("TASK FOUND")
         return True
     else:
