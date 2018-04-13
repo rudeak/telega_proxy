@@ -479,7 +479,7 @@ def rename_block_bs(html):
 def find_task (block):
     print (block)
     header_h3 = block.find ('h3')
-    if len (header_h3) == 0:
+    if header_h3 == None:
         return False
 
     print (header_h3)
