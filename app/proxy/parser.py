@@ -371,8 +371,7 @@ def set_block (html):
             html_dic[z+1] ='<div class="block">'
             i = 1
     print ('-----------------------START SET BLOCK PRINTING---------------------')
-    soup = BeautifulSoup(''.join(html_dic))
-    print (soup)
+    print (rename_block_bs (''.join(html_dic)))
     print ('-----------------------END SET BLOCK PRINTING---------------------')
     html_dic = rename_block (html_dic)   
     html = ''.join(html_dic)
@@ -425,6 +424,12 @@ def rename_block (html_dic):
         if html_dic[z] == '<div class="block">' and html_dic[z+1].strip() == '<span class="'+code_not_entered_class+'">' and counter == 3:
             html_dic[z] = '<div class="block_bonus">'
     return html_dic
+
+def rename_block_bs (html):
+    soup = BeautifulSoup (html, 'lxml')
+    html_out = soup.prettify()
+    return html_out
+
 
 
 
