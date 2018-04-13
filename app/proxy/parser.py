@@ -478,7 +478,7 @@ def rename_block_bs(html):
 
 def find_task (block):
     print (block)
-    header_h3 = block.findAll ('h3')
+    header_h3 = block.find ('h3')
     print (header_h3)
     if header_h3.prettify().find('Task'):
         return True
