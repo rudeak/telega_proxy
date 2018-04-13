@@ -434,7 +434,7 @@ def en_history_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
     print_history_from_db (proxy_key, en_lvl_id, en_lvl_no)
     return None
 
-    def print_history_from_db (proxy_key, en_lvl_id, en_lvl_no):
+def print_history_from_db (proxy_key, en_lvl_id, en_lvl_no):
 
     en_history = EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
                                           en_lvl_id = en_lvl_id, 
