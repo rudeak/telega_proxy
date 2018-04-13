@@ -53,7 +53,7 @@ def get_game_info(page):
     return name
 
 def change_href (page, id):
-    soup = BeautifulSoup(page.text)
+    soup = BeautifulSoup(page.text, 'lxml')
     soup.prettify()
     try:
         soup.find('div', class_ = "header").replaceWith('')
@@ -70,7 +70,7 @@ def change_href (page, id):
     return page
 
 def level_parser (page):
-    soup = BeautifulSoup(page)
+    soup = BeautifulSoup(page, 'lxml')
     soup.prettify()
     try:
         levelInfo = get_level_num (soup)
@@ -84,7 +84,7 @@ def level_parser (page):
     else:
         sectors_count = json.dumps({'all':1,'need':1})
         sectors_info = get_sectors_info (soup)
-    soup = BeautifulSoup(page)
+    soup = BeautifulSoup(page, "lxml")
     soup.prettify()
     task = get_task(soup)
     prompts = get_prompts (soup)
@@ -385,7 +385,7 @@ def rename_block (html_dic):
     counter = 0
     penalty = False
     for z in range(0, len(html_dic)-1):
-        if not have_sectors(html_dic):
+        if not have_sectors(html_dic) and counter == 0:
             counter = 1
             if html_dic[z+2].strip()=='<h3 class="'+timer_class+'">':
                 html_dic[z] = '<div class="block_timer">'
