@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 import app
 from app.proxy.parser import get_game_info, change_href, level_parser
 from app.game_managment import edit_game_name, get_domain, get_game_id
-from app.models import Proxy
+from app.models import Proxy, Game
 from app.proxy.game_controller import en_game_logger
 
 
@@ -46,7 +46,8 @@ def en_game_proxy_root(id):
     r = get_session (id)
     url = 'http://'+get_domain(id)+'/gameengines/encounter/play/'+get_game_id(id)
     en_game_logger(id,level_parser (change_href(r.get (url),id))['json'])
-    return render_template ('proxy.html', content = level_parser (change_href(r.get (url),id))['html'])
+    game = Game.query.filter_by (game_id = get_game_id(id))
+    return render_template ('proxy.html', game_name = game.game_name, content = level_parser (change_href(r.get (url),id))['html'])
   #  level_parser (change_href(r.get (url),id))['html'] # change_href(r.get (url),id) #
 
 
