@@ -60,7 +60,7 @@ def change_href(page, id):
     soup.prettify()
     try:
         print (soup.find('div', class_="header"))
-        soup.find('div', class_="header").replaceWith(''))
+        soup.find('div', class_="header").replaceWith('')
     except:
         print('гра ще не почалася')
     for ref in soup.findAll('a', href=True):
