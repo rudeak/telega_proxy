@@ -84,7 +84,8 @@ def change_header (page, id):
     header_soup = soup.find('div', class_="header")
     game = Game.query.filter_by(game_id = get_game_id(id)).first()
     for h1 in header_soup.find('h1'):
-        h1.a['href']= '/proxy'+str(id)
+        print (h1.a['href'])
+        h1.a['href']= '/proxy/'+str(id)
     print (header_soup)
     return header_soup
 """
