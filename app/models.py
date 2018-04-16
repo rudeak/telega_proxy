@@ -346,7 +346,7 @@ class EnBonus (db.Model):
         return self.__str__()
 
     def __str__(self):
-        return "<EnBonus(%(id)s, %(en_bonus_text)s, %(en_bonus_completed)s, %(en_bonus_answer)s)>" % self.__dict__
+        return "<EnBonus(%(id)s, %(en_bonus_text)s, %(en_bonus_completed)s, %(en_bonus_answer)s, %(en_gamer)s)>" % self.__dict__
     
     def __init__(self, en_game_id, en_lvl_id, 
                 en_lvl_no, 
