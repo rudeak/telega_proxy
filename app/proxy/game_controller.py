@@ -276,7 +276,7 @@ def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                                     en_lvl_no = en_lvl_no,
                                                     en_prompt_no = prompt['number']).first()
         # якщо підказка з таким номером є то перевірити чи не змінився її текст
-            if en_prompt != None:
+            if en_prompt.count() != 0:
                 if en_prompt.en_prompt_text != prompt['text']:
                     # TODO подати сигнал боту що змінився текст підказки
                     en_prompt.en_prompt_text = prompt['text']
