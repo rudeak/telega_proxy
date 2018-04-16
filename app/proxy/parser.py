@@ -78,6 +78,7 @@ def change_header (page, id):
     soup.find('div', class_="header")
     try:
         str(soup).replace('/GameDetails.aspx?gid='+str(get_game_id(id), '/'+str(id)))
+        print (soup)
     except:
         print ('error header change')
     return soup
@@ -87,7 +88,7 @@ def level_parser(page):
     soup = BeautifulSoup(page, 'lxml')
     soup.prettify()
     head = str(soup)[0:str(soup).find('<div class="spacer">')]
-    print (soup)
+    #print (soup)
     try:
         levelInfo = get_level_num(soup)
     except:
