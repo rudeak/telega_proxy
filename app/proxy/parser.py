@@ -487,15 +487,21 @@ def rename_block_bs(html):
             continue
         if len (block_parse.findAll('span', class_ = code_not_entered_class)) > 0:
             if len (block_parse.findAll ('script')) == 0:
-                block = str(block).replace ('"block"', '"block_bonus"')
+                block = block.prettify().replace ('"block"', '"block_bonus"')
                 print ('bonus 3')
                 html_out = html_out+str(block)
                 continue
             else:
-                block = block.prettify().replace ('"block"', '"block_prompt"')
-                print ('prompt 1')
-                html_out = html_out+str(block)
-                continue
+                if block.prettify.find('Penalty') > 0 or block.prettify.find('Штрафна')
+                    block = block.prettify().replace ('"block"', '"block_penalty"')
+                    print ('penalty 1')
+                    html_out = html_out+str(block)
+                    continue
+                else:
+                    block = block.prettify().replace ('"block"', '"block_prompt"')
+                    print ('prompt 1')
+                    html_out = html_out+str(block)
+                    continue
         
         if task:
 
