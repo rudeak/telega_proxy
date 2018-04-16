@@ -76,15 +76,7 @@ def change_header (page, id):
     soup = BeautifulSoup(page.text, 'lxml')
     soup.prettify()
     header_soup = soup.find('div', class_="header")
-    try:
-        soup.find('h1').replaceWith('')
-        #str(soup).replace('/GameDetails.aspx?gid='+str(get_game_id(id), '/'+str(id)))
-
-        print (soup)
-    except:
-        print ('error header change')
-    #header  = u"""<div class="header"><a href="/">{}</a>""".format('test game')
-    #header_soup = BeautifulSoup(header, 'lxml')
+    print (header_soup)
     return header_soup
 """
 <ul>
