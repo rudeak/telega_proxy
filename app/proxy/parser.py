@@ -457,23 +457,38 @@ def rename_block_bs(html):
     soup = BeautifulSoup(html, 'lxml')
     blocks = soup.findAll('div', class_='block')
     html_out =''
+    
     for block in blocks:
         block_parse = BeautifulSoup (block.prettify(), 'lxml')
         if len (block_parse.findAll ('h3', class_ = timer_class))> 0:
             block = block.prettify().replace ('"block"', '"block_timer"')
+            html_out = html_out+str(block)
+            continue
         if len (block_parse.findAll('div', class_ = sectors_div_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_sectors"')
+            html_out = html_out+str(block)
+            continue
         if len (block_parse.findAll('h3', class_ = penalty_h3_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_penalty"')
+            html_out = html_out+str(block)
+            continue
         if len (block_parse.findAll('h3', class_ = correct_bonus_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_bonus"')
+            html_out = html_out+str(block)
+            continue
         if len (block_parse.findAll('h3', class_ = code_entered_class)) > 0: 
             block = block.prettify().replace ('"block"', '"block_bonus"')
+            html_out = html_out+str(block)
+            continue
         if len (block_parse.findAll('span', class_ = code_not_entered_class)) > 0:
             if len (block_parse.findAll ('script')) == 0:
                 block = str(block).replace ('"block"', '"block_bonus"')
+                html_out = html_out+str(block)
+                continue
             else:
                 block = block.prettify().replace ('"block"', '"block_prompt"')
+                html_out = html_out+str(block)
+                continue
             #block = block.replace ('"block"', '"block_task"')
         html_out = html_out+str(block)
     print (html_out)
