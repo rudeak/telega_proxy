@@ -50,6 +50,7 @@ def en_game_proxy_root(id):
     return render_template ('proxy.html', 
             game_stats = game.game_domain + '/GameStat.aspx?gid='+str(get_game_id(id)),
             game_name = game.game_name, 
+            alt_game_stats = 'questtools.herokuapp.com/gamestat/'+str (str(get_game_id(id))+'?domain='+game.game_domain
             content = level_parser (change_href(r.get (url),id))['html'])
   #  level_parser (change_href(r.get (url),id))['html'] # change_href(r.get (url),id) #
 
