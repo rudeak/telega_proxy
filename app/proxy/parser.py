@@ -75,7 +75,7 @@ def change_href(page, id):
 def change_header (page, id):
     soup = BeautifulSoup(page.text, 'lxml')
     soup.prettify()
-    soup.find('div', class_="header")
+    header_soup = soup.find('div', class_="header")
     try:
         soup.find('h1').replaceWith('')
         #str(soup).replace('/GameDetails.aspx?gid='+str(get_game_id(id), '/'+str(id)))
@@ -83,8 +83,8 @@ def change_header (page, id):
         print (soup)
     except:
         print ('error header change')
-    header  = u"""<div class="header"><a href="/">{}</a>""".format('test game')
-    header_soup = BeautifulSoup(header, 'lxml')
+    #header  = u"""<div class="header"><a href="/">{}</a>""".format('test game')
+    #header_soup = BeautifulSoup(header, 'lxml')
     return header_soup.prettify()
 """
 <ul>
