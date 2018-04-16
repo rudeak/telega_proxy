@@ -83,8 +83,7 @@ def change_header (page, id):
         print (soup)
     except:
         print ('error header change')
-    header  = '''<div class="header">
-                 <a href="/">{}</a>'''.format('test game')
+    header  = '<div class="header"><a href="/">{}</a>'.format('test game')
     header_soup = BeautifulSoup(header, 'lxml')
     return header_soup.prettify()
 """
