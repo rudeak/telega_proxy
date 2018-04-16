@@ -77,7 +77,9 @@ def change_header (page, id):
     soup.prettify()
     soup.find('div', class_="header")
     try:
-        str(soup).replace('/GameDetails.aspx?gid='+str(get_game_id(id), '/'+str(id)))
+        soup.find('h1').replaceWith('')
+        #str(soup).replace('/GameDetails.aspx?gid='+str(get_game_id(id), '/'+str(id)))
+
         print (soup)
     except:
         print ('error header change')
