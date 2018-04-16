@@ -91,7 +91,7 @@ def en_game_proxy_post_root(id):
         #for k,v in request.form.to_dict():
         #    post_data[k] = v.encode('utf-8')
         #level_parser (change_href(r.get (url),id))
-        page = level_parser (r.post (url, request.form.to_dict()),id))
+        page = level_parser (r.post (url, request.form.to_dict()),id)
         en_game_logger(id,page['json'])
         game = Game.query.filter_by (game_id = get_game_id(id)).first()
         alt_game_stats = 'questtools.herokuapp.com/gamestat/'+str(get_game_id(id))+'?domain='+game.game_domain
