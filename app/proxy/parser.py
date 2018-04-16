@@ -83,7 +83,27 @@ def change_header (page, id):
         print (soup)
     except:
         print ('error header change')
-    return soup
+    header  = '''<div class="header">
+                 <a href="/">{}</a>'''.format('test game')
+"""
+<ul>
+<li class="refresh">
+<a href="/gameengines/encounter/play/27151/?rnd=0.940503293620657"><i></i><span>Refresh</span></a>
+</li>
+<li class="stats">
+<a href="/GameStat.aspx?gid=27151" target="_blank"><i></i><span>Statistic</span></a>
+</li>
+<li class="mail">
+<a href="javascript:OpenScrollableWindow('/MailLevel.aspx?level=6&amp;gid=27151', 'MailLevel', 640, 420)"><span>To Mail</span></a>
+</li>
+<li class="print">
+<a href="/gameengines/encounter/print/27151/?level=6" target="_blank"><i></i><span>To Print</span></a>
+</li>
+</ul>
+</div>
+"""
+
+    return header
 
 
 def level_parser(page):
