@@ -436,7 +436,7 @@ def en_history_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 except:
                     db.session.rollback ()
                     print ('error loggin history')
-    #print_history_from_db (proxy_key, en_lvl_id, en_lvl_no)
+    print_history_from_db (proxy_key, en_lvl_id, en_lvl_no)
     return None
 
 def history_analize (proxy_key, en_lvl_id, en_lvl_no, pageJson):
