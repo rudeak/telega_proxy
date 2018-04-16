@@ -326,9 +326,10 @@ def print_prompts_from_db (proxy_key, en_lvl_id, en_lvl_no):
     print ('------------------------START DB prompts printing -------------------')                                          
     for prompt in en_prompt:
         print (prompt)
+    print ('------------------------END DB prompts printing -------------------')
+    for prompt in en_prompt:
         db.session.delete(prompt)
         db.session.commit()
-    print ('------------------------END DB prompts printing -------------------')
     return None
                                   
 def en_bonus_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
