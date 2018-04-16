@@ -396,25 +396,15 @@ def set_block(html):
             html_dic[z] = '</div>'
             html_dic[z+1] = '<div class="block">'
             i = 1
-    print('-----------------------START SET BLOCK PRINTING---------------------')
-    rename_block_bs(''.join(html_dic))
-    print('-----------------------END SET BLOCK PRINTING---------------------')
+
     html_dic = rename_block(html_dic)
     html = ''.join(html_dic)
 
     return html
 
-
+"""
 def rename_block(html_dic):
-    """
-    отримує стрінг хтмл переробений на блоки, визначає тип коного блоку:
-    block_sectors
-    block_timer
-    block_task
-    block_bonus
-    block_prompt
-    block_penalty
-    """
+
     counter = 0
     penalty = False
     for z in range(0, len(html_dic)-1):
@@ -451,9 +441,18 @@ def rename_block(html_dic):
         if html_dic[z] == '<div class="block">' and html_dic[z+1].strip() == '<span class="'+code_not_entered_class+'">' and counter == 3:
             html_dic[z] = '<div class="block_bonus">'
     return html_dic
+"""
 
-
-def rename_block_bs(html):
+def rename_block(html):
+    """
+    отримує стрінг хтмл переробений на блоки, визначає тип коного блоку:
+    block_sectors
+    block_timer
+    block_task
+    block_bonus
+    block_prompt
+    block_penalty
+    """
     soup = BeautifulSoup(html, 'lxml')
     blocks = soup.findAll('div', class_='block')
     html_out =''
@@ -462,80 +461,66 @@ def rename_block_bs(html):
         block_parse = BeautifulSoup (block.prettify(), 'lxml')
         if len (block_parse.findAll ('h3', class_ = timer_class))> 0:
             block = block.prettify().replace ('"block"', '"block_timer"')
-            print ('timer')
+            
             html_out = html_out+str(block)
             continue
         if len (block_parse.findAll('div', class_ = sectors_div_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_sectors"')
-            print ('sectors')
+            
             html_out = html_out+str(block)
             continue
         if len (block_parse.findAll('h3', class_ = penalty_h3_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_penalty"')
-            print ('penalty')
+            
             html_out = html_out+str(block)
             continue
         if len (block_parse.findAll('h3', class_ = correct_bonus_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_bonus"')
-            print ('bonus')
+            
             html_out = html_out+str(block)
             continue
         if len (block_parse.findAll('h3', class_ = code_entered_class)) > 0: 
             block = block.prettify().replace ('"block"', '"block_bonus"')
-            print ('bonus 2')
+            
             html_out = html_out+str(block)
             continue
         if len (block_parse.findAll('span', class_ = code_not_entered_class)) > 0:
             if len (block_parse.findAll ('script')) == 0:
                 block = block.prettify().replace ('"block"', '"block_bonus"')
-                print ('bonus 3')
+                
                 html_out = html_out+str(block)
                 continue
             else:
                 if str(block).find('Penalty') > 0 or str(block).find('Штрафна') > 0:
                     block = block.prettify().replace ('"block"', '"block_penalty"')
-                    print ('penalty 1')
+                    
                     html_out = html_out+str(block)
                     continue
                 else:
                     block = block.prettify().replace ('"block"', '"block_prompt"')
-                    print ('prompt 1')
+                    
                     html_out = html_out+str(block)
                     continue
         
         if task:
 
             block = block.prettify().replace ('"block"', '"block_task"')
-            print ('task')
-            print (block)
+            
             html_out = html_out+str(block)
             task = False
             continue
         else:
             block = block.prettify().replace ('"block"', '"block_prompt"')
-            print ('prompt 2')
+           
             html_out = html_out+str(block)
             task = False
             continue
             #block = block.replace ('"block"', '"block_task"')
         
-    print (html_out)
+
     return html_out
 
-def find_task (block):
-    print('-----------------------START FIND TASK---------------------')
-    print (block)
-    header_h3 = block.find ('h3')
-    if header_h3 == None:
-        return False
 
-    print (header_h3)
-    print('-----------------------END FIND TASK---------------------')
-    if header_h3.get_text().find('Task'):
-        print ("TASK FOUND")
-        return True
-    else:
-        return False
 
 
 def get_code_date(inStr):
