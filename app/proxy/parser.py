@@ -457,7 +457,7 @@ def rename_block_bs(html):
     soup = BeautifulSoup(html, 'lxml')
     blocks = soup.findAll('div', class_='block')
     html_out =''
-    
+    task = True
     for block in blocks:
         block_parse = BeautifulSoup (block.prettify(), 'lxml')
         if len (block_parse.findAll ('h3', class_ = timer_class))> 0:
@@ -489,6 +489,15 @@ def rename_block_bs(html):
                 block = block.prettify().replace ('"block"', '"block_prompt"')
                 html_out = html_out+str(block)
                 continue
+        if task:
+            block = str(block).replace ('"block"', '"block_task"')
+            html_out = html_out+str(block)
+            task = False
+            continue
+        else:
+            block = block.prettify().replace ('"block"', '"block_prompt"')
+            html_out = html_out+str(block)
+            continue
             #block = block.replace ('"block"', '"block_task"')
         html_out = html_out+str(block)
     print (html_out)
