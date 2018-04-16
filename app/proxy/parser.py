@@ -67,6 +67,12 @@ def change_href(page, id):
             ref['href'] = '/proxy/'+str(id)+ref['href']
     for ref in soup.findAll('a', href=True):
         print(ref['href'])
+        
+    try:
+        print (soup.find('div', class_="header"))
+        soup.find('div', class_="header").replaceWith(change_header (page, id))
+    except:
+        print('гра ще не почалася')
     page = soup.prettify().replace('/gameengines/encounter/play/'+str(get_game_id(id))+'/',
                                    '/proxy/'+str(id))
 
