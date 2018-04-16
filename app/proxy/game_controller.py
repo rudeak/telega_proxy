@@ -445,7 +445,6 @@ def en_history_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
 def history_analize (proxy_key, en_lvl_id, en_lvl_no, pageJson):
     history = json.loads (pageJson['history'])
     for story in history:
-            for story in en_history:
         print (story)
         if EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
                                           en_lvl_id = en_lvl_id, 
