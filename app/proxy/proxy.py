@@ -47,7 +47,10 @@ def en_game_proxy_root(id):
     url = 'http://'+get_domain(id)+'/gameengines/encounter/play/'+get_game_id(id)
     en_game_logger(id,level_parser (change_href(r.get (url),id))['json'])
     game = Game.query.filter_by (game_id = get_game_id(id)).first()
-    return render_template ('proxy.html', game_name = game.game_name, content = level_parser (change_href(r.get (url),id))['html'])
+    return render_template ('proxy.html', 
+            game_stats = game.game_domain + '/GameStat.aspx?gid='+str(get_game_id(id)),
+            game_name = game.game_name, 
+            content = level_parser (change_href(r.get (url),id))['html'])
   #  level_parser (change_href(r.get (url),id))['html'] # change_href(r.get (url),id) #
 
 
