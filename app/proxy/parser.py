@@ -1,7 +1,7 @@
 import json
 import time
 from app import db
-from app.models import EnGameJson
+from app.models import EnGameJson, Game
 from app.game_managment import get_game_id
 from sqlalchemy.orm import sessionmaker
 from bs4 import BeautifulSoup
@@ -76,6 +76,8 @@ def change_header (page, id):
     soup = BeautifulSoup(page.text, 'lxml')
     soup.prettify()
     header_soup = soup.find('div', class_="header")
+    game = Game.query.filter_by(game_id = get_game_id(id)).first()
+    header_soup.find('h1').replaceWith ('<h1><a href ={}>{}</a></h1>'.format('/proxy'+str(id), game.game_name))
     print (header_soup)
     return header_soup
 """
