@@ -85,6 +85,7 @@ def change_header (page, id):
         print ('error header change')
     header  = '''<div class="header">
                  <a href="/">{}</a>'''.format('test game')
+    return header
 """
 <ul>
 <li class="refresh">
@@ -103,7 +104,7 @@ def change_header (page, id):
 </div>
 """
 
-    return header
+    
 
 
 def level_parser(page):
