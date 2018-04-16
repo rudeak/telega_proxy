@@ -496,10 +496,12 @@ def rename_block_bs(html):
                 print ('prompt 1')
                 html_out = html_out+str(block)
                 continue
-        print (block)
+        
         if task:
+
             block = block.prettify().replace ('"block"', '"block_prompt"')
             print ('task')
+            print (block)
             html_out = html_out+str(block)
             task = False
             continue
@@ -507,6 +509,7 @@ def rename_block_bs(html):
             block = block.prettify().replace ('"block"', '"block_prompt"')
             print ('prompt 2')
             html_out = html_out+str(block)
+            task = False
             continue
             #block = block.replace ('"block"', '"block_task"')
         
