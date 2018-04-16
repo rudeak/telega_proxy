@@ -499,7 +499,7 @@ def rename_block_bs(html):
         
         if task:
 
-            block = block.prettify().replace ('"block"', '"block_prompt"')
+            block = block.prettify().replace ('"block"', '"block_task"')
             print ('task')
             print (block)
             html_out = html_out+str(block)
