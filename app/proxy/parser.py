@@ -58,6 +58,7 @@ def change_href(page, id):
     soup = BeautifulSoup(page.text, 'lxml')
     soup.prettify()
     try:
+        print (soup.find('div', class_="header"))
         soup.find('div', class_="header").replaceWith('')
     except:
         print('гра ще не почалася')
