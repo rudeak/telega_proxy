@@ -462,45 +462,55 @@ def rename_block_bs(html):
         block_parse = BeautifulSoup (block.prettify(), 'lxml')
         if len (block_parse.findAll ('h3', class_ = timer_class))> 0:
             block = block.prettify().replace ('"block"', '"block_timer"')
+            print ('timer')
             html_out = html_out+str(block)
             continue
         if len (block_parse.findAll('div', class_ = sectors_div_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_sectors"')
+            print ('sectors')
             html_out = html_out+str(block)
             continue
         if len (block_parse.findAll('h3', class_ = penalty_h3_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_penalty"')
+            print ('penalty')
             html_out = html_out+str(block)
             continue
         if len (block_parse.findAll('h3', class_ = correct_bonus_class)) > 0:
             block = block.prettify().replace ('"block"', '"block_bonus"')
+            print ('bonus')
             html_out = html_out+str(block)
             continue
         if len (block_parse.findAll('h3', class_ = code_entered_class)) > 0: 
             block = block.prettify().replace ('"block"', '"block_bonus"')
+            print ('bonus 2')
             html_out = html_out+str(block)
             continue
         if len (block_parse.findAll('span', class_ = code_not_entered_class)) > 0:
             if len (block_parse.findAll ('script')) == 0:
                 block = str(block).replace ('"block"', '"block_bonus"')
+                print ('bonus 3')
                 html_out = html_out+str(block)
                 continue
             else:
                 block = block.prettify().replace ('"block"', '"block_prompt"')
+                print ('prompt 1')
                 html_out = html_out+str(block)
                 continue
+            print (block)
         if task:
-            block = str(block).replace ('"block"', '"block_task"')
+            block = block.prettify().replace ('"block"', '"block_prompt"')
+            print ('task')
             html_out = html_out+str(block)
             task = False
             continue
         else:
             block = block.prettify().replace ('"block"', '"block_prompt"')
+            print ('prompt 2')
             html_out = html_out+str(block)
             continue
             #block = block.replace ('"block"', '"block_task"')
         html_out = html_out+str(block)
-    print (html_out)
+    #print (html_out)
     return html_out
 
 def find_task (block):
