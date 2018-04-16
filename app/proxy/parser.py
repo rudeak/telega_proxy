@@ -496,7 +496,7 @@ def rename_block_bs(html):
                 print ('prompt 1')
                 html_out = html_out+str(block)
                 continue
-            print (block)
+        print (block)
         if task:
             block = block.prettify().replace ('"block"', '"block_prompt"')
             print ('task')
@@ -509,8 +509,8 @@ def rename_block_bs(html):
             html_out = html_out+str(block)
             continue
             #block = block.replace ('"block"', '"block_task"')
-        html_out = html_out+str(block)
-    #print (html_out)
+        
+    print (html_out)
     return html_out
 
 def find_task (block):
