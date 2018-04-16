@@ -409,7 +409,8 @@ def en_history_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
         return None
     if len(history) != EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
                                                   en_lvl_id = en_lvl_id, 
-                                                  en_lvl_no = en_lvl_no).count():
+                                                  en_lvl_no = en_lvl_no).count(): #TODO аналіз введених кодів - вірний/невірний/бонус
+        history_analize (proxy_key, en_lvl_id, en_lvl_no, pageJson)
         for story in history:
             if EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
                                           en_lvl_id = en_lvl_id, 
@@ -431,7 +432,13 @@ def en_history_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 except:
                     db.session.rollback ()
                     print ('error loggin history')
-    print_history_from_db (proxy_key, en_lvl_id, en_lvl_no)
+    #print_history_from_db (proxy_key, en_lvl_id, en_lvl_no)
+    return None
+
+def history_analize (proxy_key, en_lvl_id, en_lvl_no, pageJson):
+    history = json.loads (pageJson['history'])
+    for story in history:
+        print (story)
     return None
 
 def print_history_from_db (proxy_key, en_lvl_id, en_lvl_no):
