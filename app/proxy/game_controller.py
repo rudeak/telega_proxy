@@ -1,6 +1,6 @@
 import json
 from app import db
-from app.models import EnGame, EnLvl, EnSectors, EnTask, EnPrompt, EnBonus, EnHistory
+from app.models import EnGame, EnLvl, EnSectors, EnTask, EnPrompt, EnBonus, EnHistory, EnPenalty
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from app.game_managment import edit_game_name, get_domain, get_game_id
@@ -40,6 +40,7 @@ def en_game_logger (proxy_key, page_json):
             en_task_logger (proxy_key, levelInfo['levelId'], levelInfo['levelNum'], page_json)
             en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, page_json)
             en_bonus_logger (proxy_key, en_lvl_id, en_lvl_no, page_json)
+            en_penalty_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, page_json)
             
         except:
             db.session.rollback()
@@ -51,7 +52,7 @@ def en_game_logger (proxy_key, page_json):
         en_task_logger (proxy_key, levelInfo['levelId'], levelInfo['levelNum'], page_json)
         en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, page_json)
         en_bonus_logger (proxy_key, en_lvl_id, en_lvl_no, page_json)
-        
+        en_penalty_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, page_json)
         print ('old level found')
         #print (lvl)
 
@@ -318,9 +319,105 @@ def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
     print_prompts_from_db (proxy_key, en_lvl_id, en_lvl_no)
     return None
 
+def en_penalty_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
+    prompts = json.loads(pageJson['penalty'])
+    print ('penalty logger')
+    print (prompts)
+    # якщо немає піказок тоді вернутись
+    if prompts == None: 
+        return None
+    # якщо не створені підказки в базі то створити їх
+    if EnPenalty.query.filter_by(en_game_id = get_game_id(proxy_key), 
+                                en_lvl_id = en_lvl_id, 
+                                en_lvl_no = en_lvl_no).count() == 0:
+        for prompt in prompts:
+            if prompt['timer'] == '':
+                prompt['timer'] = '0'
+            en_prompt = EnPenalty (get_game_id(proxy_key), 
+                                    en_lvl_id, 
+                                    en_lvl_no,
+                                    prompt['number'], 
+                                    prompt['text'], 
+                                    int(prompt['timer']))
+            db.session.add (en_prompt)
+            try:
+                db.session.commit()
+                print ('Penalty prompt added') # TODO прописати сигнали боту по штрафних підказках
+            except:
+                db.session.rollback()
+                print ('Penalty prompt error')
+    print ('prompts length =' + str (len(prompts)))
+    if len(prompts) > EnPenalty.query.filter_by(en_game_id = get_game_id(proxy_key), 
+                                                        en_lvl_id = en_lvl_id, 
+                                                        en_lvl_no = en_lvl_no).count():
+        print ('prompts count changed') # TODO сигнал боту що кількість штрафних підказок змінилася
+        # перевірки чи не змінилася кількість підказок
+
+        for prompt in prompts:
+            if prompt['timer'] == '':
+                    prompt['timer'] = '0'
+            en_prompt = EnPenalty.query.filter_by (en_game_id = get_game_id(proxy_key),
+                                                    en_lvl_id = en_lvl_id,
+                                                    en_lvl_no = en_lvl_no,
+                                                    en_prompt_no = prompt['number']).first()
+        # якщо підказка з таким номером є то перевірити чи не змінився її текст
+            if EnPenalty.query.filter_by (en_game_id = get_game_id(proxy_key),
+                                         en_lvl_id = en_lvl_id,
+                                         en_lvl_no = en_lvl_no,
+                                         en_prompt_no = prompt['number']).count() != 0:
+                if en_prompt.en_prompt_text != prompt['text']:
+                    # TODO подати сигнал боту що змінився текст підказки
+                    en_prompt.en_prompt_text = prompt['text']
+                if en_prompt.en_prompt_data != prompt['timer']:
+                    # якщо час == 0 тоді додати сигнал боту про появу нової підказки
+                    if prompt['timer'] == 0:
+                        en_prompt.en_prompt_data = 0
+                        print ('new penalty prompt appeared') #TODO сигнал про нову штрафнк підказку
+                    else:
+                        # змінився час до підказки
+                        en_prompt.en_prompt_data = prompt['timer']
+                        print ('penalty prompt timer changed') # TODO перезаписати сигнали боту по штрафних підказках
+                    try:
+                        db.session.commit()
+                        print ('new penalty prompt text written')
+                    except:
+                        db.session.rollback()
+                        print ('error updating penalty prompt text')
+            else:
+                # TODO подати сигнал боту, що додалася нова штрафна підказкка
+                if prompt['timer'] == '':
+                    prompt['timer'] = '0'
+                en_prompt = EnPenalty (get_game_id(proxy_key), 
+                                    en_lvl_id, 
+                                    en_lvl_no,
+                                    prompt['number'], 
+                                    prompt['text'], 
+                                    int(prompt['timer']))
+                db.session.add (en_prompt)
+                try:
+                    db.session.commit()
+                    print ('penalty prompt added')
+                except:
+                    db.session.rollback()
+                    print ('penalty prompt error')
+    print_penalty_prompts_from_db (proxy_key, en_lvl_id, en_lvl_no)
+    return None
+
 def print_prompts_from_db (proxy_key, en_lvl_id, en_lvl_no):
 
     en_prompt = EnPrompt.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                          en_lvl_id = en_lvl_id, 
+                                          en_lvl_no = en_lvl_no).all()
+    print ('------------------------START DB prompts printing -------------------')                                          
+    for prompt in en_prompt:
+        print (prompt)
+    print ('------------------------END DB prompts printing -------------------')
+
+    return None
+
+def print_penalty_prompts_from_db (proxy_key, en_lvl_id, en_lvl_no):
+
+    en_prompt = EnPenalty.query.filter_by (en_game_id = get_game_id(proxy_key), 
                                           en_lvl_id = en_lvl_id, 
                                           en_lvl_no = en_lvl_no).all()
     print ('------------------------START DB prompts printing -------------------')                                          

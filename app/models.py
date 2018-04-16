@@ -397,6 +397,29 @@ class EnHistory (db.Model):
         self.en_is_code = en_is_code
         self.en_correct = en_correct
 
+class EnPenalty (db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    en_game_id = db.Column(db.Integer)
+    en_lvl_id = db.Column(db.Integer)
+    en_lvl_no = db.Column(db.Integer)
+    en_prompt_no = db.Column(db.Integer)
+    en_prompt_text = db.Column(db.Text)
+    en_prompt_data = db.Column(db.Integer)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<EnPenalty(%(id)s, %(en_prompt_text)s, %(en_prompt_data)s)>" % self.__dict__
+    
+    def __init__(self, en_game_id, en_lvl_id, en_lvl_no, en_prompt_no, en_prompt_text, en_prompt_data):
+        self.en_game_id = en_game_id
+        self.en_lvl_id = en_lvl_id
+        self.en_lvl_no = en_lvl_no
+        self.en_prompt_no = en_prompt_no
+        self.en_prompt_text = en_prompt_text
+        self.en_prompt_data = en_prompt_data
+
 
 """
 class EnTask(db.Model):
