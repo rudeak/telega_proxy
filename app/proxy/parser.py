@@ -471,7 +471,7 @@ def rename_block_bs(html):
             block = block.prettify().replace ('"block"', '"block_bonus"')
         if len (block_parse.findAll('span', class_ = code_not_entered_class)) > 0:
             if len (block_parse.findAll ('script')) == 0:
-                block = block.replace ('"block"', '"block_bonus"')
+                block = str(block).replace ('"block"', '"block_bonus"')
             else:
                 block = block.prettify().replace ('"block"', '"block_prompt"')
             #block = block.replace ('"block"', '"block_task"')
