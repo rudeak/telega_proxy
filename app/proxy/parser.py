@@ -196,23 +196,23 @@ def get_level_history(pageSoup):
         #code_date = code_date[0:code_date.find('/n')]
         try:
             user = item.find('a').get_text().strip()
+            answer = item.find('span').get_text().strip()
+            answer_class = item.find('span')['class']
+            if answer_class[0] == correct_answer_class:
+                correct = True
+                isCode = True
+            else:
+                if answer_class[0] == correct_bonus_class:
+                    correct = True
+                    isCode = False
+                else:
+                    correct = False
+                    isCode = True
+
+            history.append({'time': code_date, 'gamer': user,
+                            'answer': answer, 'correct': correct, 'is_code': isCode})
         except:
             print ('Current code is ' + str(item)) # TODO розбір чи введений код правильний
-        answer = item.find('span').get_text().strip()
-        answer_class = item.find('span')['class']
-        if answer_class[0] == correct_answer_class:
-            correct = True
-            isCode = True
-        else:
-            if answer_class[0] == correct_bonus_class:
-                correct = True
-                isCode = False
-            else:
-                correct = False
-                isCode = True
-
-        history.append({'time': code_date, 'gamer': user,
-                        'answer': answer, 'correct': correct, 'is_code': isCode})
     return json.dumps(history)
 
 
