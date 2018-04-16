@@ -420,7 +420,10 @@ def en_history_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                           en_lvl_id = en_lvl_id, 
                                           en_lvl_no = en_lvl_no,
                                           en_gamer = story['gamer'],
-                                          en_answer = story['answer']).count() == 0:
+                                          en_answer = story['answer'],
+                                          en_time = story['time'],
+                                          en_is_code = story['is_code'],
+                                          en_correct = story['correct']).count() == 0:
                 en_history = EnHistory (get_game_id(proxy_key), 
                                         en_lvl_id, 
                                         en_lvl_no,
