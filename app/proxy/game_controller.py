@@ -410,6 +410,10 @@ def en_history_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
     if len(history) != EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
                                                   en_lvl_id = en_lvl_id, 
                                                   en_lvl_no = en_lvl_no).count(): #TODO аналіз введених кодів - вірний/невірний/бонус
+        print ('json history len = '+ str(len(history)))
+        print ('DB history count = ' str(EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                                                    en_lvl_id = en_lvl_id, 
+                                                                    en_lvl_no = en_lvl_no).count()) )
         history_analize (proxy_key, en_lvl_id, en_lvl_no, pageJson)
         for story in history:
             if EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
