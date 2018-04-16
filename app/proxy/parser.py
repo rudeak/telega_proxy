@@ -75,6 +75,7 @@ def change_href(page, id):
 def level_parser(page):
     soup = BeautifulSoup(page, 'lxml')
     soup.prettify()
+    print (soup)
     try:
         levelInfo = get_level_num(soup)
     except:
@@ -117,7 +118,7 @@ def level_parser(page):
     return {'html': set_block(page), 'json': level}
 
 
-def get_blockage_info(pageSoup):
+def get_blockage_info(pageSoup): #TODO витягувати більш докладну інфу про блокування 
     if len(pageSoup.findAll('div', class_=answer_block_div_class)) > 0:
         return True
     else:
