@@ -283,9 +283,11 @@ def en_prompts_loger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 if en_prompt.en_prompt_data != prompt['timer']:
                     # якщо час == 0 тоді додати сигнал боту про появу нової підказки
                     if prompt['timer'] == 0:
+                        en_prompt.en_prompt_data = 0
                         print ('new prompt appeared') #TODO сигнал про нову підказку
                     else:
                         # змінився час до підказки
+                        en_prompt.en_prompt_data = prompt['timer']
                         print ('prompt timer changed') # TODO перезаписати сигнали боту по підказках
                     try:
                         db.session.commit()
@@ -468,7 +470,7 @@ def history_analize (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                         en_bonus.en_bonus_answer = story ['answer']
                         en_bonus.en_gamer = story ['gamer']
                         try:
-                            db.session.commit()
+                            db.session.commit() #TODO сигнал боту про закриття сектора
                             print ('new bonus answer found')
                         except:
                             print ('error when bonus commiting')
