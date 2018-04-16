@@ -462,7 +462,7 @@ def history_analize (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                             en_lvl_id = en_lvl_id, 
                                             en_lvl_no = en_lvl_no,
                                             en_bonus_no = bonus['number']).first()
-                    if en_bonus.en_bonus_completed != bonus['completed'] :=
+                    if en_bonus.en_bonus_completed != bonus['completed'] :
                         en_bonus.en_bonus_answer = story ['answer']
                         en_bonus.en_gamer = story ['gamer']
                         try:
