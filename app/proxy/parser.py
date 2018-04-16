@@ -397,10 +397,10 @@ def set_block(html):
             html_dic[z+1] = '<div class="block">'
             i = 1
 
-    html_dic = rename_block(html_dic)
-    html = ''.join(html_dic)
+    html_dic = rename_block(''.join(html_dic)
+    #html = ''.join(html_dic)
 
-    return html
+    return html_dic
 
 """
 def rename_block(html_dic):
