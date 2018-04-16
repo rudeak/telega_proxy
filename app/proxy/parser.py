@@ -55,6 +55,7 @@ def get_game_info(page):
 
 
 def change_href(page, id):
+    game = Game.query.filter_by(game_id = get_game_id(id)).first()
     soup = BeautifulSoup(page.text, 'lxml')
     soup.prettify()
     try:
@@ -64,6 +65,9 @@ def change_href(page, id):
         print('гра ще не почалася')
     for ref in soup.findAll('a', href=True):
         if ref['href'][0] == '/':
+            if ref['href'].find ('GameStat') > 0:
+                ref['href'] = game.game_domain+ref['href']  
+        else:
             ref['href'] = '/proxy/'+str(id)+ref['href']
     for ref in soup.findAll('a', href=True):
         print(ref['href'])
