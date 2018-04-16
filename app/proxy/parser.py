@@ -59,7 +59,7 @@ def change_href(page, id):
     soup.prettify()
     try:
         print (soup.find('div', class_="header"))
-        soup.find('div', class_="header").replaceWith('')
+        soup.find('div', class_="header").replaceWith(change_header (page, id))
     except:
         print('гра ще не почалася')
     for ref in soup.findAll('a', href=True):
@@ -71,6 +71,14 @@ def change_href(page, id):
                                    '/proxy/'+str(id))
 
     return page
+
+def change_header (page, id):
+    soup = BeautifulSoup(page.text, 'lxml')
+    soup.prettify()
+    soup.find('div', class_="header")
+    try:
+        str(soup).replace('/GameDetails.aspx?gid='+str(get_game_id(id), '/'+str(id)))
+    return soup
 
 
 def level_parser(page):
