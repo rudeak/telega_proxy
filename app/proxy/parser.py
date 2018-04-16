@@ -474,8 +474,6 @@ def rename_block_bs(html):
                 block = block.replace ('"block"', '"block_bonus"')
             else:
                 block = block.prettify().replace ('"block"', '"block_prompt"')
-        if find_task(block_parse):
-            print (block)
             #block = block.replace ('"block"', '"block_task"')
         html_out = html_out+str(block)
     print (html_out)
