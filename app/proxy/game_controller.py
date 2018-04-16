@@ -468,11 +468,11 @@ def history_analize (proxy_key, en_lvl_id, en_lvl_no, pageJson):
                         en_bonus.en_bonus_answer = story ['answer']
                         en_bonus.en_gamer = story ['gamer']
                         try:
-                            db.commit()
+                            db.session.commit()
                             print ('new bonus answer found')
                         except:
                             print ('error when bonus commiting')
-                            db.rollback()
+                            db.session.rollback()
 
     return None
 
