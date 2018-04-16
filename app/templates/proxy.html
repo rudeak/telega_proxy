@@ -1,0 +1,21 @@
+{% extends "head.html" %}
+{% block content %}
+<div class="header">
+    <a class="logo" href="/"><img alt="Encounter - international network of active urban games" height="60" src="http://d2.endata.cx/images/v2/en/engines/enlogo.png" title="Encounter - international network of active urban games" width="60"/></a>
+    
+    <h1><a href="{{game_link}}" id="lblGameTitle">{{game_name}}</a></h1>
+    <ul>
+    <li class="refresh">
+    <a href="{{game_proxy}}"><i></i><span>Refresh</span></a>
+    </li>
+    <li class="stats">
+    <a href="{{game_stats}}" target="_blank"><i></i><span>Statistic</span></a>
+    </li>
+    <li class="stat">
+    <a href="{game_stats}}"><span>Another Stat</span></a>
+    </li>
+
+    </ul>
+    </div>
+    {{content}}
+{% endblock content %}
