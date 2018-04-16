@@ -492,7 +492,7 @@ def rename_block_bs(html):
                 html_out = html_out+str(block)
                 continue
             else:
-                if str(block).find('Penalty') > 0 or block.prettify.find('Штрафна'):
+                if str(block).find('Penalty') > 0 or str(block).find('Штрафна'):
                     block = block.prettify().replace ('"block"', '"block_penalty"')
                     print ('penalty 1')
                     html_out = html_out+str(block)
