@@ -75,6 +75,7 @@ def change_href(page, id):
 def level_parser(page):
     soup = BeautifulSoup(page, 'lxml')
     soup.prettify()
+    head = str(soup)[0:str(soup).find('<div class="spacer">')]
     print (soup)
     try:
         levelInfo = get_level_num(soup)
@@ -115,7 +116,7 @@ def level_parser(page):
         print('not added')
     # for result in EnGameJson.query.all():
     #    print (result)
-    return {'html': set_block(page), 'json': level}
+    return {'html': head+set_block(page), 'json': level}
 
 
 def get_blockage_info(pageSoup): #TODO витягувати більш докладну інфу про блокування 
