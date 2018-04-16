@@ -194,7 +194,10 @@ def get_level_history(pageSoup):
     for item in items:
         code_date = get_code_date(item.get_text().strip())
         #code_date = code_date[0:code_date.find('/n')]
-        user = item.find('a').get_text().strip()
+        try:
+            user = item.find('a').get_text().strip()
+        except:
+            print ('Current code is ' + str(item)) # TODO розбір чи введений код правильний
         answer = item.find('span').get_text().strip()
         answer_class = item.find('span')['class']
         if answer_class[0] == correct_answer_class:
