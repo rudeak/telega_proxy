@@ -61,9 +61,16 @@ def en_game_proxy_root(id):
 @login_required
 def en_game_proxy_get(id,path):
     r = get_session (id)
-    url = 'http://'+get_domain(id)+'/'+path
-    level_parser (change_href(r.get (url),id))
-    return level_parser (change_href(r.get (url),id))['html']
+    url = 'http://'+get_domain(id)+'/gameengines/encounter/play/'+get_game_id(id)
+    page = level_parser (change_href(r.get (url),id))
+    en_game_logger(id,page['json'])
+    game = Game.query.filter_by (game_id = get_game_id(id)).first()
+    alt_game_stats = 'questtools.herokuapp.com/gamestat/'+str(get_game_id(id))+'?domain='+game.game_domain
+    return render_template ('proxy.html', 
+            game_stats = game.game_domain + '/GameStat.aspx?gid='+str(get_game_id(id)),
+            game_name = game.game_name, 
+            alt_game_stats = alt_game_stats, 
+            content = page['html'])
 
 @proxy.route('/<id>/<path:path>', methods=['POST'])
 @login_required
@@ -83,8 +90,17 @@ def en_game_proxy_post_root(id):
         post_data = {}
         #for k,v in request.form.to_dict():
         #    post_data[k] = v.encode('utf-8')
-        level_parser (change_href(r.get (url),id))
-        return change_href(r.post (url, request.form.to_dict()),id)
+        #level_parser (change_href(r.get (url),id))
+        page = level_parser (r.post (url, request.form.to_dict()),id))
+        en_game_logger(id,page['json'])
+        game = Game.query.filter_by (game_id = get_game_id(id)).first()
+        alt_game_stats = 'questtools.herokuapp.com/gamestat/'+str(get_game_id(id))+'?domain='+game.game_domain
+        return render_template ('proxy.html', 
+                game_stats = game.game_domain + '/GameStat.aspx?gid='+str(get_game_id(id)),
+                game_name = game.game_name, 
+                alt_game_stats = alt_game_stats, 
+                content = page['html'])
+        #return change_href(r.post (url, request.form.to_dict()),id)
     
 
 
