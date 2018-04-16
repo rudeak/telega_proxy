@@ -445,7 +445,34 @@ def en_history_logger (proxy_key, en_lvl_id, en_lvl_no, pageJson):
 def history_analize (proxy_key, en_lvl_id, en_lvl_no, pageJson):
     history = json.loads (pageJson['history'])
     for story in history:
+            for story in en_history:
         print (story)
+        if EnHistory.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                          en_lvl_id = en_lvl_id, 
+                                          en_lvl_no = en_lvl_no,
+                                          en_gamer = story['gamer'],
+                                          en_answer = story['answer'],
+                                          en_time = story['time'],
+                                          en_is_code = story['is_code'],
+                                          en_correct = story['correct']).count() == 0:
+            if story['correct'] and not story['is_code']:
+                print ('new bonus entered')
+                bonuses = json.loads (pageJson['bonuses'])
+                for bonus in bonuses:
+                    en_bonus = EnBonus.query.filter_by (en_game_id = get_game_id(proxy_key), 
+                                            en_lvl_id = en_lvl_id, 
+                                            en_lvl_no = en_lvl_no,
+                                            en_bonus_no = bonus['number']).first()
+                    if en_bonus.en_bonus_completed != bonus['completed'] :=
+                        en_bonus.en_bonus_answer = story ['answer']
+                        en_bonus.en_gamer = story ['gamer']
+                        try:
+                            db.commit()
+                            print ('new bonus answer found')
+                        except:
+                            print ('error when bonus commiting')
+                            db.rollback()
+
     return None
 
 def print_history_from_db (proxy_key, en_lvl_id, en_lvl_no):
