@@ -1,6 +1,6 @@
 #!bin/python
 
 from app import app
-app.run(host='0.0.0.0', debug = True)
+app.run(host='0.0.0.0', debug = True, port = 443)
 
 #, ssl_context=('fullchain.pem', 'privkey.pem'), port = 443)
