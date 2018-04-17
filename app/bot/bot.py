@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 import app
 import telepot
 
-bot = Blueprint('bot', 'bot', template_folder='templates')
+bot = Blueprint('bot', 'bot', template_folder='templates' , ssl_context=('fullchain.pem', 'privkey.pem'))
 
 telegram_api_key = '598589123:AAH3gPKY_4kvA50wrXQdnq6pGMd14TQId0E'
 
