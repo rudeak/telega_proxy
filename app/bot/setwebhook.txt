@@ -1,0 +1,1 @@
+curl -F "url=https://rudeak.gq/bot/598589123:AAH3gPKY_4kvA50wrXQdnq6pGMd14TQId0E" -F "certificate=@privkey.pem" https://api.telegram.org/bot598589123:AAH3gPKY_4kvA50wrXQdnq6pGMd14TQId0E/setWebhook
