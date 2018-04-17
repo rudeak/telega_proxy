@@ -12,4 +12,4 @@ telega_bot = telepot.Bot(telegram_api_key)
 
 @bot.route('/'+telegram_api_key, methods = ['POST', 'GET'])
 def message_listener():
-    return render_template ('index.html', user = current_user)
+    return 'bot ok'
