@@ -24,7 +24,7 @@ from app.api.api import api
 from app.proxy.parser import get_game_info
 from app.game_managment import login_game
 app.register_blueprint(proxy , url_prefix='/proxy')
-app.register_blueprint(bot , url_prefix='/bot')
+app.register_blueprint(bot , url_prefix='/bot', , ssl_context=('fullchain.pem', 'privkey.pem'))
 app.register_blueprint(api , url_prefix='/api')
 
 
