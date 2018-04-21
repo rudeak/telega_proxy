@@ -1,6 +1,7 @@
 from datetime import datetime
 from hashlib import md5
 from random import randint
+
 from app import db
 
 ROLE_USER = 0
@@ -176,60 +177,62 @@ class Proxy (db.Model):
         self.creation_date = datetime.now()
         key = randint(1000000, 9999999)
         while Proxy.query.filter_by(key=key).count() != 0:
-            print ('key ='+str(key))
+            print('key ='+str(key))
             key = randint(1000000, 9999999)
         self.key = key
-    
+
+
 class GameInfo (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     game_id = db.Column(db.Integer)
     game_name = db.Column(db.String(120), index=True, unique=False)
-    game_description = db.Column (db.Text)
-    game_start = db.Column (db.DateTime)
+    game_description = db.Column(db.Text)
+    game_start = db.Column(db.DateTime)
     game_owner = db.Column(db.Integer)
-    
+
     def __repr__(self):
         return '<Game name %r>' % (self.game_name)
-    
-    def __init__(self, game_id, game_name, game_description,game_start, game_owner):
+
+    def __init__(self, game_id, game_name, game_description, game_start, game_owner):
         self.game_id = game_id
         self.game_name = game_name
         self.game_description = game_description
         self.game_start = game_start
         self.game_owner = game_owner
-        
+
 #--------------------------------
 # моделі сценарія гри
 #--------------------------------
 
-class EnGameJson( db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
-    json = db.Column (db.Text)
-    
+
+class EnGameJson(db.Model):
+    id = db.Column(
+        db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    json = db.Column(db.Text)
+
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
         return "<EnJson(%(json)s, %(id)s)>" % self.__dict__
-    
-    def __init__ (self, json):
+
+    def __init__(self, json):
         self.json = json
 
 
 class EnGame(db.Model):
 
-
-
-    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    id = db.Column(
+        db.Integer, primary_key=True)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     proxy_key = db.Column(db.Integer)
-    
+
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
         return "<EnGame(%(en_game_id)s, %(id)s)>" % self.__dict__
-    
+
     def __init__(self, en_game_id, proxy_key):
         self.en_game_id = en_game_id
         self.proxy_key = proxy_key
@@ -237,9 +240,8 @@ class EnGame(db.Model):
 
 class EnLvl(db.Model):
 
-
-
-    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    id = db.Column(
+        db.Integer, primary_key=True)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer)
@@ -247,7 +249,6 @@ class EnLvl(db.Model):
     en_sectors_count = db.Column(db.Integer)
     en_sectors_need = db.Column(db.Integer)
     en_sectors_closed = db.Column(db.Integer)
-    
 
     def __repr__(self):
         return self.__str__()
@@ -260,8 +261,10 @@ class EnLvl(db.Model):
         self.en_lvl_id = en_lvl_id
         self.en_lvl_no = en_lvl_no
 
+
 class EnSectors (db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    id = db.Column(
+        db.Integer, primary_key=True)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer)
@@ -276,7 +279,7 @@ class EnSectors (db.Model):
 
     def __str__(self):
         return "<EnSectors(%(id)s, %(en_sector_name)s)>" % self.__dict__
-    
+
     def __init__(self, en_game_id, en_lvl_id, en_lvl_no, en_sector_no, en_sector_name, en_sector_entered, en_sector_answer, en_gamer):
         self.en_game_id = en_game_id
         self.en_lvl_id = en_lvl_id
@@ -287,8 +290,10 @@ class EnSectors (db.Model):
         self.en_sector_answer = en_sector_answer
         self.en_gamer = en_gamer
 
+
 class EnTask (db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    id = db.Column(
+        db.Integer, primary_key=True)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer)
@@ -299,15 +304,17 @@ class EnTask (db.Model):
 
     def __str__(self):
         return "<EnTask(%(id)s, %(en_task_text)s)>" % self.__dict__
-    
+
     def __init__(self, en_game_id, en_lvl_id, en_lvl_no, en_task_text):
         self.en_game_id = en_game_id
         self.en_lvl_id = en_lvl_id
         self.en_lvl_no = en_lvl_no
         self.en_task_text = en_task_text
 
+
 class EnPrompt (db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    id = db.Column(
+        db.Integer, primary_key=True)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer)
@@ -320,7 +327,7 @@ class EnPrompt (db.Model):
 
     def __str__(self):
         return "<EnPrompt(%(id)s, %(en_prompt_text)s, %(en_prompt_data)s)>" % self.__dict__
-    
+
     def __init__(self, en_game_id, en_lvl_id, en_lvl_no, en_prompt_no, en_prompt_text, en_prompt_data):
         self.en_game_id = en_game_id
         self.en_lvl_id = en_lvl_id
@@ -329,8 +336,10 @@ class EnPrompt (db.Model):
         self.en_prompt_text = en_prompt_text
         self.en_prompt_data = en_prompt_data
 
+
 class EnBonus (db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    id = db.Column(
+        db.Integer, primary_key=True)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer)
@@ -347,14 +356,14 @@ class EnBonus (db.Model):
 
     def __str__(self):
         return "<EnBonus(%(id)s, %(en_bonus_text)s, %(en_bonus_completed)s, %(en_bonus_answer)s, %(en_gamer)s)>" % self.__dict__
-    
-    def __init__(self, en_game_id, en_lvl_id, 
-                en_lvl_no, 
-                en_bonus_no, 
-                en_bonus_text, 
-                en_bonus_prompt_text,
-                en_bonus_completed,
-                en_bonus_passed):
+
+    def __init__(self, en_game_id, en_lvl_id,
+                 en_lvl_no,
+                 en_bonus_no,
+                 en_bonus_text,
+                 en_bonus_prompt_text,
+                 en_bonus_completed,
+                 en_bonus_passed):
         self.en_game_id = en_game_id
         self.en_lvl_id = en_lvl_id
         self.en_lvl_no = en_lvl_no
@@ -364,30 +373,32 @@ class EnBonus (db.Model):
         self.en_bonus_completed = en_bonus_completed
         self.en_bonus_passed = en_bonus_passed
 
+
 class EnHistory (db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    id = db.Column(
+        db.Integer, primary_key=True)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer)
     en_gamer = db.Column(db.Text)
     en_answer = db.Column(db.Text)
-    en_time = db.Column (db.Integer)
-    en_is_code = db.Column (db.Boolean)
-    en_correct = db.Column (db.Boolean)
+    en_time = db.Column(db.Integer)
+    en_is_code = db.Column(db.Boolean)
+    en_correct = db.Column(db.Boolean)
 
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
         return "<EnHistory(%(id)s, %(en_answer)s, %(en_gamer)s, %(en_correct)s)>" % self.__dict__
-    
-    def __init__(self, en_game_id, en_lvl_id, 
-                en_lvl_no, 
-                en_gamer, 
-                en_answer, 
-                en_time,
-                en_is_code,
-                en_correct):
+
+    def __init__(self, en_game_id, en_lvl_id,
+                 en_lvl_no,
+                 en_gamer,
+                 en_answer,
+                 en_time,
+                 en_is_code,
+                 en_correct):
         self.en_game_id = en_game_id
         self.en_lvl_id = en_lvl_id
         self.en_lvl_no = en_lvl_no
@@ -397,8 +408,10 @@ class EnHistory (db.Model):
         self.en_is_code = en_is_code
         self.en_correct = en_correct
 
+
 class EnPenalty (db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    id = db.Column(
+        db.Integer, primary_key=True)  # pylint: disable=invalid-name
     en_game_id = db.Column(db.Integer)
     en_lvl_id = db.Column(db.Integer)
     en_lvl_no = db.Column(db.Integer)
@@ -411,7 +424,7 @@ class EnPenalty (db.Model):
 
     def __str__(self):
         return "<EnPenalty(%(id)s, %(en_prompt_text)s, %(en_prompt_data)s)>" % self.__dict__
-    
+
     def __init__(self, en_game_id, en_lvl_id, en_lvl_no, en_prompt_no, en_prompt_text, en_prompt_data):
         self.en_game_id = en_game_id
         self.en_lvl_id = en_lvl_id
@@ -420,6 +433,27 @@ class EnPenalty (db.Model):
         self.en_prompt_text = en_prompt_text
         self.en_prompt_data = en_prompt_data
 
+#-------------------------------------
+# кінець сценарю
+#-------------------------------------
+
+#-------------------------------------
+# моделі сигналів
+#--------------------------------------
+
+class botSignall (db.Model):
+    id = db.Column(
+        db.Integer, primary_key=True)
+    chat_id = db.Column(db.Integer)
+    signal_type = db.Column(db.Integer)
+    signal_html = db.Column(db.Text)
+    signal_date = db.Column (db.Integer)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<botSignal(%(id)s, %(signal_type)s, %(signal_html)s)>" % self.__dict__
 
 """
 class EnTask(db.Model):
