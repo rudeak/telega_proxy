@@ -446,14 +446,14 @@ class botSignall (db.Model):
         db.Integer, primary_key=True)
     chat_id = db.Column(db.Integer)
     signal_type = db.Column(db.Integer)
-    signal_html = db.Column(db.Text)
+    signal_json = db.Column(db.Text)
     signal_date = db.Column (db.Integer)
 
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
-        return "<botSignal(%(id)s, %(signal_type)s, %(signal_html)s)>" % self.__dict__
+        return "<botSignal(%(id)s, %(signal_type)s, %(signal_json)s)>" % self.__dict__
 
 """
 class EnTask(db.Model):
