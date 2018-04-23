@@ -536,7 +536,7 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                bonus['completed'],
                                bonus['passed'])
             db.session.add(en_bonus)
-            addSignal (proxy_key, 18, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text']) 
+            addSignal (proxy_key, 18, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus['bonus_text']) 
             try:
                 db.session.commit()
                 print('new bonus added')
