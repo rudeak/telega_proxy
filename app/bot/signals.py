@@ -114,8 +114,8 @@ def addSignallPromptsCount(chatId, level, count):
     return None
 
 
-def addSignalRenew(proxyKey, timestamp)
-# TODO сигнал проксі поновити сторінку тип = 9, на проксі proxyKey, в час timestamp
+def addSignalRenew(proxyKey, timestamp):
+    # TODO сигнал проксі поновити сторінку тип = 9, на проксі proxyKey, в час timestamp
     return None
 
 
