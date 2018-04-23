@@ -336,7 +336,7 @@ def addSignallBonusCount(chatId, level, count):
     # TODO сигнал боту про кількість бонусів, тип = 16, повідомлення: на рівні № level count бонусів, час = now +4
     signal.chat_id = chatId
     signal.signal_type = 16
-    signal.signal_json = json.dumps ({'msg':bonus_count_msg.format(level,count), 'html':})
+    signal.signal_json = json.dumps ({'msg':bonus_count_msg.format(level,count), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())+4
     db.session.add(signal)
     try:
