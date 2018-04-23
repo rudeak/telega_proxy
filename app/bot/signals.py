@@ -236,7 +236,7 @@ def addSignalPromptsCountChanged(chatId, level, oldCount, newCount):
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 10
-    signal.signal_json = json.dumps ({'msg':prompts_count_changed_msg.format(level, oldCount, newCount, 'html':''})
+    signal.signal_json = json.dumps ({'msg':prompts_count_changed_msg.format(level, oldCount, newCount), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
     try:
