@@ -647,7 +647,7 @@ def history_analize(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                         en_bonus.en_gamer = story['gamer']
                         try:
                             db.session.commit()  # TODO сигнал боту про закриття сектора
-                            addSignal (proxy_key, 20, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text'], answer = story['answer'], gamer = story['gamer'])
+                            addSignal (proxy_key, 20, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus ['bonus_text'], answer = story['answer'], gamer = story['gamer'])
                             print('new bonus answer found')
                         except:
                             print('error when bonus commiting')
