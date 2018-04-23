@@ -439,7 +439,7 @@ def addSignallBonusPassed(chatId, level, number, text, bonus_text):
 def print_signals():
     signals = botSignall.query.all()
     print ('------------------ START PRINTING SIGNAL ---------------------')
-    for signal in signals:
+    for signall in signals:
         print (signall)
     print ('------------------ END PRINTING SIGNAL ---------------------')
     return None
