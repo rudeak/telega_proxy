@@ -7,7 +7,7 @@ from app import db
 from app.game_managment import edit_game_name, get_domain, get_game_id
 from app.models import (EnBonus, EnGame, EnHistory, EnLvl, EnPenalty, EnPrompt,
                         EnSectors, EnTask)
-from app.bot.signals import addSignal
+from app.bot.signals import addSignal, print_signals
 
 
 def en_game_info_create(page, user_id):
@@ -15,7 +15,8 @@ def en_game_info_create(page, user_id):
 
 
 def en_game_logger(proxy_key, page_json):
-    print(page_json)
+    #print(page_json)
+    print_signals()
     if page_json['levelinfo'] == False:
         return 0
     # print ('game id ='+str(get_game_id(proxy_key)))

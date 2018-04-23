@@ -12,6 +12,7 @@ from app.bot.messages import *
 
 
 def addSignal(proxyKey, type_, **kwargs):
+    print_signals()
     if type_ == 1:
         adSignallSectorsCountChanged(get_chat_tg_id(
             proxyKey), kwargs['was'], kwargs['now'])
@@ -302,6 +303,7 @@ def addSignallPenaltyPromptsCount(chatId, level, count):
 
 def addSignalPenaltyPromptsCountChanged(chatId, level, oldCount, newCount):
     # TODO сигнал боту, що змінилася кількість штрафних підказок тип = 14, повідомлення: на рівні № level змінилася в кількість штрафних підказок з oldCount на newCount, час now
+    signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 14
     signal.signal_json = json.dumps ({'msg':penalty_count_changed_msg .format(level,oldCount, newCount), 'html':''})
@@ -318,6 +320,7 @@ def addSignalPenaltyPromptsCountChanged(chatId, level, oldCount, newCount):
 
 def addSignallPenaltyPromptNew(chatId, level, number, text):
     # TODO сигнал боту про появу штрафної нової підказки, тип = 15, повідомлення: на рівні № level з'явилася нова штрафна підказка № number : text, час = now
+    signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 15
     signal.signal_json = json.dumps ({'msg':new_penalty_prompt_msg.format(level,number), 'html':text})
@@ -334,6 +337,7 @@ def addSignallPenaltyPromptNew(chatId, level, number, text):
 
 def addSignallBonusCount(chatId, level, count):
     # TODO сигнал боту про кількість бонусів, тип = 16, повідомлення: на рівні № level count бонусів, час = now +4
+    signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 16
     signal.signal_json = json.dumps ({'msg':bonus_count_msg.format(level,count), 'html':''})
@@ -350,6 +354,7 @@ def addSignallBonusCount(chatId, level, count):
 
 def addSignallBonusText(chatId, level, number, text, bonus_text):
     # TODO сигнал боту про текст бонусу, тип = 17, повідомлення: Бонус № number на рівні № level, text , bonus_text , now +5
+    signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 17
     signal.signal_json = json.dumps ({'msg':bonus_text_msg.format(level,number), 'html':text})
@@ -366,6 +371,7 @@ def addSignallBonusText(chatId, level, number, text, bonus_text):
 
 def addSignallBonusNew(chatId, level, number, text, bonus_text):
     # TODO сигнал боту про появу нового бонусу, тип = 18, повідомлення: на рівні № level з'явився новий бонус № number : text, bonus_text, час = now
+    signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 18
     signal.signal_json = json.dumps ({'msg':new_bonus_text_msg.format(level,number), 'html':text})
@@ -382,6 +388,7 @@ def addSignallBonusNew(chatId, level, number, text, bonus_text):
 
 def addSignallBonusTextNew(chatId, level, number, text, bonus_text):
     # TODO сигнал боту про текст бонусу, тип = 19, повідомлення: Бонус № number на рівні № level змінився, text , bonus_text , час = now
+    signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 19
     signal.signal_json = json.dumps ({'msg':bonus_text_changed.format(level,number), 'html':text})
@@ -398,6 +405,7 @@ def addSignallBonusTextNew(chatId, level, number, text, bonus_text):
 
 def addSignallBonusClosed(chatId, level, number, text, bonus_text, answer, gamer):
     # TODO сигнал боту про закриття, тип = 20, повідомлення: Бонус № number на рівні № level закрито гравцем gamer, кодом answer, отримано бонусну підказку bonus_text , час = now
+    signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 20
     signal.signal_json = json.dumps ({'msg':bonus_answered_msg.format(level,number, gamer, answer), 'html':text+bonus_text})
@@ -414,6 +422,7 @@ def addSignallBonusClosed(chatId, level, number, text, bonus_text, answer, gamer
 
 def addSignallBonusPassed(chatId, level, number, text, bonus_text):
     # TODO сигнал боту про пропуск, тип = 21, повідомлення: Бонус № number на рівні № level пропущено , час = now
+    signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 21
     signal.signal_json = json.dumps ({'msg':bonus_passed_msg.format(level,number), 'html':''})
@@ -425,4 +434,12 @@ def addSignallBonusPassed(chatId, level, number, text, bonus_text):
     except:
         db.session.rollback()
         print ('Bonus answered text signall NOT commited') 
+    return None
+
+def print_signals():
+    signals = botSignall.query.all()
+    print ('------------------ START PRINTING SIGNAL ---------------------')
+    for signal in signals:
+        print (signall)
+    print ('------------------ END PRINTING SIGNAL ---------------------')
     return None
