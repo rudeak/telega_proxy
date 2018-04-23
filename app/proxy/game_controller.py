@@ -557,7 +557,7 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
         if en_bonus.en_bonus_passed != bonus['passed']:
             # TODO послати сигнал боту, що бонус пропустили
             en_bonus.en_bonus_passed != bonus['passed']
-            addSignal (proxy_key, 21, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text']) 
+            addSignal (proxy_key, 21, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus ['bonus_text']) 
         try:
             db.session.commit()
             print('bonus data updated')
