@@ -334,30 +334,95 @@ def addSignallPenaltyPromptNew(chatId, level, number, text):
 
 def addSignallBonusCount(chatId, level, count):
     # TODO сигнал боту про кількість бонусів, тип = 16, повідомлення: на рівні № level count бонусів, час = now +4
-  
+    signal.chat_id = chatId
+    signal.signal_type = 16
+    signal.signal_json = json.dumps ({'msg':bonus_count_msg.format(level,count), 'html':})
+    signal.signal_date = time.mktime(datetime.now().timetuple())+4
+    db.session.add(signal)
+    try:
+        db.session.commit()
+        print ('Bonus count signall commited')
+    except:
+        db.session.rollback()
+        print ('Bonus count signall NOT commited')   
     return None
 
 
 def addSignallBonusText(chatId, level, number, text, bonus_text):
     # TODO сигнал боту про текст бонусу, тип = 17, повідомлення: Бонус № number на рівні № level, text , bonus_text , now +5
+    signal.chat_id = chatId
+    signal.signal_type = 17
+    signal.signal_json = json.dumps ({'msg':bonus_text_msg.format(level,number), 'html':text})
+    signal.signal_date = time.mktime(datetime.now().timetuple())+5
+    db.session.add(signal)
+    try:
+        db.session.commit()
+        print ('Bonus text signall commited')
+    except:
+        db.session.rollback()
+        print ('Bonus text signall NOT commited')     
     return None
 
 
 def addSignallBonusNew(chatId, level, number, text, bonus_text):
     # TODO сигнал боту про появу нового бонусу, тип = 18, повідомлення: на рівні № level з'явився новий бонус № number : text, bonus_text, час = now
+    signal.chat_id = chatId
+    signal.signal_type = 18
+    signal.signal_json = json.dumps ({'msg':new_bonus_text_msg.format(level,number), 'html':text})
+    signal.signal_date = time.mktime(datetime.now().timetuple())+5
+    db.session.add(signal)
+    try:
+        db.session.commit()
+        print ('New Bonus signall commited')
+    except:
+        db.session.rollback()
+        print ('New Bonus signall NOT commited')    
     return None
 
 
 def addSignallBonusTextNew(chatId, level, number, text, bonus_text):
     # TODO сигнал боту про текст бонусу, тип = 19, повідомлення: Бонус № number на рівні № level змінився, text , bonus_text , час = now
+    signal.chat_id = chatId
+    signal.signal_type = 19
+    signal.signal_json = json.dumps ({'msg':bonus_text_changed.format(level,number), 'html':text})
+    signal.signal_date = time.mktime(datetime.now().timetuple())
+    db.session.add(signal)
+    try:
+        db.session.commit()
+        print ('New Bonus text signall commited')
+    except:
+        db.session.rollback()
+        print ('New Bonus text signall NOT commited')     
     return None
 
 
 def addSignallBonusClosed(chatId, level, number, text, bonus_text, answer, gamer):
     # TODO сигнал боту про закриття, тип = 20, повідомлення: Бонус № number на рівні № level закрито гравцем gamer, кодом answer, отримано бонусну підказку bonus_text , час = now
+    signal.chat_id = chatId
+    signal.signal_type = 20
+    signal.signal_json = json.dumps ({'msg':bonus_answered_msg.format(level,number, gamer, answer), 'html':text+bonus_text})
+    signal.signal_date = time.mktime(datetime.now().timetuple())
+    db.session.add(signal)
+    try:
+        db.session.commit()
+        print ('Bonus answered text signall commited')
+    except:
+        db.session.rollback()
+        print ('Bonus answered text signall NOT commited')      
     return None
 
 
 def addSignallBonusPassed(chatId, level, number, text, bonus_text):
     # TODO сигнал боту про пропуск, тип = 21, повідомлення: Бонус № number на рівні № level пропущено , час = now
+    signal.chat_id = chatId
+    signal.signal_type = 21
+    signal.signal_json = json.dumps ({'msg':bonus_passed_msg.format(level,number), 'html':''})
+    signal.signal_date = time.mktime(datetime.now().timetuple())
+    db.session.add(signal)
+    try:
+        db.session.commit()
+        print ('Bonus answered text signall commited')
+    except:
+        db.session.rollback()
+        print ('Bonus answered text signall NOT commited') 
     return None
