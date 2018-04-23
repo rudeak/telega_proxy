@@ -133,5 +133,10 @@ def login_game (proxy_id):
    # edit_game_name (id,  get_game_info (page))
     login_page = r.get ('http://'+domain+'/Login.aspx?login='+login+'&password='+password)
     return 1
+
+def get_chat_tg_id (proxyKey):
+    proxy = Proxy.query.filter_by (key = proxyKey).first()
+    chat = Chat.query.filter_by (id = proxy.chat).first()
+    return chat.tg_id
     
 
