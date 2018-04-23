@@ -57,7 +57,7 @@ def addSignal(proxyKey, type_, **kwargs):
         addSignallPenaltyPromptNew(get_chat_tg_id(
             proxyKey), kwargs['level'], kwargs['number'], kwargs['text'])
     if type_ == 16:
-        addSignallBonusCountCount(get_chat_tg_id(
+        addSignallBonusCount (get_chat_tg_id(
             proxyKey), kwargs['level'], kwargs['count'])
     if type_ == 17:
         addSignallBonusText(get_chat_tg_id(
