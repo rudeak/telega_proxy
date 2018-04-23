@@ -33,12 +33,12 @@ def en_game_logger(proxy_key, page_json):
     levelInfo = json.loads(page_json['levelinfo'])
     en_lvl_id = levelInfo['levelId']
     en_lvl_no = levelInfo['levelNum']
-    #print (levelInfo['levelId'])
+    # print (levelInfo['levelId'])
     if EnLvl.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=levelInfo['levelId'], en_lvl_no=levelInfo['levelNum']).count() == 0:
         lvl = EnLvl(get_game_id(proxy_key),
                     levelInfo['levelId'], levelInfo['levelNum'])
         db.session.add(lvl)
-        #print ('new level found')
+        # print ('new level found')
         try:
             db.session.commit()
             en_level_info_updater(proxy_key, page_json)
@@ -65,7 +65,7 @@ def en_game_logger(proxy_key, page_json):
         en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, page_json)
         en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, page_json)
         print('old level found')
-        #print (lvl)
+        # print (lvl)
 
     return 1
 
@@ -105,7 +105,7 @@ def en_sectors_logger(proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
     print('sectors in DB ' + str(EnSectors.query.filter_by(en_game_id=get_game_id(
         proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count()))
 
-    #print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no)
+    # print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no)
 
     # якщо ще не внесені сектори в рівень то створюємо нові
     if EnSectors.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count() == 0:
@@ -237,6 +237,8 @@ def en_task_logger(proxy_key, en_lvl_id, en_lvl_no, taskJson):
                               en_lvl_no=en_lvl_no).count() == 0:
         print('New task cretation')
         print(taskJson)
+        # TODO сигнал боту про нове завдання
+        addSignal(proxy_key, 5, level=en_lvl_no, task=taskJson['task'])
         en_task = EnTask(get_game_id(proxy_key), en_lvl_id,
                          en_lvl_no, taskJson['task'])
         db.session.add(en_task)
@@ -253,6 +255,7 @@ def en_task_logger(proxy_key, en_lvl_id, en_lvl_no, taskJson):
         if en_task.en_task_text != taskJson['task']:
             en_task.en_task_text = taskJson['task']
             # TODO добавити сигнал боту про зміну тексту завдання
+            addSignal(proxy_key, level=en_lvl_no, task=taskJson['task'])
             print('task text changed')
             try:
                 db.session.commit()
@@ -295,10 +298,13 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
             try:
                 db.session.commit()
                 # TODO прописати сигнали боту по підказках
+                addSignal(proxy_key, 9, timestamp=prompt['timer'])
                 print('prompt added')
             except:
                 db.session.rollback()
                 print('prompt error')
+         # TODO прописати сигнали боту кількості підказок
+         addSignal (proxy_key, 8, level = en_lvl_no, count = len(prompts))
     print('prompts length =' + str(len(prompts)))
     if len(prompts) > EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key),
                                                en_lvl_id=en_lvl_id,
@@ -306,7 +312,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
         # TODO сигнал боту що кількість підказок змінилася
         print('prompts count changed')
         # перевірки чи не змінилася кількість підказок
-
+        addSignal (proxy_key, 10, level = en_lvl_no, oldCount = EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count(), newCount = len(prompts))
         for prompt in prompts:
             if prompt['timer'] == '':
                 prompt['timer'] = '0'
@@ -319,19 +325,22 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                         en_lvl_id=en_lvl_id,
                                         en_lvl_no=en_lvl_no,
                                         en_prompt_no=prompt['number']).count() != 0:
-                if en_prompt.en_prompt_text != prompt['text']:
+                if en_prompt.en_prompt_text != prompt['text'] and en_prompt.en_prompt_data !=0:
                     # TODO подати сигнал боту що змінився текст підказки
+                    addSignal (proxy_key, 11, level= en_lvl_no, number = prompt['number'], text = prompt['text'])
                     en_prompt.en_prompt_text = prompt['text']
                 if en_prompt.en_prompt_data != prompt['timer']:
                     # якщо час == 0 тоді додати сигнал боту про появу нової підказки
                     if prompt['timer'] == 0:
                         en_prompt.en_prompt_data = 0
                         # TODO сигнал про нову підказку
+                        addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
                         print('new prompt appeared')
                     else:
                         # змінився час до підказки
                         en_prompt.en_prompt_data = prompt['timer']
                         # TODO перезаписати сигнали боту по підказках
+                        addSignal (proxy_key, 9, timestamp=prompt['timer'])
                         print('prompt timer changed')
                     try:
                         db.session.commit()
@@ -350,6 +359,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                      prompt['text'],
                                      int(prompt['timer']))
                 db.session.add(en_prompt)
+                addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
                 try:
                     db.session.commit()
                     print('prompt added')
@@ -384,18 +394,20 @@ def en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
             try:
                 db.session.commit()
                 # TODO прописати сигнали боту по штрафних підказках
+                addSignal (proxy_key, 9, timestamp=prompt['timer'])
                 print('Penalty prompt added')
             except:
                 db.session.rollback()
                 print('Penalty prompt error')
     print('prompts length =' + str(len(prompts)))
+    addSignal (proxy_key, 13, level = en_lvl_no, count = len(prompts))
     if len(prompts) > EnPenalty.query.filter_by(en_game_id=get_game_id(proxy_key),
                                                 en_lvl_id=en_lvl_id,
                                                 en_lvl_no=en_lvl_no).count():
         # TODO сигнал боту що кількість штрафних підказок змінилася
         print('prompts count changed')
         # перевірки чи не змінилася кількість підказок
-
+        addSignal (proxy_key, 14, level = en_lvl_no, oldCount = EnPenalty.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count(), newCount = len(prompts))
         for prompt in prompts:
             if prompt['timer'] == '':
                 prompt['timer'] = '0'
@@ -417,10 +429,12 @@ def en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                         en_prompt.en_prompt_data = 0
                         # TODO сигнал про нову штрафнк підказку
                         print('new penalty prompt appeared')
+                        addSignal (proxy_key, 15, level = en_lvl_no, number = prompt['number'], text = prompt['text'] )
                     else:
                         # змінився час до підказки
                         en_prompt.en_prompt_data = prompt['timer']
                         # TODO перезаписати сигнали боту по штрафних підказках
+                        addSignal (proxy_key, 9, timestamp=prompt['timer'])
                         print('penalty prompt timer changed')
                     try:
                         db.session.commit()
@@ -439,6 +453,7 @@ def en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                       prompt['text'],
                                       int(prompt['timer']))
                 db.session.add(en_prompt)
+                addSignal (proxy_key, 15, level = en_lvl_no, number = prompt['number'], text = prompt['text'] )
                 try:
                     db.session.commit()
                     print('penalty prompt added')
@@ -467,10 +482,10 @@ def print_penalty_prompts_from_db(proxy_key, en_lvl_id, en_lvl_no):
     en_prompt = EnPenalty.query.filter_by(en_game_id=get_game_id(proxy_key),
                                           en_lvl_id=en_lvl_id,
                                           en_lvl_no=en_lvl_no).all()
-    print('------------------------START DB prompts printing -------------------')
+    print('------------------------START DB penalty prompts printing -------------------')
     for prompt in en_prompt:
         print(prompt)
-    print('------------------------END DB prompts printing -------------------')
+    print('------------------------END DB penalty prompts printing -------------------')
 
     return None
 
@@ -493,13 +508,18 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                bonus['completed'],
                                bonus['passed'])
             db.session.add(en_bonus)
+            if bonus['passed']:
+                pass
+            else:
+                #TODO сигнал боту про текст бонуса
+                addSignal (proxy_key, 17, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text']) 
             try:
                 db.session.commit()
                 print('new bonus added')
             except:
                 db.session.rollback()
                 print('error adding new bonus')
-
+        addSignal (proxy_key, 16, level = en_lvl_no, count = len(bonuses))
     for bonus in bonuses:
         en_bonus = EnBonus.query.filter_by(en_game_id=get_game_id(proxy_key),
                                            en_lvl_id=en_lvl_id,
@@ -516,6 +536,7 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                bonus['completed'],
                                bonus['passed'])
             db.session.add(en_bonus)
+            addSignal (proxy_key, 18, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text']) 
             try:
                 db.session.commit()
                 print('new bonus added')
@@ -524,9 +545,11 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 print('error adding new bonus')
         if en_bonus.en_bonus_text != bonus['text']:
             # TODO послати сигнал боту що змінився текст бонусу
+            addSignal (proxy_key, 19, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text']) 
             en_bonus.en_bonus_text = bonus['text']
         if en_bonus.en_bonus_prompt_text != bonus['bonus_text']:
             # TODO послати сигнал боту що змінився текст бонусної підказки
+            #addSignal (proxy_key, 21, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text']) 
             en_bonus.en_bonus_prompt_text = bonus['bonus_text']
         if en_bonus.en_bonus_completed != bonus['completed']:
             # TODO послати сигнал боту що бонус закрився
@@ -534,6 +557,7 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
         if en_bonus.en_bonus_passed != bonus['passed']:
             # TODO послати сигнал боту, що бонус пропустили
             en_bonus.en_bonus_passed != bonus['passed']
+            addSignal (proxy_key, 21, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text']) 
         try:
             db.session.commit()
             print('bonus data updated')
@@ -623,6 +647,7 @@ def history_analize(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                         en_bonus.en_gamer = story['gamer']
                         try:
                             db.session.commit()  # TODO сигнал боту про закриття сектора
+                            addSignal (proxy_key, 21, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text'], answer = story['answer'], gamer = story['gamer'])
                             print('new bonus answer found')
                         except:
                             print('error when bonus commiting')
