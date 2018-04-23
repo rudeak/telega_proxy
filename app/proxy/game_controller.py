@@ -400,8 +400,8 @@ def en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
             except:
                 db.session.rollback()
                 print('Penalty prompt error')
-    print('prompts length =' + str(len(prompts)))
-    addSignal (proxy_key, 13, level = en_lvl_no, count = len(prompts))
+        addSignal (proxy_key, 13, level = en_lvl_no, count = len(prompts))
+    print('Penalty prompts length =' + str(len(prompts)))
     if len(prompts) > EnPenalty.query.filter_by(en_game_id=get_game_id(proxy_key),
                                                 en_lvl_id=en_lvl_id,
                                                 en_lvl_no=en_lvl_no).count():
