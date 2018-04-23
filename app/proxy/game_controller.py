@@ -545,7 +545,7 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 print('error adding new bonus')
         if en_bonus.en_bonus_text != bonus['text']:
             # TODO послати сигнал боту що змінився текст бонусу
-            addSignal (proxy_key, 19, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text']) 
+            addSignal (proxy_key, 19, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus ['bonus_text']) 
             en_bonus.en_bonus_text = bonus['text']
         if en_bonus.en_bonus_prompt_text != bonus['bonus_text']:
             # TODO послати сигнал боту що змінився текст бонусної підказки
