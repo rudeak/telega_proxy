@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from app import db
 from app.game_managment import edit_game_name, get_domain, get_game_id
 from app.models import (EnBonus, EnGame, EnHistory, EnLvl, EnPenalty, EnPrompt,
-                        EnSectors, EnTask)
+                        EnSectors, EnTask, botSignall)
 from app.bot.signals import addSignal, print_signals
 
 
@@ -705,6 +705,9 @@ def clear_level (proxy_key, en_lvl_id, en_lvl_no):
                                     en_lvl_no=en_lvl_no).all()
     for penalty in penalties:
         db.session.delete (penalty)
+    signals = botSignall.query.all()
+    for singnal in signals: 
+        db.session.delete(signal)
     try:
         db.session.commit()
         print ('level cleared')
