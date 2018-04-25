@@ -67,7 +67,7 @@ penalty_count_changed_msg = 'The level {} has changed the number of penalty card
 new_penalty_prompt_msg = 'A penalty card # {} was opened at level # {}'
 # reports about the number of bonuses at the level
 bonus_count_msg = 'At level # {} there are {} bonuses'
-bonus_text_msg = 'Bonus number {} at level # {}' # message about bonus content
+bonus_text_msg = 'Level # {}, Bonus number {}' # message about bonus content
 # notifications about adding a new bonus
 new_bonus_text_msg = 'A new bonus number {} has been added at level # {}'
 # Notification about changing the bonus text
