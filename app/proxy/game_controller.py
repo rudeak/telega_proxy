@@ -34,6 +34,7 @@ def en_game_logger(proxy_key, page_json):
     levelInfo = json.loads(page_json['levelinfo'])
     en_lvl_id = levelInfo['levelId']
     en_lvl_no = levelInfo['levelNum']
+    clear_level (proxy_key, en_lvl_id, en_lvl_no)
     # print (levelInfo['levelId'])
     if EnLvl.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=levelInfo['levelId'], en_lvl_no=levelInfo['levelNum']).count() == 0:
         lvl = EnLvl(get_game_id(proxy_key),
@@ -666,4 +667,47 @@ def print_history_from_db(proxy_key, en_lvl_id, en_lvl_no):
     for story in en_history:
         print(story)
     print('------------------------END DB history printing -------------------')
+    return None
+
+def clear_level (proxy_key, en_lvl_id, en_lvl_no):
+    lvl = EnLvl.query.filter_by (en_game_id=get_game_id(proxy_key),
+                                 en_lvl_id=en_lvl_id,
+                                 en_lvl_no=en_lvl_no).all()
+    for l in lvl:
+        db.session.delete (l)
+    sectors = EnSectors.query.filter_by (en_game_id=get_game_id(proxy_key),
+                                         en_lvl_id=en_lvl_id,
+                                         en_lvl_no=en_lvl_no).all()
+    for sector in sectors:
+        db.session.delete(sector)
+    tasks = EnTask.query.filter_by (en_game_id=get_game_id(proxy_key),
+                                    en_lvl_id=en_lvl_id,
+                                    en_lvl_no=en_lvl_no).all()
+    for task in tasks:
+        db.session.delete(task)
+    prompts = EnPrompt.query.filter_by (en_game_id=get_game_id(proxy_key),
+                                    en_lvl_id=en_lvl_id,
+                                    en_lvl_no=en_lvl_no).all()
+    for prompt in prompts:
+        db.session.delete(prompt)
+    bonuses = EnBonus.query.filter_by (en_game_id=get_game_id(proxy_key),
+                                    en_lvl_id=en_lvl_id,
+                                    en_lvl_no=en_lvl_no).all()
+    for bonus in bonuses:
+        db.session.delete(bonus)
+    stories = EnHistory.query.filter_by (en_game_id=get_game_id(proxy_key),
+                                    en_lvl_id=en_lvl_id,
+                                    en_lvl_no=en_lvl_no).all()
+    for story in stories:
+        db.session.delete(story)
+    penalties = EnPenalty.query.filter_by (en_game_id=get_game_id(proxy_key),
+                                    en_lvl_id=en_lvl_id,
+                                    en_lvl_no=en_lvl_no).all()
+    for penalty in penalties:
+        db.session.delete (penalty)
+    try:
+        db.session.commit()
+        print ('level cleared')
+    except:
+        db.session.rollback()
     return None
