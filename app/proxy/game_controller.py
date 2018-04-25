@@ -104,8 +104,7 @@ def en_sectors_logger(proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
 
     #print('sectors count' + str(sectors_counter(sectorsJson)))
 
-    #print('sectors in DB ' + str(EnSectors.query.filter_by(en_game_id=get_game_id(
-        proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count()))
+
 
     # #print_sectors_from_db (proxy_key, en_lvl_id, en_lvl_no)
 
