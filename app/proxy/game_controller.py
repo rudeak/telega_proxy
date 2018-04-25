@@ -706,7 +706,7 @@ def clear_level (proxy_key, en_lvl_id, en_lvl_no):
     for penalty in penalties:
         db.session.delete (penalty)
     signals = botSignall.query.all()
-    for singnal in signals: 
+    for signal in signals: 
         db.session.delete(signal)
     try:
         db.session.commit()
