@@ -71,7 +71,7 @@ bonus_text_msg = 'Level # {}, Bonus number {}' # message about bonus content
 # notifications about adding a new bonus
 new_bonus_text_msg = 'A new bonus number {} has been added at level # {}'
 # Notification about changing the bonus text
-bonus_text_changed = 'Bonus number {} at the level # {} has changed'
+bonus_text_changed = 'At level # {} bonus number {} has changed'
 # message about bonus closing
 bonus_answered_msg = 'Bonus number {} at level # {} is closed by {} with answer {}'
 # Missing bonus messages
