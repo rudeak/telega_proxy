@@ -238,7 +238,7 @@ class EnGame(db.Model):
         self.proxy_key = proxy_key
 
 
-class EnLvl(db.Model):
+class EnLvl(db.Model): #TODO додати в інформацію рівня час до апу
 
     id = db.Column(
         db.Integer, primary_key=True)  # pylint: disable=invalid-name
@@ -441,7 +441,7 @@ class EnPenalty (db.Model):
 # моделі сигналів
 #--------------------------------------
 
-class botSignall (db.Model):
+class botSignall (db.Model): #Додати номер рівня
     id = db.Column(
         db.Integer, primary_key=True)
     chat_id = db.Column(db.Integer)
