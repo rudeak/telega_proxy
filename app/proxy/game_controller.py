@@ -16,7 +16,7 @@ def en_game_info_create(page, user_id):
 
 def en_game_logger(proxy_key, page_json):
     ##print(page_json)
-    #print_signals()
+    print_signals()
     if page_json['levelinfo'] == False:
         return 0
     # #print ('game id ='+str(get_game_id(proxy_key)))
