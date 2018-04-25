@@ -7,7 +7,7 @@ from app import db
 from app.game_managment import edit_game_name, get_domain, get_game_id
 from app.models import (EnBonus, EnGame, EnHistory, EnLvl, EnPenalty, EnPrompt,
                         EnSectors, EnTask, botSignall)
-from app.bot.signals import addSignal, #print_signals
+from app.bot.signals import addSignal, print_signals
 
 
 def en_game_info_create(page, user_id):
@@ -127,7 +127,7 @@ def en_sectors_logger(proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                   sectors['gamer'])
             db.session.add(en_sector)
             #print('sector No:' + str(en_sector.en_sector_no) + ' sector name ' + en_sector.en_sector_name + ' closed:' +
-                  str(en_sector.en_sector_entered) + ' answer: ' + en_sector.en_sector_answer + ' gamer: ' + en_sector.en_gamer)
+            #      str(en_sector.en_sector_entered) + ' answer: ' + en_sector.en_sector_answer + ' gamer: ' + en_sector.en_gamer)
             try:
                 db.session.commit()
                 counter += 1
@@ -179,10 +179,10 @@ def en_sectors_logger(proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
                                               en_lvl_no=en_lvl_no,
                                               en_sector_no=counter).first()
         #print('sector No:' + str(en_sector.en_sector_no) + ' sector name ' + en_sector.en_sector_name + ' closed:' +
-              str(en_sector.en_sector_entered) + ' answer: ' + en_sector.en_sector_answer + ' gamer: ' + en_sector.en_gamer)
+        #      str(en_sector.en_sector_entered) + ' answer: ' + en_sector.en_sector_answer + ' gamer: ' + en_sector.en_gamer)
         if sectors['name'] != en_sector.en_sector_name:
             #print('sector #' + str(counter) +
-                  ' name was changed to ' + str(sectors['name']))
+            #      ' name was changed to ' + str(sectors['name']))
             addSignal(proxy_key, 3, sectorNumber=counter,
                       nameOld=en_sector.en_sector_name, nameNew=sectors['name'])
             # TODO сигнал боту про зміну назви сектора
@@ -191,7 +191,7 @@ def en_sectors_logger(proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
         if sectors['entered'] != en_sector.en_sector_entered:
             # TODO сигнал боту про введення сектора
             #print('sector #' + str(counter) + ' name was closed by code ' +
-                  sectors['answer'] + ' by gamer ' + sectors['gamer'])
+            #      sectors['answer'] + ' by gamer ' + sectors['gamer'])
             addSignal(proxy_key, 4, sectorNumber=counter,
                       sectorName=sectors['name'], code=sectors['answer'], gamer=sectors['gamer'])
             updated = True
@@ -218,7 +218,7 @@ def sectors_counter(sectorsJson):
     return counter
 
 
-def #print_sectors_from_db(proxy_key, en_lvl_id, en_lvl_no):
+def print_sectors_from_db(proxy_key, en_lvl_id, en_lvl_no):
     sectors = EnSectors.query.filter_by(en_game_id=get_game_id(proxy_key),
                                         en_lvl_id=en_lvl_id,
                                         en_lvl_no=en_lvl_no).all()
@@ -226,7 +226,7 @@ def #print_sectors_from_db(proxy_key, en_lvl_id, en_lvl_no):
     #print('------------------------START DB sectors #printing -------------------')
     #print(sectors)
     for sector in sectors:
-        #print('sector No:' + str(sector.en_sector_no) + ' sector name ' + sector.en_sector_name + ' closed:' +
+        print('sector No:' + str(sector.en_sector_no) + ' sector name ' + sector.en_sector_name + ' closed:' +
               str(sector.en_sector_entered) + ' answer: ' + sector.en_sector_answer + ' gamer: ' + sector.en_gamer)
     #print('------------------------END DB sectors #printing -------------------')
     return None
@@ -266,12 +266,12 @@ def en_task_logger(proxy_key, en_lvl_id, en_lvl_no, taskJson):
     return None
 
 
-def #print_task_from_db(proxy_key, en_lvl_id, en_lvl_no):
+def print_task_from_db(proxy_key, en_lvl_id, en_lvl_no):
     en_task = EnTask.query.filter_by(en_game_id=get_game_id(proxy_key),
                                      en_lvl_id=en_lvl_id,
                                      en_lvl_no=en_lvl_no).all()
     for task in en_task:
-        #print(task)
+        print(task)
     return None
 
 
@@ -465,28 +465,28 @@ def en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
     return None
 
 
-def #print_prompts_from_db(proxy_key, en_lvl_id, en_lvl_no):
+def print_prompts_from_db(proxy_key, en_lvl_id, en_lvl_no):
 
     en_prompt = EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key),
                                          en_lvl_id=en_lvl_id,
                                          en_lvl_no=en_lvl_no).all()
-    #print('------------------------START DB prompts #printing -------------------')
+    print('------------------------START DB prompts #printing -------------------')
     for prompt in en_prompt:
-        #print(prompt)
-    #print('------------------------END DB prompts #printing -------------------')
+        print(prompt)
+    print('------------------------END DB prompts #printing -------------------')
 
     return None
 
 
-def #print_penalty_prompts_from_db(proxy_key, en_lvl_id, en_lvl_no):
+def print_penalty_prompts_from_db(proxy_key, en_lvl_id, en_lvl_no):
 
     en_prompt = EnPenalty.query.filter_by(en_game_id=get_game_id(proxy_key),
                                           en_lvl_id=en_lvl_id,
                                           en_lvl_no=en_lvl_no).all()
-    #print('------------------------START DB penalty prompts #printing -------------------')
+    print('------------------------START DB penalty prompts #printing -------------------')
     for prompt in en_prompt:
-        #print(prompt)
-    #print('------------------------END DB penalty prompts #printing -------------------')
+        print(prompt)
+    print('------------------------END DB penalty prompts #printing -------------------')
 
     return None
 
@@ -574,15 +574,15 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
     return None
 
 
-def #print_bonuses_from_db(proxy_key, en_lvl_id, en_lvl_no):
+def print_bonuses_from_db(proxy_key, en_lvl_id, en_lvl_no):
 
     en_bonus = EnBonus.query.filter_by(en_game_id=get_game_id(proxy_key),
                                        en_lvl_id=en_lvl_id,
                                        en_lvl_no=en_lvl_no).all()
-    #print('------------------------START DB bonuses #printing -------------------')
+    print('------------------------START DB bonuses #printing -------------------')
     for bonus in en_bonus:
-        #print(bonus)
-    #print('------------------------END DB bonuses #printing -------------------')
+        print(bonus)
+    print('------------------------END DB bonuses #printing -------------------')
     return None
 
 
@@ -593,10 +593,6 @@ def en_history_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
     if len(history) != EnHistory.query.filter_by(en_game_id=get_game_id(proxy_key),
                                                  en_lvl_id=en_lvl_id,
                                                  en_lvl_no=en_lvl_no).count():  # TODO аналіз введених кодів - вірний/невірний/бонус
-        #print('json history len = ' + str(len(history)))
-        #print('DB history count = ' + str(EnHistory.query.filter_by(en_game_id=get_game_id(proxy_key),
-                                                                    en_lvl_id=en_lvl_id,
-                                                                    en_lvl_no=en_lvl_no).count()))
         history_analize(proxy_key, en_lvl_id, en_lvl_no, pageJson)
         for story in history:
             if EnHistory.query.filter_by(en_game_id=get_game_id(proxy_key),
@@ -660,15 +656,15 @@ def history_analize(proxy_key, en_lvl_id, en_lvl_no, pageJson):
     return None
 
 
-def #print_history_from_db(proxy_key, en_lvl_id, en_lvl_no):
+def print_history_from_db(proxy_key, en_lvl_id, en_lvl_no):
 
     en_history = EnHistory.query.filter_by(en_game_id=get_game_id(proxy_key),
                                            en_lvl_id=en_lvl_id,
                                            en_lvl_no=en_lvl_no).all()
-    #print('------------------------START DB history #printing -------------------')
+    print('------------------------START DB history #printing -------------------')
     for story in en_history:
-        #print(story)
-    #print('------------------------END DB history #printing -------------------')
+        print(story)
+    print('------------------------END DB history #printing -------------------')
     return None
 
 def clear_level (proxy_key, en_lvl_id, en_lvl_no):
