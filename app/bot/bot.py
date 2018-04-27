@@ -20,22 +20,15 @@ telega_bot.setWebhook('https://rudeak.gq/bot/{}'.format(telegram_api_key))
 @bot.route('/'+telegram_api_key, methods=['POST', 'GET'])
 def message_listener():
     update = request.get_json() #TODO перевірку чи такий чат є в базі якщо немає то створити
-    #print(update)
     find_chat(update)
-    #print(update)
     return 'bot ok'
 
 def find_chat (json_plain):
     
     jsonIn = json_plain
     print (jsonIn)
-    for key in jsonIn.keys():
-        print (key)
     message = jsonIn ['message']
     chat = message['chat']
-    for key in chat.keys():
-        print (key)
-    print (int(chat['id']))
     if Chat.query.filter_by(tg_id = int(chat['id'])).count() ==0:
         if chat['type']!='private':
             chat_db = Chat(chat['id'], chat['title'], "<img></img>",0)
@@ -44,12 +37,12 @@ def find_chat (json_plain):
             user = message['from']
             privat_title = 'Private chat with {}'.format(user['username'])
             chat_db = Chat(chat['id'], privat_title, "<img></img>",0) 
-    db.session.add(chat_db)
-    try:
-        db.session.commit()
-        print ('new chat added')
-    except:
-        db.session.rollback()
-        print ('error while adding chat to db')
+        db.session.add(chat_db)
+        try:
+            db.session.commit()
+            print ('new chat added')
+        except:
+            db.session.rollback()
+            print ('error while adding chat to db')
     
     return None
