@@ -20,7 +20,8 @@ telega_bot.setWebhook('https://rudeak.gq/bot/{}'.format(telegram_api_key))
 @bot.route('/'+telegram_api_key, methods=['POST', 'GET'])
 def message_listener():
     update = request.get_json() #TODO перевірку чи такий чат є в базі якщо немає то створити
-    find_chat(update)
+    print(update)
+    #find_chat(update)
     print(update)
     return 'bot ok'
 
