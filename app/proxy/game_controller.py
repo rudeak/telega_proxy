@@ -300,7 +300,8 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                  prompt['text'],
                                  int(prompt['timer']))
             db.session.add(en_prompt)
-            addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
+            if prompt[timer] !='0':
+                addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
             try:
                 db.session.commit()
                 # TODO прописати сигнали боту по підказках
