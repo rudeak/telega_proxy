@@ -484,4 +484,4 @@ def addSignallUpTime (chatId, level, timer):
         db.session.rollback()
         print ('Bonus answered text signall NOT commited') 
     return None
-        return None
+        
