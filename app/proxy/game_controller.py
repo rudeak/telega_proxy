@@ -302,14 +302,16 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
             db.session.add(en_prompt)
             if prompt[timer] !='0':
                 addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
+            else:
+                addSignal(proxy_key, 9, timestamp=prompt['timer'])
             try:
                 db.session.commit()
                 # TODO прописати сигнали боту по підказках
-                addSignal(proxy_key, 9, timestamp=prompt['timer'])
-                #print('prompt added')
+                
+                print('prompt added')
             except:
                 db.session.rollback()
-                #print('prompt error')
+                print('prompt error')
          # TODO прописати сигнали боту кількості підказок
         addSignal (proxy_key, 8, level = en_lvl_no, count = len(prompts))
     #print('prompts length =' + str(len(prompts)))
