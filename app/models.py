@@ -448,12 +448,13 @@ class botSignall (db.Model): #Додати номер рівня
     signal_type = db.Column(db.Integer)
     signal_json = db.Column(db.Text)
     signal_date = db.Column (db.Integer)
+    level = db.Column (db.Integer)
 
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
-        return "<botSignal(%(id)s, %(signal_type)s, %(signal_json)s)>" % self.__dict__
+        return "<botSignal(%(id)s, %(signal_type)s, %(signal_json)s, %(level)s)>" % self.__dict__
 
 """
 class EnTask(db.Model):

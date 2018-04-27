@@ -37,7 +37,7 @@ bonus_text_changed = 'Бонус №{} на рівні №{} змінився'
 bonus_answered_msg = 'Бонус №{} на рівні №{} закрито гравцем {}, кодом {}'
 # повідомлення про пропуск бонусу
 bonus_passed_msg = 'Бонус №{} на рівні №{} пропущено(час закінчився)'
-
+up_msg = 'Час до апу: {}'
 
 # Текст сообщения об изменении количества секторов
 sectors_count_changed_msg = 'На уровне изменилось количество секторов с {} на {}'
@@ -116,3 +116,5 @@ bonus_text_changed = 'At level # {} bonus number {} has changed'
 bonus_answered_msg = 'Bonus number {} at level # {} is closed by {} with answer {}'
 # Missing bonus messages
 bonus_passed_msg = 'Bonus number {} at level {} missing (time is over)'
+#up timer message
+up_msg = 'Time tu up: {}'

@@ -369,6 +369,8 @@ def addSignallBonusText(chatId, level, number, text, bonus_text):
     return None
 
 
+
+
 def addSignallBonusNew(chatId, level, number, text, bonus_text):
     # TODO сигнал боту про появу нового бонусу, тип = 18, повідомлення: на рівні № level з'явився новий бонус № number : text, bonus_text, час = now
     signal = botSignall()    
@@ -443,3 +445,22 @@ def print_signals():
         print (signall)
     print ('------------------ END PRINTING SIGNAL ---------------------')
     return None
+
+
+    def addSignallUpTime (chatId, level, timer):
+    # TODO сигнал боту про ап, тип = 22, повідомлення: Час до Апу , час = now-1
+    signal = botSignall()    
+    signal.chat_id = chatId
+    signal.signal_type = 22
+    time_up = time.strftime("%H:%M:%S", time.gmtime(timer - time.mktime(datetime.now().timetuple())))
+    signal.signal_json = json.dumps ({'msg':up_msg.format(time_up), 'html':''})
+    signal.signal_date = time.mktime(datetime.now().timetuple())-1
+    db.session.add(signal)
+    try:
+        db.session.commit()
+        print ('Bonus answered text signall commited')
+    except:
+        db.session.rollback()
+        print ('Bonus answered text signall NOT commited') 
+    return None
+        return None
