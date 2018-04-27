@@ -243,7 +243,7 @@ def en_task_logger(proxy_key, en_lvl_id, en_lvl_no, taskJson):
         #print('New task cretation')
         #print(taskJson)
         # TODO сигнал боту про нове завдання
-        addSignal(proxy_key, 5, level=en_lvl_no, task=taskJson['task'], level = en_lvl_no)
+        addSignal(proxy_key, 5, level=en_lvl_no, task=taskJson['task'])
         en_task = EnTask(get_game_id(proxy_key), en_lvl_id,
                          en_lvl_no, taskJson['task'])
         db.session.add(en_task)
