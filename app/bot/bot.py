@@ -6,6 +6,7 @@ from jinja2 import TemplateNotFound
 import app
 import telepot
 from app import db
+from app.models import Chat, botSignall
 
 bot = Blueprint('bot', 'bot', template_folder='templates')
 
@@ -17,6 +18,24 @@ telega_bot.setWebhook('https://rudeak.gq/bot/{}'.format(telegram_api_key))
 
 @bot.route('/'+telegram_api_key, methods=['POST', 'GET'])
 def message_listener():
-    update = request.get_json()
+    update = request.get_json() #TODO перевірку чи такий чат є в базі якщо немає то створити
     print(update)
     return 'bot ok'
+
+def find_chat (jsonIn):
+    chat = jsonIn['chat']
+    if Chat.query.filter_by(tg_id = chat['id']).count() ==0
+        if chat['id']<0:
+            chat_db = Chat(chat['id'], chat['title'], "<img></img>",0)
+        else:
+            message = jsonIn['message']
+            user = message['from']
+            privat_title = 'Private chat with {}'.format(user['username'])
+            chat_db = Chat(chat['id'], chat['title'], "<img></img>",0) 
+    db.session.add(chat_db)
+    try:
+        db.session.commit()
+    except:
+        db.session.rollback()
+    
+    return None
