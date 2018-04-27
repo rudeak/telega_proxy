@@ -141,7 +141,7 @@ def en_sectors_logger(proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
         if EnSectors.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count() != sectors_counter(sectorsJson):
             # TODO повідомлення про зміну кількості секторів
             addSignal(proxy_key, 1, was=EnSectors.query.filter_by(en_game_id=get_game_id(
-                proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count(), now=sectors_counter(sectorsJson))
+                proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count(), now=sectors_counter(sectorsJson), level = en_lvl_no)
             #print('level sectors count was changed!!!')
             counter = 1
             for sector in sectorsJson:

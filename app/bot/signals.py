@@ -15,9 +15,9 @@ def addSignal(proxyKey, type_, **kwargs):
     print_signals()
     if type_ == 1:
         adSignallSectorsCountChanged(get_chat_tg_id(
-            proxyKey), kwargs['was'], kwargs['now'])
+            proxyKey), kwargs['was'], kwargs['now'], kwargs['level'])
     if type_ == 2:
-        adSignallSectorsCount(get_chat_tg_id(proxyKey), kwargs['now'])
+        adSignallSectorsCount(get_chat_tg_id(proxyKey), kwargs['now'], kwargs['level'])
     if type_ == 3:
         addSignallSectorNameChanged(get_chat_tg_id(
             proxyKey), kwargs['sectorNumber'], kwargs['nameOld'], kwargs['nameNew'])
@@ -77,11 +77,12 @@ def addSignal(proxyKey, type_, **kwargs):
     return None
 
 
-def adSignallSectorsCountChanged(chatId, was, now):
+def adSignallSectorsCountChanged(chatId, was, now, level):
     # TODO сигнал про зміну кількості секторів тип = 1, повідоблення було was секторів, зараз now секторів, час now
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 1
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':sectors_count_changed_msg.format(was, now), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -94,11 +95,12 @@ def adSignallSectorsCountChanged(chatId, was, now):
     return None
 
 
-def adSignallSectorsCount(chatId, now):
+def adSignallSectorsCount(chatId, now, level):
     # TODO сигнал про кількість секторів тип = 2, повідомлення на рівні now секторів, час now + 1 sec
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 2
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':sectors_count_msg.format(now), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())+1
     db.session.add(signal)
@@ -111,11 +113,12 @@ def adSignallSectorsCount(chatId, now):
     return None
 
 
-def addSignallSectorNameChanged(chatId, sectorNumber, nameOld, nameNew):
+def addSignallSectorNameChanged(chatId, sectorNumber, nameOld, nameNew, level):
     # TODO сигнад про зміну назви сектора, тип = 3, повідомлення: назва сектора № sectorNumber змінилася з nameOld, nameNew, час now
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 3
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':sector_renamed_msg.format(sectorNumber, nameOld, nameNew), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -128,11 +131,12 @@ def addSignallSectorNameChanged(chatId, sectorNumber, nameOld, nameNew):
     return None
 
 
-def adSignallSectorClosed(chatId, sectorNumber, sectorName, code, gamer):
+def adSignallSectorClosed(chatId, sectorNumber, sectorName, code, gamer, level):
     # TODO сигнал про введення сектора, тип = 4, повідомлення сектор № sectorNumber, закритий кодом code, гравцем gamer, час now
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 4
+    signal.level = level
     if sectorName =='':
         signal.signal_json = json.dumps ({'msg':sector_noname_closed_msg.format(sectorNumber, code, gamer), 'html':''})
     else:
@@ -148,11 +152,12 @@ def adSignallSectorClosed(chatId, sectorNumber, sectorName, code, gamer):
     return None
 
 
-def adSignallNewTask(chatId, level, task):
+def adSignallNewTask(chatId, level, task, level):
     # TODO сигнал про нове завдання тип = 5, повідомлення: Перехід на новий рівень level, отримано завдання. task, час =now
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 5
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':new_level_msg.format(level), 'html':task})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -165,11 +170,12 @@ def adSignallNewTask(chatId, level, task):
     return None
 
 
-def adSignallTask(chatId, level, task):
+def adSignallTask(chatId, level, task, level):
     # TODO сигнал перевідправку завдання тип = 6, повідомлення: Завдання рівня level. task, час =now
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 6
+    signal.level = level
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
     try:
@@ -186,6 +192,7 @@ def addSignallTaskChanged(chatId, level, task):
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 7
+    signal.level= level
     signal.signal_json = json.dumps ({'msg':task_changed_msg, 'html':task})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -203,6 +210,7 @@ def addSignallPromptsCount(chatId, level, count):
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 8
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':prompts_count_msg.format(count), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple()) + 2
     db.session.add(signal)
@@ -237,6 +245,7 @@ def addSignalPromptsCountChanged(chatId, level, oldCount, newCount):
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 10
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':prompts_count_changed_msg.format(level, oldCount, newCount), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -254,6 +263,7 @@ def addSignallPromptTextChanged(chatId, level, number, text):
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 11
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':prompt_text_changed_msg.format(level, number), 'html':text})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -271,6 +281,7 @@ def addSignallPromptNew(chatId, level, number, text):
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 12
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':new_prompt_msg.format(number), 'html':text})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -289,6 +300,7 @@ def addSignallPenaltyPromptsCount(chatId, level, count):
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 13
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':penalty_count_msg.format(count), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())+3
     db.session.add(signal)
@@ -306,6 +318,7 @@ def addSignalPenaltyPromptsCountChanged(chatId, level, oldCount, newCount):
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 14
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':penalty_count_changed_msg .format(level,oldCount, newCount), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -323,6 +336,7 @@ def addSignallPenaltyPromptNew(chatId, level, number, text):
     signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 15
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':new_penalty_prompt_msg.format(level,number), 'html':text})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -340,6 +354,7 @@ def addSignallBonusCount(chatId, level, count):
     signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 16
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':bonus_count_msg.format(level,count), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())+4
     db.session.add(signal)
@@ -357,6 +372,7 @@ def addSignallBonusText(chatId, level, number, text, bonus_text):
     signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 17
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':bonus_text_msg.format(level,number), 'html':text})
     signal.signal_date = time.mktime(datetime.now().timetuple())+5
     db.session.add(signal)
@@ -376,6 +392,7 @@ def addSignallBonusNew(chatId, level, number, text, bonus_text):
     signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 18
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':new_bonus_text_msg.format(level,number), 'html':text})
     signal.signal_date = time.mktime(datetime.now().timetuple())+5
     db.session.add(signal)
@@ -393,6 +410,7 @@ def addSignallBonusTextNew(chatId, level, number, text, bonus_text):
     signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 19
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':bonus_text_changed.format(level,number), 'html':text})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -410,6 +428,7 @@ def addSignallBonusClosed(chatId, level, number, text, bonus_text, answer, gamer
     signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 20
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':bonus_answered_msg.format(level,number, gamer, answer), 'html':text+bonus_text})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -427,6 +446,7 @@ def addSignallBonusPassed(chatId, level, number, text, bonus_text):
     signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 21
+    signal.level = level
     signal.signal_json = json.dumps ({'msg':bonus_passed_msg.format(level,number), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     db.session.add(signal)
@@ -452,6 +472,7 @@ def print_signals():
     signal = botSignall()    
     signal.chat_id = chatId
     signal.signal_type = 22
+    signal.level = level
     time_up = time.strftime("%H:%M:%S", time.gmtime(timer - time.mktime(datetime.now().timetuple())))
     signal.signal_json = json.dumps ({'msg':up_msg.format(time_up), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())-1
