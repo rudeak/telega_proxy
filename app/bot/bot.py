@@ -37,7 +37,7 @@ def find_chat (json_plain):
         print (key)
     print (int(chat['id']))
     if Chat.query.filter_by(tg_id = int(chat['id'])).count() ==0:
-        if int(chat['type'])!='private':
+        if chat['type']!='private':
             chat_db = Chat(chat['id'], chat['title'], "<img></img>",0)
         else:
             message = jsonIn['message']
