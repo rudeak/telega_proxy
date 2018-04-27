@@ -170,7 +170,7 @@ def adSignallNewTask(chatId, level, task):
     return None
 
 
-def adSignallTask(chatId, level, task, level):
+def adSignallTask(chatId, level, task):
     # TODO сигнал перевідправку завдання тип = 6, повідомлення: Завдання рівня level. task, час =now
     signal = botSignall()
     signal.chat_id = chatId
