@@ -9,14 +9,15 @@ from app.models import (EnBonus, EnGame, EnHistory, EnLvl, EnPenalty, EnPrompt,
                         EnSectors, EnTask, botSignall)
 from app.bot.signals import addSignal, print_signals
 
+debug = True
 
 def en_game_info_create(page, user_id):
     return 1
 
 
 def en_game_logger(proxy_key, page_json):
-    ##print(page_json)
-    print_signals()
+    
+    
     if page_json['levelinfo'] == False:
         return 0
     # #print ('game id ='+str(get_game_id(proxy_key)))
@@ -34,7 +35,10 @@ def en_game_logger(proxy_key, page_json):
     levelInfo = json.loads(page_json['levelinfo'])
     en_lvl_id = levelInfo['levelId']
     en_lvl_no = levelInfo['levelNum']
-    clear_level (proxy_key, en_lvl_id, en_lvl_no)
+    if debug:
+        print(page_json)
+        print_signals()
+        clear_level (proxy_key, en_lvl_id, en_lvl_no)
     # #print (levelInfo['levelId'])
     if EnLvl.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=levelInfo['levelId'], en_lvl_no=levelInfo['levelNum']).count() == 0:
         lvl = EnLvl(get_game_id(proxy_key),

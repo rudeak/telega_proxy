@@ -467,7 +467,7 @@ def print_signals():
     return None
 
 
-    def addSignallUpTime (chatId, level, timer):
+def addSignallUpTime (chatId, level, timer):
     # TODO сигнал боту про ап, тип = 22, повідомлення: Час до Апу , час = now-1
     signal = botSignall()    
     signal.chat_id = chatId
