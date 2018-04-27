@@ -31,7 +31,8 @@ def find_chat (json_plain):
     print (jsonIn)
     for key in jsonIn.keys():
         print (key)
-    chat = jsonIn['chat']
+    message = jsonIn ['message']
+    chat = message['chat']
     if Chat.query.filter_by(tg_id = chat['id']).count() ==0:
         if chat['id']<0:
             chat_db = Chat(chat['id'], chat['title'], "<img></img>",0)
