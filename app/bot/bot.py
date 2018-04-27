@@ -43,7 +43,7 @@ def find_chat (json_plain):
             message = jsonIn['message']
             user = message['from']
             privat_title = 'Private chat with {}'.format(user['username'])
-            chat_db = Chat(chat['id'], chat['title'], "<img></img>",0) 
+            chat_db = Chat(chat['id'], privat_title, "<img></img>",0) 
     db.session.add(chat_db)
     try:
         db.session.commit()
