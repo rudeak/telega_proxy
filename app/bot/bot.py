@@ -35,7 +35,9 @@ def find_chat (jsonIn):
     db.session.add(chat_db)
     try:
         db.session.commit()
+        print ('new chat added')
     except:
         db.session.rollback()
+        print ('error while adding chat to db')
     
     return None
