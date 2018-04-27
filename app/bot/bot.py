@@ -5,6 +5,7 @@ from jinja2 import TemplateNotFound
 
 import app
 import telepot
+import json
 from app import db
 from app.models import Chat, botSignall
 
