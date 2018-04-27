@@ -24,7 +24,7 @@ def message_listener():
 
 def find_chat (jsonIn):
     chat = jsonIn['chat']
-    if Chat.query.filter_by(tg_id = chat['id']).count() ==0
+    if Chat.query.filter_by(tg_id = chat['id']).count() ==0:
         if chat['id']<0:
             chat_db = Chat(chat['id'], chat['title'], "<img></img>",0)
         else:
