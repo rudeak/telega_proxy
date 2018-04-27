@@ -29,6 +29,8 @@ def find_chat (json_plain):
     
     jsonIn = json_plain
     print (jsonIn)
+    for key in jsonIn.keys():
+        print (key)
     chat = jsonIn['chat']
     if Chat.query.filter_by(tg_id = chat['id']).count() ==0:
         if chat['id']<0:
