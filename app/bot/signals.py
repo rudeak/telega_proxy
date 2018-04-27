@@ -152,7 +152,7 @@ def adSignallSectorClosed(chatId, sectorNumber, sectorName, code, gamer, level):
     return None
 
 
-def adSignallNewTask(chatId, level, task, level):
+def adSignallNewTask(chatId, level, task):
     # TODO сигнал про нове завдання тип = 5, повідомлення: Перехід на новий рівень level, отримано завдання. task, час =now
     signal = botSignall()
     signal.chat_id = chatId
