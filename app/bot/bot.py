@@ -28,6 +28,7 @@ def message_listener():
 def find_chat (json_plain):
     
     jsonIn = json_plain
+    print (jsonIn)
     chat = jsonIn['chat']
     if Chat.query.filter_by(tg_id = chat['id']).count() ==0:
         if chat['id']<0:
