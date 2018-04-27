@@ -116,7 +116,7 @@ def en_sectors_logger(proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
     if EnSectors.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count() == 0:
         # TODO повідомлення про додавання секторів
         #print('no sectors was logged!!!')
-        addSignal(proxy_key, 2, now=sectors_counter(sectorsJson))
+        addSignal(proxy_key, 2, now=sectors_counter(sectorsJson), level = en_lvl_no)
         counter = 1
         #print('------------------------START adding sector #printing -------------------')
         for sectors in sectorsJson:
@@ -188,7 +188,7 @@ def en_sectors_logger(proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
             #print('sector #' + str(counter) +
             #      ' name was changed to ' + str(sectors['name']))
             addSignal(proxy_key, 3, sectorNumber=counter,
-                      nameOld=en_sector.en_sector_name, nameNew=sectors['name'])
+                      nameOld=en_sector.en_sector_name, nameNew=sectors['name'], level = en_lvl_no)
             # TODO сигнал боту про зміну назви сектора
             updated = True
             en_sector.en_sector_name = sectors['name']
@@ -197,7 +197,7 @@ def en_sectors_logger(proxy_key, en_lvl_id, en_lvl_no, sectorsJson):
             #print('sector #' + str(counter) + ' name was closed by code ' +
             #      sectors['answer'] + ' by gamer ' + sectors['gamer'])
             addSignal(proxy_key, 4, sectorNumber=counter,
-                      sectorName=sectors['name'], code=sectors['answer'], gamer=sectors['gamer'])
+                      sectorName=sectors['name'], code=sectors['answer'], gamer=sectors['gamer'], level = en_lvl_no)
             updated = True
             en_sector.en_sector_entered = True
             en_sector.en_sector_answer = sectors['answer']
@@ -243,7 +243,7 @@ def en_task_logger(proxy_key, en_lvl_id, en_lvl_no, taskJson):
         #print('New task cretation')
         #print(taskJson)
         # TODO сигнал боту про нове завдання
-        addSignal(proxy_key, 5, level=en_lvl_no, task=taskJson['task'])
+        addSignal(proxy_key, 5, level=en_lvl_no, task=taskJson['task'], level = en_lvl_no)
         en_task = EnTask(get_game_id(proxy_key), en_lvl_id,
                          en_lvl_no, taskJson['task'])
         db.session.add(en_task)
@@ -260,7 +260,7 @@ def en_task_logger(proxy_key, en_lvl_id, en_lvl_no, taskJson):
         if en_task.en_task_text != taskJson['task']:
             en_task.en_task_text = taskJson['task']
             # TODO добавити сигнал боту про зміну тексту завдання
-            addSignal(proxy_key, level=en_lvl_no, task=taskJson['task'])
+            addSignal(proxy_key,7, level=en_lvl_no, task=taskJson['task'])
             #print('task text changed')
             try:
                 db.session.commit()
