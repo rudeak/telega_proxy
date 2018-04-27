@@ -23,7 +23,8 @@ def message_listener():
     print(update)
     return 'bot ok'
 
-def find_chat (jsonIn):
+def find_chat (json_plain):
+    jsonIn = json.dumps(json_plain)
     chat = jsonIn['chat']
     if Chat.query.filter_by(tg_id = chat['id']).count() ==0:
         if chat['id']<0:
