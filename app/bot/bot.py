@@ -22,7 +22,7 @@ def message_listener():
     update = request.get_json() #TODO перевірку чи такий чат є в базі якщо немає то створити
     print(update)
     #find_chat(update)
-    print(update)
+    #print(update)
     return 'bot ok'
 
 def find_chat (json_plain):
