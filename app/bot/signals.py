@@ -45,6 +45,7 @@ def addSignal(proxyKey, type_, **kwargs):
         addSignallPromptTextChanged(get_chat_tg_id(
             proxyKey), kwargs['level'], kwargs['number'], kwargs['text'])
     if type_ == 12:
+        print ('Signal type 12 !!!!!!!!!!!!!!!!!!!!')
         addSignallPromptNew(get_chat_tg_id(proxyKey),
                             kwargs['level'], kwargs['number'], kwargs['text'])
     if type_ == 13:
