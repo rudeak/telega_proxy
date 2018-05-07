@@ -50,8 +50,8 @@ def addSignal(proxyKey, type_, **kwargs):
         addSignallPromptNew(get_chat_tg_id(proxyKey),
                             kwargs['level'], kwargs['number'], kwargs['text'])
     if type_ == 13:
-        addSignallPenaltyPromptsCount(get_chat_tg_id(
-            proxyKey), kwargs['level'], kwargs['count'])
+        print ('Signal type 13 !!!!!!!!!!!!!!!!!!!!')
+        addSignallPenaltyPromptsCount(get_chat_tg_id(proxyKey), kwargs['level'], kwargs['count'])
     if type_ == 14:
         addSignalPenaltyPromptsCountChanged(get_chat_tg_id(
             proxyKey), kwargs['level'], kwargs['oldCount'], kwargs['newCount'])
@@ -59,7 +59,7 @@ def addSignal(proxyKey, type_, **kwargs):
         addSignallPenaltyPromptNew(get_chat_tg_id(
             proxyKey), kwargs['level'], kwargs['number'], kwargs['text'])
     if type_ == 16:
-        print ('Signal type 16 !!!!!!!!!!!!!!!!!!!!')
+        
         addSignallBonusCount (get_chat_tg_id(proxyKey), kwargs['level'], kwargs['count'])
     if type_ == 17:
         addSignallBonusText(get_chat_tg_id(
@@ -310,10 +310,10 @@ def addSignallPenaltyPromptsCount(chatId, level, count):
     db.session.add(signal)
     try:
         db.session.commit()
-        print ('New prompt signall commited')
+        print ('New penalty count signall commited')
     except:
         db.session.rollback()
-        print ('New prompt signall NOT commited') 
+        print ('New penalty prompt count signall NOT commited') 
     return None
 
 
