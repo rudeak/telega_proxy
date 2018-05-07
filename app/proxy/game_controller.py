@@ -240,7 +240,7 @@ def en_task_logger(proxy_key, en_lvl_id, en_lvl_no, taskJson):
         #print('New task cretation')
         #print(taskJson)
         # TODO сигнал боту про нове завдання
-        task_text = json.loads(taskJson)['task']
+        task_text = json.loads(taskJson['task'])['task'] #TODO прибрати вкладення тексту
         print (task_text)
         addSignal(proxy_key, 5, level=en_lvl_no, task=task_text)
         en_task = EnTask(get_game_id(proxy_key), en_lvl_id,
