@@ -51,7 +51,7 @@ def find_chat (json_plain):
     return None
 
 def read_signals (chat_id):
-        signals = botSignall.query.filter_by (chat_id = chat_id).order_by(botSignall.level, botSignall.signal_date.all()
+        signals = botSignall.query.filter_by (chat_id = chat_id).order_by(botSignall.level, botSignall.signal_date).all()
         if len(signals) == 0:
             return None
         for signal in signals:
