@@ -56,7 +56,7 @@ def read_signals (chat_id):
             return None
         for signal in signals:
             if signal.signal_type == 5:
-                bot.sendMessage (chat_id, 'New task found')
+                telega_bot.sendMessage (chat_id, 'New task found')
             print(signal)
         return None
 
