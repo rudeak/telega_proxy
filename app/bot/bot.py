@@ -55,30 +55,38 @@ def read_signals (chat_id):
         if len(signals) == 0:
             return None
         for signal in signals:
-            print(signal)
+           # print(signal)
             if signal.signal_type == 5:
                 message = json.loads(signal.signal_json)
                 telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
+                db.session.delete (signal)
             if signal.signal_type == 8:
                 message = json.loads(signal.signal_json)
                 telega_bot.sendMessage (chat_id, message['msg'])
+                db.session.delete (signal)
             if signal.signal_type == 2:
                 message = json.loads(signal.signal_json)
                 telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
+                db.session.delete (signal)
             if signal.signal_type == 12:
                 message = json.loads(signal.signal_json)
                 telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
+                db.session.delete (signal)
                 #db.session.delete(signall)
                 #db.session.commit()
             if signal.signal_type == 13:
                 message = json.loads(signal.signal_json)
                 telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
+                db.session.delete (signal)
             if signal.signal_type == 16:
                 message = json.loads(signal.signal_json)
                 telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
+                db.session.delete (signal)
             if signal.signal_type == 17:
                 message = json.loads(signal.signal_json)
                 telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
+                db.session.delete (signal)
+            db.session.commit()
             
             
             
