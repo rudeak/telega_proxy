@@ -104,7 +104,7 @@ def send_html_message (chat_id, messageJson):
     soup = BeautifulSoup (messageJson['html']).prettify()
     html = ''
     print (soup)
-    for line in soup:
+    for line in soup.split('\n'):
         if line.find('div') >0:
             line = ''
         if line.find('span') >0:
