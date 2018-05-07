@@ -13,6 +13,7 @@ from app.bot.messages import *
 
 def addSignal(proxyKey, type_, **kwargs):
     print_signals()
+    print ('signal type = '+ str(type_))
     if type_ == 1:
         adSignallSectorsCountChanged(get_chat_tg_id(
             proxyKey), kwargs['was'], kwargs['now'], kwargs['level'])
