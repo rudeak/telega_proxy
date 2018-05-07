@@ -283,7 +283,7 @@ def print_task_from_db(proxy_key, en_lvl_id, en_lvl_no):
 def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
     prompts = json.loads(pageJson['prompts'])
     #print('prompts logger')
-    print(prompts)
+    print(len(prompts)
     # якщо немає піказок тоді вернутись
     if len(prompts) == 0:
         return None
