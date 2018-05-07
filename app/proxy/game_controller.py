@@ -315,6 +315,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
             except:
                 db.session.rollback()
                 print('prompt error')
+    return None
 
  """   
     if len(prompts) > EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key),
@@ -379,7 +380,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                     #print('prompt error')
     print_prompts_from_db(proxy_key, en_lvl_id, en_lvl_no)
 """
-    return None
+    
 
 
 def en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
