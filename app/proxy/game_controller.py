@@ -387,8 +387,8 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
 
 def en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
     prompts = json.loads(pageJson['penalty'])
-    #print('penalty logger')
-    #print(prompts)
+    print('penalty logger')
+    print(prompts)
     # якщо немає піказок тоді вернутись
     if prompts == None:
         return None
