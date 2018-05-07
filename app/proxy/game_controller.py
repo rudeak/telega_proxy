@@ -48,14 +48,11 @@ def en_game_logger(proxy_key, page_json):
         try:
             db.session.commit()
             en_level_info_updater(proxy_key, page_json)
-            en_history_logger(proxy_key, en_lvl_id, en_lvl_no,
-                              page_json)  # НЕ ПЕРЕСТАВЛЯТИ
-            en_task_logger(
-                proxy_key, levelInfo['levelId'], levelInfo['levelNum'], page_json)
+            en_history_logger(proxy_key, en_lvl_id, en_lvl_no,page_json)  # НЕ ПЕРЕСТАВЛЯТИ
+            en_task_logger(proxy_key, levelInfo['levelId'], levelInfo['levelNum'], page_json)
             en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, page_json)
             en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, page_json)
-            en_penalty_prompts_loger(
-                proxy_key, en_lvl_id, en_lvl_no, page_json)
+            en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, page_json)
 
         except:
             db.session.rollback()
@@ -63,10 +60,8 @@ def en_game_logger(proxy_key, page_json):
     else:
      #       lvl = EnLvl.query.filter_by(en_game_id = get_game_id(proxy_key), en_lvl_id = levelInfo['levelId'], en_lvl_no = levelInfo['levelNum']).first()
         en_level_info_updater(proxy_key, page_json)
-        en_history_logger(proxy_key, en_lvl_id, en_lvl_no,
-                          page_json)  # НЕ ПЕРЕСТАВЛЯТИ
-        en_task_logger(
-            proxy_key, levelInfo['levelId'], levelInfo['levelNum'], page_json)
+        en_history_logger(proxy_key, en_lvl_id, en_lvl_no, page_json)  # НЕ ПЕРЕСТАВЛЯТИ
+        en_task_logger(proxy_key, levelInfo['levelId'], levelInfo['levelNum'], page_json)
         en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, page_json)
         en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, page_json)
         en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, page_json)
