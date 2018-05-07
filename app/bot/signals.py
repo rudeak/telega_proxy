@@ -145,10 +145,10 @@ def adSignallSectorClosed(chatId, sectorNumber, sectorName, code, gamer, level):
     db.session.add(signal)
     try:
         db.session.commit()
-        print ('Sectors renamed signall commited')
+        print ('Sectors closed signall commited')
     except:
         db.session.rollback()
-        print ('Sectors renamed signall NOT commited')
+        print ('Sectors closed signall NOT commited')
     return None
 
 
@@ -163,10 +163,10 @@ def adSignallNewTask(chatId, level, task):
     db.session.add(signal)
     try:
         db.session.commit()
-        print ('Sectors renamed signall commited')
+        print ('New task signall commited')
     except:
         db.session.rollback()
-        print ('Sectors renamed signall NOT commited')    
+        print ('new task signall NOT commited')    
     return None
 
 
@@ -198,10 +198,10 @@ def addSignallTaskChanged(chatId, level, task):
     db.session.add(signal)
     try:
         db.session.commit()
-        print ('Sectors renamed signall commited')
+        print ('Task changed signall commited')
     except:
         db.session.rollback()
-        print ('Sectors renamed signall NOT commited') 
+        print ('Task changed signall NOT commited') 
     return None
 
 
