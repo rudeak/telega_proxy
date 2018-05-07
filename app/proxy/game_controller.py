@@ -296,12 +296,13 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                 en_lvl_id=en_lvl_id,
                                 en_lvl_no=en_lvl_no).count() == 0:
         for prompt in prompts:
-            print (prompt)
+            
             if prompt['timer'] == '':
                 prompt['timer'] = '0'
             en_prompt = EnPrompt(get_game_id(proxy_key), en_lvl_id, en_lvl_no, prompt['number'], prompt['text'], int(prompt['timer']))
             db.session.add(en_prompt)
             db.session.commit()
+            print (prompt)
             print (en_prompt)
             #if prompt['timer'] =='0':
             #    addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
@@ -316,7 +317,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 db.session.rollback()
                 print('prompt error')
 
-    #print('prompts length =' + str(len(prompts)))
+    
     if len(prompts) > EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key),
                                                en_lvl_id=en_lvl_id,
                                                en_lvl_no=en_lvl_no).count():
