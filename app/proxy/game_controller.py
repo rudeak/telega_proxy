@@ -533,54 +533,52 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 db.session.rollback()
                 print('error adding new bonus')
         addSignal (proxy_key, 16, level = en_lvl_no, count = len(bonuses))
-    for bonus in bonuses:
-        en_bonus = EnBonus.query.filter_by(en_game_id=get_game_id(proxy_key),
-                                           en_lvl_id=en_lvl_id,
-                                           en_lvl_no=en_lvl_no,
-                                           en_bonus_text = bonus['text']).first()
-        print (en_bonus)
-        if en_bonus == None:  # якщо бонус з таким номером не знайдено значить він новий
-            # TODO послати сигнал боту що додався новий бонус
-            en_bonus = EnBonus(get_game_id(proxy_key),
-                               en_lvl_id,
-                               en_lvl_no,
-                               bonus['number'],
-                               bonus['text'],
-                               bonus['bonus_text'],
-                               bonus['completed'],
-                               bonus['passed'])
-            db.session.add(en_bonus)
-            addSignal (proxy_key, 18, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus['bonus_text']) 
+    if len (bonuses) != EnBonus.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).all().count:
+        for bonus in bonuses:
+            en_bonus = EnBonus.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no, en_bonus_text = bonus['text']).first()
+            print (en_bonus)
+            if en_bonus == None:  # якщо бонус з таким номером не знайдено значить він новий
+                # TODO послати сигнал боту що додався новий бонус
+                en_bonus = EnBonus(get_game_id(proxy_key),
+                                en_lvl_id,
+                                en_lvl_no,
+                                bonus['number'],
+                                bonus['text'],
+                                bonus['bonus_text'],
+                                bonus['completed'],
+                                bonus['passed'])
+                db.session.add(en_bonus)
+                addSignal (proxy_key, 18, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus['bonus_text']) 
+                try:
+                    db.session.commit()
+                    #print('new bonus added')
+                except:
+                    db.session.rollback()
+                    #print('error adding new bonus')
+            if en_bonus.en_bonus_text != bonus['text']:
+                # TODO послати сигнал боту що змінився текст бонусу
+                addSignal (proxy_key, 19, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus ['bonus_text']) 
+                en_bonus.en_bonus_text = bonus['text']
+                print ('--------------------------------------')
+                print ('Bonus No{} db text {}, JSON text {}'.format(bonus['number'], en_bonus.en_bonus_text, bonus['text']))
+                print ('--------------------------------------')
+            if en_bonus.en_bonus_prompt_text != bonus['bonus_text']:
+                # TODO послати сигнал боту що змінився текст бонусної підказки
+                #addSignal (proxy_key, 21, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text']) 
+                en_bonus.en_bonus_prompt_text = bonus['bonus_text']
+            if en_bonus.en_bonus_completed != bonus['completed']:
+                # TODO послати сигнал боту що бонус закрився
+                en_bonus.en_bonus_completed = bonus['completed']
+            if en_bonus.en_bonus_passed != bonus['passed']:
+                # TODO послати сигнал боту, що бонус пропустили
+                en_bonus.en_bonus_passed != bonus['passed']
+                addSignal (proxy_key, 21, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus ['bonus_text']) 
             try:
                 db.session.commit()
-                #print('new bonus added')
+                #print('bonus data updated')
             except:
                 db.session.rollback()
-                #print('error adding new bonus')
-        if en_bonus.en_bonus_text != bonus['text']:
-            # TODO послати сигнал боту що змінився текст бонусу
-            addSignal (proxy_key, 19, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus ['bonus_text']) 
-            en_bonus.en_bonus_text = bonus['text']
-            print ('--------------------------------------')
-            print ('Bonus No{} db text {}, JSON text {}'.format(bonus['number'], en_bonus.en_bonus_text, bonus['text']))
-            print ('--------------------------------------')
-        if en_bonus.en_bonus_prompt_text != bonus['bonus_text']:
-            # TODO послати сигнал боту що змінився текст бонусної підказки
-            #addSignal (proxy_key, 21, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text ['bonus_text']) 
-            en_bonus.en_bonus_prompt_text = bonus['bonus_text']
-        if en_bonus.en_bonus_completed != bonus['completed']:
-            # TODO послати сигнал боту що бонус закрився
-            en_bonus.en_bonus_completed = bonus['completed']
-        if en_bonus.en_bonus_passed != bonus['passed']:
-            # TODO послати сигнал боту, що бонус пропустили
-            en_bonus.en_bonus_passed != bonus['passed']
-            addSignal (proxy_key, 21, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus ['bonus_text']) 
-        try:
-            db.session.commit()
-            #print('bonus data updated')
-        except:
-            db.session.rollback()
-            #print('error while updating bonus data')
+                #print('error while updating bonus data')
     #print(bonuses)
     #print('------------------------END bonus logger -------------------')
     #print_bonuses_from_db(proxy_key, en_lvl_id, en_lvl_no)
