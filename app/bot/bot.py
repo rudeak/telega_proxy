@@ -58,7 +58,7 @@ def read_signals (chat_id):
             print(signal)
             if signal.signal_type == 5:
                 message = json.loads(signal.signal_json)
-                telega_bot.sendMessage (chat_id, message['text'] + message['html'])
+                telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
                 #db.session.delete(signall)
                 #db.session.commit()
             
