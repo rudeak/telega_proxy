@@ -218,10 +218,10 @@ def addSignallPromptsCount(chatId, level, count):
     db.session.add(signal)
     try:
         db.session.commit()
-        print ('Prompts signall commited')
+        print ('Prompts  count signall commited')
     except:
         db.session.rollback()
-        print ('Prompts renamed signall NOT commited')     
+        print ('Prompts count signall NOT commited')     
     return None
 
 
@@ -238,7 +238,7 @@ def addSignalRenew(proxyKey, timestamp):
         print ('Renew signall commited')
     except:
         db.session.rollback()
-        print ('Renew renamed signall NOT commited')  
+        print ('Renew signall NOT commited')  
     return None
 
 
