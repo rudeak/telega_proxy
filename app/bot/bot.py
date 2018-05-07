@@ -60,7 +60,8 @@ def read_signals (chat_id):
                 message = json.loads(signal.signal_json)
                 telega_bot.sendMessage (chat_id, message['text'] + message['html'])
                 db.session.delete(signall)
-            db.session.commit()
+                db.session.commit()
+            
             
         return None
 
