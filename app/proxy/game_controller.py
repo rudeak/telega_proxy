@@ -296,12 +296,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
             print (prompt)
             if prompt['timer'] == '':
                 prompt['timer'] = '0'
-            en_prompt = EnPrompt(get_game_id(proxy_key),
-                                 en_lvl_id,
-                                 en_lvl_no,
-                                 prompt['number'],
-                                 prompt['text'],
-                                 int(prompt['timer']))
+            en_prompt = EnPrompt(get_game_id(proxy_key), en_lvl_id, en_lvl_no, prompt['number'], prompt['text'], int(prompt['timer']))
             db.session.add(en_prompt)
             db.session.commit()
             print (en_prompt)
