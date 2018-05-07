@@ -102,7 +102,7 @@ class Chat (db.Model):
 
 class Chat_opt (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    chat = db.Column(db.Integer, unique=True)
+    chat = db.Column(db.BigInteger, unique=True)
     proxy = db.Column(db.Boolean, default=True)
     multi_proxy = db.Column(db.Boolean, default=False)
     bonuses = db.Column(db.Boolean, default=True)

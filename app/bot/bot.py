@@ -7,7 +7,7 @@ import app
 import telepot
 import json
 from app import db
-from app.models import Chat, botSignall
+from app.models import Chat, botSignall, Chat_opt
 
 bot = Blueprint('bot', 'bot', template_folder='templates')
 
@@ -37,7 +37,9 @@ def find_chat (json_plain):
             user = message['from']
             privat_title = 'Private chat with {}'.format(user['username'])
             chat_db = Chat(chat['id'], privat_title, "<img></img>",0) 
+        chat_opt = Chat_opt (chat_db.tg_id)
         db.session.add(chat_db)
+        db.session.add(chat_opt)
         try:
             db.session.commit()
             print ('new chat added')
