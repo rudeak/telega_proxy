@@ -73,6 +73,14 @@ def read_signals (chat_id):
             if signal.signal_type == 13:
                 message = json.loads(signal.signal_json)
                 telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
+            if signal.signal_type == 16:
+                message = json.loads(signal.signal_json)
+                telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
+            if signal.signal_type == 17:
+                message = json.loads(signal.signal_json)
+                telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
+            
+            
             
             
         return None
