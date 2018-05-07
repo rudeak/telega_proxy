@@ -282,7 +282,7 @@ def print_task_from_db(proxy_key, en_lvl_id, en_lvl_no):
 def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
     prompts = json.loads(pageJson['prompts'])
     #print('prompts logger')
-    #print(prompts)
+    print(prompts)
     # якщо немає піказок тоді вернутись
     if prompts == None:
         return None
@@ -300,7 +300,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                  prompt['text'],
                                  int(prompt['timer']))
             db.session.add(en_prompt)
-            if prompt[timer] !='0':
+            if prompt[timer] =='0':
                 addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
             else:
                 addSignal(proxy_key, 9, timestamp=prompt['timer'])
