@@ -233,7 +233,7 @@ def addSignalRenew(proxyKey, timestamp):
     signal = botSignall()
     signal.chat_id = get_chat_tg_id(proxyKey)
     signal.signal_type = 9
-    signal.signal_json = json.dumps ({'msg':proxyKey, 'html':''})
+    signal.signal_json = json.dumps ({'msg':str(proxyKey), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     signal.level = 0
     
