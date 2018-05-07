@@ -37,7 +37,7 @@ def addSignal(proxyKey, type_, **kwargs):
         addSignallPromptsCount(get_chat_tg_id(proxyKey),
                                kwargs['level'], kwargs['count'])
     if type_ == 9:
-        print ('Signal type 9 !!!!!!!!!!!!!!!!!!!!')
+        
         addSignalRenew(proxyKey, kwargs['timestamp'])
     if type_ == 10:
         addSignalPromptsCountChanged(get_chat_tg_id(
@@ -59,8 +59,8 @@ def addSignal(proxyKey, type_, **kwargs):
         addSignallPenaltyPromptNew(get_chat_tg_id(
             proxyKey), kwargs['level'], kwargs['number'], kwargs['text'])
     if type_ == 16:
-        addSignallBonusCount (get_chat_tg_id(
-            proxyKey), kwargs['level'], kwargs['count'])
+        print ('Signal type 16 !!!!!!!!!!!!!!!!!!!!')
+        addSignallBonusCount (get_chat_tg_id(proxyKey), kwargs['level'], kwargs['count'])
     if type_ == 17:
         addSignallBonusText(get_chat_tg_id(
             proxyKey), kwargs['level'], kwargs['number'], kwargs['text'], kwargs['bonus_text'])
