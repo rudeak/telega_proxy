@@ -528,10 +528,10 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 addSignal (proxy_key, 17, level = en_lvl_no, number = bonus ['number'], text = bonus ['text'], bonus_text = bonus ['bonus_text']) 
             try:
                 db.session.commit()
-                #print('new bonus added')
+                print('new bonus added')
             except:
                 db.session.rollback()
-                #print('error adding new bonus')
+                print('error adding new bonus')
         addSignal (proxy_key, 16, level = en_lvl_no, count = len(bonuses))
     for bonus in bonuses:
         en_bonus = EnBonus.query.filter_by(en_game_id=get_game_id(proxy_key),
