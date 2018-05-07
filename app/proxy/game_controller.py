@@ -289,6 +289,8 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
         
         return None
     # якщо не створені підказки в базі то створити їх
+    for prompt in prompts:
+            print (prompt)
     if EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key),
                                 en_lvl_id=en_lvl_id,
                                 en_lvl_no=en_lvl_no).count() == 0:
