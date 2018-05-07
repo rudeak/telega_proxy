@@ -451,6 +451,7 @@ class botSignall (db.Model): #Додати номер рівня
     level = db.Column (db.Integer)
 
     def __repr__(self):
+        print (self.signal_json)
         return self.__str__()
 
     def __str__(self):

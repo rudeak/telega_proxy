@@ -38,7 +38,6 @@ def addSignal(proxyKey, type_, **kwargs):
                                kwargs['level'], kwargs['count'])
     if type_ == 9:
         print ('Signal type 9 !!!!!!!!!!!!!!!!!!!!')
-        print (kwargs['timestamp'])
         addSignalRenew(proxyKey, kwargs['timestamp'])
     if type_ == 10:
         addSignalPromptsCountChanged(get_chat_tg_id(
@@ -232,11 +231,9 @@ def addSignalRenew(proxyKey, timestamp):
     signal = botSignall()
     signal.chat_id = get_chat_tg_id(proxyKey)
     signal.signal_type = 9
+    signal.level = 0
     signal.signal_json = json.dumps ({'msg':str(proxyKey), 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())
-    signal.level = 0
-    
-    print (signal)
     db.session.add(signal)
     try:
         db.session.commit()
