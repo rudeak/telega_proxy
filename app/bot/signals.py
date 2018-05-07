@@ -229,6 +229,7 @@ def addSignallPromptsCount(chatId, level, count):
 
 def addSignalRenew(proxyKey, timestamp):
     # TODO сигнал проксі поновити сторінку тип = 9, на проксі proxyKey, в час timestamp
+    print ('renew signal try to add')
     signal = botSignall()
     signal.chat_id = chatId
     signal.signal_type = 9
