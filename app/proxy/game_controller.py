@@ -286,7 +286,10 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
     print(len(prompts))
     # якщо немає піказок тоді вернутись
     if len(prompts) == 0:
+        print ('returned from prompts')
         return None
+    else:
+        print ('note returned from prompts')
     # якщо не створені підказки в базі то створити їх
     if EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key),
                                 en_lvl_id=en_lvl_id,
