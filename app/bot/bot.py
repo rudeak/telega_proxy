@@ -101,7 +101,24 @@ def get_chat_id_from_update (jsonIn):
     return chat_id
 
 def send_html_message (chat_id, messageJson):
-    soup = BeautifulSoup (messageJson['html'])
-    message = '<b>' + messageJson['msg'] + '</b> \n'+soup.get_text()
+    soup = BeautifulSoup (messageJson['html']).prettyfy()
+    html = ''
+    print (soup)
+    for line in soup:
+        if line.find('div') >0:
+            line = ''
+        if line.find('span') >0:
+            line = ''
+        if line.find('<p>') >0:
+            line = ''
+        if line.find('</p>') >0:
+            line = ''
+        if line.find('<h3>') > 0:
+            line = '<b>'
+        if line.find('</h3>') > 0:
+            line = '</b>'
+        html = html+line
+    print (html)
+    message = '<b>' + messageJson['msg'] + '</b> \n'
     telega_bot.sendMessage (chat_id, message, parse_mode = 'HTML')
     return None
