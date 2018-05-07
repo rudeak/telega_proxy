@@ -234,6 +234,8 @@ def addSignalRenew(proxyKey, timestamp):
     signal.signal_json = json.dumps ({'msg':proxyKey, 'html':''})
     signal.signal_date = time.mktime(datetime.now().timetuple())
     signal.level = 0
+    print ('renew signal try to add')
+    print (signal)
     db.session.add(signal)
     try:
         db.session.commit()
