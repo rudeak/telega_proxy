@@ -130,5 +130,5 @@ def send_html_message (chat_id, messageJson):
         html = html+line
     print (html)
     message = '<b>' + messageJson['msg'] + '</b> \n'+html
-    telega_bot.sendMessage (chat_id, message)
+    telega_bot.sendMessage (chat_id, message, parse_mode = "HTML")
     return None
