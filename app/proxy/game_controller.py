@@ -35,6 +35,7 @@ def en_game_logger(proxy_key, page_json):
     levelInfo = json.loads(page_json['levelinfo'])
     en_lvl_id = levelInfo['levelId']
     en_lvl_no = levelInfo['levelNum']
+    print_prompts_from_db(proxy_key, en_lvl_id, en_lvl_no)
     if debug:
         print(page_json)
         print_signals()
