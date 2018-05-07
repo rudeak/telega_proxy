@@ -6,8 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 from app import db
 from app.game_managment import edit_game_name, get_domain, get_game_id, get_chat_tg_id
-from app.models import (EnBonus, EnGame, EnHistory, EnLvl, EnPenalty, EnPrompt,
-                        EnSectors, EnTask, botSignall)
+from app.models import EnBonus, EnGame, EnHistory, EnLvl, EnPenalty, EnPrompt, EnSectors, EnTask, botSignall
 from app.bot.messages import *
 
 
