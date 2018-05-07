@@ -292,8 +292,8 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
     if EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key),
                                 en_lvl_id=en_lvl_id,
                                 en_lvl_no=en_lvl_no).count() == 0:
-        print ('there no prompts in DB')
         for prompt in prompts:
+            print ('new prompt found')
             if prompt['timer'] == '':
                 prompt['timer'] = '0'
             en_prompt = EnPrompt(get_game_id(proxy_key),
