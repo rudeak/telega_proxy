@@ -344,7 +344,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                     en_prompt.en_prompt_text = prompt['text']
                 if en_prompt.en_prompt_data != prompt['timer']:
                     # якщо час == 0 тоді додати сигнал боту про появу нової підказки
-                    if prompt['timer'] == 0:
+                    if prompt['timer'] == '0':
                         en_prompt.en_prompt_data = 0
                         # TODO сигнал про нову підказку
                         addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
@@ -390,7 +390,7 @@ def en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
     print('penalty logger')
     print(prompts)
     # якщо немає піказок тоді вернутись
-    if prompts == None:
+    if len(prompts) == 0:
         return None
     # якщо не створені підказки в базі то створити їх
     if EnPenalty.query.filter_by(en_game_id=get_game_id(proxy_key),
@@ -409,7 +409,8 @@ def en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
             try:
                 db.session.commit()
                 # TODO прописати сигнали боту по штрафних підказках
-                addSignal (proxy_key, 9, timestamp=prompt['timer'])
+                if prompt['timer'] !='0':
+                    addSignal (proxy_key, 9, timestamp=prompt['timer'])
                 #print('Penalty prompt added')
             except:
                 db.session.rollback()
