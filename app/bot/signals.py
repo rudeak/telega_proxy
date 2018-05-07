@@ -38,6 +38,7 @@ def addSignal(proxyKey, type_, **kwargs):
         addSignallPromptsCount(get_chat_tg_id(proxyKey),
                                kwargs['level'], kwargs['count'])
     if type_ == 9:
+        print ('Signal type 9 !!!!!!!!!!!!!!!!!!!!')
         addSignalRenew(proxyKey, kwargs['timestamp'])
     if type_ == 10:
         addSignalPromptsCountChanged(get_chat_tg_id(
@@ -46,7 +47,7 @@ def addSignal(proxyKey, type_, **kwargs):
         addSignallPromptTextChanged(get_chat_tg_id(
             proxyKey), kwargs['level'], kwargs['number'], kwargs['text'])
     if type_ == 12:
-        print ('Signal type 12 !!!!!!!!!!!!!!!!!!!!')
+        
         addSignallPromptNew(get_chat_tg_id(proxyKey),
                             kwargs['level'], kwargs['number'], kwargs['text'])
     if type_ == 13:
