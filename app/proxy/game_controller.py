@@ -473,7 +473,7 @@ def en_penalty_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 except:
                     db.session.rollback()
                     #print('penalty prompt error')
-    #print_penalty_prompts_from_db(proxy_key, en_lvl_id, en_lvl_no)
+    print_penalty_prompts_from_db(proxy_key, en_lvl_id, en_lvl_no)
     return None
 
 
