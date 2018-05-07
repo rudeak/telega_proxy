@@ -289,6 +289,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
         
         return None
     # якщо не створені підказки в базі то створити їх
+    addSignal (proxy_key, 8, level = en_lvl_no, count = len(prompts))
     for prompt in prompts:
             print (prompt)
     if EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key),
@@ -314,8 +315,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
             except:
                 db.session.rollback()
                 print('prompt error')
-         # TODO прописати сигнали боту кількості підказок
-        #addSignal (proxy_key, 8, level = en_lvl_no, count = len(prompts))
+
     #print('prompts length =' + str(len(prompts)))
     if len(prompts) > EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key),
                                                en_lvl_id=en_lvl_id,
