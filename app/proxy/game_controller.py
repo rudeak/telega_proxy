@@ -325,7 +325,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
         # TODO сигнал боту що кількість підказок змінилася
         #print('prompts count changed')
         # перевірки чи не змінилася кількість підказок
-        #addSignal (proxy_key, 10, level = en_lvl_no, oldCount = EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count(), newCount = len(prompts))
+        addSignal (proxy_key, 10, level = en_lvl_no, oldCount = EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).count(), newCount = len(prompts))
         for prompt in prompts:
             if prompt['timer'] == '':
                 prompt['timer'] = '0'
@@ -340,20 +340,20 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                         en_prompt_no=prompt['number']).count() != 0:
                 if en_prompt.en_prompt_text != prompt['text'] and en_prompt.en_prompt_data !=0:
                     # TODO подати сигнал боту що змінився текст підказки
-        #            addSignal (proxy_key, 11, level= en_lvl_no, number = prompt['number'], text = prompt['text'])
+                    addSignal (proxy_key, 11, level= en_lvl_no, number = prompt['number'], text = prompt['text'])
                     en_prompt.en_prompt_text = prompt['text']
                 if en_prompt.en_prompt_data != prompt['timer']:
                     # якщо час == 0 тоді додати сигнал боту про появу нової підказки
                     if prompt['timer'] == 0:
                         en_prompt.en_prompt_data = 0
                         # TODO сигнал про нову підказку
-        #                addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
+                        addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
                         #print('new prompt appeared')
                     else:
                         # змінився час до підказки
                         en_prompt.en_prompt_data = prompt['timer']
                         # TODO перезаписати сигнали боту по підказках
-        #                addSignal (proxy_key, 9, timestamp=prompt['timer'])
+                        addSignal (proxy_key, 9, timestamp=prompt['timer'])
                         #print('prompt timer changed')
                     try:
                         db.session.commit()
@@ -372,7 +372,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                      prompt['text'],
                                      int(prompt['timer']))
                 db.session.add(en_prompt)
-        #        addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
+                addSignal (proxy_key, 12, level = en_lvl_no, number = prompt['number'], text = prompt['text'])
                 try:
                     db.session.commit()
                     #print('prompt added')
