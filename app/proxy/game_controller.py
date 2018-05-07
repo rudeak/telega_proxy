@@ -5,8 +5,7 @@ from sqlalchemy.orm import sessionmaker
 
 from app import db
 from app.game_managment import edit_game_name, get_domain, get_game_id
-from app.models import (EnBonus, EnGame, EnHistory, EnLvl, EnPenalty, EnPrompt,
-                        EnSectors, EnTask, botSignall)
+from app.models import EnBonus, EnGame, EnHistory, EnLvl, EnPenalty, EnPrompt, EnSectors, EnTask, botSignall
 from app.bot.signals import addSignal, print_signals
 
 debug = True
@@ -317,7 +316,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 db.session.rollback()
                 print('prompt error')
 
-    
+ """   
     if len(prompts) > EnPrompt.query.filter_by(en_game_id=get_game_id(proxy_key),
                                                en_lvl_id=en_lvl_id,
                                                en_lvl_no=en_lvl_no).count():
@@ -379,6 +378,7 @@ def en_prompts_loger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                     db.session.rollback()
                     #print('prompt error')
     print_prompts_from_db(proxy_key, en_lvl_id, en_lvl_no)
+"""
     return None
 
 
