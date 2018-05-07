@@ -55,9 +55,13 @@ def read_signals (chat_id):
         if len(signals) == 0:
             return None
         for signal in signals:
-            if signal.signal_type == 5:
-                telega_bot.sendMessage (chat_id, 'New task found')
             print(signal)
+            if signal.signal_type == 5:
+                message = json.loads(signal.signal_json)
+                telega_bot.sendMessage (chat_id, message['text'] + message['html'])
+                db.session.delete(signall)
+            db.session.commit()
+            
         return None
 
 def get_chat_id_from_update (jsonIn):
