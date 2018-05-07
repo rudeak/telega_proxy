@@ -538,7 +538,7 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                                            en_lvl_id=en_lvl_id,
                                            en_lvl_no=en_lvl_no,
                                            en_bonus_no=bonus['number']).first()
-        if en_bonus == None:  # якщо бонус з таким номером не знайдено значить він новий
+        if en_bonus.count() == 0:  # якщо бонус з таким номером не знайдено значить він новий
             # TODO послати сигнал боту що додався новий бонус
             en_bonus = EnBonus(get_game_id(proxy_key),
                                en_lvl_id,
