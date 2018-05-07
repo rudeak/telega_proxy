@@ -101,8 +101,8 @@ def get_chat_id_from_update (jsonIn):
     return chat_id
 
 def send_html_message (chat_id, messageJson):
-    soup = BeautifulSoup (messageJson['html'])
-    soup.findAll (tag = 'html').replaceWith ('').prettify()
+    soup = BeautifulSoup (messageJson['html']).prettify()
+   
     html = ''
     print (soup)
     for line in soup.split('\n'):
