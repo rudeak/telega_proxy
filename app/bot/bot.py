@@ -2,6 +2,7 @@ from flask import (Blueprint, flash, g, redirect, render_template, request,
                    session, url_for)
 from flask_login import current_user, login_required, login_user, logout_user
 from jinja2 import TemplateNotFound
+from bs4 import BeautifulSoup, Tag
 
 import app
 import telepot
@@ -58,7 +59,8 @@ def read_signals (chat_id):
            # print(signal)
             if signal.signal_type == 5:
                 message = json.loads(signal.signal_json)
-                telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
+                send_html_message (chat_id, message)
+                #telega_bot.sendMessage (chat_id, message['msg'] + message['html'])
                 db.session.delete (signal)
             if signal.signal_type == 8:
                 message = json.loads(signal.signal_json)
@@ -97,3 +99,9 @@ def get_chat_id_from_update (jsonIn):
     message = jsonIn ['message']
     chat_id = message ['chat']['id']
     return chat_id
+
+def send_html_message (chat_id, messageJson):
+    soup = BeautifulSoup (messageJson['html']).prettify()
+    message = '<b>' + messageJson['msg'] + '</b><br>' 
+    telega_bot.sendMessage (chat_id, message, parse_mode = 'HTML')
+    return None
