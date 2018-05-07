@@ -109,8 +109,18 @@ def send_html_message (chat_id, messageJson):
             line = ''
         if line.find('span') >0:
             line = ''
-        if line.find('<p>') >0:
+        if line.find('<br/>') > 0:
+            line = '\n'
+        if line.find('<html>') > 0:
             line = ''
+        if line.find('</html>') > 0:
+            line = ''
+        if line.find('<body>') > 0:
+            line = ''
+        if line.find('</body>') > 0:
+            line = ''
+        if line.find('<p>') >0:
+            line = '/n'
         if line.find('</p>') >0:
             line = ''
         if line.find('<h3>') > 0:
