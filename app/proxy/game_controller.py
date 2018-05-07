@@ -533,6 +533,7 @@ def en_bonus_logger(proxy_key, en_lvl_id, en_lvl_no, pageJson):
                 db.session.rollback()
                 print('error adding new bonus')
         addSignal (proxy_key, 16, level = en_lvl_no, count = len(bonuses))
+#TODO розібратися з зміною текста бонуса
     if len (bonuses) != EnBonus.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no).all().count:
         for bonus in bonuses:
             en_bonus = EnBonus.query.filter_by(en_game_id=get_game_id(proxy_key), en_lvl_id=en_lvl_id, en_lvl_no=en_lvl_no, en_bonus_text = bonus['text']).first()
