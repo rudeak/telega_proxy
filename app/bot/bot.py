@@ -129,7 +129,11 @@ def send_html_message (chat_id, messageJson):
         if line.find('</h3>') > 0:
             line = '</b>'
         html = html+line
-    print (html)
+    html_dic = []
+    for line in html.split():
+        html_dic.append(line)
+    
+    print (html_dic)
     message = '<b>' + messageJson['msg'] + '</b> \n'+html
-    telega_bot.sendMessage (chat_id, message, parse_mode = "HTML")
+    telega_bot.sendMessage (chat_id, message)
     return None
