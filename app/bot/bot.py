@@ -105,6 +105,7 @@ def send_html_message (chat_id, messageJson):
    
     html = ''
     print (soup)
+    html_dic = []
     for line in soup.split('\n'):
         if line.find('div') >0:
             line = ''
@@ -128,10 +129,9 @@ def send_html_message (chat_id, messageJson):
             line = '<b>'
         if line.find('</h3>') > 0:
             line = '</b>'
-        html = html+line
-    html_dic = []
-    for line in html.split():
         html_dic.append(line)
+    
+      
     
     print (html_dic)
     message = '<b>' + messageJson['msg'] + '</b> \n'+html
