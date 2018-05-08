@@ -137,6 +137,16 @@ def send_html_message (chat_id, messageJson):
       
     
     print (html_dic)
-    message = '<b>' + messageJson['msg'] + '</b> \n'+''.join(html_dic)
-    telega_bot.sendMessage (chat_id, message)
+    html = '<b>' + messageJson['msg'] + '</b> \n'
+    for item in html_dic:
+        if item.find('<img') > 0:
+            telega_bot.sendMessage (chat_id, html, parse_mode = 'HTML')
+            html =  ''
+            img = BeautifulSoup (item)
+            for tag in img.findAll (itemprop="image"):
+                telega_bot.sendPhoto (chat_id, tag['src'])
+            item = ''
+        html = html+item
+    
+    
     return None
