@@ -130,7 +130,9 @@ def send_html_message (chat_id, messageJson):
         if line.find('</h3>') > 0:
             line = '</b>'
         if line !='': 
-            html_dic.append(line)
+            html_dic.append(line.strip())
+    html_dic.remove('<html>')
+    html_dic.remove('</html>')
     
       
     
