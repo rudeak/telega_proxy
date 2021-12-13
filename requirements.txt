@@ -20,7 +20,7 @@ flup==1.0.3
 idna==2.6
 itsdangerous==0.24
 Jinja2==2.10
-lxml==4.2.1
+lxml==4.6.5
 MarkupSafe==1.0
 pbr==4.0.0
 pkg-resources==0.0.0
